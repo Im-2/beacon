@@ -1,0 +1,155 @@
+#!/usr/bin/env python3
+"""
+Beacon decision engine. Modes:
+
+  --mode preview   Take the next unprocessed trigger, run SENSE -> (GATE) -> JUDGE
+                    -> RISK, log and print the full result, but do NOT place any
+                    order and do NOT mark the trigger as processed (so it can be
+                    re-run for real once reviewed). Use this to sanity-check
+                    reasoning quality before going live.
+
+  --mode live       Process ALL unprocessed triggers. Non-substantive 7.01 filings
+                    are filtered and logged (no LLM judgment call). Substantive
+                    triggers get a full JUDGE + RISK pass; risk-approved trades are
+                    then executed via Bitget paper trading. Marks each trigger
+                    processed so repeated cron runs don't double-fire.
+
+Currently EXECUTE is not wired to real Bitget order placement yet — that lands
+after the first preview decisions are reviewed for reasoning quality.
+"""
+import argparse
+import json
+import sys
+from datetime import datetime, timezone
+from beacon import config, sense, judge, risk, state, logger, execute
+
+TRIGGERS_FILE = config.DATA_DIR / "filing_triggers.json"
+ANTICIPATORY_FILE = config.DATA_DIR / "anticipatory_triggers.json"
+
+
+def load_triggers():
+    triggers = []
+    if TRIGGERS_FILE.exists():
+        data = json.loads(TRIGGERS_FILE.read_text())
+        for t in data.get("triggers", []):
+            t["category"] = "post_event_reactive"
+            triggers.append(t)
+    if ANTICIPATORY_FILE.exists():
+        data = json.loads(ANTICIPATORY_FILE.read_text())
+        triggers.extend(data.get("triggers", []))
+    if not triggers:
+        sys.exit(f"No triggers found — run scan_8k_filings.py and scan_anticipatory_earnings.py first.")
+    return triggers
+
+
+def trigger_key(t):
+    return f"{t['symbol']}::{t.get('accession_number') or t.get('report_date') or t.get('filed_date')}"
+
+
+def needs_gate(t):
+    items = set(t.get("matched_items") or [])
+    return "7.01" in items and "2.02" not in items
+
+
+def process_one(t, portfolio_state, execute_live=False):
+    symbol = t["symbol"]
+    record = {"symbol": symbol, "trigger_type": t["trigger_type"], "category": t["category"],
+              "matched_items": t.get("matched_items"), "filed_date": t.get("filed_date"),
+              "accession_number": t.get("accession_number"), "edgar_url": t.get("edgar_url")}
+
+    print(f"\n=== SENSE: {symbol} ===")
+    sensed = sense.sense_for_trigger(t)
+    print(json.dumps(sensed, indent=2, default=str)[:2000])
+
+    if needs_gate(t):
+        filing_text = (sensed.get("filing") or {}).get("text", "")
+        print(f"\n=== GATE (7.01 substantive-content check): {symbol} ===")
+        gate = judge.gate_check_7_01(symbol, filing_text)
+        print(json.dumps(gate, indent=2))
+        record["gate_result"] = gate
+        if not gate.get("substantive"):
+            record["outcome"] = "trigger_fired_filtered_non_substantive"
+            record["judgment"] = None
+            record["risk_result"] = None
+            print(f"\n>>> FILTERED: {symbol} — not substantive ({gate.get('reason')}). No position taken.")
+            logger.log_decision(record)
+            return record
+
+    print(f"\n=== JUDGE: {symbol} ===")
+    judgment = judge.judge(sensed, {"symbol": symbol, "category": t["category"],
+                                     "matched_items": t.get("matched_items"),
+                                     "trigger_type": t["trigger_type"]})
+    print(json.dumps(judgment, indent=2))
+    record["judgment"] = judgment
+
+    print(f"\n=== RISK: {symbol} ===")
+    risk_result = risk.evaluate(judgment, symbol, portfolio_state)
+    print(json.dumps(risk_result, indent=2))
+    record["risk_result"] = risk_result
+
+    if judgment.get("decision") == "no-trade":
+        record["outcome"] = "no_trade_llm_decision"
+    elif not risk_result["approved"]:
+        record["outcome"] = "rejected_by_risk_controls"
+    elif not execute_live:
+        record["outcome"] = "preview_pending_approval_not_executed"
+    else:
+        entry_price = (sensed.get("quote") or {}).get("current_price")
+        capital = config.RISK["allocated_capital_usd"]
+        size_usd = capital * float(judgment["position_size_pct_of_capital"]) / 100.0
+        order = execute.place_paper_order(
+            symbol=symbol,
+            direction=judgment["decision"],
+            size_usd=size_usd,
+            entry_price=entry_price,
+            stop_loss_pct=judgment.get("stop_loss_pct", 0),
+            take_profit_pct=judgment.get("take_profit_pct", 0),
+            dry_run=not config.bitget_configured(),
+        )
+        record["order"] = order
+        if order["status"] == "SENT":
+            record["outcome"] = "executed"
+            portfolio_state.setdefault("open_positions", []).append({
+                "symbol": symbol, "direction": judgment["decision"], "entry_price": entry_price,
+                "size_usd": size_usd, "stop_loss_pct": judgment.get("stop_loss_pct", 0),
+                "take_profit_pct": judgment.get("take_profit_pct", 0),
+                "opened_at": datetime.now(timezone.utc).isoformat(), "category": t["category"],
+                "unrealized_pnl_usd": 0.0,
+            })
+            state.save_state(portfolio_state)
+        else:
+            record["outcome"] = f"execute_not_sent_{order['status'].lower()}"
+
+    logger.log_decision(record)
+    return record
+
+
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument("--mode", choices=["preview", "live"], default="preview")
+    args = p.parse_args()
+
+    triggers = load_triggers()
+    processed = state.load_processed()
+    portfolio_state = state.load_state()
+
+    pending = [t for t in triggers if trigger_key(t) not in processed]
+    print(f"{len(pending)}/{len(triggers)} triggers unprocessed.")
+    if not pending:
+        print("Nothing new to process.")
+        return
+
+    if args.mode == "preview":
+        t = pending[0]
+        record = process_one(t, portfolio_state, execute_live=False)
+        print(f"\n{'='*60}\nPREVIEW COMPLETE for {t['symbol']}. Outcome: {record['outcome']}")
+        print("Not marked as processed — rerun in --mode live to actually act on it once reviewed.")
+    else:
+        for t in pending:
+            record = process_one(t, portfolio_state, execute_live=True)
+            state.mark_processed(trigger_key(t))
+            portfolio_state = state.load_state()
+
+
+if __name__ == "__main__":
+    main()

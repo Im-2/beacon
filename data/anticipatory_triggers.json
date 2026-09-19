@@ -1,0 +1,28 @@
+{
+  "triggers": [
+    {
+      "symbol": "AIR",
+      "trigger_type": "anticipatory_earnings_positioning",
+      "category": "anticipatory_positioning",
+      "matched_items": null,
+      "report_date": "2026-09-21",
+      "consensus_eps_estimate": 1.3383,
+      "consensus_revenue_estimate": 889490163,
+      "filed_date": null,
+      "accession_number": null,
+      "edgar_url": null
+    },
+    {
+      "symbol": "EBF",
+      "trigger_type": "anticipatory_earnings_positioning",
+      "category": "anticipatory_positioning",
+      "matched_items": null,
+      "report_date": "2026-09-21",
+      "consensus_eps_estimate": 0.3939,
+      "consensus_revenue_estimate": 100848500,
+      "filed_date": null,
+      "accession_number": null,
+      "edgar_url": null
+    }
+  ]
+}
