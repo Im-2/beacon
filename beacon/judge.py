@@ -60,7 +60,10 @@ def _call_qwen(system: str, user: str, max_tokens: int) -> str:
                 {"role": "user", "content": user},
             ],
         },
-        timeout=60,
+        # Bitget's shared hackathon proxy is noticeably slower than calling
+        # Qwen directly, especially on longer JUDGE completions (1500 tokens) —
+        # 60s produced real ReadTimeouts in testing on a real trigger.
+        timeout=150,
     )
     resp.raise_for_status()
     data = resp.json()
