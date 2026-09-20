@@ -16,9 +16,12 @@ from beacon import config
 ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
 ANTHROPIC_MODEL = "claude-opus-5"
 
-# DashScope (Alibaba Cloud) OpenAI-compatible endpoint for Qwen.
-QWEN_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
-QWEN_MODEL = "qwen-max"
+# Bitget AI Base Camp Hackathon S2's sponsored Qwen proxy (OpenAI-compatible),
+# not Alibaba Cloud DashScope directly — the hackathon-issued key only
+# authenticates against this endpoint. See:
+# https://bitget-ai.gitbook.io/bitgetai_hackathons2#qwen-token-subsidy-during-the-hackathon
+QWEN_API_URL = "https://hackathon.bitgetops.com/v1/chat/completions"
+QWEN_MODEL = "qwen3.8-max"
 
 
 def _call_anthropic(system: str, user: str, max_tokens: int) -> str:
