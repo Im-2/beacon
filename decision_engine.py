@@ -14,8 +14,15 @@ Beacon decision engine. Modes:
                     then executed via Bitget paper trading. Marks each trigger
                     processed so repeated cron runs don't double-fire.
 
-Currently EXECUTE is not wired to real Bitget order placement yet — that lands
-after the first preview decisions are reviewed for reasoning quality.
+EXECUTE calls beacon.execute.place_paper_order() for real, real-account writes.
+Verified end to end on 2026-09-21 against the funded Bitget Demo Trading account:
+PGR real order request was signed, sent, and correctly logged its actual Bitget
+response. Note: the Demo Trading environment only lists a small, separate symbol
+universe from the live market (confirmed via GET .../public/symbols with the
+paptrading header) -- most single-stock S&P 500 rToken pairs (including RPGRUSDT)
+are not tradable there, so most trades will legitimately resolve to
+"execute_not_sent_skipped_not_tradable_on_bitget" rather than "executed" until
+Beacon's tracked universe is narrowed to symbols the demo environment supports.
 """
 import argparse
 import json

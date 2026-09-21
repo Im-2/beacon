@@ -29,10 +29,16 @@ _symbols_cache = None
 
 
 def _load_tradable_symbols() -> dict:
-    """Public endpoint, no auth needed. Cached per-process."""
+    """Public endpoint, no auth needed, but the `paptrading` header changes
+    the response to the Demo Trading environment's own (much smaller, and
+    otherwise-undocumented) symbol universe -- confirmed empirically after
+    a real order for RPGRUSDT was accepted by check_tradable() (unheadered
+    call, live-market universe) then rejected by Bitget's actual order
+    endpoint with code 40034 "Parameter RPGRUSDT does not exist" once sent
+    with the paptrading header. Cached per-process."""
     global _symbols_cache
     if _symbols_cache is None:
-        resp = requests.get(BASE_URL + SYMBOLS_PATH, timeout=30)
+        resp = requests.get(BASE_URL + SYMBOLS_PATH, headers={"paptrading": "1"}, timeout=30)
         resp.raise_for_status()
         _symbols_cache = {s["symbol"]: s for s in resp.json().get("data", [])}
     return _symbols_cache
@@ -123,10 +129,22 @@ def place_paper_order(symbol: str, direction: str, size_usd: float, entry_price:
         "paptrading": "1",   # Bitget Demo Trading flag — hardcoded, not configurable here
     }
     resp = requests.post(BASE_URL + req["path"], headers=headers, data=req["body"], timeout=30)
-    result["status"] = "SENT"
     result["http_status"] = resp.status_code
     try:
         result["response"] = resp.json()
     except ValueError:
         result["response"] = resp.text[:500]
+        result["status"] = "SEND_FAILED_NON_JSON_RESPONSE"
+        return result
+
+    # Bitget returns HTTP 200 with an error body for some failures and non-200
+    # for others -- code "00000" is the only real success signal. A request
+    # that reached Bitget but was rejected (bad symbol, insufficient demo
+    # balance, etc.) is a FAILURE, not a placed order: conflating the two
+    # previously caused a real rejected order (RPGRUSDT, code 40034) to be
+    # logged as outcome "executed" with no position actually opened.
+    if resp.ok and result["response"].get("code") == "00000":
+        result["status"] = "SENT"
+    else:
+        result["status"] = "REJECTED_BY_BITGET"
     return result
