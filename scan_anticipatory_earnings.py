@@ -6,32 +6,35 @@ estimates as SENSE data. Logged in a separate category from post-event reactive
 trades per the user's instruction — pre-earnings positioning is a distinct,
 clearly-labeled thing, not disguised as a post-event reaction.
 
-Currently hardcoded to the two tickers confirmed via live Finnhub earnings-calendar
-discovery on 2026-09-18 (AIR, EBF) — both real, dated, liquid (AIR) or moderately
-liquid (EBF) names with actual analyst coverage. EBF has no Bitget tokenized-stock
-pair (verified in beacon/execute.py's tradability check) — it stays in this file so
-it's logged as "trigger valid, non-executable on Bitget" rather than silently
-dropped, per explicit instruction.
+Re-scoped 2026-09-21 to the corrected 5-ticker Bitget-demo-tradable universe
+(EQT, GOOGL, MU, NVDA, ECHO — see scan_8k_filings.py for why). Re-ran live
+Finnhub earnings-calendar discovery against just these 5 for confirmed dates
+in the next 35 days: MU (2026-09-30) and EQT (2026-10-19) have one; GOOGL,
+NVDA, and ECHO do not yet. The previous AIR/EBF candidates are dropped along
+with the rest of the old 21-ticker universe — neither has a Bitget demo pair.
 """
 import json
 from beacon import config, sense
 
-CANDIDATES = ["AIR", "EBF"]
-REPORT_DATE = "2026-09-21"
+# symbol -> confirmed report date, from live Finnhub earnings-calendar discovery
+CANDIDATES = {
+    "MU": "2026-09-30",
+    "EQT": "2026-10-19",
+}
 
 OUTPUT_FILE = config.DATA_DIR / "anticipatory_triggers.json"
 
 
 def build():
     triggers = []
-    for symbol in CANDIDATES:
-        estimate = sense.get_earnings_estimate(symbol, REPORT_DATE)
+    for symbol, report_date in CANDIDATES.items():
+        estimate = sense.get_earnings_estimate(symbol, report_date)
         triggers.append({
             "symbol": symbol,
             "trigger_type": "anticipatory_earnings_positioning",
             "category": "anticipatory_positioning",
             "matched_items": None,
-            "report_date": REPORT_DATE,
+            "report_date": report_date,
             "consensus_eps_estimate": estimate.get("epsEstimate"),
             "consensus_revenue_estimate": estimate.get("revenueEstimate"),
             "filed_date": None,

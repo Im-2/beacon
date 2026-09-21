@@ -29,6 +29,20 @@ PAGE_SIZE = 100
 RELEVANT_ITEMS = {"2.02", "7.01"}
 SEARCH_URL = "https://efts.sec.gov/LATEST/search-index"
 
+# Corrected tracked universe as of 2026-09-21: the original S&P 500-wide scan
+# was chosen purely by SEC filing activity, without first checking Bitget
+# Demo Trading's own (separate, undocumented, ~25-symbol) tradable universe --
+# every one of the original 21 tracked tickers turned out to have no Bitget
+# demo pair at all (confirmed empirically: a real order for RPGRUSDT was
+# rejected with code 40034 "Parameter RPGRUSDT does not exist"). Narrowed to
+# the domestic, 8-K-filing S&P 500 names that DO have a live rToken pair in
+# the demo environment (checked against GET /public/symbols with the
+# paptrading header). BILI (Bilibili) has a demo pair but is a foreign
+# private issuer that files Form 6-K, not 8-K (confirmed: 0 historical 8-K
+# filings, 10 recent 6-K) -- structurally incompatible with this 8-K-only
+# scanner, so it's excluded rather than silently producing zero triggers.
+TRADABLE_ON_BITGET_DEMO = {"EQT", "GOOGL", "MU", "NVDA", "ECHO"}
+
 
 def load_env():
     if not ENV_FILE.exists():
@@ -48,8 +62,9 @@ def load_sp500_ciks():
     with open(CONSTITUENTS_FILE, newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
             cik = row["CIK"].strip()
-            if cik:
-                cik_to_symbol[cik.zfill(10)] = row["Symbol"].strip()
+            symbol = row["Symbol"].strip()
+            if cik and symbol in TRADABLE_ON_BITGET_DEMO:
+                cik_to_symbol[cik.zfill(10)] = symbol
     return cik_to_symbol
 
 
@@ -140,7 +155,7 @@ def scan(days_back):
     result = {
         "scan_timestamp_utc": datetime.now(timezone.utc).isoformat(),
         "source": "SEC EDGAR full-text search (efts.sec.gov)",
-        "universe": "sp500",
+        "universe": "sp500_bitget_demo_tradable",
         "universe_size": len(cik_to_symbol),
         "days_back": days_back,
         "date_range": [startdt, enddt],
