@@ -1,20 +1,84 @@
 {
-  "scan_timestamp_utc": "2026-09-19T13:07:04.442805+00:00",
+  "scan_timestamp_utc": "2026-09-21T18:15:16.899201+00:00",
   "source": "SEC EDGAR full-text search (efts.sec.gov)",
   "universe": "sp500",
   "universe_size": 500,
   "days_back": 3,
   "date_range": [
-    "2026-09-16",
-    "2026-09-19"
+    "2026-09-18",
+    "2026-09-21"
   ],
   "item_filter": [
     "2.02",
     "7.01"
   ],
-  "raw_hits_total": 530,
-  "trigger_count": 14,
+  "raw_hits_total": 230,
+  "trigger_count": 8,
   "triggers": [
+    {
+      "symbol": "APO",
+      "trigger_type": "8-K_guidance_or_earnings_item",
+      "matched_items": [
+        "7.01"
+      ],
+      "all_items": [
+        "7.01"
+      ],
+      "filed_date": "2026-09-21",
+      "display_name": "Apollo Global Management, Inc.  (APO, APOS)  (CIK 0001858681)",
+      "cik": "0001858681",
+      "accession_number": "0001858681-26-000051",
+      "edgar_url": "https://www.sec.gov/Archives/edgar/data/1858681/000185868126000051/0001858681-26-000051-index.htm"
+    },
+    {
+      "symbol": "CTVA",
+      "trigger_type": "8-K_guidance_or_earnings_item",
+      "matched_items": [
+        "7.01"
+      ],
+      "all_items": [
+        "7.01"
+      ],
+      "filed_date": "2026-09-21",
+      "display_name": "Corteva, Inc.  (CTVA)  (CIK 0001755672)",
+      "cik": "0001755672",
+      "accession_number": "0001193125-26-396123",
+      "edgar_url": "https://www.sec.gov/Archives/edgar/data/1755672/000119312526396123/0001193125-26-396123-index.htm"
+    },
+    {
+      "symbol": "AXON",
+      "trigger_type": "8-K_guidance_or_earnings_item",
+      "matched_items": [
+        "7.01"
+      ],
+      "all_items": [
+        "1.01",
+        "2.03",
+        "7.01",
+        "9.01"
+      ],
+      "filed_date": "2026-09-21",
+      "display_name": "AXON ENTERPRISE, INC.  (AXON)  (CIK 0001069183)",
+      "cik": "0001069183",
+      "accession_number": "0001193125-26-395997",
+      "edgar_url": "https://www.sec.gov/Archives/edgar/data/1069183/000119312526395997/0001193125-26-395997-index.htm"
+    },
+    {
+      "symbol": "HPQ",
+      "trigger_type": "8-K_guidance_or_earnings_item",
+      "matched_items": [
+        "7.01"
+      ],
+      "all_items": [
+        "7.01",
+        "9.01"
+      ],
+      "filed_date": "2026-09-21",
+      "display_name": "HP INC  (HPQ)  (CIK 0000047217)",
+      "cik": "0000047217",
+      "accession_number": "0001140361-26-037170",
+      "edgar_url": "https://www.sec.gov/Archives/edgar/data/47217/000114036126037170/0001140361-26-037170-index.htm"
+    },
     {
       "symbol": "VLO",
       "trigger_type": "8-K_guidance_or_earnings_item",
@@ -79,168 +143,6 @@
       "cik": "0000080661",
       "accession_number": "0000080661-26-000322",
       "edgar_url": "https://www.sec.gov/Archives/edgar/data/80661/000008066126000322/0000080661-26-000322-index.htm"
-    },
-    {
-      "symbol": "CRM",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "7.01",
-        "9.01"
-      ],
-      "filed_date": "2026-09-17",
-      "display_name": "Salesforce, Inc.  (CRM)  (CIK 0001108524)",
-      "cik": "0001108524",
-      "accession_number": "0001108524-26-000210",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/1108524/000110852426000210/0001108524-26-000210-index.htm"
-    },
-    {
-      "symbol": "TXN",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "7.01",
-        "9.01"
-      ],
-      "filed_date": "2026-09-17",
-      "display_name": "TEXAS INSTRUMENTS INC  (TXN)  (CIK 0000097476)",
-      "cik": "0000097476",
-      "accession_number": "0000950103-26-014118",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/97476/000095010326014118/0000950103-26-014118-index.htm"
-    },
-    {
-      "symbol": "ALL",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "7.01",
-        "9.01"
-      ],
-      "filed_date": "2026-09-17",
-      "display_name": "ALLSTATE CORP  (ALL, ALL-PB, ALL-PH, ALL-PI, ALL-PJ)  (CIK 0000899051)",
-      "cik": "0000899051",
-      "accession_number": "0000899051-26-000135",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/899051/000089905126000135/0000899051-26-000135-index.htm"
-    },
-    {
-      "symbol": "ROST",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "5.02",
-        "7.01",
-        "9.01"
-      ],
-      "filed_date": "2026-09-17",
-      "display_name": "ROSS STORES, INC.  (ROST)  (CIK 0000745732)",
-      "cik": "0000745732",
-      "accession_number": "0000745732-26-000043",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/745732/000074573226000043/0000745732-26-000043-index.htm"
-    },
-    {
-      "symbol": "LEN",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "2.02"
-      ],
-      "all_items": [
-        "2.02",
-        "9.01"
-      ],
-      "filed_date": "2026-09-16",
-      "display_name": "LENNAR CORP /NEW/  (LEN, LEN-B)  (CIK 0000920760)",
-      "cik": "0000920760",
-      "accession_number": "0001628280-26-062287",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/920760/000162828026062287/0001628280-26-062287-index.htm"
-    },
-    {
-      "symbol": "VMRK",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "7.01",
-        "9.01"
-      ],
-      "filed_date": "2026-09-16",
-      "display_name": "VIVMARK RESIDENTIAL  (VMRK)  (CIK 0000906107)",
-      "cik": "0000906107",
-      "accession_number": "0001193125-26-392188",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/906107/000119312526392188/0001193125-26-392188-index.htm"
-    },
-    {
-      "symbol": "EXE",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "1.01",
-        "7.01",
-        "9.01"
-      ],
-      "filed_date": "2026-09-16",
-      "display_name": "EXPAND ENERGY Corp  (EXE)  (CIK 0000895126)",
-      "cik": "0000895126",
-      "accession_number": "0001104659-26-108003",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/895126/000110465926108003/0001104659-26-108003-index.htm"
-    },
-    {
-      "symbol": "CNC",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "7.01"
-      ],
-      "filed_date": "2026-09-16",
-      "display_name": "CENTENE CORP  (CNC)  (CIK 0001071739)",
-      "cik": "0001071739",
-      "accession_number": "0001071739-26-000172",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/1071739/000107173926000172/0001071739-26-000172-index.htm"
-    },
-    {
-      "symbol": "NKE",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "5.02",
-        "7.01",
-        "9.01"
-      ],
-      "filed_date": "2026-09-16",
-      "display_name": "NIKE, Inc.  (NKE)  (CIK 0000320187)",
-      "cik": "0000320187",
-      "accession_number": "0000320187-26-000170",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/320187/000032018726000170/0000320187-26-000170-index.htm"
-    },
-    {
-      "symbol": "HBAN",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "7.01",
-        "9.01"
-      ],
-      "filed_date": "2026-09-16",
-      "display_name": "HUNTINGTON BANCSHARES INC /MD/  (HBAN, HBANL, HBANM, HBANP, HBANZ)  (CIK 0000049196)",
-      "cik": "0000049196",
-      "accession_number": "0000049196-26-000077",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/49196/000004919626000077/0000049196-26-000077-index.htm"
     }
   ]
 }

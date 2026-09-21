@@ -1320,3 +1320,192 @@
 }
 0/16 triggers unprocessed.
 Nothing new to process.
+0/16 triggers unprocessed.
+Nothing new to process.
+0/16 triggers unprocessed.
+Nothing new to process.
+0/10 triggers unprocessed.
+Nothing new to process.
+4/10 triggers unprocessed.
+
+=== SENSE: APO ===
+{
+  "symbol": "APO",
+  "trigger_type": "8-K_guidance_or_earnings_item",
+  "matched_items": [
+    "7.01"
+  ],
+  "filed_date": "2026-09-21",
+  "quote": {
+    "current_price": 125.91,
+    "change": -0.09,
+    "percent_change": -0.0714,
+    "day_high": 126.89,
+    "day_low": 124.23,
+    "day_open": 126.355,
+    "previous_close": 126,
+    "quote_timestamp": 1789761600
+  },
+  "metrics": {
+    "market_cap_musd": 74355.3,
+    "avg_volume_10d_m": 2.7763,
+    "52w_high": 153.29,
+    "52w_low": 99.56
+  },
+  "filing": {
+    "index_url": "https://www.sec.gov/Archives/edgar/data/1858681/000185868126000051/0001858681-26-000051-index.htm",
+    "document_url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1858681/000185868126000051/apo-20260921.htm",
+    "text": "XBRL Viewer Please enable JavaScript to use the EDGAR Inline XBRL Viewer.",
+    "truncated": false
+  }
+}
+
+=== GATE (7.01 substantive-content check): APO ===
+{
+  "substantive": false,
+  "reason": "The filing text contains only boilerplate viewer text and no substantive financial performance, guidance, or outlook information.",
+  "mock": false
+}
+
+>>> FILTERED: APO — not substantive (The filing text contains only boilerplate viewer text and no substantive financial performance, guidance, or outlook information.). No position taken.
+
+=== SENSE: CTVA ===
+{
+  "symbol": "CTVA",
+  "trigger_type": "8-K_guidance_or_earnings_item",
+  "matched_items": [
+    "7.01"
+  ],
+  "filed_date": "2026-09-21",
+  "quote": {
+    "current_price": 80.53,
+    "change": -1,
+    "percent_change": -1.2265,
+    "day_high": 80.97,
+    "day_low": 80,
+    "day_open": 80.45,
+    "previous_close": 81.53,
+    "quote_timestamp": 1789761600
+  },
+  "metrics": {
+    "market_cap_musd": 53729.293,
+    "avg_volume_10d_m": 5.00134,
+    "52w_high": 90.97,
+    "52w_low": 60.535
+  },
+  "filing": {
+    "index_url": "https://www.sec.gov/Archives/edgar/data/1755672/000119312526396123/0001193125-26-396123-index.htm",
+    "document_url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/30554/000119312526396123/d144225d8k.htm",
+    "text": "XBRL Viewer Please enable JavaScript to use the EDGAR Inline XBRL Viewer.",
+    "truncated": false
+  }
+}
+
+=== GATE (7.01 substantive-content check): CTVA ===
+{
+  "substantive": false,
+  "reason": "The filing text contains only boilerplate EDGAR viewer text and no substantive financial performance, guidance, or outlook information.",
+  "mock": false
+}
+
+>>> FILTERED: CTVA — not substantive (The filing text contains only boilerplate EDGAR viewer text and no substantive financial performance, guidance, or outlook information.). No position taken.
+
+=== SENSE: AXON ===
+{
+  "symbol": "AXON",
+  "trigger_type": "8-K_guidance_or_earnings_item",
+  "matched_items": [
+    "7.01"
+  ],
+  "filed_date": "2026-09-21",
+  "quote": {
+    "current_price": 447.76,
+    "change": -5.74,
+    "percent_change": -1.2657,
+    "day_high": 458,
+    "day_low": 446.37,
+    "day_open": 455.62,
+    "previous_close": 453.5,
+    "quote_timestamp": 1789761600
+  },
+  "metrics": {
+    "market_cap_musd": 36374.863,
+    "avg_volume_10d_m": 1.18244,
+    "52w_high": 792.16,
+    "52w_low": 339.01
+  },
+  "filing": {
+    "index_url": "https://www.sec.gov/Archives/edgar/data/1069183/000119312526395997/0001193125-26-395997-index.htm",
+    "document_url": "https://www.sec.gov/Archives/edgar/data/1069183/000119312526395997/d476163dex991.htm",
+    "text": "EX-99.1 8 d476163dex991.htm EX-99.1 EX-99.1 Exhibit 99.1 Axon Announces Pricing of $1.0 Billion Offering of 0% Convertible Senior Notes Due 2031 SCOTTSDALE, Ariz., September 16, 2026 &#8211; Axon Enterprise, Inc. (Nasdaq: AXON) (&#8220;Axon&#8221;) announced today that it has priced its offering of $1.0 billion aggregate principal amount of 0% convertible senior notes due 2031 (the &#8220;Notes&#8221;). Axon also granted the underwriters of the Notes an option to purchase for settlement within an 11-day period beginning on, and including, the first date on which the Notes are issued, up to an additional $150.0 million aggregate principal amount of Notes, solely to cover over-allotments, if any. The sale of the Notes to the underwriters is expected to settle on September 18, 2026, subject to customary closing conditions, and is expected to result in approximately $986.0 million in net proceeds to Axon (or approximately $1,134.3 million if the underwriters exercise their over-allotment option in full) after deducting the underwriters&#8217; discount and estimated offering expenses payable by Axon. Goldman Sachs & Co. LLC, Morgan Stanley & Co. LLC, J.P. Morgan Securities LLC, RBC Capital Markets, LLC and Citigroup Global Market
+
+=== GATE (7.01 substantive-content check): AXON ===
+{
+  "substantive": true,
+  "reason": "The filing details a $1.0 billion convertible notes offering, expected net proceeds, and use of proceeds for growth and acquisitions, making it directly relevant to Axon's capital structure, liquidity, and financial outlook.",
+  "mock": false
+}
+
+=== JUDGE: AXON ===
+{
+  "surprise_classification": "neutral",
+  "surprise_confidence": 30,
+  "tone_assessment": "The filing is a factual financing announcement with a neutral corporate tone, emphasizing growth capital and dilution mitigation via capped calls. There is no earnings or guidance language indicating a clear positive or negative surprise.",
+  "decision": "no-trade",
+  "conviction_score": 25,
+  "rationale": "AXON announced pricing of a $1.0 billion 0% convertible senior note due 2031, with an initial conversion price of about $652.06 versus the current price of $447.76, implying a large conversion premium. Net proceeds are approximately $986.0 million, and the capped call transactions with an initial cap price of $1,049.94 are intended to reduce potential dilution. However, convertible offerings can also create near-term pressure from arbitrage hedging, and the stock is down modestly at -1.27% from the prior close. The filing contains no earnings surprise, guidance change, or expectation comparison, so the provided data does not support a clear directional edge.",
+  "position_size_pct_of_capital": 0.0,
+  "stop_loss_pct": 0.0,
+  "take_profit_pct": 0.0,
+  "mock": false
+}
+
+=== RISK: AXON ===
+{
+  "approved": false,
+  "reason": "LLM decision was no-trade.",
+  "checks": {}
+}
+
+=== SENSE: HPQ ===
+{
+  "symbol": "HPQ",
+  "trigger_type": "8-K_guidance_or_earnings_item",
+  "matched_items": [
+    "7.01"
+  ],
+  "filed_date": "2026-09-21",
+  "quote": {
+    "current_price": 34.4,
+    "change": -0.26,
+    "percent_change": -0.7501,
+    "day_high": 35.15,
+    "day_low": 33.76,
+    "day_open": 34.74,
+    "previous_close": 34.66,
+    "quote_timestamp": 1789761600
+  },
+  "metrics": {
+    "market_cap_musd": 31021.611,
+    "avg_volume_10d_m": 18.24305,
+    "52w_high": 36.225,
+    "52w_low": 17.56
+  },
+  "filing": {
+    "index_url": "https://www.sec.gov/Archives/edgar/data/47217/000114036126037170/0001140361-26-037170-index.htm",
+    "document_url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/47217/000114036126037170/ef20082499_form8k.htm",
+    "text": "XBRL Viewer Please enable JavaScript to use the EDGAR Inline XBRL Viewer.",
+    "truncated": false
+  }
+}
+
+=== GATE (7.01 substantive-content check): HPQ ===
+{
+  "substantive": false,
+  "reason": "The filing text contains only an XBRL viewer placeholder and no substantive financial performance, guidance, or outlook information.",
+  "mock": false
+}
+
+>>> FILTERED: HPQ — not substantive (The filing text contains only an XBRL viewer placeholder and no substantive financial performance, guidance, or outlook information.). No position taken.
+0/10 triggers unprocessed.
+Nothing new to process.
