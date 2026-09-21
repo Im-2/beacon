@@ -1,25 +1,25 @@
 {
   "triggers": [
     {
-      "symbol": "AIR",
+      "symbol": "MU",
       "trigger_type": "anticipatory_earnings_positioning",
       "category": "anticipatory_positioning",
       "matched_items": null,
-      "report_date": "2026-09-21",
-      "consensus_eps_estimate": 1.3383,
-      "consensus_revenue_estimate": 889490163,
+      "report_date": "2026-09-30",
+      "consensus_eps_estimate": 32.2164,
+      "consensus_revenue_estimate": 52104999710,
       "filed_date": null,
       "accession_number": null,
       "edgar_url": null
     },
     {
-      "symbol": "EBF",
+      "symbol": "EQT",
       "trigger_type": "anticipatory_earnings_positioning",
       "category": "anticipatory_positioning",
       "matched_items": null,
-      "report_date": "2026-09-21",
-      "consensus_eps_estimate": 0.3939,
-      "consensus_revenue_estimate": 100848500,
+      "report_date": "2026-10-19",
+      "consensus_eps_estimate": 0.5053,
+      "consensus_revenue_estimate": 1950969893,
       "filed_date": null,
       "accession_number": null,
       "edgar_url": null

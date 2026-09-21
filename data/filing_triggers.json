@@ -1,8 +1,8 @@
 {
-  "scan_timestamp_utc": "2026-09-21T18:15:16.899201+00:00",
+  "scan_timestamp_utc": "2026-09-21T21:23:15.709844+00:00",
   "source": "SEC EDGAR full-text search (efts.sec.gov)",
-  "universe": "sp500",
-  "universe_size": 500,
+  "universe": "sp500_bitget_demo_tradable",
+  "universe_size": 5,
   "days_back": 3,
   "date_range": [
     "2026-09-18",
@@ -12,137 +12,7 @@
     "2.02",
     "7.01"
   ],
-  "raw_hits_total": 230,
-  "trigger_count": 8,
-  "triggers": [
-    {
-      "symbol": "APO",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "7.01"
-      ],
-      "filed_date": "2026-09-21",
-      "display_name": "Apollo Global Management, Inc.  (APO, APOS)  (CIK 0001858681)",
-      "cik": "0001858681",
-      "accession_number": "0001858681-26-000051",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/1858681/000185868126000051/0001858681-26-000051-index.htm"
-    },
-    {
-      "symbol": "CTVA",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "7.01"
-      ],
-      "filed_date": "2026-09-21",
-      "display_name": "Corteva, Inc.  (CTVA)  (CIK 0001755672)",
-      "cik": "0001755672",
-      "accession_number": "0001193125-26-396123",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/1755672/000119312526396123/0001193125-26-396123-index.htm"
-    },
-    {
-      "symbol": "AXON",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "1.01",
-        "2.03",
-        "7.01",
-        "9.01"
-      ],
-      "filed_date": "2026-09-21",
-      "display_name": "AXON ENTERPRISE, INC.  (AXON)  (CIK 0001069183)",
-      "cik": "0001069183",
-      "accession_number": "0001193125-26-395997",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/1069183/000119312526395997/0001193125-26-395997-index.htm"
-    },
-    {
-      "symbol": "HPQ",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "7.01",
-        "9.01"
-      ],
-      "filed_date": "2026-09-21",
-      "display_name": "HP INC  (HPQ)  (CIK 0000047217)",
-      "cik": "0000047217",
-      "accession_number": "0001140361-26-037170",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/47217/000114036126037170/0001140361-26-037170-index.htm"
-    },
-    {
-      "symbol": "VLO",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "5.02",
-        "7.01",
-        "9.01"
-      ],
-      "filed_date": "2026-09-18",
-      "display_name": "VALERO ENERGY CORP/TX  (VLO)  (CIK 0001035002)",
-      "cik": "0001035002",
-      "accession_number": "0001628280-26-062625",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/1035002/000162828026062625/0001628280-26-062625-index.htm"
-    },
-    {
-      "symbol": "PM",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "7.01",
-        "9.01"
-      ],
-      "filed_date": "2026-09-18",
-      "display_name": "Philip Morris International Inc.  (PM)  (CIK 0001413329)",
-      "cik": "0001413329",
-      "accession_number": "0001628280-26-062621",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/1413329/000162828026062621/0001628280-26-062621-index.htm"
-    },
-    {
-      "symbol": "STLD",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "7.01",
-        "9.01"
-      ],
-      "filed_date": "2026-09-18",
-      "display_name": "STEEL DYNAMICS INC  (STLD)  (CIK 0001022671)",
-      "cik": "0001022671",
-      "accession_number": "0001104659-26-108777",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/1022671/000110465926108777/0001104659-26-108777-index.htm"
-    },
-    {
-      "symbol": "PGR",
-      "trigger_type": "8-K_guidance_or_earnings_item",
-      "matched_items": [
-        "7.01"
-      ],
-      "all_items": [
-        "7.01",
-        "9.01"
-      ],
-      "filed_date": "2026-09-18",
-      "display_name": "PROGRESSIVE CORP/OH/  (PGR)  (CIK 0000080661)",
-      "cik": "0000080661",
-      "accession_number": "0000080661-26-000322",
-      "edgar_url": "https://www.sec.gov/Archives/edgar/data/80661/000008066126000322/0000080661-26-000322-index.htm"
-    }
-  ]
+  "raw_hits_total": 335,
+  "trigger_count": 0,
+  "triggers": []
 }

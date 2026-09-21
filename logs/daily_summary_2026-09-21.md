@@ -44,3 +44,13 @@
 
 ---
 
+## 2026-09-21T21:24:10.763528+00:00 — MU (anticipatory_earnings_positioning, category=anticipatory_positioning)
+
+- **Outcome:** no_trade_llm_decision
+- **LLM judgment:** neutral (confidence 10), decision=no-trade, conviction=10
+- **Rationale:** MU has a confirmed future earnings date, but no actual EPS or revenue has been reported, so there is no surprise to evaluate. The stock is up 2.77% to $1,043.96 and sits about 16.8% below its 52-week high of $1,255, suggesting strong recent positioning but not a clear earnings edge. Against a consensus EPS estimate of $32.22 and revenue estimate of about $52.1 billion, the provided valuation context is high relative to the limited data available. With no estimate revisions, filing tone, or reported results to anchor a directional view, waiting for the actual report is the prudent decision.
+- **Proposed size/stop/target:** 0.0% / SL 0.0% / TP 0.0%
+- **Risk check:** approved=False — LLM decision was no-trade.
+
+---
+
