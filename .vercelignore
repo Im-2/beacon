@@ -1,0 +1,17 @@
+# Only index.html, dashboard.html, market_data.json, and dashboard_data.json
+# need to be served -- everything else here is the Python backend, its logs,
+# and its raw internal state, none of which should be publicly deployed.
+beacon/
+data/
+logs/
+*.py
+*.sh
+.env
+.mcp.json
+.claude/
+__pycache__/
+*.pyc
+*.webp
+*.png
+*.jpg
+*.jpeg
