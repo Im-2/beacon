@@ -1286,13 +1286,20 @@ Data source: SEC EDGAR (live)</pre>
 </div>
 
 <script>
-  // `window.claude` only exists inside the actual published-artifact frame — a
-  // plain saved copy of this file (or a local dev-server preview) has no such
-  // global. Guard every capability lookup through this so those hosts degrade
-  // to "no db" instead of throwing on window.claude being undefined.
-  function useCapability(name){
-    if (!window.claude || typeof window.claude.use !== 'function') return Promise.resolve(null);
-    return window.claude.use(name);
+  // market_data.json is written by the backend pipeline (update_market_data.py,
+  // same cron cycle as SENSE/JUDGE/RISK/EXECUTE/LOG) with real prices + candles
+  // fetched from Bitget's public market-data API. Plain relative fetch — no
+  // platform-specific capability, works on any static host. Fetched once and
+  // shared across the ticker strip, Watchlist, and chart modal; each of those
+  // can force a fresh fetch (e.g. on an interval) via loadMarketData(true).
+  var MARKET_DATA_URL = 'market_data.json';
+  var marketDataPromise = null;
+  function loadMarketData(force){
+    if (!marketDataPromise || force) {
+      marketDataPromise = fetch(MARKET_DATA_URL + '?t=' + Date.now(), {cache: 'no-store'})
+        .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+    }
+    return marketDataPromise;
   }
 
   (function(){
@@ -1319,16 +1326,14 @@ Data source: SEC EDGAR (live)</pre>
   })();
 
   (function(){
-    // Real prices for this ticker strip come from this artifact's `db` capability
-    // (collection "prices", one doc per ticker) — NOT a direct browser fetch to
-    // Bitget. A published artifact's sandboxed iframe blocks that cross-origin
-    // request via CSP (confirmed via DevTools: 0 requests to api.bitget.com were
-    // ever attempted, even on failure). A scheduled background job fetches
-    // Bitget's public ticker endpoint server-side (outside this sandbox, where
-    // no such CSP applies) every 15 minutes and writes the results into this
-    // artifact's db; db.onSnapshot below picks those writes up live for every
-    // open viewer, no client-side fetch involved.
+    // Real prices for this ticker strip come from market_data.json (see the
+    // loadMarketData() helper above) — written by the backend pipeline on the
+    // same cron cycle that runs SENSE/JUDGE/RISK/EXECUTE.
     var TICKERS = ['MU', 'EQT', 'GOOGL', 'NVDA', 'ECHO'];
+    // market_data.json only changes on the ~3h cron cycle; this just re-polls
+    // the static file periodically in case it's been updated since page load —
+    // not a live subscription, so a few minutes of staleness is expected and fine.
+    var REFRESH_MS = 5 * 60 * 1000;
 
     function formatPrice(n){
       if (typeof n !== 'number' || isNaN(n)) return null;
@@ -1355,29 +1360,29 @@ Data source: SEC EDGAR (live)</pre>
       return true;
     }
 
-    var latestByTicker = {};
-    function refreshLastUpdated(){
+    function setLastUpdated(iso){
       var updatedEl = document.getElementById('lastUpdated');
       if (!updatedEl) return;
-      var stamps = Object.keys(latestByTicker).map(function(k){ return latestByTicker[k]; });
-      if (!stamps.length) { updatedEl.textContent = 'Last updated: unavailable'; return; }
-      var mostRecent = stamps.sort().slice(-1)[0];
-      var label = new Date(mostRecent).toLocaleString('en-US', {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
+      if (!iso) { updatedEl.textContent = 'Last updated: unavailable'; return; }
+      var label = new Date(iso).toLocaleString('en-US', {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
       updatedEl.textContent = 'Last updated: ' + label;
     }
 
-    useCapability('db').then(function(db){
-      if (!db) { refreshLastUpdated(); return; } // no db grant on this view — leave static placeholders in place
-      TICKERS.forEach(function(ticker){
-        db.collection('prices').doc(ticker).onSnapshot(function(snap){
-          if (!snap.exists) return;
-          var data = snap.data();
-          if (applyTicker(ticker, data) && data.updatedAt) {
-            latestByTicker[ticker] = data.updatedAt;
-            refreshLastUpdated();
-          }
-        }, function(){ /* leave existing values in place on a subscription error */ });
-      });
+    function refresh(force){
+      loadMarketData(force).then(function(data){
+        var anySuccess = false;
+        TICKERS.forEach(function(ticker){
+          var p = data.prices && data.prices[ticker];
+          if (p && applyTicker(ticker, p)) anySuccess = true;
+        });
+        setLastUpdated(anySuccess ? data.updatedAt : null);
+      }).catch(function(){ setLastUpdated(null); });
+    }
+
+    refresh(true);
+    setInterval(function(){ refresh(true); }, REFRESH_MS);
+    document.addEventListener('visibilitychange', function(){
+      if (document.visibilityState === 'visible') refresh(true);
     });
   })();
 
@@ -1502,27 +1507,21 @@ Data source: SEC EDGAR (live)</pre>
       return '$' + n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
     }
 
-    useCapability('db').then(function(db){
-      if (!db) return; // no db grant on this view — leave placeholder dashes in place
-      db.collection('prices').onSnapshot(function(snap){
-        snap.docs.forEach(function(doc){
-          if (!WATCHLIST_TICKERS[doc.id]) return;
-          var price = formatPrice(doc.data().price);
-          if (price === null) return;
-          document.querySelectorAll('.wl-price[data-ticker="' + doc.id + '"]').forEach(function(el){ el.textContent = price; });
-        });
-      }, function(){ /* leave placeholder dashes in place on a subscription error */ });
-    });
+    loadMarketData().then(function(data){
+      Object.keys(WATCHLIST_TICKERS).forEach(function(ticker){
+        var p = data.prices && data.prices[ticker];
+        var price = p ? formatPrice(p.price) : null;
+        if (price === null) return; // leave placeholder dash in place
+        document.querySelectorAll('.wl-price[data-ticker="' + ticker + '"]').forEach(function(el){ el.textContent = price; });
+      });
+    }).catch(function(){ /* leave placeholder dashes in place on a fetch error */ });
   })();
 
   (function(){
     // Clickable Watchlist rows -> a chart modal with a real candlestick series.
-    // Candle data is fetched from Bitget's public candles endpoint the same way
-    // prices are — server-side, by the same scheduled job, then written into
-    // this artifact's db (collection "candles", one doc per ticker: {candles:
-    // [{time, open, high, low, close}, ...], updatedAt}) — because, like the
-    // price fetch, a direct browser fetch to api.bitget.com is CSP-blocked
-    // inside this published artifact's sandbox.
+    // Candle data comes from market_data.json's "candles" object (one array
+    // per ticker: [{time, open, high, low, close}, ...]) — same file as the
+    // ticker strip / Watchlist prices, fetched via loadMarketData() above.
     var table = document.getElementById('watchlistTable');
     if (!table) return;
 
@@ -1595,16 +1594,13 @@ Data source: SEC EDGAR (live)</pre>
       }
 
       showEmpty('Loading chart…');
-      useCapability('db').then(function(db){
-        if (!db) { showEmpty('Live chart data is unavailable right now.'); return; }
-        return db.doc('candles/' + ticker).get().then(function(snap){
-          var data = snap.exists ? snap.data() : null;
-          if (!data || !data.candles || !data.candles.length) {
-            showEmpty('No chart data available for this ticker yet — check back after the next sync.');
-            return;
-          }
-          renderChart(data.candles);
-        });
+      loadMarketData().then(function(data){
+        var candles = data.candles && data.candles[ticker];
+        if (!candles || !candles.length) {
+          showEmpty('No chart data available for this ticker yet — check back after the next sync.');
+          return;
+        }
+        renderChart(candles);
       }).catch(function(){ showEmpty('Live chart data is unavailable right now.'); });
     }
 
