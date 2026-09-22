@@ -63,12 +63,28 @@ def _sign(timestamp: str, method: str, path: str, body: str, secret_key: str) ->
     return base64.b64encode(mac.digest()).decode()
 
 
+
+# Bitget's tokenized-stock symbols are usually R<ticker>USDT, but at least one
+# in our universe is truncated on Bitget's side rather than following that
+# pattern exactly -- confirmed against the real demo-trading symbol list, not
+# guessed. Without this, to_bitget_symbol("NVDA") builds "RNVDAUSDT", which
+# does not exist, silently reporting NVDA as untradable even once its real
+# pair (RNVDUSDT) comes off halt.
+BITGET_SYMBOL_OVERRIDES = {
+    "NVDA": "RNVDUSDT",
+}
+
+
 def to_bitget_symbol(symbol: str) -> str:
     """Bitget lists US equities as tokenized-stock spot pairs, prefixed with
     'R' (e.g. VLO -> RVLOUSDT), not as the raw ticker. Verified against
     api.bitget.com/api/v2/spot/public/symbols — most S&P 500 names have a
     live 'R<ticker>USDT' pair, but not all (e.g. VMRK, AXON, EBF were not
-    found as of this scan). Callers must check tradability before ordering."""
+    found as of this scan), and a few use a truncated ticker instead of the
+    literal one (see BITGET_SYMBOL_OVERRIDES). Callers must check tradability
+    before ordering."""
+    if symbol in BITGET_SYMBOL_OVERRIDES:
+        return BITGET_SYMBOL_OVERRIDES[symbol]
     return f"R{symbol}USDT"
 
 
