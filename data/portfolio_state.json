@@ -1,18 +1,6 @@
 {
   "capital_usd": 10000.0,
-  "open_positions": [
-    {
-      "symbol": "PGR",
-      "direction": "short",
-      "entry_price": 212.24,
-      "size_usd": 200.0,
-      "stop_loss_pct": 3.0,
-      "take_profit_pct": 5.0,
-      "opened_at": "2026-09-21T21:10:51.722927+00:00",
-      "category": "post_event_reactive",
-      "unrealized_pnl_usd": 4.99
-    }
-  ],
+  "open_positions": [],
   "closed_positions": [],
   "daily_pnl": {}
 }
