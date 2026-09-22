@@ -1097,16 +1097,33 @@
 <script>
   // market_data.json is written by the backend pipeline (update_market_data.py,
   // same cron cycle as SENSE/JUDGE/RISK/EXECUTE/LOG) with real prices + candles
-  // fetched from Bitget's public market-data API. Plain relative fetch — no
-  // platform-specific capability, works on any static host. Fetched once and
-  // shared across the ticker strip, Watchlist, and chart modal; each of those
-  // can force a fresh fetch (e.g. on an interval) via loadMarketData(true).
-  var MARKET_DATA_URL = 'market_data.json';
+  // fetched from Bitget's public market-data API. Fetched from GitHub's raw
+  // content CDN (not a same-origin relative path) so this page stays live
+  // once deployed as a static site (Vercel etc.) without needing a redeploy
+  // every time the backend writes new data -- the cron job's `publish-data`
+  // step (run_now.sh) just git-pushes the JSON files, and every open
+  // dashboard picks up the change on its next poll. raw.githubusercontent.com
+  // sends permissive CORS (Access-Control-Allow-Origin: *), confirmed
+  // 2026-09-22. The `?t=` cache-bust matters here specifically because
+  // GitHub's raw CDN sends Cache-Control: max-age=300. Falls straight back to
+  // a plain relative fetch on failure (e.g. local testing with no network,
+  // or a fork with a different GitHub path).
+  var MARKET_DATA_URL = 'https://raw.githubusercontent.com/Im-2/beacon/master/market_data.json';
+  var MARKET_DATA_FALLBACK_URL = 'market_data.json';
+  function fetchJsonWithFallback(primaryUrl, fallbackUrl){
+    return fetch(primaryUrl + '?t=' + Date.now(), {cache: 'no-store'})
+      .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .catch(function(err){
+        console.warn('Primary fetch failed (' + primaryUrl + '), falling back to ' + fallbackUrl, err);
+        return fetch(fallbackUrl + '?t=' + Date.now(), {cache: 'no-store'})
+          .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+      });
+  }
+
   var marketDataPromise = null;
   function loadMarketData(force){
     if (!marketDataPromise || force) {
-      marketDataPromise = fetch(MARKET_DATA_URL + '?t=' + Date.now(), {cache: 'no-store'})
-        .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+      marketDataPromise = fetchJsonWithFallback(MARKET_DATA_URL, MARKET_DATA_FALLBACK_URL);
     }
     return marketDataPromise;
   }
@@ -1117,13 +1134,15 @@
   // Every decision record is included (nothing hidden), but each one carries
   // is_mock (true for pre-Qwen-wiring placeholder judgments and this
   // session's explicitly-labeled synthetic test fixtures) so the UI can
-  // badge it instead of presenting it as a real trading signal.
-  var DASHBOARD_DATA_URL = 'dashboard_data.json';
+  // badge it instead of presenting it as a real trading signal. Fetched from
+  // GitHub's raw content CDN for the same reason as market_data.json above --
+  // see that comment for the CORS/caching/fallback details.
+  var DASHBOARD_DATA_URL = 'https://raw.githubusercontent.com/Im-2/beacon/master/dashboard_data.json';
+  var DASHBOARD_DATA_FALLBACK_URL = 'dashboard_data.json';
   var dashboardDataPromise = null;
   function loadDashboardData(force){
     if (!dashboardDataPromise || force) {
-      dashboardDataPromise = fetch(DASHBOARD_DATA_URL + '?t=' + Date.now(), {cache: 'no-store'})
-        .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+      dashboardDataPromise = fetchJsonWithFallback(DASHBOARD_DATA_URL, DASHBOARD_DATA_FALLBACK_URL);
     }
     return dashboardDataPromise;
   }
