@@ -104,6 +104,8 @@ def process_one(t, portfolio_state, execute_live=False):
         entry_price = (sensed.get("quote") or {}).get("current_price")
         capital = config.RISK["allocated_capital_usd"]
         size_usd = capital * float(judgment["position_size_pct_of_capital"]) / 100.0
+        dry_run = not config.bitget_configured()
+
         order = execute.place_paper_order(
             symbol=symbol,
             direction=judgment["decision"],
@@ -111,19 +113,75 @@ def process_one(t, portfolio_state, execute_live=False):
             entry_price=entry_price,
             stop_loss_pct=judgment.get("stop_loss_pct", 0),
             take_profit_pct=judgment.get("take_profit_pct", 0),
-            dry_run=not config.bitget_configured(),
+            dry_run=dry_run,
         )
-        record["order"] = order
+        record["rtoken_order"] = order
+
         if order["status"] == "SENT":
-            record["outcome"] = "executed"
+            record["outcome"] = "executed_direct_rtoken"
+            record["execution_leg"] = "direct_rtoken"
             portfolio_state.setdefault("open_positions", []).append({
                 "symbol": symbol, "direction": judgment["decision"], "entry_price": entry_price,
                 "size_usd": size_usd, "stop_loss_pct": judgment.get("stop_loss_pct", 0),
                 "take_profit_pct": judgment.get("take_profit_pct", 0),
                 "opened_at": datetime.now(timezone.utc).isoformat(), "category": t["category"],
-                "unrealized_pnl_usd": 0.0,
+                "unrealized_pnl_usd": 0.0, "execution_leg": "direct_rtoken",
             })
             state.save_state(portfolio_state)
+
+        elif order["status"] == "SKIPPED_NOT_TRADABLE_ON_BITGET":
+            # Cross-Asset Execution Agent sub-theme: the rToken order was
+            # blocked (halted or no pair), but the JUDGE conviction behind it
+            # is still real -- re-express it via a Bitget-demo-tradable crypto
+            # proxy instead of silently dropping the trigger. This re-runs
+            # RISK for the proxy symbol specifically (its own concurrent-
+            # position and no-averaging-into-loser checks are per-symbol).
+            proxy_symbol = execute.CROSS_ASSET_PROXY
+            proxy_risk_result = risk.evaluate(judgment, proxy_symbol, portfolio_state)
+            record["cross_asset_risk_result"] = proxy_risk_result
+
+            if not proxy_risk_result["approved"]:
+                record["outcome"] = "cross_asset_proxy_rejected_by_risk"
+            else:
+                proxy_bitget_symbol = execute.to_bitget_symbol(proxy_symbol)
+                try:
+                    proxy_entry_price = execute.get_public_price(proxy_bitget_symbol)
+                except Exception as e:
+                    record["outcome"] = "cross_asset_proxy_price_unavailable"
+                    record["cross_asset_error"] = str(e)
+                    logger.log_decision(record)
+                    return record
+
+                proxy_order = execute.place_paper_order(
+                    symbol=proxy_symbol,
+                    direction=judgment["decision"],
+                    size_usd=size_usd,
+                    entry_price=proxy_entry_price,
+                    stop_loss_pct=judgment.get("stop_loss_pct", 0),
+                    take_profit_pct=judgment.get("take_profit_pct", 0),
+                    dry_run=dry_run,
+                )
+                record["cross_asset_order"] = proxy_order
+
+                if proxy_order["status"] == "SENT":
+                    record["outcome"] = "executed_cross_asset_proxy"
+                    record["execution_leg"] = "cross_asset_proxy"
+                    record["cross_asset_note"] = (
+                        f"Cross-asset proxy execution: rToken {symbol} halted, "
+                        f"expressing via {proxy_symbol} instead."
+                    )
+                    portfolio_state.setdefault("open_positions", []).append({
+                        "symbol": proxy_symbol, "direction": judgment["decision"],
+                        "entry_price": proxy_entry_price, "size_usd": size_usd,
+                        "stop_loss_pct": judgment.get("stop_loss_pct", 0),
+                        "take_profit_pct": judgment.get("take_profit_pct", 0),
+                        "opened_at": datetime.now(timezone.utc).isoformat(), "category": t["category"],
+                        "unrealized_pnl_usd": 0.0, "execution_leg": "cross_asset_proxy",
+                        "proxy_for": symbol,
+                    })
+                    state.save_state(portfolio_state)
+                else:
+                    record["outcome"] = f"cross_asset_proxy_not_sent_{proxy_order['status'].lower()}"
         else:
             record["outcome"] = f"execute_not_sent_{order['status'].lower()}"
 

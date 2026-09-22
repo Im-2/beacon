@@ -24,6 +24,15 @@ from beacon import config
 BASE_URL = "https://api.bitget.com"
 ORDER_PATH = "/api/v2/spot/trade/place-order"
 SYMBOLS_PATH = "/api/v2/spot/public/symbols"
+TICKER_PATH = "/api/v2/spot/market/tickers"
+
+# Cross-Asset Execution Agent sub-theme: when a trigger's directional rToken
+# order is blocked (SKIPPED_NOT_TRADABLE_ON_BITGET -- covers both "no pair"
+# and "halted"), decision_engine.py re-expresses the same JUDGE conviction as
+# a real order in this crypto pair instead, rather than dropping the trigger.
+# BTC chosen as the default proxy: the most liquid Bitget-demo-tradable pair,
+# a defensible single default rather than a per-sector mapping.
+CROSS_ASSET_PROXY = "BTC"
 
 _symbols_cache = None
 
@@ -57,6 +66,19 @@ def check_tradable(symbol: str) -> dict:
     return {"tradable": True, "bitget_symbol": bitget_symbol, "min_trade_usdt": info.get("minTradeUSDT")}
 
 
+def get_public_price(bitget_symbol: str) -> float:
+    """Live last price for any Bitget spot pair. Public endpoint, no auth --
+    used to get a real entry price for the cross-asset proxy leg, since that
+    trade isn't tied to a SENSE step's own quote (SENSE quotes the rToken's
+    underlying equity via Finnhub, not the crypto proxy)."""
+    resp = requests.get(BASE_URL + TICKER_PATH, params={"symbol": bitget_symbol}, timeout=20)
+    resp.raise_for_status()
+    j = resp.json()
+    if j.get("code") != "00000" or not j.get("data"):
+        raise ValueError(f"unexpected payload for {bitget_symbol}: {j}")
+    return float(j["data"][0]["lastPr"])
+
+
 def _sign(timestamp: str, method: str, path: str, body: str, secret_key: str) -> str:
     prehash = f"{timestamp}{method.upper()}{path}{body}"
     mac = hmac.new(secret_key.encode(), prehash.encode(), hashlib.sha256)
@@ -72,6 +94,8 @@ def _sign(timestamp: str, method: str, path: str, body: str, secret_key: str) ->
 # pair (RNVDUSDT) comes off halt.
 BITGET_SYMBOL_OVERRIDES = {
     "NVDA": "RNVDUSDT",
+    # Cross-asset proxy leg: a plain crypto pair, no tokenized-stock "R" prefix.
+    "BTC": "BTCUSDT",
 }
 
 

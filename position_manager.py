@@ -12,6 +12,16 @@ from datetime import datetime, timezone
 from beacon import config, sense, execute, state, logger
 
 
+def current_price_for(symbol: str) -> float:
+    """Cross-asset proxy positions (execute.CROSS_ASSET_PROXY, e.g. "BTC") are
+    real crypto, not equities -- sense.get_quote() calls Finnhub's stock-quote
+    endpoint, which doesn't have a "BTC" ticker. Route those through Bitget's
+    own public price endpoint instead; everything else keeps using Finnhub."""
+    if symbol == execute.CROSS_ASSET_PROXY:
+        return execute.get_public_price(execute.to_bitget_symbol(symbol))
+    return sense.get_quote(symbol)["current_price"]
+
+
 def unrealized_pnl_pct(direction: str, entry_price: float, current_price: float) -> float:
     if direction == "long":
         return (current_price - entry_price) / entry_price * 100.0
@@ -62,8 +72,7 @@ def run(dry_run: bool = None):
 
     still_open = []
     for pos in open_positions:
-        quote = sense.get_quote(pos["symbol"])
-        current_price = quote["current_price"]
+        current_price = current_price_for(pos["symbol"])
         pnl_pct = unrealized_pnl_pct(pos["direction"], pos["entry_price"], current_price)
         pos["unrealized_pnl_usd"] = round(pos["size_usd"] * pnl_pct / 100.0, 2)
 

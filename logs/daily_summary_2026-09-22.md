@@ -20,3 +20,13 @@
 
 ---
 
+## 2026-09-22T11:31:18.911103+00:00 — MU (anticipatory_earnings_positioning, category=anticipatory_positioning)
+
+- **Outcome:** no_trade_llm_decision
+- **LLM judgment:** neutral (confidence 10), decision=no-trade, conviction=25
+- **Rationale:** This is an anticipatory earnings setup with no actual EPS or revenue surprise yet, so the event surprise must be treated as neutral. MU is trading at $1,043.96, up 2.77% from the prior close, but remains about 16.8% below its 52-week high of $1,255 after a very large move from its 52-week low of $154.65. Against consensus EPS of $32.2164, the price implies roughly a 32.4x forward earnings multiple, and against consensus revenue of about $52.1B versus a market cap of roughly $1.17T, the valuation context looks rich. Without disclosed estimate revisions, guidance, or reported results, there is insufficient edge to initiate a position ahead of the 2026-09-30 report.
+- **Proposed size/stop/target:** 0.0% / SL 0.0% / TP 0.0%
+- **Risk check:** approved=False — LLM decision was no-trade.
+
+---
+

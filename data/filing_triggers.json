@@ -1,5 +1,5 @@
 {
-  "scan_timestamp_utc": "2026-09-22T10:28:17.781278+00:00",
+  "scan_timestamp_utc": "2026-09-22T11:33:06.421672+00:00",
   "source": "SEC EDGAR full-text search (efts.sec.gov)",
   "universe": "sp500_bitget_demo_tradable",
   "universe_size": 5,
@@ -12,7 +12,7 @@
     "2.02",
     "7.01"
   ],
-  "raw_hits_total": 187,
+  "raw_hits_total": 210,
   "trigger_count": 0,
   "triggers": []
 }
