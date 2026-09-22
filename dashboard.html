@@ -1,4 +1,5 @@
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Beacon Dashboard</title>
 <style>
   :root{
@@ -481,14 +482,54 @@
       padding:14px 16px;gap:16px;
     }
     .sidebar-brand{flex-shrink:0;}
-    .sidebar-nav{flex-direction:row;gap:4px;}
+    .sidebar-back{flex-shrink:0;white-space:nowrap;}
+    .sidebar-nav{flex-direction:row;gap:4px;flex-shrink:0;}
     .nav-label{display:none;}
     .nav-item span{display:none;}
     .content{padding:20px;}
   }
+  @media (max-width:480px){
+    .sidebar-back span{display:none;}
+  }
   @media (max-width:600px){
     .summary-row{grid-template-columns:1fr;}
     .page-header{flex-direction:column;}
+  }
+
+  /* ---------- RESPONSIVE TABLES (Overview/Positions/History/Watchlist) ----------
+     Below 700px a data table's columns can't all fit without horizontal
+     scrolling, which silently hides the most important columns (Decision,
+     Status, Unrealized P&L) off-screen with no visual hint to scroll for
+     them. Any <table class="table-cards"> turns each row into a stacked
+     card instead: <thead> is hidden, each <td> becomes a labeled line using
+     its data-label attribute. A cell with no data-label (the History
+     detail-panel row, which is already self-labeled internally) just
+     renders as a plain full-width block. */
+  @media (max-width:700px){
+    .table-wrap{overflow-x:visible;}
+    .table-cards{min-width:0;}
+    .table-cards, .table-cards tbody{display:block;width:100%;}
+    .table-cards thead{display:none;}
+    .table-cards tr.history-row,
+    .table-cards tbody > tr:not(.history-detail-row){
+      display:block;width:100%;border:1px solid var(--line);border-radius:12px;
+      padding:12px 14px;margin-bottom:10px;background:var(--paper);
+    }
+    .table-cards tr.history-detail-row{display:block;}
+    .table-cards tr.history-detail-row td{display:block;padding:0;border:none;}
+    .table-cards td{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:14px;
+      padding:6px 0;border:none;white-space:normal;text-align:right;
+    }
+    .table-cards td[data-label]::before{
+      content:attr(data-label);flex-shrink:0;text-align:left;
+      font-size:10.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;
+      color:var(--muted);
+    }
+    .table-cards td:not([data-label]){display:block;text-align:left;}
+    .table-cards .row-chevron-cell{position:absolute;top:10px;right:10px;padding:0;}
+    .table-cards tr.history-row{position:relative;padding-right:40px;}
+    .table-empty-state{padding:32px 12px;}
   }
 </style>
 
@@ -504,9 +545,9 @@
 
 <div class="app">
   <aside class="sidebar">
-    <a class="sidebar-back" href="https://claude.ai/artifact/Xrw2sHFjmZmbG8WgXx38xz">
+    <a class="sidebar-back" href="https://claude.ai/artifact/Xrw2sHFjmZmbG8WgXx38xz" aria-label="Back to site">
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 L6 10 L12 16"/></svg>
-      Back to site
+      <span>Back to site</span>
     </a>
 
     <div class="sidebar-brand">
@@ -516,27 +557,27 @@
 
     <nav class="sidebar-nav">
       <div class="nav-label">Menu</div>
-      <button class="nav-item active" data-page="overview" type="button">
+      <button class="nav-item active" data-page="overview" type="button" aria-label="Overview">
         <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="6" height="6" rx="1.3"/><rect x="11" y="3" width="6" height="6" rx="1.3"/><rect x="3" y="11" width="6" height="6" rx="1.3"/><rect x="11" y="11" width="6" height="6" rx="1.3"/></svg>
         <span>Overview</span>
       </button>
-      <button class="nav-item" data-page="agent" type="button">
+      <button class="nav-item" data-page="agent" type="button" aria-label="Beacon Agent">
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10" cy="10" r="6"/><circle cx="7.6" cy="9" r="1" fill="currentColor" stroke="none"/><circle cx="12.4" cy="9" r="1" fill="currentColor" stroke="none"/><path d="M7.5 12.3q2.5 2 5 0" stroke-linecap="round"/><line x1="10" y1="4" x2="10" y2="2" stroke-linecap="round"/><circle cx="10" cy="1.6" r="0.9" fill="currentColor" stroke="none"/></svg>
         <span>Beacon Agent</span>
       </button>
-      <button class="nav-item" data-page="positions" type="button">
+      <button class="nav-item" data-page="positions" type="button" aria-label="Positions">
         <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><rect x="3" y="4" width="14" height="3" rx="1"/><rect x="3" y="9" width="14" height="3" rx="1"/><rect x="3" y="14" width="14" height="3" rx="1" opacity="0.5"/></svg>
         <span>Positions</span>
       </button>
-      <button class="nav-item" data-page="history" type="button">
+      <button class="nav-item" data-page="history" type="button" aria-label="History">
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span>History</span>
       </button>
-      <button class="nav-item" data-page="performance" type="button">
+      <button class="nav-item" data-page="performance" type="button" aria-label="Performance">
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="17" x2="3" y2="11"/><line x1="8" y1="17" x2="8" y2="7"/><line x1="13" y1="17" x2="13" y2="9"/><line x1="17.5" y1="17" x2="17.5" y2="4"/></svg>
         <span>Performance</span>
       </button>
-      <button class="nav-item" data-page="watchlist" type="button">
+      <button class="nav-item" data-page="watchlist" type="button" aria-label="Watchlist">
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 10s3-5.5 8-5.5 8 5.5 8 5.5-3 5.5-8 5.5-8-5.5-8-5.5z"/><circle cx="10" cy="10" r="2.3"/></svg>
         <span>Watchlist</span>
       </button>
@@ -614,7 +655,7 @@
               </div>
             </div>
             <div class="table-wrap">
-              <table>
+              <table class="table-cards">
                 <thead>
                   <tr><th>Ticker</th><th>Trigger</th><th>Decision</th><th>Date</th><th>Status</th></tr>
                 </thead>
@@ -782,7 +823,7 @@
             </div>
           </div>
           <div class="table-wrap">
-            <table>
+            <table class="table-cards">
               <thead>
                 <tr>
                   <th>Ticker</th><th>Direction</th><th>Entry</th><th>Current</th>
@@ -839,7 +880,7 @@
                by the renderHistory() script below — every real decision record,
                nothing hidden, mock/test-fixture rows badged, not dropped. -->
           <div class="table-wrap">
-            <table class="history-table" id="historyTable">
+            <table class="history-table table-cards" id="historyTable">
               <thead>
                 <tr>
                   <th>Date</th><th>Ticker</th><th>Trigger</th><th>Decision</th>
@@ -1005,16 +1046,16 @@
                can actually fill trades on it. "Last Trigger" reflects real scans/decisions only —
                no fabricated history for tickers Beacon has only just started watching. -->
           <div class="table-wrap">
-            <table id="watchlistTable">
+            <table id="watchlistTable" class="table-cards">
               <thead>
                 <tr><th>Ticker</th><th>Company</th><th>Live Price</th><th>Last Trigger</th><th>Status</th></tr>
               </thead>
               <tbody>
-                <tr data-ticker="MU" data-fired="yes" data-track="anticipatory"><td><b>MU</b></td><td>Micron Technology</td><td><span class="wl-price" data-ticker="MU">—</span></td><td>No-trade (real JUDGE) · reports Sep 30</td><td><span class="status-pill anticipatory">Anticipatory Track</span></td></tr>
-                <tr data-ticker="EQT" data-fired="no" data-track="anticipatory"><td><b>EQT</b></td><td>EQT Corporation</td><td><span class="wl-price" data-ticker="EQT">—</span></td><td>— (reports Oct 19)</td><td><span class="status-pill anticipatory">Anticipatory Track</span></td></tr>
-                <tr data-ticker="GOOGL" data-fired="no" data-track="core"><td><b>GOOGL</b></td><td>Alphabet Inc. (Class A)</td><td><span class="wl-price" data-ticker="GOOGL">—</span></td><td>— (no triggers yet)</td><td><span class="status-pill active">Active Monitoring</span></td></tr>
-                <tr data-ticker="NVDA" data-fired="no" data-track="core"><td><b>NVDA</b></td><td>Nvidia</td><td><span class="wl-price" data-ticker="NVDA">—</span></td><td>— (no triggers yet)</td><td><span class="status-pill active">Active Monitoring</span></td></tr>
-                <tr data-ticker="ECHO" data-fired="no" data-track="core"><td><b>ECHO</b></td><td>EchoStar</td><td><span class="wl-price" data-ticker="ECHO">—</span></td><td>— (no triggers yet)</td><td><span class="status-pill active">Active Monitoring</span></td></tr>
+                <tr data-ticker="MU" data-fired="yes" data-track="anticipatory"><td data-label="Ticker"><b>MU</b></td><td data-label="Company">Micron Technology</td><td data-label="Live Price"><span class="wl-price" data-ticker="MU">—</span></td><td data-label="Last Trigger">No-trade (real JUDGE) · reports Sep 30</td><td data-label="Status"><span class="status-pill anticipatory">Anticipatory Track</span></td></tr>
+                <tr data-ticker="EQT" data-fired="no" data-track="anticipatory"><td data-label="Ticker"><b>EQT</b></td><td data-label="Company">EQT Corporation</td><td data-label="Live Price"><span class="wl-price" data-ticker="EQT">—</span></td><td data-label="Last Trigger">— (reports Oct 19)</td><td data-label="Status"><span class="status-pill anticipatory">Anticipatory Track</span></td></tr>
+                <tr data-ticker="GOOGL" data-fired="no" data-track="core"><td data-label="Ticker"><b>GOOGL</b></td><td data-label="Company">Alphabet Inc. (Class A)</td><td data-label="Live Price"><span class="wl-price" data-ticker="GOOGL">—</span></td><td data-label="Last Trigger">— (no triggers yet)</td><td data-label="Status"><span class="status-pill active">Active Monitoring</span></td></tr>
+                <tr data-ticker="NVDA" data-fired="no" data-track="core"><td data-label="Ticker"><b>NVDA</b></td><td data-label="Company">Nvidia</td><td data-label="Live Price"><span class="wl-price" data-ticker="NVDA">—</span></td><td data-label="Last Trigger">— (no triggers yet)</td><td data-label="Status"><span class="status-pill active">Active Monitoring</span></td></tr>
+                <tr data-ticker="ECHO" data-fired="no" data-track="core"><td data-label="Ticker"><b>ECHO</b></td><td data-label="Company">EchoStar</td><td data-label="Live Price"><span class="wl-price" data-ticker="ECHO">—</span></td><td data-label="Last Trigger">— (no triggers yet)</td><td data-label="Status"><span class="status-pill active">Active Monitoring</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -1288,14 +1329,14 @@
     function historyRowsHtml(d){
       return '<tr class="history-row" data-status="' + d.status + '" data-trigger="' + triggerDataAttr(d) +
           '" data-decision="' + decisionDataAttr(d) + '" data-ticker="' + esc(d.symbol) + '">' +
-          '<td>' + esc(d.date_label) + '</td>' +
-          '<td><b>' + esc(d.symbol) + '</b>' + extraBadgesHtml(d) + '</td>' +
-          '<td><code class="t-badge">' + esc(d.trigger_label) + '</code></td>' +
-          '<td>' + decisionCellHtml(d) + '</td>' +
-          '<td>' + (typeof d.conviction === 'number' ? d.conviction + '%' : '—') + '</td>' +
-          '<td>' + (d.risk_approved === true ? 'Passed' : d.risk_approved === false ? 'Rejected' : 'N/A') + '</td>' +
-          '<td>' + statusBadgeHtml(d.status) + '</td>' +
-          '<td><button class="row-chevron" type="button" aria-label="Expand"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg></button></td>' +
+          '<td data-label="Date">' + esc(d.date_label) + '</td>' +
+          '<td data-label="Ticker"><b>' + esc(d.symbol) + '</b>' + extraBadgesHtml(d) + '</td>' +
+          '<td data-label="Trigger"><code class="t-badge">' + esc(d.trigger_label) + '</code></td>' +
+          '<td data-label="Decision">' + decisionCellHtml(d) + '</td>' +
+          '<td data-label="Conviction">' + (typeof d.conviction === 'number' ? d.conviction + '%' : '—') + '</td>' +
+          '<td data-label="Risk Check">' + (d.risk_approved === true ? 'Passed' : d.risk_approved === false ? 'Rejected' : 'N/A') + '</td>' +
+          '<td data-label="Status">' + statusBadgeHtml(d.status) + '</td>' +
+          '<td class="row-chevron-cell"><button class="row-chevron" type="button" aria-label="Expand"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg></button></td>' +
         '</tr>' +
         '<tr class="history-detail-row"><td colspan="8">' + detailPanelHtml(d) + '</td></tr>';
     }
@@ -1335,8 +1376,8 @@
       var histBody = document.getElementById('ovHistoryBody');
       if (histBody) {
         histBody.innerHTML = recent.map(function(d){
-          return '<tr><td><b>' + esc(d.symbol) + '</b></td><td>' + esc(d.trigger_label) + '</td><td>' +
-            decisionLabel(d) + '</td><td>' + esc(d.date_label) + '</td><td>' + statusBadgeHtml(d.status) + '</td></tr>';
+          return '<tr><td data-label="Ticker"><b>' + esc(d.symbol) + '</b></td><td data-label="Trigger">' + esc(d.trigger_label) + '</td><td data-label="Decision">' +
+            decisionLabel(d) + '</td><td data-label="Date">' + esc(d.date_label) + '</td><td data-label="Status">' + statusBadgeHtml(d.status) + '</td></tr>';
         }).join('');
       }
     }
@@ -1374,15 +1415,15 @@
         if (p.is_test_fixture) badges += ' <span class="t-badge mock" title="' + esc(p.test_fixture_note || '') + '">Test Fixture</span>';
         if (p.execution_leg === 'cross_asset_proxy') badges += ' <span class="t-badge cross-asset" title="Cross-asset proxy position">&rarr; ' + esc(p.proxy_for || '') + '</span>';
         return '<tr>' +
-          '<td><b>' + esc(p.symbol) + '</b>' + badges + '</td>' +
-          '<td><span class="pos-direction ' + esc(p.direction) + '">' + (p.direction === 'long' ? 'Long' : 'Short') + '</span></td>' +
-          '<td>' + fmtUsd(p.entry_price) + '</td>' +
-          '<td>' + fmtUsd(current) + '</td>' +
-          '<td>-' + Number(p.stop_loss_pct || 0).toFixed(2) + '%</td>' +
-          '<td>+' + Number(p.take_profit_pct || 0).toFixed(2) + '%</td>' +
-          '<td>' + fmtUsd(p.size_usd) + '</td>' +
-          '<td style="color:' + (pnl >= 0 ? 'var(--pos)' : 'var(--neg)') + ';font-weight:700;">' + fmtUsd(pnl, {signed: true}) + '</td>' +
-          '<td>' + timeHeld(p.opened_at) + '</td>' +
+          '<td data-label="Ticker"><b>' + esc(p.symbol) + '</b>' + badges + '</td>' +
+          '<td data-label="Direction"><span class="pos-direction ' + esc(p.direction) + '">' + (p.direction === 'long' ? 'Long' : 'Short') + '</span></td>' +
+          '<td data-label="Entry">' + fmtUsd(p.entry_price) + '</td>' +
+          '<td data-label="Current">' + fmtUsd(current) + '</td>' +
+          '<td data-label="Stop-Loss">-' + Number(p.stop_loss_pct || 0).toFixed(2) + '%</td>' +
+          '<td data-label="Take-Profit">+' + Number(p.take_profit_pct || 0).toFixed(2) + '%</td>' +
+          '<td data-label="Size">' + fmtUsd(p.size_usd) + '</td>' +
+          '<td data-label="Unrealized P&amp;L" style="color:' + (pnl >= 0 ? 'var(--pos)' : 'var(--neg)') + ';font-weight:700;">' + fmtUsd(pnl, {signed: true}) + '</td>' +
+          '<td data-label="Time Held">' + timeHeld(p.opened_at) + '</td>' +
         '</tr>';
       }).join('');
     }
