@@ -224,12 +224,21 @@ def build():
     decisions.sort(key=lambda d: d["timestamp_utc"] or "", reverse=True)
 
     real_closed = [p for p in closed_positions if not p.get("is_test_fixture")]
-    cumulative_pnl_usd = round(sum(p.get("realized_pnl_usd", 0.0) for p in real_closed), 2)
+    realized_pnl_usd = round(sum(p.get("realized_pnl_usd", 0.0) for p in real_closed), 2)
     wins = [p for p in real_closed if p.get("realized_pnl_usd", 0.0) > 0]
     win_rate_pct = round(len(wins) / len(real_closed) * 100, 1) if real_closed else None
 
     total_exposure = round(sum(p.get("size_usd", 0.0) for p in open_positions), 2)
     unrealized_pnl = round(sum(p.get("unrealized_pnl_usd", 0.0) for p in open_positions), 2)
+    # Cumulative P&L is realized (closed, real trades only) + unrealized (every
+    # currently open position, same total the Positions tab's own "Unrealized
+    # P&L" card shows) -- until a position closes, its P&L only ever shows up
+    # here as unrealized. Previously this only counted realized trades, so it
+    # sat at $0.00 and visibly contradicted a real, non-zero open position on
+    # the Positions tab. realized_pnl_usd is exposed separately so the
+    # frontend can recombine it with a freshly live-fetched unrealized figure
+    # without having to back it out of the combined total.
+    cumulative_pnl_usd = round(realized_pnl_usd + unrealized_pnl, 2)
     largest_position_pct = round(max((p.get("size_usd", 0.0) for p in open_positions), default=0.0) / capital * 100, 2)
 
     today_realized = state.today_realized_pnl(portfolio)
@@ -241,6 +250,7 @@ def build():
         "capital_usd": capital,
         "summary": {
             "cumulative_pnl_usd": cumulative_pnl_usd,
+            "realized_pnl_usd": realized_pnl_usd,
             "win_rate_pct": win_rate_pct,
             "real_closed_count": len(real_closed),
             "open_positions_count": len(open_positions),

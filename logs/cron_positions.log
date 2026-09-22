@@ -29,3 +29,8 @@ No open positions.
 No open positions.
 No open positions.
 No open positions.
+OPEN BTC: unrealized -0.13% (SL 3.0% / TP 5.0%)
+=== Dashboard data export (decisions.jsonl + portfolio_state.json -> dashboard_data.json) ===
+Wrote C:\Users\hp\Beacon\dashboard_data.json — 50 decisions, 1 open position(s).
+=== Publish market_data.json + dashboard_data.json to GitHub ===
+Published.

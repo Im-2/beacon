@@ -280,6 +280,7 @@
     display:inline-block;color:#9A6B12;background:rgba(245,166,35,0.12);
     border-radius:6px;padding:2px 8px;
   }
+  .live-price-dot{color:var(--pos);font-size:8px;vertical-align:middle;}
 
   .table-empty-state{
     display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -908,12 +909,15 @@
           </div>
         </div>
 
-        <!-- PERFORMANCE: all metrics currently zero/flat because no real trades have
-             executed yet (Judge/Qwen not connected) — wire to real JSONL log once live -->
+        <!-- PERFORMANCE: Cumulative P&L is wired to real data (renderPerformance(),
+             realized + live unrealized). Sharpe Ratio/Win Rate/Max Drawdown/Equity
+             Curve/Breakdown/Conviction below are still static placeholders -- no
+             real closed trades yet to compute them from, and the equity curve
+             needs a daily P&L history this project doesn't track yet. -->
         <div class="summary-row metrics-4">
           <div class="summary-card">
             <div class="sc-label">Cumulative P&amp;L</div>
-            <div class="sc-value">+$0.00</div>
+            <div class="sc-value" id="perfPnl">+$0.00</div>
           </div>
           <div class="summary-card">
             <div class="sc-label">Sharpe Ratio</div>
@@ -1165,6 +1169,50 @@
     var mins = Math.max(0, Math.round((Date.now() - opened) / 60000));
     var h = Math.floor(mins / 60), m = mins % 60;
     return h > 0 ? (h + 'h ' + m + 'm') : (m + 'm');
+  }
+
+  // Live per-position pricing, fetched directly from Bitget's public API on
+  // every page load/refresh -- NOT the backend cron's snapshot. The
+  // "Current" price on Positions previously only came from
+  // dashboard_data.json, which only updates on the backend's 30-min cron
+  // cycle, so reloading the page mid-cycle kept showing the same stale price
+  // even though the real market had moved. Mirrors
+  // beacon/execute.py's BITGET_SYMBOL_OVERRIDES/to_bitget_symbol() -- keep in
+  // sync if that mapping changes.
+  var BITGET_SYMBOL_OVERRIDES = {NVDA: 'RNVDUSDT', BTC: 'BTCUSDT'};
+  function toBitgetSymbol(symbol){
+    return BITGET_SYMBOL_OVERRIDES[symbol] || ('R' + symbol + 'USDT');
+  }
+  function fetchLiveBitgetPrice(bitgetSymbol){
+    var url = 'https://api.bitget.com/api/v2/spot/market/tickers?symbol=' + encodeURIComponent(bitgetSymbol);
+    return fetch(url + '&t=' + Date.now(), {cache: 'no-store'})
+      .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function(j){
+        if (j.code !== '00000' || !j.data || !j.data[0]) throw new Error('unexpected payload');
+        var price = parseFloat(j.data[0].lastPr);
+        if (!isFinite(price)) throw new Error('non-numeric price');
+        return price;
+      });
+  }
+  function unrealizedPnlPct(direction, entryPrice, currentPrice){
+    if (direction === 'long') return (currentPrice - entryPrice) / entryPrice * 100;
+    return (entryPrice - currentPrice) / entryPrice * 100;
+  }
+  // Fetches a fresh live price for every open position in parallel. Never
+  // rejects -- a position whose live fetch fails (network hiccup, symbol not
+  // on Bitget) just keeps the backend-provided current_price/unrealized_pnl_usd
+  // it already had, exactly like every other live-data fallback in this file.
+  function attachLivePrices(openPositions){
+    return Promise.all(openPositions.map(function(p){
+      return fetchLiveBitgetPrice(toBitgetSymbol(p.symbol)).then(function(price){
+        var pct = unrealizedPnlPct(p.direction, p.entry_price, price);
+        p.current_price = price;
+        p.unrealized_pnl_usd = Math.round(p.size_usd * pct / 100 * 100) / 100;
+        p.live_price = true;
+      }).catch(function(err){
+        console.warn('Live price fetch failed for ' + p.symbol + ', keeping last known value', err);
+      });
+    })).then(function(){ return openPositions; });
   }
 
   (function(){
@@ -1437,7 +1485,8 @@
           '<td data-label="Ticker"><b>' + esc(p.symbol) + '</b>' + badges + '</td>' +
           '<td data-label="Direction"><span class="pos-direction ' + esc(p.direction) + '">' + (p.direction === 'long' ? 'Long' : 'Short') + '</span></td>' +
           '<td data-label="Entry">' + fmtUsd(p.entry_price) + '</td>' +
-          '<td data-label="Current">' + fmtUsd(current) + '</td>' +
+          '<td data-label="Current">' + fmtUsd(current) +
+            (p.live_price ? ' <span class="live-price-dot" title="Fetched live from Bitget just now">&#9679;</span>' : '') + '</td>' +
           '<td data-label="Stop-Loss">-' + Number(p.stop_loss_pct || 0).toFixed(2) + '%</td>' +
           '<td data-label="Take-Profit">+' + Number(p.take_profit_pct || 0).toFixed(2) + '%</td>' +
           '<td data-label="Size">' + fmtUsd(p.size_usd) + '</td>' +
@@ -1471,6 +1520,15 @@
       ddFill.style.width = Math.min(100, ddCap ? (Math.max(0, -ddPct) / ddCap * 100) : 0) + '%';
 
       avgBadge.textContent = 'Enforced · ' + (s.no_averaging_blocked_count || 0) + ' blocked';
+    }
+
+    function renderPerformance(data){
+      var s = data.summary || {};
+      var el = document.getElementById('perfPnl');
+      if (!el) return;
+      el.textContent = fmtUsd(s.cumulative_pnl_usd, {signed: true});
+      el.classList.toggle('pos', (s.cumulative_pnl_usd || 0) >= 0);
+      el.classList.toggle('neg', (s.cumulative_pnl_usd || 0) < 0);
     }
 
     function setupHistory(data){
@@ -1574,9 +1632,24 @@
 
     function refreshDashboard(force){
       loadDashboardData(force).then(function(data){
+        return attachLivePrices(data.open_positions || []).then(function(){
+          // Recompute the aggregates that depend on position price -- backend
+          // realized_pnl_usd never changes from a live price fetch (only a
+          // closed trade changes it), but unrealized/cumulative must reflect
+          // whatever attachLivePrices() just fetched, not the backend's
+          // cron-cadence snapshot.
+          var s = data.summary || (data.summary = {});
+          var liveUnrealized = (data.open_positions || [])
+            .reduce(function(sum, p){ return sum + (p.unrealized_pnl_usd || 0); }, 0);
+          s.unrealized_pnl_usd = Math.round(liveUnrealized * 100) / 100;
+          s.cumulative_pnl_usd = Math.round(((s.realized_pnl_usd || 0) + liveUnrealized) * 100) / 100;
+          return data;
+        });
+      }).then(function(data){
         renderOverview(data);
         renderPositions(data);
         renderAgentRisk(data);
+        renderPerformance(data);
         if (!historyRendered) {
           setupHistory(data);
           historyRendered = true;
