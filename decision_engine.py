@@ -211,7 +211,18 @@ def main():
         print("Not marked as processed — rerun in --mode live to actually act on it once reviewed.")
     else:
         for t in pending:
-            record = process_one(t, portfolio_state, execute_live=True)
+            try:
+                process_one(t, portfolio_state, execute_live=True)
+            except Exception as e:
+                # One trigger's unexpected failure (a transient SEC/Finnhub/Qwen
+                # network error, not a Bitget connectivity issue -- that's
+                # already handled gracefully inside process_one) must not kill
+                # the rest of this batch or the cron cycle behind it. Left
+                # unprocessed so it's retried next cycle rather than silently
+                # marked done.
+                print(f"\n>>> ERROR processing {t['symbol']}: {e} -- leaving unprocessed, "
+                      f"will retry next cycle.", file=sys.stderr)
+                continue
             state.mark_processed(trigger_key(t))
             portfolio_state = state.load_state()
 

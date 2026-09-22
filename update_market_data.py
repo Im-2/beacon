@@ -83,10 +83,18 @@ def update():
         time.sleep(0.15)
 
     if not prices and not candles:
-        print("All fetches failed -- leaving market_data.json untouched.", file=sys.stderr)
+        # Loud warning, but NEVER exit nonzero: run_now.sh's `all` chain uses
+        # `set -e`, so exiting 1 here used to abort the rest of the cron cycle
+        # -- including `live` (SENSE/JUDGE/RISK), which must keep running
+        # regardless of Bitget/market-data connectivity. Confirmed as the real
+        # cause of a silently-skipped automated run on 2026-09-22 (VPN was
+        # down; market-data failed; live never ran; LastTaskResult was 1 and
+        # the cron log wasn't touched at all that cycle).
+        print("All fetches failed -- leaving market_data.json untouched. "
+              "(Not treated as fatal -- see run_now.sh.)", file=sys.stderr)
         for f in failures:
             print(f"  {f}", file=sys.stderr)
-        sys.exit(1)
+        return None
 
     payload = {
         "updatedAt": datetime.now(timezone.utc).isoformat(),
