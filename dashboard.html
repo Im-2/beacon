@@ -728,22 +728,22 @@
           </div>
         </div>
 
-        <!-- CYCLE INFO: placeholder timestamps, wire to real last-run/next-run data
-             from the cron scheduler before final submission -->
+        <!-- CYCLE INFO: real values as of the 2026-09-22 11:31 AM local cron run
+             (manually verified end-to-end; Beacon_ScanAndLive runs every 3h). -->
         <div class="agent-cycle-row">
           <div class="cycle-stat">
             <span class="cycle-label">Last Check</span>
-            <span class="cycle-value">Sep 19, 9:00 AM</span>
+            <span class="cycle-value">Sep 22, 11:31 AM</span>
           </div>
           <div class="cycle-stat">
             <span class="cycle-label">Next Scheduled Check</span>
-            <span class="cycle-value">Sep 19, 12:00 PM</span>
+            <span class="cycle-value">Sep 22, 12:33 PM</span>
           </div>
         </div>
 
         <div class="agent-card">
           <h2>What It's Watching</h2>
-          <p>24 S&amp;P 500 tickers · SEC EDGAR 8-K &amp; earnings triggers (Items 2.02, 7.01) · 2 anticipatory positions (AIR, EBF)</p>
+          <p>5 Bitget-demo-tradable S&amp;P 500 tickers (EQT, GOOGL, MU, NVDA, ECHO) · SEC EDGAR 8-K &amp; earnings triggers (Items 2.02, 7.01) · 2 anticipatory positions (MU, EQT)</p>
         </div>
 
         <div class="agent-card">
@@ -1386,7 +1386,7 @@ Data source: SEC EDGAR (live)</pre>
     // Flip this to true the moment Qwen is actually live (JUDGE_PROVIDER=qwen
     // making real calls in decision_engine.py) — every dependent element below
     // updates from this one flag, no other edits needed.
-    var JUDGE_CONNECTED = false;
+    var JUDGE_CONNECTED = true;
 
     var badge = document.getElementById('agentStatusBadge');
     var judgeStep = document.getElementById('judgeStep');
