@@ -159,6 +159,11 @@
   .status-badge.approved{background:rgba(12,139,121,0.1);color:var(--pos);}
   .status-badge.filtered{background:rgba(76,106,110,0.1);color:var(--muted);}
   .status-badge.rejected{background:rgba(209,69,59,0.1);color:var(--neg);}
+  .status-badge.notrade{background:rgba(76,106,110,0.1);color:var(--muted);}
+  .status-badge.skipped,.status-badge.pending{background:rgba(245,166,35,0.14);color:#9A6B12;}
+  .status-badge.closed{background:rgba(29,162,180,0.1);color:var(--teal-mid);}
+  .t-badge.mock{background:rgba(245,166,35,0.14);color:#9A6B12;border-color:transparent;}
+  .t-badge.cross-asset{background:rgba(29,162,180,0.12);color:var(--teal-brand);border-color:transparent;}
 
   .carousel-wrap{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;}
   .carousel-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;gap:12px;}
@@ -578,15 +583,15 @@
         <div class="summary-row">
           <div class="summary-card">
             <div class="sc-label">Paper Capital</div>
-            <div class="sc-value">$10,000.00</div>
+            <div class="sc-value" id="ovCapital">$10,000.00</div>
           </div>
           <div class="summary-card">
             <div class="sc-label">Cumulative P&amp;L</div>
-            <div class="sc-value pos">+$0.00</div>
+            <div class="sc-value pos" id="ovPnl">+$0.00</div>
           </div>
           <div class="summary-card">
             <div class="sc-label">Win Rate</div>
-            <div class="sc-value">—</div>
+            <div class="sc-value" id="ovWinRate">—</div>
           </div>
         </div>
 
@@ -598,36 +603,7 @@
                 <p>Latest trigger-to-decision outcomes.</p>
               </div>
             </div>
-            <div class="decision-row">
-              <span class="d-ticker">LEN</span>
-              <span class="d-badge">2.02 Earnings</span>
-              <span class="d-decision long">Long</span>
-              <span class="d-conviction">82%</span>
-            </div>
-            <div class="decision-row">
-              <span class="d-ticker">VLO</span>
-              <span class="d-badge">7.01 Guidance</span>
-              <span class="d-decision notrade">Filtered</span>
-              <span class="d-conviction">—</span>
-            </div>
-            <div class="decision-row">
-              <span class="d-ticker">NKE</span>
-              <span class="d-badge">7.01 Guidance</span>
-              <span class="d-decision notrade">No Trade</span>
-              <span class="d-conviction">—</span>
-            </div>
-            <div class="decision-row">
-              <span class="d-ticker">COF</span>
-              <span class="d-badge">7.01 Guidance</span>
-              <span class="d-decision long">Long</span>
-              <span class="d-conviction">58%</span>
-            </div>
-            <div class="decision-row">
-              <span class="d-ticker">CTVA</span>
-              <span class="d-badge">7.01 Guidance</span>
-              <span class="d-decision long">Long</span>
-              <span class="d-conviction">64%</span>
-            </div>
+            <div id="ovRecentDecisions"></div>
           </div>
 
           <div class="panel">
@@ -642,28 +618,7 @@
                 <thead>
                   <tr><th>Ticker</th><th>Trigger</th><th>Decision</th><th>Date</th><th>Status</th></tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td><b>LEN</b></td><td>2.02 Earnings</td><td>Long</td><td>Sep 16</td>
-                    <td><span class="status-badge approved">Approved</span></td>
-                  </tr>
-                  <tr>
-                    <td><b>VLO</b></td><td>7.01 Guidance</td><td>No Trade</td><td>Sep 18</td>
-                    <td><span class="status-badge filtered">Filtered</span></td>
-                  </tr>
-                  <tr>
-                    <td><b>NKE</b></td><td>7.01 Guidance</td><td>No Trade</td><td>Sep 16</td>
-                    <td><span class="status-badge approved">Approved</span></td>
-                  </tr>
-                  <tr>
-                    <td><b>CTVA</b></td><td>7.01 Guidance</td><td>Long</td><td>Sep 15</td>
-                    <td><span class="status-badge rejected">Rejected</span></td>
-                  </tr>
-                  <tr>
-                    <td><b>COF</b></td><td>7.01 Guidance</td><td>Long</td><td>Sep 15</td>
-                    <td><span class="status-badge approved">Approved</span></td>
-                  </tr>
-                </tbody>
+                <tbody id="ovHistoryBody"></tbody>
               </table>
             </div>
           </div>
@@ -776,23 +731,23 @@
 
         <div class="agent-card">
           <h2>Risk Profile Snapshot</h2>
-          <!-- RISK SNAPSHOT: placeholder 0 values, wire to real beacon/portfolio_state.json
-               before final submission -->
+          <!-- RISK SNAPSHOT: filled from dashboard_data.json's summary object by
+               renderAgentRisk() below. -->
           <div class="risk-meter">
-            <div class="risk-meter-head"><span class="rm-name">Position size cap</span><span class="rm-usage">0% of 5%</span></div>
-            <div class="risk-meter-bar"><div class="risk-meter-fill" style="width:0%"></div></div>
+            <div class="risk-meter-head"><span class="rm-name">Position size cap</span><span class="rm-usage" id="riskPositionSizeUsage">0% of 5%</span></div>
+            <div class="risk-meter-bar"><div class="risk-meter-fill" id="riskPositionSizeFill" style="width:0%"></div></div>
           </div>
           <div class="risk-meter">
-            <div class="risk-meter-head"><span class="rm-name">Concurrent positions</span><span class="rm-usage">0 of 5</span></div>
-            <div class="risk-meter-bar"><div class="risk-meter-fill" style="width:0%"></div></div>
+            <div class="risk-meter-head"><span class="rm-name">Concurrent positions</span><span class="rm-usage" id="riskConcurrentUsage">0 of 5</span></div>
+            <div class="risk-meter-bar"><div class="risk-meter-fill" id="riskConcurrentFill" style="width:0%"></div></div>
           </div>
           <div class="risk-meter">
-            <div class="risk-meter-head"><span class="rm-name">Daily drawdown breaker</span><span class="rm-usage">0% of 3% limit</span></div>
-            <div class="risk-meter-bar"><div class="risk-meter-fill" style="width:0%"></div></div>
+            <div class="risk-meter-head"><span class="rm-name">Daily drawdown breaker</span><span class="rm-usage" id="riskDrawdownUsage">0% of 3% limit</span></div>
+            <div class="risk-meter-bar"><div class="risk-meter-fill" id="riskDrawdownFill" style="width:0%"></div></div>
           </div>
           <div class="risk-rule-static">
             <span class="rm-name">No averaging into losers</span>
-            <span class="risk-enforced-badge">Enforced · 0 blocked</span>
+            <span class="risk-enforced-badge" id="riskAveragingBadge">Enforced · 0 blocked</span>
           </div>
         </div>
       </section>
@@ -807,15 +762,15 @@
         <div class="summary-row">
           <div class="summary-card">
             <div class="sc-label">Open Positions</div>
-            <div class="sc-value">0</div>
+            <div class="sc-value" id="posCount">0</div>
           </div>
           <div class="summary-card">
             <div class="sc-label">Total Exposure</div>
-            <div class="sc-value">$0.00 <span class="sc-sub">(0% of capital)</span></div>
+            <div class="sc-value" id="posExposure">$0.00 <span class="sc-sub" id="posExposurePct">(0% of capital)</span></div>
           </div>
           <div class="summary-card">
             <div class="sc-label">Unrealized P&amp;L</div>
-            <div class="sc-value pos">+$0.00</div>
+            <div class="sc-value pos" id="posUnrealized">+$0.00</div>
           </div>
         </div>
 
@@ -834,28 +789,21 @@
                   <th>Stop-Loss</th><th>Take-Profit</th><th>Size</th><th>Unrealized P&amp;L</th><th>Time Held</th>
                 </tr>
               </thead>
-              <!-- POSITIONS: wire to real open-positions data from JSONL log/state file once
-                   trades exist. Replace this empty-state row with one <tr> per open position;
-                   apply the .pos-cell-warn class to the Current/Stop-Loss/Take-Profit cells
-                   when price is within ~10% of triggering that level. -->
-              <tbody>
+              <!-- POSITIONS: rendered from dashboard_data.json (export_dashboard_data.py)
+                   by the renderPositions() script below. -->
+              <tbody id="positionsBody">
                 <tr>
                   <td colspan="9">
                     <div class="table-empty-state">
                       <div class="ph-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="3" rx="1"/><rect x="3" y="9" width="14" height="3" rx="1"/><rect x="3" y="14" width="14" height="3" rx="1" opacity="0.5"/></svg></div>
                       <h3>No open positions yet</h3>
-                      <p>Beacon will open its first position once the Judge step is connected and a qualifying trigger fires.</p>
+                      <p>Beacon will open its first position once a qualifying trigger fires and clears Risk.</p>
                     </div>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </div>
-
-        <div class="anticipatory-card">
-          <span class="anticipatory-badge">Anticipatory</span>
-          <p>Anticipatory positions (pre-earnings, Sept 21 reports): <b>AIR</b>, <b>EBF</b> — queued, not yet opened.</p>
         </div>
       </section>
       <section class="page" data-page="history" hidden>
@@ -874,18 +822,22 @@
             <button class="filter-pill" data-value="filtered" type="button">Filtered</button>
             <button class="filter-pill" data-value="rejected" type="button">Rejected</button>
             <button class="filter-pill" data-value="notrade" type="button">No Trade</button>
+            <button class="filter-pill" data-value="skipped" type="button">Skipped</button>
           </div>
           <div class="filter-group" data-filter-group="trigger">
             <span class="filter-group-label">Trigger</span>
             <button class="filter-pill active" data-value="all" type="button">All</button>
             <button class="filter-pill" data-value="2.02" type="button">2.02 Earnings</button>
             <button class="filter-pill" data-value="7.01" type="button">7.01 Guidance</button>
+            <button class="filter-pill" data-value="anticipatory" type="button">Anticipatory</button>
           </div>
           <input class="filter-text-input" id="historyTickerFilter" type="text" placeholder="Filter by ticker...">
         </div>
 
         <div class="panel">
-          <!-- HISTORY: placeholder/seed data, wire to full real JSONL log before final submission -->
+          <!-- HISTORY: rendered from dashboard_data.json (export_dashboard_data.py)
+               by the renderHistory() script below — every real decision record,
+               nothing hidden, mock/test-fixture rows badged, not dropped. -->
           <div class="table-wrap">
             <table class="history-table" id="historyTable">
               <thead>
@@ -894,197 +846,7 @@
                   <th>Conviction</th><th>Risk Check</th><th>Status</th><th></th>
                 </tr>
               </thead>
-              <tbody>
-
-                <tr class="history-row" data-status="approved" data-trigger="2.02" data-decision="long" data-ticker="LEN">
-                  <td>Sep 16</td>
-                  <td><b>LEN</b></td>
-                  <td><code class="t-badge">2.02 Earnings</code></td>
-                  <td><span class="pos-direction long">Long</span></td>
-                  <td>82%</td>
-                  <td>Passed</td>
-                  <td><span class="status-badge approved">Approved</span></td>
-                  <td><button class="row-chevron" type="button" aria-label="Expand"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg></button></td>
-                </tr>
-                <tr class="history-detail-row">
-                  <td colspan="8">
-                    <div class="detail-panel">
-                      <div class="detail-block">
-                        <h4>Sense</h4>
-                        <pre class="detail-code">Filing type: 10-Q Results
-EPS: actual vs. consensus available
-Data source: SEC EDGAR (live)</pre>
-                      </div>
-                      <div class="detail-block">
-                        <h4>Judge</h4>
-                        <p class="detail-quote">"Earnings beat with a positive guidance revision. Classifying as bullish with high conviction given the clear quantitative surprise."</p>
-                      </div>
-                      <div class="detail-block">
-                        <h4>Risk Check</h4>
-                        <ul class="detail-list">
-                          <li>Position size <b>4.8% of 5% cap</b></li>
-                          <li>Concurrent positions <b>3 of 5</b></li>
-                          <li>Daily drawdown <b>0.8% of 3% limit</b></li>
-                        </ul>
-                      </div>
-                      <div class="detail-block">
-                        <h4>Execute</h4>
-                        <div class="detail-outcome ok">Long RLENUSDT · Size 4.8% of capital · Order placed</div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr class="history-row" data-status="filtered" data-trigger="7.01" data-decision="notrade" data-ticker="VLO">
-                  <td>Sep 18</td>
-                  <td><b>VLO</b></td>
-                  <td><code class="t-badge">7.01 Guidance</code></td>
-                  <td><span class="pos-direction" style="color:var(--muted);">No Trade</span></td>
-                  <td>—</td>
-                  <td>N/A</td>
-                  <td><span class="status-badge filtered">Filtered</span></td>
-                  <td><button class="row-chevron" type="button" aria-label="Expand"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg></button></td>
-                </tr>
-                <tr class="history-detail-row">
-                  <td colspan="8">
-                    <div class="detail-panel">
-                      <div class="detail-block">
-                        <h4>Sense</h4>
-                        <pre class="detail-code">Valero Energy Corporation Elects Matt Audette
-to its Board of Directors.
-Filing type: Reg FD Disclosure (Item 7.01)
-Data source: SEC EDGAR (live)</pre>
-                      </div>
-                      <div class="detail-block">
-                        <h4>Judge (Gate Check)</h4>
-                        <p class="detail-quote">"Not substantively financial — this is a board-of-directors appointment announcement, not guidance or earnings content. Filtered before directional judgment."</p>
-                      </div>
-                      <div class="detail-block">
-                        <h4>Risk Check</h4>
-                        <div class="detail-outcome neutral">Not reached — trigger filtered before the Judge step produced a directional decision.</div>
-                      </div>
-                      <div class="detail-block">
-                        <h4>Execute</h4>
-                        <div class="detail-outcome neutral">No order placed — trigger fired, filtered as non-substantive.</div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr class="history-row" data-status="approved" data-trigger="7.01" data-decision="notrade" data-ticker="NKE">
-                  <td>Sep 16</td>
-                  <td><b>NKE</b></td>
-                  <td><code class="t-badge">7.01 Guidance</code></td>
-                  <td><span class="pos-direction" style="color:var(--muted);">No Trade</span></td>
-                  <td>—</td>
-                  <td>Passed</td>
-                  <td><span class="status-badge approved">Approved</span></td>
-                  <td><button class="row-chevron" type="button" aria-label="Expand"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg></button></td>
-                </tr>
-                <tr class="history-detail-row">
-                  <td colspan="8">
-                    <div class="detail-panel">
-                      <div class="detail-block">
-                        <h4>Sense</h4>
-                        <pre class="detail-code">Filing type: Reg FD Disclosure
-Recent price action: flat pre-market
-Data source: SEC EDGAR (live)</pre>
-                      </div>
-                      <div class="detail-block">
-                        <h4>Judge</h4>
-                        <p class="detail-quote">"Content is substantively relevant but does not contain a clear directional signal. Insufficient evidence to form conviction — decision: no-trade."</p>
-                      </div>
-                      <div class="detail-block">
-                        <h4>Risk Check</h4>
-                        <div class="detail-outcome neutral">Not applicable — no directional trade proposed to check.</div>
-                      </div>
-                      <div class="detail-block">
-                        <h4>Execute</h4>
-                        <div class="detail-outcome neutral">No order placed — Judge decision was no-trade.</div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr class="history-row" data-status="rejected" data-trigger="7.01" data-decision="long" data-ticker="CTVA">
-                  <td>Sep 15</td>
-                  <td><b>CTVA</b></td>
-                  <td><code class="t-badge">7.01 Guidance</code></td>
-                  <td><span class="pos-direction long">Long</span></td>
-                  <td>64%</td>
-                  <td>Rejected</td>
-                  <td><span class="status-badge rejected">Rejected</span></td>
-                  <td><button class="row-chevron" type="button" aria-label="Expand"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg></button></td>
-                </tr>
-                <tr class="history-detail-row">
-                  <td colspan="8">
-                    <div class="detail-panel">
-                      <div class="detail-block">
-                        <h4>Sense</h4>
-                        <pre class="detail-code">Filing type: Reg FD Disclosure
-Recent price action: +0.4% pre-market
-Data source: SEC EDGAR (live)</pre>
-                      </div>
-                      <div class="detail-block">
-                        <h4>Judge</h4>
-                        <p class="detail-quote">"Guidance language reads moderately positive relative to prior commentary. Classifying as bullish with moderate conviction."</p>
-                      </div>
-                      <div class="detail-block">
-                        <h4>Risk Check</h4>
-                        <ul class="detail-list">
-                          <li>Position size <b>4.2% of 5% cap</b></li>
-                          <li>Concurrent positions <b>5 of 5 — limit reached</b></li>
-                          <li>Daily drawdown <b>1.1% of 3% limit</b></li>
-                        </ul>
-                      </div>
-                      <div class="detail-block">
-                        <h4>Execute</h4>
-                        <div class="detail-outcome blocked">Rejected by risk controls — max concurrent positions reached. No order placed.</div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr class="history-row" data-status="approved" data-trigger="7.01" data-decision="long" data-ticker="COF">
-                  <td>Sep 15</td>
-                  <td><b>COF</b></td>
-                  <td><code class="t-badge">7.01 Guidance</code></td>
-                  <td><span class="pos-direction long">Long</span></td>
-                  <td>58%</td>
-                  <td>Passed</td>
-                  <td><span class="status-badge approved">Approved</span></td>
-                  <td><button class="row-chevron" type="button" aria-label="Expand"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg></button></td>
-                </tr>
-                <tr class="history-detail-row">
-                  <td colspan="8">
-                    <div class="detail-panel">
-                      <div class="detail-block">
-                        <h4>Sense</h4>
-                        <pre class="detail-code">Filing type: Reg FD Disclosure
-Recent price action: +0.2% pre-market
-Data source: SEC EDGAR (live)</pre>
-                      </div>
-                      <div class="detail-block">
-                        <h4>Judge</h4>
-                        <p class="detail-quote">"Guidance commentary skews positive relative to the prior quarter. Classifying as bullish with moderate conviction."</p>
-                      </div>
-                      <div class="detail-block">
-                        <h4>Risk Check</h4>
-                        <ul class="detail-list">
-                          <li>Position size <b>3.6% of 5% cap</b></li>
-                          <li>Concurrent positions <b>2 of 5</b></li>
-                          <li>Daily drawdown <b>0.8% of 3% limit</b></li>
-                        </ul>
-                      </div>
-                      <div class="detail-block">
-                        <h4>Execute</h4>
-                        <div class="detail-outcome ok">Long RCOFUSDT · Size 3.6% of capital · Order placed</div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-
-              </tbody>
+              <tbody id="historyBody"></tbody>
             </table>
           </div>
 
@@ -1308,6 +1070,43 @@ Data source: SEC EDGAR (live)</pre>
     return marketDataPromise;
   }
 
+  // dashboard_data.json is written by export_dashboard_data.py (same cron
+  // cycle) from the real logs/decisions.jsonl audit log and
+  // data/portfolio_state.json -- nothing here is placeholder/seed data.
+  // Every decision record is included (nothing hidden), but each one carries
+  // is_mock (true for pre-Qwen-wiring placeholder judgments and this
+  // session's explicitly-labeled synthetic test fixtures) so the UI can
+  // badge it instead of presenting it as a real trading signal.
+  var DASHBOARD_DATA_URL = 'dashboard_data.json';
+  var dashboardDataPromise = null;
+  function loadDashboardData(force){
+    if (!dashboardDataPromise || force) {
+      dashboardDataPromise = fetch(DASHBOARD_DATA_URL + '?t=' + Date.now(), {cache: 'no-store'})
+        .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+    }
+    return dashboardDataPromise;
+  }
+
+  function fmtUsd(n, opts){
+    opts = opts || {};
+    if (typeof n !== 'number' || isNaN(n)) return '—';
+    var sign = opts.signed ? (n >= 0 ? '+' : '-') : (n < 0 ? '-' : '');
+    return sign + '$' + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  }
+  function fmtPct(n, opts){
+    opts = opts || {};
+    if (typeof n !== 'number' || isNaN(n)) return '—';
+    var sign = opts.signed ? (n >= 0 ? '+' : '') : '';
+    return sign + n.toFixed(2) + '%';
+  }
+  function timeHeld(iso){
+    var opened = new Date(iso).getTime();
+    if (isNaN(opened)) return '—';
+    var mins = Math.max(0, Math.round((Date.now() - opened) / 60000));
+    var h = Math.floor(mins / 60), m = mins % 60;
+    return h > 0 ? (h + 'h ' + m + 'm') : (m + 'm');
+  }
+
   (function(){
     var navItems = [].slice.call(document.querySelectorAll('.nav-item'));
     var pages = [].slice.call(document.querySelectorAll('.page'));
@@ -1418,64 +1217,295 @@ Data source: SEC EDGAR (live)</pre>
   })();
 
   (function(){
-    var table = document.getElementById('historyTable');
-    if (!table) return;
-    var rows = [].slice.call(table.querySelectorAll('.history-row'));
-    var tickerInput = document.getElementById('historyTickerFilter');
-    var countLabel = document.getElementById('historyCount');
-    var filters = { status: 'all', trigger: 'all' };
-
-    // row expand/collapse
-    rows.forEach(function(row){
-      var detail = row.nextElementSibling;
-      row.addEventListener('click', function(){
-        var isOpen = row.classList.contains('expanded');
-        row.classList.toggle('expanded', !isOpen);
-        if (detail) detail.classList.toggle('open', !isOpen);
+    // Everything below renders from dashboard_data.json (export_dashboard_data.py)
+    // -- real logs/decisions.jsonl + data/portfolio_state.json, nothing seeded.
+    function esc(s){
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
       });
-    });
+    }
 
-    // filter pills — scoped to this page only. Watchlist reuses the same
-    // .filter-group/.filter-pill class names for its own "Show" toggle, so an
-    // unscoped document-wide query here would incorrectly also wire up (and
-    // misfire against History's own rows/applyFilters) Watchlist's filter pills.
-    var historyPage = table.closest('.page') || document;
-    [].slice.call(historyPage.querySelectorAll('.filter-group')).forEach(function(group){
-      var key = group.getAttribute('data-filter-group');
-      var pills = [].slice.call(group.querySelectorAll('.filter-pill'));
-      pills.forEach(function(pill){
-        pill.addEventListener('click', function(){
-          pills.forEach(function(p){ p.classList.remove('active'); });
-          pill.classList.add('active');
-          filters[key] = pill.getAttribute('data-value');
-          applyFilters();
-        });
-      });
-    });
+    var STATUS_LABELS = {approved:'Approved', filtered:'Filtered', rejected:'Rejected',
+      notrade:'No Trade', skipped:'Skipped', pending:'Pending', closed:'Closed'};
 
-    if (tickerInput) tickerInput.addEventListener('input', applyFilters);
+    function statusBadgeHtml(status){
+      var label = STATUS_LABELS[status] || 'Other';
+      var cls = STATUS_LABELS[status] ? status : 'filtered';
+      return '<span class="status-badge ' + cls + '">' + label + '</span>';
+    }
 
-    function applyFilters(){
-      var tickerQuery = tickerInput ? tickerInput.value.trim().toUpperCase() : '';
-      var visibleCount = 0;
+    function decisionLabel(d){
+      if (d.decision === 'long') return 'Long';
+      if (d.decision === 'short') return 'Short';
+      return 'No Trade';
+    }
+
+    function decisionCellHtml(d){
+      if (d.decision === 'long') return '<span class="pos-direction long">Long</span>';
+      if (d.decision === 'short') return '<span class="pos-direction short">Short</span>';
+      return '<span class="pos-direction" style="color:var(--muted);">No Trade</span>';
+    }
+
+    function extraBadgesHtml(d){
+      var out = '';
+      if (d.is_mock) out += ' <span class="t-badge mock" title="Mock or test-fixture judgment — not a real trading signal">Mock</span>';
+      if (d.is_cross_asset) out += ' <span class="t-badge cross-asset" title="Executed via cross-asset proxy (' + esc(d.cross_asset_symbol || '') + ')">Cross-Asset</span>';
+      return out;
+    }
+
+    function triggerDataAttr(d){
+      if (d.trigger_label === '2.02 Earnings') return '2.02';
+      if (d.trigger_label === '7.01 Guidance') return '7.01';
+      if (d.category === 'anticipatory_positioning') return 'anticipatory';
+      return 'other';
+    }
+
+    function decisionDataAttr(d){
+      if (d.decision === 'long') return 'long';
+      if (d.decision === 'short') return 'short';
+      return 'notrade';
+    }
+
+    function detailPanelHtml(d){
+      var riskHtml = (d.risk_lines && d.risk_lines.length)
+        ? '<ul class="detail-list">' + d.risk_lines.map(function(l){ return '<li>' + esc(l) + '</li>'; }).join('') + '</ul>'
+        : '<div class="detail-outcome neutral">Not reached.</div>';
+      var execClass = d.execute_kind === 'ok' ? 'ok' : (d.execute_kind === 'blocked' ? 'blocked' : 'neutral');
+      var correctionHtml = d.correction_note
+        ? '<div class="detail-outcome blocked" style="margin-top:10px;">Retroactively corrected: ' + esc(d.correction_note) + '</div>'
+        : '';
+      var judgeHtml = d.judge_neutral
+        ? '<div class="detail-outcome neutral">' + esc(d.judge_text) + '</div>'
+        : '<p class="detail-quote">"' + esc(d.judge_text) + '"</p>';
+      return '<div class="detail-panel">' +
+          '<div class="detail-block"><h4>Sense</h4><pre class="detail-code">' + esc(d.sense_text) + '</pre></div>' +
+          '<div class="detail-block"><h4>' + esc(d.judge_heading) + '</h4>' + judgeHtml + '</div>' +
+          '<div class="detail-block"><h4>Risk Check</h4>' + riskHtml + '</div>' +
+          '<div class="detail-block"><h4>Execute</h4><div class="detail-outcome ' + execClass + '">' + esc(d.execute_text) + '</div>' + correctionHtml + '</div>' +
+        '</div>';
+    }
+
+    function historyRowsHtml(d){
+      return '<tr class="history-row" data-status="' + d.status + '" data-trigger="' + triggerDataAttr(d) +
+          '" data-decision="' + decisionDataAttr(d) + '" data-ticker="' + esc(d.symbol) + '">' +
+          '<td>' + esc(d.date_label) + '</td>' +
+          '<td><b>' + esc(d.symbol) + '</b>' + extraBadgesHtml(d) + '</td>' +
+          '<td><code class="t-badge">' + esc(d.trigger_label) + '</code></td>' +
+          '<td>' + decisionCellHtml(d) + '</td>' +
+          '<td>' + (typeof d.conviction === 'number' ? d.conviction + '%' : '—') + '</td>' +
+          '<td>' + (d.risk_approved === true ? 'Passed' : d.risk_approved === false ? 'Rejected' : 'N/A') + '</td>' +
+          '<td>' + statusBadgeHtml(d.status) + '</td>' +
+          '<td><button class="row-chevron" type="button" aria-label="Expand"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg></button></td>' +
+        '</tr>' +
+        '<tr class="history-detail-row"><td colspan="8">' + detailPanelHtml(d) + '</td></tr>';
+    }
+
+    function renderOverview(data){
+      var s = data.summary || {};
+      var capEl = document.getElementById('ovCapital');
+      var pnlEl = document.getElementById('ovPnl');
+      var winEl = document.getElementById('ovWinRate');
+      if (capEl) capEl.textContent = fmtUsd(data.capital_usd);
+      if (pnlEl) {
+        pnlEl.textContent = fmtUsd(s.cumulative_pnl_usd, {signed: true});
+        pnlEl.classList.toggle('pos', (s.cumulative_pnl_usd || 0) >= 0);
+        pnlEl.classList.toggle('neg', (s.cumulative_pnl_usd || 0) < 0);
+      }
+      if (winEl) winEl.textContent = (typeof s.win_rate_pct === 'number') ? s.win_rate_pct.toFixed(1) + '%' : '—';
+
+      // Headline "Recent" panels show only real (non-mock) decisions — the
+      // full audit trail, including clearly-badged mock/test-fixture rows, is
+      // in History. Keeps the teaser panels honest without needing a badge in
+      // their tight layout.
+      var real = (data.decisions || []).filter(function(d){ return !d.is_mock; });
+      var recent = real.slice(0, 5);
+
+      var recentWrap = document.getElementById('ovRecentDecisions');
+      if (recentWrap) {
+        recentWrap.innerHTML = recent.length ? recent.map(function(d){
+          return '<div class="decision-row">' +
+            '<span class="d-ticker">' + esc(d.symbol) + '</span>' +
+            '<span class="d-badge">' + esc(d.trigger_label) + '</span>' +
+            '<span class="d-decision ' + decisionDataAttr(d) + '">' + decisionLabel(d) + '</span>' +
+            '<span class="d-conviction">' + (typeof d.conviction === 'number' ? d.conviction + '%' : '—') + '</span>' +
+          '</div>';
+        }).join('') : '<p style="font-size:12.5px;color:var(--muted);margin:0;">No real decisions yet.</p>';
+      }
+
+      var histBody = document.getElementById('ovHistoryBody');
+      if (histBody) {
+        histBody.innerHTML = recent.map(function(d){
+          return '<tr><td><b>' + esc(d.symbol) + '</b></td><td>' + esc(d.trigger_label) + '</td><td>' +
+            decisionLabel(d) + '</td><td>' + esc(d.date_label) + '</td><td>' + statusBadgeHtml(d.status) + '</td></tr>';
+        }).join('');
+      }
+    }
+
+    function renderPositions(data){
+      var body = document.getElementById('positionsBody');
+      if (!body) return;
+      var positions = data.open_positions || [];
+      var s = data.summary || {};
+
+      var countEl = document.getElementById('posCount');
+      var exposureEl = document.getElementById('posExposure');
+      var unrealizedEl = document.getElementById('posUnrealized');
+      if (countEl) countEl.textContent = positions.length;
+      if (exposureEl) exposureEl.innerHTML = fmtUsd(s.total_exposure_usd) +
+        ' <span class="sc-sub">(' + fmtPct(s.total_exposure_pct) + ' of capital)</span>';
+      if (unrealizedEl) {
+        unrealizedEl.textContent = fmtUsd(s.unrealized_pnl_usd, {signed: true});
+        unrealizedEl.classList.toggle('pos', (s.unrealized_pnl_usd || 0) >= 0);
+        unrealizedEl.classList.toggle('neg', (s.unrealized_pnl_usd || 0) < 0);
+      }
+
+      if (!positions.length) {
+        body.innerHTML = '<tr><td colspan="9"><div class="table-empty-state">' +
+          '<div class="ph-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="3" rx="1"/><rect x="3" y="9" width="14" height="3" rx="1"/><rect x="3" y="14" width="14" height="3" rx="1" opacity="0.5"/></svg></div>' +
+          '<h3>No open positions yet</h3><p>Beacon will open its first position once a qualifying trigger fires and clears Risk.</p>' +
+          '</div></td></tr>';
+        return;
+      }
+
+      body.innerHTML = positions.map(function(p){
+        var current = (typeof p.current_price === 'number') ? p.current_price : p.entry_price;
+        var pnl = p.unrealized_pnl_usd || 0;
+        var badges = '';
+        if (p.is_test_fixture) badges += ' <span class="t-badge mock" title="' + esc(p.test_fixture_note || '') + '">Test Fixture</span>';
+        if (p.execution_leg === 'cross_asset_proxy') badges += ' <span class="t-badge cross-asset" title="Cross-asset proxy position">&rarr; ' + esc(p.proxy_for || '') + '</span>';
+        return '<tr>' +
+          '<td><b>' + esc(p.symbol) + '</b>' + badges + '</td>' +
+          '<td><span class="pos-direction ' + esc(p.direction) + '">' + (p.direction === 'long' ? 'Long' : 'Short') + '</span></td>' +
+          '<td>' + fmtUsd(p.entry_price) + '</td>' +
+          '<td>' + fmtUsd(current) + '</td>' +
+          '<td>-' + Number(p.stop_loss_pct || 0).toFixed(2) + '%</td>' +
+          '<td>+' + Number(p.take_profit_pct || 0).toFixed(2) + '%</td>' +
+          '<td>' + fmtUsd(p.size_usd) + '</td>' +
+          '<td style="color:' + (pnl >= 0 ? 'var(--pos)' : 'var(--neg)') + ';font-weight:700;">' + fmtUsd(pnl, {signed: true}) + '</td>' +
+          '<td>' + timeHeld(p.opened_at) + '</td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    function renderAgentRisk(data){
+      var s = data.summary || {};
+      var posUsage = document.getElementById('riskPositionSizeUsage');
+      var posFill = document.getElementById('riskPositionSizeFill');
+      var concUsage = document.getElementById('riskConcurrentUsage');
+      var concFill = document.getElementById('riskConcurrentFill');
+      var ddUsage = document.getElementById('riskDrawdownUsage');
+      var ddFill = document.getElementById('riskDrawdownFill');
+      var avgBadge = document.getElementById('riskAveragingBadge');
+      if (!posUsage) return;
+
+      var posPct = s.position_size_used_pct || 0, posCap = s.position_size_cap_pct || 5;
+      posUsage.textContent = posPct.toFixed(1) + '% of ' + posCap + '%';
+      posFill.style.width = Math.min(100, posCap ? (posPct / posCap * 100) : 0) + '%';
+
+      var concUsed = s.concurrent_positions_used || 0, concCap = s.concurrent_positions_cap || 5;
+      concUsage.textContent = concUsed + ' of ' + concCap;
+      concFill.style.width = Math.min(100, concCap ? (concUsed / concCap * 100) : 0) + '%';
+
+      var ddPct = s.daily_drawdown_pct || 0, ddCap = s.daily_drawdown_cap_pct || 3;
+      ddUsage.textContent = ddPct.toFixed(2) + '% of ' + ddCap + '% limit';
+      ddFill.style.width = Math.min(100, ddCap ? (Math.max(0, -ddPct) / ddCap * 100) : 0) + '%';
+
+      avgBadge.textContent = 'Enforced · ' + (s.no_averaging_blocked_count || 0) + ' blocked';
+    }
+
+    function setupHistory(data){
+      var table = document.getElementById('historyTable');
+      var body = document.getElementById('historyBody');
+      if (!table || !body) return;
+
+      var decisions = data.decisions || [];
+      body.innerHTML = decisions.map(historyRowsHtml).join('');
+
+      var tickerInput = document.getElementById('historyTickerFilter');
+      var countLabel = document.getElementById('historyCount');
+      var prevBtn = document.getElementById('historyPrevBtn');
+      var nextBtn = document.getElementById('historyNextBtn');
+      var filters = { status: 'all', trigger: 'all' };
+      var PAGE_SIZE = 12;
+      var page = 0;
+
+      var rows = [].slice.call(body.querySelectorAll('.history-row'));
+
       rows.forEach(function(row){
         var detail = row.nextElementSibling;
-        var statusOk = filters.status === 'all'
-          || (filters.status === 'notrade' ? row.getAttribute('data-decision') === 'notrade' : row.getAttribute('data-status') === filters.status);
-        var triggerOk = filters.trigger === 'all' || row.getAttribute('data-trigger') === filters.trigger;
-        var tickerOk = !tickerQuery || row.getAttribute('data-ticker').indexOf(tickerQuery) !== -1;
-        var show = statusOk && triggerOk && tickerOk;
-        row.style.display = show ? '' : 'none';
-        if (!show) {
-          row.classList.remove('expanded');
-          if (detail) { detail.classList.remove('open'); detail.style.display = 'none'; }
-        } else if (detail) {
-          detail.style.display = '';
-        }
-        if (show) visibleCount++;
+        row.addEventListener('click', function(){
+          var isOpen = row.classList.contains('expanded');
+          row.classList.toggle('expanded', !isOpen);
+          if (detail) detail.classList.toggle('open', !isOpen);
+        });
       });
-      if (countLabel) countLabel.textContent = 'Showing ' + visibleCount + ' of ' + rows.length + ' decisions';
+
+      var historyPage = table.closest('.page') || document;
+      [].slice.call(historyPage.querySelectorAll('.filter-group')).forEach(function(group){
+        var key = group.getAttribute('data-filter-group');
+        var pills = [].slice.call(group.querySelectorAll('.filter-pill'));
+        pills.forEach(function(pill){
+          pill.addEventListener('click', function(){
+            pills.forEach(function(p){ p.classList.remove('active'); });
+            pill.classList.add('active');
+            filters[key] = pill.getAttribute('data-value');
+            page = 0;
+            applyFilters();
+          });
+        });
+      });
+
+      if (tickerInput) tickerInput.addEventListener('input', function(){ page = 0; applyFilters(); });
+      if (prevBtn) prevBtn.addEventListener('click', function(){ if (page > 0) { page--; applyFilters(); } });
+      if (nextBtn) nextBtn.addEventListener('click', function(){ page++; applyFilters(); });
+
+      function applyFilters(){
+        var tickerQuery = tickerInput ? tickerInput.value.trim().toUpperCase() : '';
+        var matched = rows.filter(function(row){
+          var statusOk = filters.status === 'all'
+            || (filters.status === 'notrade' ? row.getAttribute('data-decision') === 'notrade' : row.getAttribute('data-status') === filters.status);
+          var triggerOk = filters.trigger === 'all' || row.getAttribute('data-trigger') === filters.trigger;
+          var tickerOk = !tickerQuery || row.getAttribute('data-ticker').indexOf(tickerQuery) !== -1;
+          return statusOk && triggerOk && tickerOk;
+        });
+
+        var totalPages = Math.max(1, Math.ceil(matched.length / PAGE_SIZE));
+        if (page >= totalPages) page = totalPages - 1;
+        var pageStart = page * PAGE_SIZE, pageEnd = pageStart + PAGE_SIZE;
+
+        rows.forEach(function(row){
+          var detail = row.nextElementSibling;
+          var idx = matched.indexOf(row);
+          var show = idx !== -1 && idx >= pageStart && idx < pageEnd;
+          row.style.display = show ? '' : 'none';
+          if (!show) {
+            row.classList.remove('expanded');
+            if (detail) { detail.classList.remove('open'); detail.style.display = 'none'; }
+          } else if (detail) {
+            detail.style.display = '';
+          }
+        });
+
+        if (countLabel) {
+          countLabel.textContent = matched.length
+            ? 'Showing ' + (pageStart + 1) + '–' + Math.min(pageEnd, matched.length) + ' of ' + matched.length + ' decisions'
+            : 'No decisions match these filters';
+        }
+        if (prevBtn) prevBtn.disabled = page <= 0;
+        if (nextBtn) nextBtn.disabled = pageEnd >= matched.length;
+      }
+
+      applyFilters();
     }
+
+    loadDashboardData().then(function(data){
+      renderOverview(data);
+      renderPositions(data);
+      renderAgentRisk(data);
+      setupHistory(data);
+    }).catch(function(err){
+      console.error('dashboard_data.json failed to load', err);
+    });
   })();
 
   (function(){

@@ -75,6 +75,7 @@ def run(dry_run: bool = None):
         current_price = current_price_for(pos["symbol"])
         pnl_pct = unrealized_pnl_pct(pos["direction"], pos["entry_price"], current_price)
         pos["unrealized_pnl_usd"] = round(pos["size_usd"] * pnl_pct / 100.0, 2)
+        pos["current_price"] = current_price
 
         trigger = check_position(pos, current_price)
         if trigger:

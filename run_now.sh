@@ -34,6 +34,10 @@ case "$step" in
   positions)
     python3 position_manager.py
     ;;
+  export-data)
+    echo "=== Dashboard data export (decisions.jsonl + portfolio_state.json -> dashboard_data.json) ==="
+    python3 export_dashboard_data.py
+    ;;
   metrics)
     python3 metrics_report.py
     ;;
@@ -44,9 +48,10 @@ case "$step" in
     "$0" market-data
     "$0" live
     "$0" positions
+    "$0" export-data
     ;;
   *)
-    echo "Usage: ./run_now.sh {connectivity|scan|tradability|market-data|preview|live|positions|metrics|all}"
+    echo "Usage: ./run_now.sh {connectivity|scan|tradability|market-data|preview|live|positions|export-data|metrics|all}"
     echo "  connectivity - check Bitget is actually reachable; warns loudly (never aborts) if not"
     echo "  scan         - refresh 8-K + anticipatory-earnings trigger data"
     echo "  tradability  - poll Bitget demo-trading symbol status for the 5-ticker universe;"
@@ -55,7 +60,8 @@ case "$step" in
     echo "  preview      - run SENSE->GATE->JUDGE->RISK on the next unprocessed trigger, no execution"
     echo "  live         - process all unprocessed triggers, execute risk-approved trades"
     echo "  positions    - check open positions against stop-loss/take-profit"
+    echo "  export-data  - refresh dashboard_data.json (positions + decision history) for the dashboard frontend"
     echo "  metrics      - print the submission metrics table"
-    echo "  all          - connectivity + scan + tradability + market-data + live + positions, in order"
+    echo "  all          - connectivity + scan + tradability + market-data + live + positions + export-data, in order"
     ;;
 esac
