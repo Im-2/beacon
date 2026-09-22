@@ -1498,13 +1498,38 @@
       applyFilters();
     }
 
-    loadDashboardData().then(function(data){
-      renderOverview(data);
-      renderPositions(data);
-      renderAgentRisk(data);
-      setupHistory(data);
-    }).catch(function(err){
-      console.error('dashboard_data.json failed to load', err);
+    // BUG FIXED 2026-09-22: this used to be a single one-shot fetch/render on
+    // page load -- unlike the ticker strip (which polls market_data.json on
+    // REFRESH_DASHBOARD_MS via setInterval + a visibilitychange listener),
+    // Overview/Positions/Agent-risk were rendered once from whatever
+    // dashboard_data.json looked like at load time and never re-read after
+    // that, so the Positions tab's Current price and Unrealized P&L appeared
+    // frozen no matter how long the page was left open. Now polls on the same
+    // pattern as the ticker strip. History is deliberately NOT re-rendered on
+    // this interval -- rebuilding its rows would collapse any expanded
+    // detail panel and reset the user's active filters/pagination mid-read;
+    // it still gets the full current data on page load / manual reload.
+    var REFRESH_DASHBOARD_MS = 60 * 1000;
+    var historyRendered = false;
+
+    function refreshDashboard(force){
+      loadDashboardData(force).then(function(data){
+        renderOverview(data);
+        renderPositions(data);
+        renderAgentRisk(data);
+        if (!historyRendered) {
+          setupHistory(data);
+          historyRendered = true;
+        }
+      }).catch(function(err){
+        console.error('dashboard_data.json failed to load', err);
+      });
+    }
+
+    refreshDashboard(true);
+    setInterval(function(){ refreshDashboard(true); }, REFRESH_DASHBOARD_MS);
+    document.addEventListener('visibilitychange', function(){
+      if (document.visibilityState === 'visible') refreshDashboard(true);
     });
   })();
 
