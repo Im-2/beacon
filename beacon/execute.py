@@ -146,16 +146,42 @@ def to_bitget_symbol(symbol: str) -> str:
 
 def build_order_request(symbol: str, direction: str, size_usd: float, entry_price: float) -> dict:
     """Constructs (but does not send) a spot market order. direction: 'long' or 'short'.
-    Paper trading only — this function has no way to target the live account."""
+    Paper trading only — this function has no way to target the live account.
+
+    Bitget's `size` field means different things depending on side for a
+    market order: for a BUY it's the quote-currency (USDT) amount to spend,
+    but for a SELL it's the BASE-currency quantity to sell -- confirmed the
+    hard way: passing size_usd directly for a real short/sell order (e.g.
+    "sell 200.00 BTC", ~$22M notional) was rejected by Bitget with code
+    45113 "Maximum order value limit triggered". A sell order must convert
+    the intended USD size into a base-asset quantity using entry_price."""
     side = "buy" if direction == "long" else "sell"
     body_obj = {
         "symbol": to_bitget_symbol(symbol),
         "side": side,
         "orderType": "market",
         "force": "gtc",
-        "size": f"{size_usd:.2f}",
         "clientOid": f"beacon-{symbol}-{int(time.time())}",
     }
+    if side == "buy":
+        body_obj["size"] = f"{size_usd:.2f}"
+    else:
+        if not entry_price:
+            raise ValueError("entry_price is required to size a market sell order correctly "
+                              "(size must be a base-asset quantity, not a USD amount)")
+        base_qty = size_usd / entry_price
+        # Bitget rejects a base quantity with more decimal places than the
+        # symbol's own quantityPrecision (code 40808, PARAM_VALIDATE_ERROR --
+        # confirmed empirically: BTCUSDT's quantityPrecision is 6, an 8-decimal
+        # size was rejected). Round down (never up, to avoid a value that's
+        # technically over the intended USD size) to that many places.
+        try:
+            precision = int(_load_tradable_symbols().get(body_obj["symbol"], {}).get("quantityPrecision", 6))
+        except (BitgetUnreachableError, TypeError, ValueError):
+            precision = 6  # reasonable fallback if the lookup itself fails
+        factor = 10 ** precision
+        base_qty = int(base_qty * factor) / factor
+        body_obj["size"] = f"{base_qty:.{precision}f}"
     body = json.dumps(body_obj, separators=(",", ":"))
     return {"method": "POST", "path": ORDER_PATH, "body": body, "body_obj": body_obj}
 

@@ -30,3 +30,63 @@
 
 ---
 
+## 2026-09-22T20:33:53.493491+00:00 — MU (anticipatory_earnings_positioning, category=anticipatory_positioning)
+
+- **Outcome:** no_trade_llm_decision
+- **LLM judgment:** neutral (confidence 10), decision=no-trade, conviction=18
+- **Rationale:** MU is in an anticipatory pre-earnings state, with a confirmed report date of 2026-09-30 but no actual EPS or revenue surprise to evaluate. The stock shows positive intraday momentum at 1096.16, up 5.0%, and is below its 52-week high of 1255 but far above its 52-week low of 154.65. Consensus estimates show EPS of 32.3202 and revenue of $52,241,283,687, but there are no estimate revisions, guidance details, or sufficient valuation context to establish a clear directional edge. Therefore, the prudent action is to avoid a position until actual results or clearer pre-event positioning data are available.
+- **Proposed size/stop/target:** 0.0% / SL 0.0% / TP 0.0%
+- **Risk check:** approved=False — LLM decision was no-trade.
+
+---
+
+## 2026-09-22T20:34:33.179230+00:00 — EQT (anticipatory_earnings_positioning, category=anticipatory_positioning)
+
+- **Outcome:** no_trade_llm_decision
+- **LLM judgment:** neutral (confidence 10), decision=no-trade, conviction=15
+- **Rationale:** EQT is in an anticipatory_positioning trigger with a confirmed report date of 2026-10-19, but no actual EPS or revenue surprise exists yet. The current price of $50.81 is only modestly above the 52-week low of $47.94 and well below the 52-week high of $68.24, suggesting the stock may already reflect tempered expectations, but the input provides no estimate revisions, guidance, or sector catalysts to confirm a directional setup. Consensus EPS of 0.5053 and revenue of approximately $1.95 billion define the expected bar, but there is insufficient information to judge whether EQT is likely to beat, miss, or trade through those estimates. Therefore, the prudent action is to stand aside rather than invent a pre-earnings surprise.
+- **Proposed size/stop/target:** 0.0% / SL 0.0% / TP 0.0%
+- **Risk check:** approved=False — LLM decision was no-trade.
+
+---
+
+## 2026-09-22T20:36:24.484203+00:00 — MU (anticipatory_earnings_positioning, category=anticipatory_positioning)
+
+- **Outcome:** cross_asset_proxy_not_sent_rejected_by_bitget
+- **LLM judgment:** bearish (confidence 60), decision=short, conviction=55
+- **Rationale:** TEST FIXTURE — synthetic rationale, not real reasoning. Real SENSE, RISK, and EXECUTE (including the actual Bitget order/fill) are unmocked.
+- **Proposed size/stop/target:** 2.0% / SL 3.0% / TP 5.0%
+- **Risk check:** approved=True — All risk checks passed.
+
+---
+
+## 2026-09-22T20:37:17.430894+00:00 — MU (anticipatory_earnings_positioning, category=anticipatory_positioning)
+
+- **Outcome:** cross_asset_proxy_not_sent_rejected_by_bitget
+- **LLM judgment:** bearish (confidence 60), decision=short, conviction=55
+- **Rationale:** TEST FIXTURE — synthetic rationale, not real reasoning. Real SENSE, RISK, and EXECUTE (including the actual Bitget order/fill) are unmocked.
+- **Proposed size/stop/target:** 2.0% / SL 3.0% / TP 5.0%
+- **Risk check:** approved=True — All risk checks passed.
+
+---
+
+## 2026-09-22T20:37:55.712484+00:00 — MU (anticipatory_earnings_positioning, category=anticipatory_positioning)
+
+- **Outcome:** cross_asset_proxy_not_sent_rejected_by_bitget
+- **LLM judgment:** bearish (confidence 60), decision=short, conviction=55
+- **Rationale:** TEST FIXTURE — synthetic rationale, not real reasoning. Real SENSE, RISK, and EXECUTE (including the actual Bitget order/fill) are unmocked.
+- **Proposed size/stop/target:** 2.0% / SL 3.0% / TP 5.0%
+- **Risk check:** approved=True — All risk checks passed.
+
+---
+
+## 2026-09-22T20:38:27.796904+00:00 — MU (anticipatory_earnings_positioning, category=anticipatory_positioning)
+
+- **Outcome:** executed_cross_asset_proxy
+- **LLM judgment:** bearish (confidence 60), decision=long, conviction=55
+- **Rationale:** TEST FIXTURE — synthetic rationale, not real reasoning. Real SENSE, RISK, and EXECUTE (including the actual Bitget order/fill) are unmocked.
+- **Proposed size/stop/target:** 2.0% / SL 3.0% / TP 5.0%
+- **Risk check:** approved=True — All risk checks passed.
+
+---
+
