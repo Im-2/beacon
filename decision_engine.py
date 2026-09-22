@@ -137,6 +137,25 @@ def process_one(t, portfolio_state, execute_live=False):
             # RISK for the proxy symbol specifically (its own concurrent-
             # position and no-averaging-into-loser checks are per-symbol).
             proxy_symbol = execute.CROSS_ASSET_PROXY
+
+            if judgment["decision"] != "long":
+                # Long-only, deliberately, per 2026-09-22 decision: a short/sell
+                # proxy order requires the demo account to already hold the base
+                # asset (confirmed via a real code 43012 "Insufficient balance"
+                # rejection -- Bitget spot has no naked shorting), and the demo
+                # account holds USDT + ETH, not BTC. Rather than fund BTC or wire
+                # up a second proxy asset just for shorts, this is logged
+                # honestly as a known gap instead of forcing a workaround.
+                record["outcome"] = "cross_asset_fallback_unavailable_for_short_direction"
+                record["cross_asset_note"] = (
+                    f"rToken {symbol} halted and JUDGE decision was 'short' -- cross-asset "
+                    f"proxy fallback is long-only for now (spot {proxy_symbol} sell orders "
+                    f"require an existing balance the demo account doesn't hold), so no "
+                    f"proxy order was attempted."
+                )
+                logger.log_decision(record)
+                return record
+
             proxy_risk_result = risk.evaluate(judgment, proxy_symbol, portfolio_state)
             record["cross_asset_risk_result"] = proxy_risk_result
 

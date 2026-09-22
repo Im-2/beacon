@@ -728,23 +728,28 @@
           </div>
         </div>
 
-        <!-- CYCLE INFO: real values as of the 2026-09-22 1:10 PM local cron run
-             (full pipeline verified end-to-end with real Bitget connectivity via
-             VPN; Beacon_ScanAndLive runs every 3h). -->
+        <!-- CYCLE INFO: real values pulled from Windows Task Scheduler's own
+             LastRunTime/NextRunTime for Beacon_ScanAndLive (result 0 = success),
+             checked 2026-09-22. -->
         <div class="agent-cycle-row">
           <div class="cycle-stat">
             <span class="cycle-label">Last Check</span>
-            <span class="cycle-value">Sep 22, 1:10 PM</span>
+            <span class="cycle-value">Sep 22, 9:33 PM</span>
           </div>
           <div class="cycle-stat">
             <span class="cycle-label">Next Scheduled Check</span>
-            <span class="cycle-value">Sep 22, 4:10 PM</span>
+            <span class="cycle-value">Sep 23, 12:33 AM</span>
           </div>
         </div>
 
         <div class="agent-card">
           <h2>What It's Watching</h2>
-          <p>5 Bitget-demo-tradable S&amp;P 500 tickers (EQT, GOOGL, MU, NVDA, ECHO) · SEC EDGAR 8-K &amp; earnings triggers (Items 2.02, 7.01) · 2 anticipatory positions (MU, EQT) · Cross-Asset Execution Agent: when an rToken order is halted, the same JUDGE conviction is re-expressed via a real BTC proxy position instead of being dropped</p>
+          <p>5 Bitget-demo-tradable S&amp;P 500 tickers (EQT, GOOGL, MU, NVDA, ECHO) · SEC EDGAR 8-K &amp; earnings triggers (Items 2.02, 7.01) · 2 anticipatory positions (MU, EQT) · Cross-Asset Execution Agent: when an rToken order is halted, the same JUDGE conviction is re-expressed via a real long BTC proxy position instead of being dropped (long-only for now — a short proxy would need a base-asset balance the demo account doesn't hold, so it's logged honestly as unavailable rather than forced)</p>
+        </div>
+
+        <div class="agent-card">
+          <h2>Cross-Asset Execution Agent — Mechanics Verified</h2>
+          <p>On 2026-09-22, with real JUDGE genuinely returning no-trade on every real trigger available that day, the EXECUTE/cross-asset path was verified with a controlled test: a clearly-labeled synthetic judgment (not a real trading signal) was pushed through fully real SENSE, RISK, and EXECUTE. Result: the halted rToken order correctly fell back to a real Bitget Demo BTC order — order <code>1486392494467620864</code>, filled, code <code>00000</code>. This confirms the fallback mechanism works; it is not itself a trading decision, and is marked <code>is_test_fixture: true</code> in the audit log.</p>
         </div>
 
         <div class="agent-card">
