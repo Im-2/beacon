@@ -3,30 +3,30 @@
     "tradable": false,
     "bitget_symbol": "REQTUSDT",
     "reason": "'REQTUSDT' exists but status is 'halt', not 'online'.",
-    "checked_at": "2026-09-22T10:43:13.447661+00:00"
+    "checked_at": "2026-09-22T12:09:38.900925+00:00"
   },
   "GOOGL": {
     "tradable": false,
     "bitget_symbol": "RGOOGLUSDT",
     "reason": "'RGOOGLUSDT' exists but status is 'halt', not 'online'.",
-    "checked_at": "2026-09-22T10:43:13.447661+00:00"
+    "checked_at": "2026-09-22T12:09:38.900925+00:00"
   },
   "MU": {
     "tradable": false,
     "bitget_symbol": "RMUUSDT",
     "reason": "'RMUUSDT' exists but status is 'halt', not 'online'.",
-    "checked_at": "2026-09-22T10:43:13.447661+00:00"
+    "checked_at": "2026-09-22T12:09:38.900925+00:00"
   },
   "NVDA": {
     "tradable": false,
     "bitget_symbol": "RNVDUSDT",
     "reason": "'RNVDUSDT' exists but status is 'halt', not 'online'.",
-    "checked_at": "2026-09-22T10:43:13.447661+00:00"
+    "checked_at": "2026-09-22T12:09:38.900925+00:00"
   },
   "ECHO": {
     "tradable": false,
     "bitget_symbol": "RECHOUSDT",
     "reason": "'RECHOUSDT' exists but status is 'halt', not 'online'.",
-    "checked_at": "2026-09-22T10:43:13.447661+00:00"
+    "checked_at": "2026-09-22T12:09:38.900925+00:00"
   }
 }

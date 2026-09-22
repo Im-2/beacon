@@ -8,6 +8,9 @@ export PYTHONIOENCODING=utf-8
 step="${1:-help}"
 
 case "$step" in
+  connectivity)
+    python3 check_connectivity.py
+    ;;
   scan)
     echo "=== 8-K filing scan (5-ticker Bitget-demo-tradable universe, last 3 days) ==="
     python3 scan_8k_filings.py --days-back 3
@@ -35,6 +38,7 @@ case "$step" in
     python3 metrics_report.py
     ;;
   all)
+    "$0" connectivity
     "$0" scan
     "$0" tradability
     "$0" market-data
@@ -42,7 +46,8 @@ case "$step" in
     "$0" positions
     ;;
   *)
-    echo "Usage: ./run_now.sh {scan|tradability|market-data|preview|live|positions|metrics|all}"
+    echo "Usage: ./run_now.sh {connectivity|scan|tradability|market-data|preview|live|positions|metrics|all}"
+    echo "  connectivity - check Bitget is actually reachable; warns loudly (never aborts) if not"
     echo "  scan         - refresh 8-K + anticipatory-earnings trigger data"
     echo "  tradability  - poll Bitget demo-trading symbol status for the 5-ticker universe;"
     echo "                 logs a halt->online transition automatically, independent of triggers"
@@ -51,6 +56,6 @@ case "$step" in
     echo "  live         - process all unprocessed triggers, execute risk-approved trades"
     echo "  positions    - check open positions against stop-loss/take-profit"
     echo "  metrics      - print the submission metrics table"
-    echo "  all          - scan + tradability + market-data + live + positions, in order"
+    echo "  all          - connectivity + scan + tradability + market-data + live + positions, in order"
     ;;
 esac

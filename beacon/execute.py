@@ -37,6 +37,19 @@ CROSS_ASSET_PROXY = "BTC"
 _symbols_cache = None
 
 
+class BitgetUnreachableError(Exception):
+    """Raised when Bitget's API can't be reached at all (DNS/TCP/TLS failure,
+    timeout, connection reset) -- distinct from Bitget responding normally
+    with an error. Observed in practice: this session's sandboxed environment
+    and the project owner's home ISP/mobile network were both apparently
+    geo-restricted from api.bitget.com (TLS handshake hangs or resets),
+    resolved only by routing through a VPN. Every caller of a Bitget network
+    call must handle this explicitly rather than let it crash the pipeline --
+    a connectivity failure should degrade a single trigger/step gracefully
+    and log clearly, never silently kill a whole `--mode live` batch run."""
+    pass
+
+
 def _load_tradable_symbols() -> dict:
     """Public endpoint, no auth needed, but the `paptrading` header changes
     the response to the Demo Trading environment's own (much smaller, and
@@ -47,15 +60,34 @@ def _load_tradable_symbols() -> dict:
     with the paptrading header. Cached per-process."""
     global _symbols_cache
     if _symbols_cache is None:
-        resp = requests.get(BASE_URL + SYMBOLS_PATH, headers={"paptrading": "1"}, timeout=30)
-        resp.raise_for_status()
+        try:
+            resp = requests.get(BASE_URL + SYMBOLS_PATH, headers={"paptrading": "1"}, timeout=15)
+            resp.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            raise BitgetUnreachableError(f"GET {SYMBOLS_PATH} failed: {e}") from e
         _symbols_cache = {s["symbol"]: s for s in resp.json().get("data", [])}
     return _symbols_cache
 
 
+def verify_bitget_reachable(timeout: float = 10) -> dict:
+    """Cheap, explicit connectivity pre-check -- a single public request with
+    a short timeout, for scripts/cron steps to check up front rather than
+    discovering unreachability halfway through a batch of triggers."""
+    try:
+        resp = requests.get(BASE_URL + SYMBOLS_PATH, headers={"paptrading": "1"}, timeout=timeout)
+        resp.raise_for_status()
+        return {"reachable": True}
+    except requests.exceptions.RequestException as e:
+        return {"reachable": False, "reason": str(e)}
+
+
 def check_tradable(symbol: str) -> dict:
     bitget_symbol = to_bitget_symbol(symbol)
-    symbols = _load_tradable_symbols()
+    try:
+        symbols = _load_tradable_symbols()
+    except BitgetUnreachableError as e:
+        return {"tradable": False, "bitget_symbol": bitget_symbol,
+                "reason": f"Bitget unreachable: {e}", "unreachable": True}
     info = symbols.get(bitget_symbol)
     if info is None:
         return {"tradable": False, "bitget_symbol": bitget_symbol,
@@ -132,9 +164,14 @@ def place_paper_order(symbol: str, direction: str, size_usd: float, entry_price:
                        stop_loss_pct: float, take_profit_pct: float, dry_run: bool = True) -> dict:
     tradability = check_tradable(symbol)
     if not tradability["tradable"]:
+        # Distinguish "genuinely not tradable" (halted / no pair -- decision_engine.py's
+        # cross-asset fallback should trigger) from "couldn't even check" (Bitget
+        # unreachable -- attempting a fallback order would fail the same way, so
+        # don't pretend this is a tradability finding).
+        status = "SKIPPED_BITGET_UNREACHABLE" if tradability.get("unreachable") else "SKIPPED_NOT_TRADABLE_ON_BITGET"
         return {
             "dry_run": dry_run, "paper_trading": True, "tradability": tradability,
-            "status": "SKIPPED_NOT_TRADABLE_ON_BITGET", "reason": tradability["reason"],
+            "status": status, "reason": tradability["reason"],
         }
 
     req = build_order_request(symbol, direction, size_usd, entry_price)
@@ -168,7 +205,12 @@ def place_paper_order(symbol: str, direction: str, size_usd: float, entry_price:
         "Content-Type": "application/json",
         "paptrading": "1",   # Bitget Demo Trading flag — hardcoded, not configurable here
     }
-    resp = requests.post(BASE_URL + req["path"], headers=headers, data=req["body"], timeout=30)
+    try:
+        resp = requests.post(BASE_URL + req["path"], headers=headers, data=req["body"], timeout=30)
+    except requests.exceptions.RequestException as e:
+        result["status"] = "SKIPPED_BITGET_UNREACHABLE"
+        result["reason"] = f"POST {req['path']} failed: {e}"
+        return result
     result["http_status"] = resp.status_code
     try:
         result["response"] = resp.json()
