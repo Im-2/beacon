@@ -63,14 +63,13 @@ case "$step" in
     python3 metrics_report.py
     ;;
   all)
-    "$0" connectivity
-    "$0" scan
-    "$0" tradability
-    "$0" market-data
-    "$0" live
-    "$0" positions
-    "$0" export-data
-    "$0" publish-data
+    # Unattended: one failing step (SEC or Bitget briefly unreachable) must not
+    # skip the rest -- existing triggers still get judged, positions still get
+    # checked, and the dashboard still gets fresh data.
+    echo "##### Beacon full cycle $(date '+%Y-%m-%d %H:%M:%S') #####"
+    for s in connectivity scan tradability market-data live positions export-data publish-data; do
+      "$0" "$s" || echo "!!! step '$s' failed (exit $?) -- continuing" >&2
+    done
     ;;
   *)
     echo "Usage: ./run_now.sh {connectivity|scan|tradability|market-data|preview|live|positions|export-data|publish-data|metrics|all}"

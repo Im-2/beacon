@@ -1515,3 +1515,83 @@ Nothing new to process.
 Published.
 === Publish market_data.json + dashboard_data.json to GitHub ===
 Published.
+##### Beacon full cycle 2026-09-23 18:30:30 #####
+Bitget connectivity: OK
+=== 8-K filing scan (5-ticker Bitget-demo-tradable universe, last 3 days) ===
+Querying SEC EDGAR full-text search for 8-K filings 2026-09-20..2026-09-23, filtering to S&P 500 CIKs and items ['2.02', '7.01']
+Total raw hits (all forms/items, all companies): 444
+Fetched 444 raw hits across all pages
+
+Done. 0 S&P 500 triggers (items 2.02/7.01) out of 444 total raw 8-K hits in window. Written to C:\Users\hp\Beacon\data\filing_triggers.json
+[]
+=== Anticipatory earnings scan (MU, EQT) ===
+[
+  {
+    "symbol": "MU",
+    "trigger_type": "anticipatory_earnings_positioning",
+    "category": "anticipatory_positioning",
+    "matched_items": null,
+    "report_date": "2026-09-30",
+    "consensus_eps_estimate": 32.3202,
+    "consensus_revenue_estimate": 52241283687,
+    "filed_date": null,
+    "accession_number": null,
+    "edgar_url": null
+  },
+  {
+    "symbol": "EQT",
+    "trigger_type": "anticipatory_earnings_positioning",
+    "category": "anticipatory_positioning",
+    "matched_items": null,
+    "report_date": "2026-10-19",
+    "consensus_eps_estimate": 0.4737,
+    "consensus_revenue_estimate": 1861726495,
+    "filed_date": null,
+    "accession_number": null,
+    "edgar_url": null
+  }
+]
+=== Bitget demo tradability poll (5-ticker universe) ===
+
+No change. Still not tradable: EQT, GOOGL, MU, NVDA, ECHO.
+{
+  "EQT": {
+    "tradable": false,
+    "bitget_symbol": "REQTUSDT",
+    "reason": "'REQTUSDT' exists but status is 'halt', not 'online'.",
+    "checked_at": "2026-09-23T17:30:43.403386+00:00"
+  },
+  "GOOGL": {
+    "tradable": false,
+    "bitget_symbol": "RGOOGLUSDT",
+    "reason": "'RGOOGLUSDT' exists but status is 'halt', not 'online'.",
+    "checked_at": "2026-09-23T17:30:43.403386+00:00"
+  },
+  "MU": {
+    "tradable": false,
+    "bitget_symbol": "RMUUSDT",
+    "reason": "'RMUUSDT' exists but status is 'halt', not 'online'.",
+    "checked_at": "2026-09-23T17:30:43.403386+00:00"
+  },
+  "NVDA": {
+    "tradable": false,
+    "bitget_symbol": "RNVDUSDT",
+    "reason": "'RNVDUSDT' exists but status is 'halt', not 'online'.",
+    "checked_at": "2026-09-23T17:30:43.403386+00:00"
+  },
+  "ECHO": {
+    "tradable": false,
+    "bitget_symbol": "RECHOUSDT",
+    "reason": "'RECHOUSDT' exists but status is 'halt', not 'online'.",
+    "checked_at": "2026-09-23T17:30:43.403386+00:00"
+  }
+}
+=== Market data refresh (prices + candles -> market_data.json) ===
+Updated C:\Users\hp\Beacon\market_data.json: 5/5 prices, 5/5 candle sets.
+0/2 triggers unprocessed.
+Nothing new to process.
+OPEN BTC: unrealized -2.64% (SL 3.0% / TP 5.0%)
+=== Dashboard data export (decisions.jsonl + portfolio_state.json -> dashboard_data.json) ===
+Wrote C:\Users\hp\Beacon\dashboard_data.json — 50 decisions, 1 open position(s).
+=== Publish market_data.json + dashboard_data.json to GitHub ===
+Published.
