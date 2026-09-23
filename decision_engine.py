@@ -32,6 +32,19 @@ from beacon import config, sense, judge, risk, state, logger, execute
 
 TRIGGERS_FILE = config.DATA_DIR / "filing_triggers.json"
 ANTICIPATORY_FILE = config.DATA_DIR / "anticipatory_triggers.json"
+HEARTBEAT_FILE = config.DATA_DIR / "last_cycle.json"
+
+
+def write_heartbeat(total, pending_count, processed_count):
+    # A live cycle that finds nothing new logs nothing to decisions.jsonl, so
+    # without this there's no evidence a check ever happened -- the dashboard's
+    # "Last Check" reads this file (via export_dashboard_data.py).
+    HEARTBEAT_FILE.write_text(json.dumps({
+        "last_live_cycle_utc": datetime.now(timezone.utc).isoformat(),
+        "triggers_total": total,
+        "triggers_pending_at_start": pending_count,
+        "triggers_processed": processed_count,
+    }, indent=2))
 
 
 def load_triggers():
@@ -221,6 +234,8 @@ def main():
     print(f"{len(pending)}/{len(triggers)} triggers unprocessed.")
     if not pending:
         print("Nothing new to process.")
+        if args.mode == "live":
+            write_heartbeat(len(triggers), 0, 0)
         return
 
     if args.mode == "preview":
@@ -229,9 +244,11 @@ def main():
         print(f"\n{'='*60}\nPREVIEW COMPLETE for {t['symbol']}. Outcome: {record['outcome']}")
         print("Not marked as processed — rerun in --mode live to actually act on it once reviewed.")
     else:
+        processed_count = 0
         for t in pending:
             try:
                 process_one(t, portfolio_state, execute_live=True)
+                processed_count += 1
             except Exception as e:
                 # One trigger's unexpected failure (a transient SEC/Finnhub/Qwen
                 # network error, not a Bitget connectivity issue -- that's
@@ -244,6 +261,7 @@ def main():
                 continue
             state.mark_processed(trigger_key(t))
             portfolio_state = state.load_state()
+        write_heartbeat(len(triggers), len(pending), processed_count)
 
 
 if __name__ == "__main__":

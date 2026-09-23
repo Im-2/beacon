@@ -725,17 +725,17 @@
           </div>
         </div>
 
-        <!-- CYCLE INFO: real values pulled from Windows Task Scheduler's own
-             LastRunTime/NextRunTime for Beacon_ScanAndLive (result 0 = success),
-             checked 2026-09-22. -->
+        <!-- CYCLE INFO: rendered by renderCycleInfo() from dashboard_data.json's
+             last_cycle (heartbeat written by every live cycle, even one that
+             finds nothing new) and scan_schedule. -->
         <div class="agent-cycle-row">
           <div class="cycle-stat">
             <span class="cycle-label">Last Check</span>
-            <span class="cycle-value">Sep 22, 9:33 PM</span>
+            <span class="cycle-value" id="cycleLast">—</span>
           </div>
           <div class="cycle-stat">
             <span class="cycle-label">Next Scheduled Check</span>
-            <span class="cycle-value">Sep 23, 12:33 AM</span>
+            <span class="cycle-value" id="cycleNext">—</span>
           </div>
         </div>
 
@@ -1522,6 +1522,31 @@
       avgBadge.textContent = 'Enforced · ' + (s.no_averaging_blocked_count || 0) + ' blocked';
     }
 
+    function renderCycleInfo(data){
+      var lastEl = document.getElementById('cycleLast');
+      var nextEl = document.getElementById('cycleNext');
+      if (!lastEl || !nextEl) return;
+      var fmt = {month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'};
+      var sched = data.scan_schedule;
+      var intervalMs = sched ? sched.interval_hours * 3600 * 1000 : null;
+
+      var last = data.last_cycle && data.last_cycle.last_live_cycle_utc;
+      if (last) {
+        var lastMs = new Date(last).getTime();
+        var overdue = intervalMs && (Date.now() - lastMs) > intervalMs + 30 * 60 * 1000;
+        lastEl.textContent = new Date(lastMs).toLocaleString('en-US', fmt) + (overdue ? ' (overdue)' : '');
+        lastEl.style.color = overdue ? 'var(--neg)' : '';
+      } else {
+        lastEl.textContent = 'No cycle recorded yet';
+      }
+
+      if (sched) {
+        var anchor = new Date(sched.anchor_utc).getTime();
+        var next = anchor + Math.ceil((Date.now() - anchor) / intervalMs) * intervalMs;
+        nextEl.textContent = new Date(next).toLocaleString('en-US', fmt);
+      }
+    }
+
     function renderPerformance(data){
       var s = data.summary || {};
       var el = document.getElementById('perfPnl');
@@ -1650,6 +1675,7 @@
         renderPositions(data);
         renderAgentRisk(data);
         renderPerformance(data);
+        renderCycleInfo(data);
         if (!historyRendered) {
           setupHistory(data);
           historyRendered = true;

@@ -10,12 +10,12 @@
       "take_profit_pct": 5.0,
       "opened_at": "2026-09-22T20:38:27.795948+00:00",
       "category": "anticipatory_positioning",
-      "unrealized_pnl_usd": -0.13,
+      "unrealized_pnl_usd": -5.71,
       "execution_leg": "cross_asset_proxy",
       "proxy_for": "MU",
       "is_test_fixture": true,
       "test_fixture_note": "Genuinely filled on Bitget Demo Trading (real orderId 1486392494467620864), but opened by a labeled synthetic JUDGE decision (not real Qwen reasoning), per explicit user authorization on 2026-09-22 to verify the cross-asset EXECUTE mechanics after real JUDGE genuinely returned no-trade on both real triggers available that day. The fill itself is real; the trading rationale behind it is not.",
-      "current_price": 86284.51
+      "current_price": 83878.76
     }
   ],
   "closed_positions": [],

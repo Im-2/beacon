@@ -17,7 +17,14 @@ from datetime import datetime, timezone
 from beacon import config, state, execute
 
 DECISIONS_LOG = config.LOG_DIR / "decisions.jsonl"
+HEARTBEAT_FILE = config.DATA_DIR / "last_cycle.json"
 OUT_FILE = config.ROOT / "dashboard_data.json"
+
+# Mirrors the Beacon_ScanAndLive Task Scheduler trigger (StartBoundary
+# 2026-09-18 15:33 machine-local, repeating every 3h). Keep in sync if the
+# task's schedule changes.
+SCAN_SCHEDULE_ANCHOR = datetime(2026, 9, 18, 15, 33).astimezone()
+SCAN_SCHEDULE_INTERVAL_HOURS = 3
 
 STATUS_MAP = {
     "trigger_fired_filtered_non_substantive": "filtered",
@@ -38,7 +45,8 @@ STATUS_MAP = {
 def status_for(outcome: str) -> str:
     if outcome in STATUS_MAP:
         return STATUS_MAP[outcome]
-    if outcome and (outcome.startswith("cross_asset_proxy_not_sent_") or outcome.startswith("execute_not_sent_")):
+    if outcome and (outcome.startswith("cross_asset_proxy_not_sent_") or outcome.startswith("execute_not_sent_")
+                    or outcome.startswith("close_failed_")):
         return "rejected"
     return "other"
 
@@ -223,8 +231,13 @@ def build():
             decisions.append(normalize_decision(json.loads(line)))
     decisions.sort(key=lambda d: d["timestamp_utc"] or "", reverse=True)
 
+    # P&L sums every closed position (a test-fixture position's fill is still a
+    # real Bitget fill with real P&L, and its unrealized P&L already counts
+    # while open -- dropping it on close would make Cumulative P&L jump back
+    # to zero). Win rate stays real-decision-only: a synthetic judgment's
+    # outcome says nothing about Beacon's judgment quality.
     real_closed = [p for p in closed_positions if not p.get("is_test_fixture")]
-    realized_pnl_usd = round(sum(p.get("realized_pnl_usd", 0.0) for p in real_closed), 2)
+    realized_pnl_usd = round(sum(p.get("realized_pnl_usd", 0.0) for p in closed_positions), 2)
     wins = [p for p in real_closed if p.get("realized_pnl_usd", 0.0) > 0]
     win_rate_pct = round(len(wins) / len(real_closed) * 100, 1) if real_closed else None
 
@@ -268,6 +281,11 @@ def build():
         "open_positions": open_positions,
         "closed_positions": closed_positions,
         "decisions": decisions,
+        "last_cycle": json.loads(HEARTBEAT_FILE.read_text()) if HEARTBEAT_FILE.exists() else None,
+        "scan_schedule": {
+            "anchor_utc": SCAN_SCHEDULE_ANCHOR.astimezone(timezone.utc).isoformat(),
+            "interval_hours": SCAN_SCHEDULE_INTERVAL_HOURS,
+        },
     }
     OUT_FILE.write_text(json.dumps(out, indent=2, default=str))
     print(f"Wrote {OUT_FILE} — {len(decisions)} decisions, {len(open_positions)} open position(s).")

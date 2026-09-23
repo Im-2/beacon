@@ -25,6 +25,7 @@ BASE_URL = "https://api.bitget.com"
 ORDER_PATH = "/api/v2/spot/trade/place-order"
 SYMBOLS_PATH = "/api/v2/spot/public/symbols"
 TICKER_PATH = "/api/v2/spot/market/tickers"
+ASSETS_PATH = "/api/v2/spot/account/assets"
 
 # Cross-Asset Execution Agent sub-theme: when a trigger's directional rToken
 # order is blocked (SKIPPED_NOT_TRADABLE_ON_BITGET -- covers both "no pair"
@@ -117,6 +118,43 @@ def _sign(timestamp: str, method: str, path: str, body: str, secret_key: str) ->
     return base64.b64encode(mac.digest()).decode()
 
 
+def _signed_headers(method: str, request_path: str, body: str) -> dict:
+    creds = config.bitget_creds()
+    timestamp = str(int(time.time() * 1000))
+    return {
+        "ACCESS-KEY": creds["api_key"],
+        "ACCESS-SIGN": _sign(timestamp, method, request_path, body, creds["secret_key"]),
+        "ACCESS-TIMESTAMP": timestamp,
+        "ACCESS-PASSPHRASE": creds["passphrase"],
+        "Content-Type": "application/json",
+        "paptrading": "1",   # Bitget Demo Trading flag — hardcoded, not configurable here
+    }
+
+
+def base_coin_for(symbol: str) -> str:
+    bitget_symbol = to_bitget_symbol(symbol)
+    try:
+        return _load_tradable_symbols().get(bitget_symbol, {}).get("baseCoin") or symbol
+    except BitgetUnreachableError:
+        return symbol
+
+
+def get_spot_available(coin: str) -> float:
+    """Available (unfrozen) Demo Trading spot balance of `coin`."""
+    request_path = f"{ASSETS_PATH}?coin={coin}"
+    try:
+        resp = requests.get(BASE_URL + request_path, headers=_signed_headers("GET", request_path, ""), timeout=15)
+    except requests.exceptions.RequestException as e:
+        raise BitgetUnreachableError(f"GET {ASSETS_PATH} failed: {e}") from e
+    j = resp.json()
+    if j.get("code") != "00000":
+        raise ValueError(f"assets query for {coin} failed: {j}")
+    for asset in j.get("data") or []:
+        if asset.get("coin") == coin:
+            return float(asset.get("available") or 0)
+    return 0.0
+
+
 
 # Bitget's tokenized-stock symbols are usually R<ticker>USDT, but at least one
 # in our universe is truncated on Bitget's side rather than following that
@@ -144,7 +182,8 @@ def to_bitget_symbol(symbol: str) -> str:
     return f"R{symbol}USDT"
 
 
-def build_order_request(symbol: str, direction: str, size_usd: float, entry_price: float) -> dict:
+def build_order_request(symbol: str, direction: str, size_usd: float, entry_price: float,
+                        base_qty: float = None) -> dict:
     """Constructs (but does not send) a spot market order. direction: 'long' or 'short'.
     Paper trading only — this function has no way to target the live account.
 
@@ -166,10 +205,11 @@ def build_order_request(symbol: str, direction: str, size_usd: float, entry_pric
     if side == "buy":
         body_obj["size"] = f"{size_usd:.2f}"
     else:
-        if not entry_price:
-            raise ValueError("entry_price is required to size a market sell order correctly "
-                              "(size must be a base-asset quantity, not a USD amount)")
-        base_qty = size_usd / entry_price
+        if base_qty is None:
+            if not entry_price:
+                raise ValueError("entry_price is required to size a market sell order correctly "
+                                  "(size must be a base-asset quantity, not a USD amount)")
+            base_qty = size_usd / entry_price
         # Bitget rejects a base quantity with more decimal places than the
         # symbol's own quantityPrecision (code 40808, PARAM_VALIDATE_ERROR --
         # confirmed empirically: BTCUSDT's quantityPrecision is 6, an 8-decimal
@@ -187,7 +227,8 @@ def build_order_request(symbol: str, direction: str, size_usd: float, entry_pric
 
 
 def place_paper_order(symbol: str, direction: str, size_usd: float, entry_price: float,
-                       stop_loss_pct: float, take_profit_pct: float, dry_run: bool = True) -> dict:
+                       stop_loss_pct: float, take_profit_pct: float, dry_run: bool = True,
+                       base_qty: float = None) -> dict:
     tradability = check_tradable(symbol)
     if not tradability["tradable"]:
         # Distinguish "genuinely not tradable" (halted / no pair -- decision_engine.py's
@@ -200,7 +241,7 @@ def place_paper_order(symbol: str, direction: str, size_usd: float, entry_price:
             "status": status, "reason": tradability["reason"],
         }
 
-    req = build_order_request(symbol, direction, size_usd, entry_price)
+    req = build_order_request(symbol, direction, size_usd, entry_price, base_qty=base_qty)
 
     result = {
         "dry_run": dry_run,
@@ -220,17 +261,7 @@ def place_paper_order(symbol: str, direction: str, size_usd: float, entry_price:
         result["status"] = "DRY_RUN_NOT_SENT"
         return result
 
-    creds = config.bitget_creds()
-    timestamp = str(int(time.time() * 1000))
-    signature = _sign(timestamp, req["method"], req["path"], req["body"], creds["secret_key"])
-    headers = {
-        "ACCESS-KEY": creds["api_key"],
-        "ACCESS-SIGN": signature,
-        "ACCESS-TIMESTAMP": timestamp,
-        "ACCESS-PASSPHRASE": creds["passphrase"],
-        "Content-Type": "application/json",
-        "paptrading": "1",   # Bitget Demo Trading flag — hardcoded, not configurable here
-    }
+    headers = _signed_headers(req["method"], req["path"], req["body"])
     try:
         resp = requests.post(BASE_URL + req["path"], headers=headers, data=req["body"], timeout=30)
     except requests.exceptions.RequestException as e:
