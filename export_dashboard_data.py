@@ -242,11 +242,18 @@ def build_news() -> tuple[list, dict]:
                 r = json.loads(line)
                 latest[r["news_key"]] = r   # later verdict (queued -> judged) wins
     items = sorted(latest.values(), key=lambda r: r.get("published_utc") or "", reverse=True)
-    stats = {"seen": len(items), "skipped": 0, "queued": 0, "judged_no_trade": 0, "judged_trade": 0}
+    stats = {"seen": len(items), "skipped": 0, "skipped_not_earnings": 0, "skipped_off_ticker": 0,
+             "expired": 0, "queued": 0, "judged_no_trade": 0, "judged_trade": 0}
     for r in items:
         v = r.get("verdict")
         if v == "skipped_not_earnings_related":
             stats["skipped"] += 1
+            stats["skipped_not_earnings"] += 1
+        elif v == "skipped_off_ticker":
+            stats["skipped"] += 1
+            stats["skipped_off_ticker"] += 1
+        elif v == "expired_not_judged":
+            stats["expired"] += 1
         elif v in stats:
             stats[v] += 1
         if r.get("outcome"):

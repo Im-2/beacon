@@ -27,6 +27,27 @@ KEYWORDS = re.compile(
 )
 
 
+# Company names match case-insensitively; tickers only as uppercase words
+# (so "MU"/"ECHO" don't match the ordinary words). Finnhub tags lots of
+# off-ticker articles to these symbols (a Sandisk story under MU, an Intel
+# story under NVDA), so the headline must actually name the company.
+ALIASES = {
+    "EQT": (["EQT Corp", "EQT Corporation"], ["EQT"]),
+    "GOOGL": (["Alphabet", "Google"], ["GOOGL", "GOOG"]),
+    "MU": (["Micron"], ["MU"]),
+    "NVDA": (["Nvidia"], ["NVDA"]),
+    "ECHO": (["EchoStar"], ["ECHO"]),
+}
+MAX_AGE_HOURS = 24
+
+
+def names_company(symbol: str, headline: str) -> bool:
+    names, tickers = ALIASES.get(symbol, ([], [symbol]))
+    headline = headline or ""
+    return (any(re.search(r"\b" + re.escape(n) + r"\b", headline, re.IGNORECASE) for n in names)
+            or any(re.search(r"\b" + re.escape(t) + r"\b", headline) for t in tickers))
+
+
 def news_key(symbol: str, finnhub_id) -> str:
     # The same article is often filed under several tickers; each ticker gets
     # its own verdict, so the key is per (ticker, article).

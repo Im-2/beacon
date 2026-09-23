@@ -27,7 +27,7 @@ Beacon's tracked universe is narrowed to symbols the demo environment supports.
 import argparse
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from beacon import config, sense, judge, risk, state, logger, execute, news
 
 TRIGGERS_FILE = config.DATA_DIR / "filing_triggers.json"
@@ -273,14 +273,37 @@ def news_verdict(record: dict) -> str:
     return "judged_trade" if decision in ("long", "short") else "judged_no_trade"
 
 
+def _news_log_base(item: dict) -> dict:
+    return {k: item.get(k) for k in ("news_key", "symbol", "finnhub_id", "headline", "source", "url",
+                                     "published_utc", "matched_keywords")}
+
+
 def process_news_queue():
-    """Judge up to MAX_JUDGE_PER_CYCLE queued news items, oldest first; the
-    rest stay queued for the next cycle. Returns (judged, still_queued)."""
+    """Judge up to MAX_JUDGE_PER_CYCLE queued news items, NEWEST first (old
+    news is already priced in). Before that, drop queued items that don't name
+    the company in the headline, and expire anything published more than
+    MAX_AGE_HOURS ago that was never judged -- both logged, never silently
+    removed. Returns (judged, still_queued)."""
     queue = news.load_queue()
     if not queue:
         print("News queue empty.")
         return 0, 0
-    batch, rest = queue[:news.MAX_JUDGE_PER_CYCLE], queue[news.MAX_JUDGE_PER_CYCLE:]
+    cutoff = (datetime.now(timezone.utc) - timedelta(hours=news.MAX_AGE_HOURS)).isoformat()
+    live, off_ticker, expired = [], 0, 0
+    for item in queue:
+        if not news.names_company(item["symbol"], item.get("headline")):
+            news.append_log({**_news_log_base(item), "verdict": "skipped_off_ticker"})
+            off_ticker += 1
+        elif item["published_utc"] < cutoff:
+            news.append_log({**_news_log_base(item), "verdict": "expired_not_judged"})
+            expired += 1
+        else:
+            live.append(item)
+    if off_ticker or expired:
+        print(f"News queue: dropped {off_ticker} not about the ticker, expired {expired} older than "
+              f"{news.MAX_AGE_HOURS}h without a judgment.")
+    live.sort(key=lambda q: q["published_utc"], reverse=True)
+    batch, rest = live[:news.MAX_JUDGE_PER_CYCLE], live[news.MAX_JUDGE_PER_CYCLE:]
     judged = 0
     for item in batch:
         t = {
@@ -299,8 +322,7 @@ def process_news_queue():
         judged += 1
         j = record.get("judgment") or {}
         news.append_log({
-            **{k: item.get(k) for k in ("news_key", "symbol", "finnhub_id", "headline", "source", "url",
-                                        "published_utc", "matched_keywords")},
+            **_news_log_base(item),
             "verdict": news_verdict(record),
             "decision": j.get("decision"),
             "conviction": j.get("conviction_score"),
@@ -311,7 +333,7 @@ def process_news_queue():
             "execution_leg": record.get("execution_leg"),
             "decision_timestamp_utc": record.get("timestamp_utc"),
         })
-    rest.sort(key=lambda q: q["published_utc"])
+    rest.sort(key=lambda q: q["published_utc"], reverse=True)
     news.save_queue(rest)
     print(f"News: judged {judged} this cycle (cap {news.MAX_JUDGE_PER_CYCLE}), "
           f"{len(rest)} still queued for next cycle.")

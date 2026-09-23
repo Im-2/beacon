@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T18:30:05.271528+00:00",
+  "generated_at": "2026-09-23T18:36:05.939090+00:00",
   "capital_usd": 10000.0,
   "summary": {
     "cumulative_pnl_usd": -5.07,
@@ -5019,6 +5019,9 @@
   "news_stats": {
     "seen": 280,
     "skipped": 230,
+    "skipped_not_earnings": 230,
+    "skipped_off_ticker": 0,
+    "expired": 0,
     "queued": 45,
     "judged_no_trade": 5,
     "judged_trade": 0,

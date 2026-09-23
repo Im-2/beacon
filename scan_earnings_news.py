@@ -61,16 +61,21 @@ def main():
                 news.append_log({**base, "verdict": "skipped_not_earnings_related"})
                 counts["skipped"] += 1
                 continue
+            if not news.names_company(symbol, item.get("headline")):
+                news.append_log({**base, "verdict": "skipped_off_ticker", "matched_keywords": keywords})
+                counts["skipped"] += 1
+                continue
             entry = {**base, "summary": item.get("summary"), "matched_keywords": keywords}
             queue.append(entry)
             news.append_log({**entry, "verdict": "queued"})
             counts["queued"] += 1
 
-    queue.sort(key=lambda q: q["published_utc"])
+    queue.sort(key=lambda q: q["published_utc"], reverse=True)
     news.save_queue(queue)
     news.save_seen(seen)
     print(f"News scan: {counts['new']} new items in last {news.LOOKBACK_HOURS}h -- "
-          f"{counts['skipped']} skipped as not earnings-related, {counts['queued']} queued for JUDGE. "
+          f"{counts['skipped']} skipped (not earnings-related or not about the ticker), "
+          f"{counts['queued']} queued for JUDGE. "
           f"Queue now {len(queue)}.")
 
 

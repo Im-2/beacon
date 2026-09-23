@@ -335,7 +335,6 @@
     background:var(--paper-soft);min-width:150px;
   }
 
-  .history-table th:first-child, .history-table td:first-child{padding-right:0;}
   .row-chevron{
     display:inline-flex;align-items:center;justify-content:center;
     width:22px;height:22px;border-radius:6px;border:none;background:none;
@@ -934,7 +933,7 @@
             <div class="sc-value" id="newsSeen">0</div>
           </div>
           <div class="summary-card">
-            <div class="sc-label">Skipped (not earnings)</div>
+            <div class="sc-label">Skipped</div>
             <div class="sc-value" id="newsSkipped">0</div>
           </div>
           <div class="summary-card">
@@ -1643,6 +1642,8 @@
 
     var NEWS_VERDICTS = {
       skipped_not_earnings_related: {label: 'Skipped · not earnings', cls: 'filtered', filter: 'skipped'},
+      skipped_off_ticker: {label: 'Skipped · not about ticker', cls: 'filtered', filter: 'skipped'},
+      expired_not_judged: {label: 'Expired — not judged in time', cls: 'skipped', filter: 'expired'},
       queued: {label: 'Queued for JUDGE', cls: 'pending', filter: 'queued'},
       judged_no_trade: {label: 'Judged → No Trade', cls: 'notrade', filter: 'judged'},
       judged_trade: {label: 'Judged → Trade', cls: 'approved', filter: 'judged traded'}
@@ -1659,12 +1660,15 @@
       var q = data.qwen_usage || {};
       var note = document.getElementById('qwenUsageNote');
       if (!note || !q.by_day || !q.by_day.length) return;
+      var breakdown = 'Skipped: ' + (s.skipped_not_earnings || 0) + ' not earnings-related, ' +
+        (s.skipped_off_ticker || 0) + ' not about the ticker. Expired unjudged (older than 24h): ' +
+        (s.expired || 0) + '. ';
       var today = new Date().toISOString().slice(0, 10);
       var todayRow = q.by_day.filter(function(d){ return d.date === today; })[0] || {calls: 0, tokens: 0};
-      note.textContent = 'Qwen usage (tracked since ' + q.tracking_since + '): ' + todayRow.calls +
+      note.textContent = breakdown + 'Qwen usage (tracked since ' + q.tracking_since + '): ' + todayRow.calls +
         ' calls today (' + (todayRow.tokens || 0).toLocaleString('en-US') + ' tokens) · ' +
         q.total_calls + ' calls / ' + (q.total_tokens || 0).toLocaleString('en-US') + ' tokens total over ' +
-        q.by_day.length + ' day' + (q.by_day.length === 1 ? '' : 's') + '. JUDGE is capped at 5 news items per cycle.';
+        q.by_day.length + ' day' + (q.by_day.length === 1 ? '' : 's') + '. JUDGE takes the 5 newest queued items per cycle.';
     }
 
     function newsRowsHtml(n){
