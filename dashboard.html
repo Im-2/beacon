@@ -281,6 +281,18 @@
     border-radius:6px;padding:2px 8px;
   }
   .live-price-dot{color:var(--pos);font-size:8px;vertical-align:middle;}
+  .news-headline{white-space:normal;min-width:260px;max-width:460px;}
+  .news-headline a{color:var(--ink);font-weight:600;text-decoration:none;}
+  .news-headline a:hover{color:var(--teal-brand);text-decoration:underline;}
+  .news-summary{display:block;margin-top:3px;font-size:11.5px;color:var(--muted);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:440px;}
+  @media (max-width:700px){
+    .news-headline{min-width:0;max-width:none;}
+    .news-summary{max-width:none;white-space:normal;}
+    .table-cards td.news-headline{display:block;text-align:left;}
+    .table-cards td.news-headline::before{display:block;margin-bottom:4px;}
+    .table-cards tr.history-row{padding-top:34px;}
+  }
 
   .table-empty-state{
     display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -335,7 +347,7 @@
   .history-row{cursor:pointer;}
   .history-detail-row{display:none;}
   .history-detail-row.open{display:table-row;}
-  .history-detail-row td{padding:0;border-bottom:1px solid var(--line);}
+  .history-detail-row td{padding:0;border-bottom:1px solid var(--line);white-space:normal;}
 
   .detail-panel{background:var(--paper-soft);padding:20px 22px;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
   .detail-block h4{
@@ -573,6 +585,10 @@
       <button class="nav-item" data-page="history" type="button" aria-label="History">
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span>History</span>
+      </button>
+      <button class="nav-item" data-page="news" type="button" aria-label="News Signals">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3.5" width="14" height="13" rx="1.5"/><line x1="6" y1="7.5" x2="14" y2="7.5"/><line x1="6" y1="10.5" x2="14" y2="10.5"/><line x1="6" y1="13.5" x2="11" y2="13.5"/></svg>
+        <span>News Signals</span>
       </button>
       <button class="nav-item" data-page="performance" type="button" aria-label="Performance">
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="17" x2="3" y2="11"/><line x1="8" y1="17" x2="8" y2="7"/><line x1="13" y1="17" x2="13" y2="9"/><line x1="17.5" y1="17" x2="17.5" y2="4"/></svg>
@@ -901,6 +917,75 @@
           </div>
         </div>
       </section>
+      <section class="page" data-page="news" hidden>
+        <div class="page-header">
+          <div>
+            <h1>News Signals</h1>
+            <p>Every real Finnhub headline Beacon processed for its 5 tickers — skipped, judged, or traded.</p>
+          </div>
+        </div>
+
+        <!-- NEWS: rendered by setupNews() from dashboard_data.json's news_signals
+             (logs/news_signals.jsonl via export_dashboard_data.py). Only items
+             Beacon actually fetched and processed ever appear here. -->
+        <div class="summary-row metrics-4">
+          <div class="summary-card">
+            <div class="sc-label">Headlines Processed</div>
+            <div class="sc-value" id="newsSeen">0</div>
+          </div>
+          <div class="summary-card">
+            <div class="sc-label">Skipped (not earnings)</div>
+            <div class="sc-value" id="newsSkipped">0</div>
+          </div>
+          <div class="summary-card">
+            <div class="sc-label">Judged by Qwen</div>
+            <div class="sc-value" id="newsJudged">0</div>
+          </div>
+          <div class="summary-card">
+            <div class="sc-label">Queued for Next Cycle</div>
+            <div class="sc-value" id="newsQueued">0</div>
+          </div>
+        </div>
+        <p class="metrics-note" id="qwenUsageNote">Qwen usage: not tracked yet.</p>
+
+        <div class="filter-row">
+          <div class="filter-group" data-filter-group="newsverdict">
+            <span class="filter-group-label">Show</span>
+            <button class="filter-pill active" data-value="all" type="button">All</button>
+            <button class="filter-pill" data-value="judged" type="button">Judged</button>
+            <button class="filter-pill" data-value="traded" type="button">Traded</button>
+            <button class="filter-pill" data-value="skipped" type="button">Skipped</button>
+          </div>
+          <input class="filter-text-input" id="newsTickerFilter" type="text" placeholder="Filter by ticker...">
+        </div>
+
+        <div class="panel">
+          <div class="table-wrap">
+            <table class="history-table table-cards" id="newsTable">
+              <thead>
+                <tr>
+                  <th>Published</th><th>Ticker</th><th>Headline</th><th>Source</th>
+                  <th>Verdict</th><th>Conviction</th><th>Execution</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="newsBody">
+                <tr><td colspan="8"><div class="table-empty-state">
+                  <h3>No news processed yet</h3>
+                  <p>The first Finnhub news scan runs on Beacon's next cycle. Rows appear here only for headlines it actually fetched.</p>
+                </div></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination-row">
+            <p id="newsCount"></p>
+            <div class="pagination-btns">
+              <button class="page-btn" id="newsPrevBtn" type="button" disabled>← Previous</button>
+              <button class="page-btn" id="newsNextBtn" type="button" disabled>Load More →</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="page" data-page="performance" hidden>
         <div class="page-header">
           <div>
@@ -1556,6 +1641,137 @@
       el.classList.toggle('neg', (s.cumulative_pnl_usd || 0) < 0);
     }
 
+    var NEWS_VERDICTS = {
+      skipped_not_earnings_related: {label: 'Skipped · not earnings', cls: 'filtered', filter: 'skipped'},
+      queued: {label: 'Queued for JUDGE', cls: 'pending', filter: 'queued'},
+      judged_no_trade: {label: 'Judged → No Trade', cls: 'notrade', filter: 'judged'},
+      judged_trade: {label: 'Judged → Trade', cls: 'approved', filter: 'judged traded'}
+    };
+
+    function renderNewsStats(data){
+      var s = data.news_stats || {};
+      var set = function(id, v){ var el = document.getElementById(id); if (el) el.textContent = v; };
+      set('newsSeen', s.seen || 0);
+      set('newsSkipped', s.skipped || 0);
+      set('newsJudged', (s.judged_no_trade || 0) + (s.judged_trade || 0));
+      set('newsQueued', s.queue_length || 0);
+
+      var q = data.qwen_usage || {};
+      var note = document.getElementById('qwenUsageNote');
+      if (!note || !q.by_day || !q.by_day.length) return;
+      var today = new Date().toISOString().slice(0, 10);
+      var todayRow = q.by_day.filter(function(d){ return d.date === today; })[0] || {calls: 0, tokens: 0};
+      note.textContent = 'Qwen usage (tracked since ' + q.tracking_since + '): ' + todayRow.calls +
+        ' calls today (' + (todayRow.tokens || 0).toLocaleString('en-US') + ' tokens) · ' +
+        q.total_calls + ' calls / ' + (q.total_tokens || 0).toLocaleString('en-US') + ' tokens total over ' +
+        q.by_day.length + ' day' + (q.by_day.length === 1 ? '' : 's') + '. JUDGE is capped at 5 news items per cycle.';
+    }
+
+    function newsRowsHtml(n){
+      var v = NEWS_VERDICTS[n.verdict] || {label: n.verdict || '—', cls: 'filtered', filter: ''};
+      var judged = n.verdict === 'judged_no_trade' || n.verdict === 'judged_trade';
+      var when = n.published_utc ? new Date(n.published_utc).toLocaleString('en-US', {month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'}) : '—';
+      var summary = judged && n.rationale ? '<span class="news-summary">' + esc(n.rationale.split(/(?<=\.)\s/)[0]) + '</span>' : '';
+      var headline = n.url && /^https?:\/\//i.test(n.url)
+        ? '<a href="' + esc(n.url) + '" target="_blank" rel="noopener noreferrer">' + esc(n.headline) + '</a>'
+        : esc(n.headline);
+      var mock = n.is_mock ? ' <span class="t-badge mock">Mock</span>' : '';
+      var row = '<tr class="history-row" data-verdict="' + v.filter + '" data-ticker="' + esc(n.symbol) + '">' +
+        '<td data-label="Published">' + esc(when) + '</td>' +
+        '<td data-label="Ticker"><b>' + esc(n.symbol) + '</b>' + mock + '</td>' +
+        '<td data-label="Headline" class="news-headline">' + headline + summary + '</td>' +
+        '<td data-label="Source">' + esc(n.source || '—') + '</td>' +
+        '<td data-label="Verdict"><span class="status-badge ' + v.cls + '">' + v.label + '</span></td>' +
+        '<td data-label="Conviction">' + (judged && typeof n.conviction === 'number' ? n.conviction + '%' : '—') + '</td>' +
+        '<td data-label="Execution">' + (n.verdict === 'judged_trade' ? esc(n.execution_label || n.outcome || '—') : '—') + '</td>' +
+        '<td class="row-chevron-cell">' + (judged ? '<button class="row-chevron" type="button" aria-label="Expand"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg></button>' : '') + '</td>' +
+        '</tr>';
+      if (!judged) return row;
+      var decisionTxt = n.decision === 'long' ? 'Long' : n.decision === 'short' ? 'Short' : 'No trade';
+      return row + '<tr class="history-detail-row"><td colspan="8"><div class="detail-panel">' +
+        '<div class="detail-block"><h4>Sense</h4><pre class="detail-code">' +
+          esc(n.headline) + '\n' + esc(n.source || '') + ' · ' + esc(when) +
+          '\nMatched keywords: ' + esc((n.matched_keywords || []).join(', ')) + '</pre></div>' +
+        '<div class="detail-block"><h4>Judge</h4><p class="detail-quote">"' + esc(n.rationale || '(no rationale recorded)') + '"</p>' +
+          (n.tone_assessment ? '<p class="conviction-note" style="margin-top:10px;">Tone: ' + esc(n.tone_assessment) + '</p>' : '') + '</div>' +
+        '<div class="detail-block"><h4>Decision</h4><ul class="detail-list">' +
+          '<li>Direction <b>' + decisionTxt + '</b></li>' +
+          '<li>Conviction <b>' + (typeof n.conviction === 'number' ? n.conviction + '%' : '—') + '</b></li></ul></div>' +
+        '<div class="detail-block"><h4>Execute</h4><div class="detail-outcome ' + (n.outcome && n.outcome.indexOf('executed_') === 0 ? 'ok' : 'neutral') + '">' +
+          esc(n.execution_label ? n.execution_label + ' (' + n.outcome + ')'
+            : n.verdict === 'judged_no_trade' ? 'No order placed — Qwen decided no-trade.'
+            : (n.outcome || 'No order placed')) + '</div></div>' +
+        '</div></td></tr>';
+    }
+
+    function setupNews(data){
+      var body = document.getElementById('newsBody');
+      var table = document.getElementById('newsTable');
+      var items = data.news_signals || [];
+      if (!body || !items.length) return;
+      body.innerHTML = items.map(newsRowsHtml).join('');
+
+      var rows = [].slice.call(body.querySelectorAll('.history-row'));
+      var tickerInput = document.getElementById('newsTickerFilter');
+      var countLabel = document.getElementById('newsCount');
+      var prevBtn = document.getElementById('newsPrevBtn');
+      var nextBtn = document.getElementById('newsNextBtn');
+      var filter = 'all', page = 0, PAGE_SIZE = 15;
+
+      rows.forEach(function(row){
+        var detail = row.nextElementSibling;
+        if (!detail || !detail.classList.contains('history-detail-row')) return;
+        row.addEventListener('click', function(e){
+          if (e.target.closest('a')) return;
+          var isOpen = row.classList.contains('expanded');
+          row.classList.toggle('expanded', !isOpen);
+          detail.classList.toggle('open', !isOpen);
+        });
+      });
+
+      var pills = [].slice.call(table.closest('.page').querySelectorAll('.filter-group[data-filter-group="newsverdict"] .filter-pill'));
+      pills.forEach(function(pill){
+        pill.addEventListener('click', function(){
+          pills.forEach(function(p){ p.classList.remove('active'); });
+          pill.classList.add('active');
+          filter = pill.getAttribute('data-value');
+          page = 0;
+          apply();
+        });
+      });
+      if (tickerInput) tickerInput.addEventListener('input', function(){ page = 0; apply(); });
+      if (prevBtn) prevBtn.addEventListener('click', function(){ if (page > 0) { page--; apply(); } });
+      if (nextBtn) nextBtn.addEventListener('click', function(){ page++; apply(); });
+
+      function apply(){
+        var q = tickerInput ? tickerInput.value.trim().toUpperCase() : '';
+        var matched = rows.filter(function(row){
+          var verdictOk = filter === 'all' || (' ' + row.getAttribute('data-verdict') + ' ').indexOf(' ' + filter + ' ') !== -1;
+          return verdictOk && (!q || row.getAttribute('data-ticker').indexOf(q) !== -1);
+        });
+        var start = page * PAGE_SIZE, end = start + PAGE_SIZE;
+        rows.forEach(function(row){
+          var idx = matched.indexOf(row);
+          var show = idx >= start && idx < end;
+          var detail = row.nextElementSibling;
+          var hasDetail = detail && detail.classList.contains('history-detail-row');
+          row.style.display = show ? '' : 'none';
+          if (!show) {
+            row.classList.remove('expanded');
+            if (hasDetail) { detail.classList.remove('open'); detail.style.display = 'none'; }
+          } else if (hasDetail) {
+            detail.style.display = '';
+          }
+        });
+        if (countLabel) countLabel.textContent = matched.length
+          ? 'Showing ' + (start + 1) + '–' + Math.min(end, matched.length) + ' of ' + matched.length + ' headlines'
+          : 'No headlines match these filters';
+        if (prevBtn) prevBtn.disabled = page <= 0;
+        if (nextBtn) nextBtn.disabled = end >= matched.length;
+      }
+      apply();
+    }
+
     function setupHistory(data){
       var table = document.getElementById('historyTable');
       var body = document.getElementById('historyBody');
@@ -1676,8 +1892,10 @@
         renderAgentRisk(data);
         renderPerformance(data);
         renderCycleInfo(data);
+        renderNewsStats(data);
         if (!historyRendered) {
           setupHistory(data);
+          setupNews(data);
           historyRendered = true;
         }
       }).catch(function(err){

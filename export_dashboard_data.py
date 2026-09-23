@@ -14,7 +14,16 @@ ones, and every record carries is_mock so the frontend can badge it clearly.
 """
 import json
 from datetime import datetime, timezone
-from beacon import config, state, execute
+from beacon import config, state, execute, news, judge
+
+NEWS_EXPORT_LIMIT = 400
+EXECUTION_LABELS = {
+    "executed_direct_rtoken": "Direct rToken",
+    "executed_cross_asset_proxy": "BTC proxy",
+    "cross_asset_fallback_unavailable_for_short_direction": "Short unavailable",
+    "rejected_by_risk_controls": "Rejected by risk",
+    "cross_asset_proxy_rejected_by_risk": "Rejected by risk",
+}
 
 DECISIONS_LOG = config.LOG_DIR / "decisions.jsonl"
 HEARTBEAT_FILE = config.DATA_DIR / "last_cycle.json"
@@ -64,6 +73,8 @@ def trigger_label(record: dict) -> str:
         return "Position Mgmt"
     if ttype == "TEST_FIXTURE":
         return "Test Fixture"
+    if ttype == "finnhub_earnings_news":
+        return "News"
     return ttype or "—"
 
 
@@ -97,6 +108,12 @@ def build_sense_text(record: dict) -> str:
         lines.append("Open-position check against stop-loss/take-profit (30-min cycle).")
     elif ttype == "TEST_FIXTURE":
         lines.append("Manual pipeline test fixture, not a real SEC filing trigger.")
+    elif ttype == "finnhub_earnings_news":
+        n = record.get("news") or {}
+        lines.append(f"Finnhub news ({n.get('source')}, {n.get('published_utc')}):")
+        lines.append(n.get("headline") or "")
+        if n.get("url"):
+            lines.append(f"Source: {n['url']}")
     else:
         items = record.get("matched_items") or []
         if items:
@@ -217,6 +234,40 @@ def normalize_decision(record: dict) -> dict:
     }
 
 
+def build_news() -> tuple[list, dict]:
+    latest = {}
+    if news.NEWS_LOG.exists():
+        for line in news.NEWS_LOG.read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                r = json.loads(line)
+                latest[r["news_key"]] = r   # later verdict (queued -> judged) wins
+    items = sorted(latest.values(), key=lambda r: r.get("published_utc") or "", reverse=True)
+    stats = {"seen": len(items), "skipped": 0, "queued": 0, "judged_no_trade": 0, "judged_trade": 0}
+    for r in items:
+        v = r.get("verdict")
+        if v == "skipped_not_earnings_related":
+            stats["skipped"] += 1
+        elif v in stats:
+            stats[v] += 1
+        if r.get("outcome"):
+            r["execution_label"] = EXECUTION_LABELS.get(r["outcome"], "Not filled" if v == "judged_trade" else None)
+    stats["exported"] = min(len(items), NEWS_EXPORT_LIMIT)
+    return items[:NEWS_EXPORT_LIMIT], stats
+
+
+def build_qwen_usage() -> dict:
+    if not judge.QWEN_USAGE_FILE.exists():
+        return {"by_day": [], "tracking_since": None}
+    usage = json.loads(judge.QWEN_USAGE_FILE.read_text())
+    by_day = [{"date": d, **v} for d, v in sorted(usage.items())]
+    return {
+        "by_day": by_day,
+        "tracking_since": by_day[0]["date"] if by_day else None,
+        "total_calls": sum(d["calls"] for d in by_day),
+        "total_tokens": sum(d["tokens"] for d in by_day),
+    }
+
+
 def build():
     portfolio = state.load_state()
     capital = portfolio.get("capital_usd", config.RISK["allocated_capital_usd"])
@@ -257,6 +308,8 @@ def build():
     today_realized = state.today_realized_pnl(portfolio)
     daily_pnl_pct = round((today_realized + unrealized_pnl) / capital * 100, 2)
     no_averaging_blocked_count = sum(1 for d in decisions if d["no_averaging_blocked"])
+    news_items, news_stats = build_news()
+    news_stats["queue_length"] = len(news.load_queue())
 
     out = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -281,6 +334,9 @@ def build():
         "open_positions": open_positions,
         "closed_positions": closed_positions,
         "decisions": decisions,
+        "news_signals": news_items,
+        "news_stats": news_stats,
+        "qwen_usage": build_qwen_usage(),
         "last_cycle": json.loads(HEARTBEAT_FILE.read_text()) if HEARTBEAT_FILE.exists() else None,
         "scan_schedule": {
             "anchor_utc": SCAN_SCHEDULE_ANCHOR.astimezone(timezone.utc).isoformat(),

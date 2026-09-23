@@ -10,8 +10,26 @@ call, so the rest of the pipeline (RISK, EXECUTE, LOG) can be built and tested
 before a real key is available.
 """
 import json
+from datetime import datetime, timezone
 import requests
 from beacon import config
+
+QWEN_USAGE_FILE = config.DATA_DIR / "qwen_usage.json"
+
+
+def _record_qwen_usage(tokens: int, ok: bool):
+    """Per-UTC-day Qwen call/token counts, so hackathon credit burn is visible.
+    Failed calls are counted too -- the proxy may still bill them."""
+    day = datetime.now(timezone.utc).date().isoformat()
+    try:
+        usage = json.loads(QWEN_USAGE_FILE.read_text()) if QWEN_USAGE_FILE.exists() else {}
+    except ValueError:
+        usage = {}
+    d = usage.setdefault(day, {"calls": 0, "failed": 0, "tokens": 0})
+    d["calls"] += 1
+    d["failed"] += 0 if ok else 1
+    d["tokens"] += tokens or 0
+    QWEN_USAGE_FILE.write_text(json.dumps(usage, indent=2, sort_keys=True))
 
 ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
 ANTHROPIC_MODEL = "claude-opus-5"
@@ -46,6 +64,16 @@ def _call_anthropic(system: str, user: str, max_tokens: int) -> str:
 
 
 def _call_qwen(system: str, user: str, max_tokens: int) -> str:
+    try:
+        text, tokens = _post_qwen(system, user, max_tokens)
+    except Exception:
+        _record_qwen_usage(0, ok=False)
+        raise
+    _record_qwen_usage(tokens, ok=True)
+    return text
+
+
+def _post_qwen(system: str, user: str, max_tokens: int) -> tuple[str, int]:
     resp = requests.post(
         QWEN_API_URL,
         headers={
@@ -67,7 +95,7 @@ def _call_qwen(system: str, user: str, max_tokens: int) -> str:
     )
     resp.raise_for_status()
     data = resp.json()
-    return data["choices"][0]["message"]["content"]
+    return data["choices"][0]["message"]["content"], (data.get("usage") or {}).get("total_tokens", 0)
 
 
 def _call_llm(system: str, user: str, max_tokens: int = 1500) -> tuple[str, bool]:
@@ -117,6 +145,11 @@ Two trigger categories exist, and they must be reasoned about differently:
   in this case; base surprise_confidence and rationale instead on real pre-event positioning factors that \
   ARE in the data (current price vs. consensus-implied expectations, valuation context) — never a fabricated \
   guess at what the report will say.
+- "news_reactive": the sensed data will include a "news" block — one real news headline (and summary, if \
+  available) about this ticker, published within the last day. It passed a keyword pre-filter only, so it \
+  may still be generic market commentary, a listicle, or about another company. If it carries no concrete, \
+  ticker-specific earnings/guidance/estimate information, decide "no-trade" with low conviction. A headline \
+  alone is thin evidence: never infer numbers the text doesn't state.
 
 Respond with ONLY a JSON object with this exact shape:
 {

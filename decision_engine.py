@@ -28,14 +28,14 @@ import argparse
 import json
 import sys
 from datetime import datetime, timezone
-from beacon import config, sense, judge, risk, state, logger, execute
+from beacon import config, sense, judge, risk, state, logger, execute, news
 
 TRIGGERS_FILE = config.DATA_DIR / "filing_triggers.json"
 ANTICIPATORY_FILE = config.DATA_DIR / "anticipatory_triggers.json"
 HEARTBEAT_FILE = config.DATA_DIR / "last_cycle.json"
 
 
-def write_heartbeat(total, pending_count, processed_count):
+def write_heartbeat(total, pending_count, processed_count, news_judged=0, news_queued=0):
     # A live cycle that finds nothing new logs nothing to decisions.jsonl, so
     # without this there's no evidence a check ever happened -- the dashboard's
     # "Last Check" reads this file (via export_dashboard_data.py).
@@ -44,6 +44,8 @@ def write_heartbeat(total, pending_count, processed_count):
         "triggers_total": total,
         "triggers_pending_at_start": pending_count,
         "triggers_processed": processed_count,
+        "news_judged": news_judged,
+        "news_queued_remaining": news_queued,
     }, indent=2))
 
 
@@ -57,8 +59,6 @@ def load_triggers():
     if ANTICIPATORY_FILE.exists():
         data = json.loads(ANTICIPATORY_FILE.read_text())
         triggers.extend(data.get("triggers", []))
-    if not triggers:
-        sys.exit(f"No triggers found — run scan_8k_filings.py and scan_anticipatory_earnings.py first.")
     return triggers
 
 
@@ -76,6 +76,8 @@ def process_one(t, portfolio_state, execute_live=False):
     record = {"symbol": symbol, "trigger_type": t["trigger_type"], "category": t["category"],
               "matched_items": t.get("matched_items"), "filed_date": t.get("filed_date"),
               "accession_number": t.get("accession_number"), "edgar_url": t.get("edgar_url")}
+    if t.get("news"):
+        record["news"] = t["news"]
 
     print(f"\n=== SENSE: {symbol} ===")
     sensed = sense.sense_for_trigger(t)
@@ -232,18 +234,18 @@ def main():
 
     pending = [t for t in triggers if trigger_key(t) not in processed]
     print(f"{len(pending)}/{len(triggers)} triggers unprocessed.")
-    if not pending:
-        print("Nothing new to process.")
-        if args.mode == "live":
-            write_heartbeat(len(triggers), 0, 0)
-        return
 
     if args.mode == "preview":
+        if not pending:
+            print("Nothing new to process.")
+            return
         t = pending[0]
         record = process_one(t, portfolio_state, execute_live=False)
         print(f"\n{'='*60}\nPREVIEW COMPLETE for {t['symbol']}. Outcome: {record['outcome']}")
         print("Not marked as processed — rerun in --mode live to actually act on it once reviewed.")
     else:
+        if not pending:
+            print("Nothing new to process.")
         processed_count = 0
         for t in pending:
             try:
@@ -261,7 +263,59 @@ def main():
                 continue
             state.mark_processed(trigger_key(t))
             portfolio_state = state.load_state()
-        write_heartbeat(len(triggers), len(pending), processed_count)
+        news_judged, news_remaining = process_news_queue()
+        write_heartbeat(len(triggers), len(pending), processed_count,
+                        news_judged=news_judged, news_queued=news_remaining)
+
+
+def news_verdict(record: dict) -> str:
+    decision = (record.get("judgment") or {}).get("decision")
+    return "judged_trade" if decision in ("long", "short") else "judged_no_trade"
+
+
+def process_news_queue():
+    """Judge up to MAX_JUDGE_PER_CYCLE queued news items, oldest first; the
+    rest stay queued for the next cycle. Returns (judged, still_queued)."""
+    queue = news.load_queue()
+    if not queue:
+        print("News queue empty.")
+        return 0, 0
+    batch, rest = queue[:news.MAX_JUDGE_PER_CYCLE], queue[news.MAX_JUDGE_PER_CYCLE:]
+    judged = 0
+    for item in batch:
+        t = {
+            "symbol": item["symbol"],
+            "trigger_type": "finnhub_earnings_news",
+            "category": "news_reactive",
+            "news": {k: item.get(k) for k in ("headline", "summary", "source", "url", "published_utc",
+                                              "matched_keywords")},
+        }
+        try:
+            record = process_one(t, state.load_state(), execute_live=True)
+        except Exception as e:
+            print(f"\n>>> ERROR judging news {item['news_key']}: {e} -- kept in queue.", file=sys.stderr)
+            rest.append(item)
+            continue
+        judged += 1
+        j = record.get("judgment") or {}
+        news.append_log({
+            **{k: item.get(k) for k in ("news_key", "symbol", "finnhub_id", "headline", "source", "url",
+                                        "published_utc", "matched_keywords")},
+            "verdict": news_verdict(record),
+            "decision": j.get("decision"),
+            "conviction": j.get("conviction_score"),
+            "rationale": j.get("rationale"),
+            "tone_assessment": j.get("tone_assessment"),
+            "is_mock": bool(j.get("mock")),
+            "outcome": record.get("outcome"),
+            "execution_leg": record.get("execution_leg"),
+            "decision_timestamp_utc": record.get("timestamp_utc"),
+        })
+    rest.sort(key=lambda q: q["published_utc"])
+    news.save_queue(rest)
+    print(f"News: judged {judged} this cycle (cap {news.MAX_JUDGE_PER_CYCLE}), "
+          f"{len(rest)} still queued for next cycle.")
+    return judged, len(rest)
 
 
 if __name__ == "__main__":

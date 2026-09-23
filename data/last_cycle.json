@@ -1,6 +1,8 @@
 {
-  "last_live_cycle_utc": "2026-09-23T17:31:01.219303+00:00",
+  "last_live_cycle_utc": "2026-09-23T18:13:15.458027+00:00",
   "triggers_total": 2,
   "triggers_pending_at_start": 0,
-  "triggers_processed": 0
+  "triggers_processed": 0,
+  "news_judged": 5,
+  "news_queued_remaining": 45
 }

@@ -17,6 +17,10 @@ case "$step" in
     echo "=== Anticipatory earnings scan (MU, EQT) ==="
     python3 scan_anticipatory_earnings.py
     ;;
+  news)
+    echo "=== Finnhub earnings-news scan (keyword pre-filter -> JUDGE queue) ==="
+    python3 scan_earnings_news.py
+    ;;
   tradability)
     echo "=== Bitget demo tradability poll (5-ticker universe) ==="
     python3 check_tradability.py
@@ -67,12 +71,12 @@ case "$step" in
     # skip the rest -- existing triggers still get judged, positions still get
     # checked, and the dashboard still gets fresh data.
     echo "##### Beacon full cycle $(date '+%Y-%m-%d %H:%M:%S') #####"
-    for s in connectivity scan tradability market-data live positions export-data publish-data; do
+    for s in connectivity scan news tradability market-data live positions export-data publish-data; do
       "$0" "$s" || echo "!!! step '$s' failed (exit $?) -- continuing" >&2
     done
     ;;
   *)
-    echo "Usage: ./run_now.sh {connectivity|scan|tradability|market-data|preview|live|positions|export-data|publish-data|metrics|all}"
+    echo "Usage: ./run_now.sh {connectivity|scan|news|tradability|market-data|preview|live|positions|export-data|publish-data|metrics|all}"
     echo "  connectivity - check Bitget is actually reachable; warns loudly (never aborts) if not"
     echo "  scan         - refresh 8-K + anticipatory-earnings trigger data"
     echo "  tradability  - poll Bitget demo-trading symbol status for the 5-ticker universe;"

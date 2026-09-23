@@ -111,6 +111,8 @@ def sense_for_trigger(trigger: dict) -> dict:
         cik = trigger.get("cik")
         filing = fetch_filing_text(cik, trigger["accession_number"]) if cik else None
         result["filing"] = filing
+    if trigger.get("trigger_type") == "finnhub_earnings_news":
+        result["news"] = trigger["news"]
     if trigger.get("trigger_type") == "anticipatory_earnings_positioning":
         result["anticipatory"] = {
             "report_date": trigger.get("report_date"),
