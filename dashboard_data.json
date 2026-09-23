@@ -1,24 +1,29 @@
 {
-  "generated_at": "2026-09-23T19:05:18.883432+00:00",
+  "generated_at": "2026-09-23T19:30:08.987683+00:00",
   "capital_usd": 10000.0,
   "summary": {
-    "cumulative_pnl_usd": -5.07,
+    "cumulative_pnl_usd": 0,
     "realized_pnl_usd": 0,
+    "real_unrealized_pnl_usd": 0,
+    "test_fixture_pnl_usd": -4.61,
+    "max_drawdown_pct": 0.0,
+    "sharpe_per_trade": null,
     "win_rate_pct": null,
     "real_closed_count": 0,
-    "open_positions_count": 1,
-    "total_exposure_usd": 200.0,
-    "total_exposure_pct": 2.0,
-    "unrealized_pnl_usd": -5.07,
-    "concurrent_positions_used": 1,
+    "open_positions_count": 0,
+    "total_exposure_usd": 0,
+    "total_exposure_pct": 0.0,
+    "unrealized_pnl_usd": 0,
+    "concurrent_positions_used": 0,
     "concurrent_positions_cap": 5,
-    "position_size_used_pct": 2.0,
+    "position_size_used_pct": 0.0,
     "position_size_cap_pct": 5.0,
     "daily_drawdown_pct": -0.05,
     "daily_drawdown_cap_pct": 3.0,
     "no_averaging_blocked_count": 0
   },
-  "open_positions": [
+  "open_positions": [],
+  "closed_positions": [
     {
       "symbol": "BTC",
       "direction": "long",
@@ -33,11 +38,80 @@
       "proxy_for": "MU",
       "is_test_fixture": true,
       "test_fixture_note": "Genuinely filled on Bitget Demo Trading (real orderId 1486392494467620864), but opened by a labeled synthetic JUDGE decision (not real Qwen reasoning), per explicit user authorization on 2026-09-22 to verify the cross-asset EXECUTE mechanics after real JUDGE genuinely returned no-trade on both real triggers available that day. The fill itself is real; the trading rationale behind it is not.",
-      "current_price": 84152.2
+      "current_price": 84152.2,
+      "closed_at": "2026-09-23T19:17:36.448805+00:00",
+      "close_price": 84353.38,
+      "close_reason": "test_fixture_closed",
+      "realized_pnl_pct": -2.3034,
+      "realized_pnl_usd": -4.61,
+      "hold_time_hours": 22.65,
+      "close_order": {
+        "dry_run": false,
+        "paper_trading": true,
+        "tradability": {
+          "tradable": true,
+          "bitget_symbol": "BTCUSDT",
+          "min_trade_usdt": "1"
+        },
+        "request": {
+          "method": "POST",
+          "path": "/api/v2/spot/trade/place-order",
+          "body": "{\"symbol\":\"BTCUSDT\",\"side\":\"sell\",\"orderType\":\"market\",\"force\":\"gtc\",\"clientOid\":\"beacon-BTC-1790191055\",\"size\":\"0.002316\"}",
+          "body_obj": {
+            "symbol": "BTCUSDT",
+            "side": "sell",
+            "orderType": "market",
+            "force": "gtc",
+            "clientOid": "beacon-BTC-1790191055",
+            "size": "0.002316"
+          }
+        },
+        "stop_loss_pct": 0,
+        "take_profit_pct": 0,
+        "http_status": 200,
+        "response": {
+          "code": "00000",
+          "msg": "success",
+          "requestTime": 1790191054832,
+          "data": {
+            "orderId": "1486734530173509632",
+            "clientOid": "beacon-BTC-1790191055"
+          }
+        },
+        "status": "SENT"
+      }
     }
   ],
-  "closed_positions": [],
   "decisions": [
+    {
+      "timestamp_utc": "2026-09-23T19:17:36.449653+00:00",
+      "date_label": "Sep 23",
+      "symbol": "BTC",
+      "trigger_label": "Position Mgmt",
+      "category": "anticipatory_positioning",
+      "decision": null,
+      "conviction": null,
+      "risk_approved": null,
+      "risk_reason": null,
+      "status": "closed",
+      "outcome": "test_fixture_closed_mechanics_verified",
+      "is_mock": true,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Open-position check against stop-loss/take-profit (30-min cycle).",
+      "judge_heading": "Judge",
+      "judge_text": "Not reached.",
+      "judge_neutral": true,
+      "risk_lines": [],
+      "execute_text": "Position closed (test_fixture_mechanics_verified). Realized P&L: $-4.61.",
+      "execute_kind": "ok",
+      "edgar_url": null,
+      "realized_pnl_usd": -4.61,
+      "realized_pnl_pct": -2.3034,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
     {
       "timestamp_utc": "2026-09-23T18:13:15.456019+00:00",
       "date_label": "Sep 23",
