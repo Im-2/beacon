@@ -1004,19 +1004,19 @@
             <div class="sc-value" id="perfPnl">+$0.00</div>
           </div>
           <div class="summary-card">
-            <div class="sc-label">Sharpe Ratio</div>
-            <div class="sc-value">—</div>
+            <div class="sc-label">Sharpe Ratio (per trade)</div>
+            <div class="sc-value" id="perfSharpe">—</div>
           </div>
           <div class="summary-card">
             <div class="sc-label">Win Rate</div>
-            <div class="sc-value">—</div>
+            <div class="sc-value" id="perfWinRate">—</div>
           </div>
           <div class="summary-card">
             <div class="sc-label">Max Drawdown</div>
-            <div class="sc-value">0.00%</div>
+            <div class="sc-value" id="perfDrawdown">0.00%</div>
           </div>
         </div>
-        <p class="metrics-note">Metrics will populate as Beacon executes real trades.</p>
+        <p class="metrics-note" id="perfNote">Metrics count real decisions only.</p>
 
         <div class="chart-card">
           <div class="panel-head">
@@ -1638,6 +1638,19 @@
       el.textContent = fmtUsd(s.cumulative_pnl_usd, {signed: true});
       el.classList.toggle('pos', (s.cumulative_pnl_usd || 0) >= 0);
       el.classList.toggle('neg', (s.cumulative_pnl_usd || 0) < 0);
+
+      var set = function(id, v){ var e = document.getElementById(id); if (e) e.textContent = v; };
+      set('perfSharpe', typeof s.sharpe_per_trade === 'number' ? s.sharpe_per_trade.toFixed(2) : '—');
+      set('perfWinRate', typeof s.win_rate_pct === 'number' ? s.win_rate_pct.toFixed(1) + '%' : '—');
+      set('perfDrawdown', (s.max_drawdown_pct || 0).toFixed(2) + '%');
+      var n = s.real_closed_count || 0;
+      var note = 'All metrics count real decisions only (' + n + ' closed real trade' + (n === 1 ? '' : 's') +
+        '; Sharpe needs at least 2). ';
+      if (s.test_fixture_pnl_usd) {
+        note += 'Test fixture P&L, excluded above: ' + fmtUsd(s.test_fixture_pnl_usd, {signed: true}) +
+          ' (a real Bitget fill opened by a labeled synthetic decision to verify execution mechanics).';
+      }
+      set('perfNote', note);
     }
 
     var NEWS_VERDICTS = {
@@ -1884,10 +1897,13 @@
           // whatever attachLivePrices() just fetched, not the backend's
           // cron-cadence snapshot.
           var s = data.summary || (data.summary = {});
-          var liveUnrealized = (data.open_positions || [])
-            .reduce(function(sum, p){ return sum + (p.unrealized_pnl_usd || 0); }, 0);
+          var open = data.open_positions || [];
+          var sumPnl = function(list){ return list.reduce(function(sum, p){ return sum + (p.unrealized_pnl_usd || 0); }, 0); };
+          var liveUnrealized = sumPnl(open);
+          var realUnrealized = sumPnl(open.filter(function(p){ return !p.is_test_fixture; }));
           s.unrealized_pnl_usd = Math.round(liveUnrealized * 100) / 100;
-          s.cumulative_pnl_usd = Math.round(((s.realized_pnl_usd || 0) + liveUnrealized) * 100) / 100;
+          // Headline Cumulative P&L: real positions only (test fixtures reported separately).
+          s.cumulative_pnl_usd = Math.round(((s.realized_pnl_usd || 0) + realUnrealized) * 100) / 100;
           return data;
         });
       }).then(function(data){

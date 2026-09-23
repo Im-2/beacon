@@ -23,12 +23,12 @@ def evaluate(judgment: dict, symbol: str, portfolio_state: dict) -> dict:
     daily_pnl_pct = (daily_pnl / config.RISK["allocated_capital_usd"]) * 100 if config.RISK["allocated_capital_usd"] else 0
     checks["daily_drawdown_circuit_breaker"] = daily_pnl_pct > -config.RISK["max_daily_drawdown_pct"]
 
-    existing_same_symbol = [p for p in open_positions if p["symbol"] == symbol]
-    averaging_into_loser = False
-    if config.RISK["no_averaging_into_loser"] and existing_same_symbol:
-        for p in existing_same_symbol:
-            if p.get("unrealized_pnl_usd", 0) < 0 and p.get("direction") == decision:
-                averaging_into_loser = True
+    # Judged on the symbol as a whole: several BTC proxy positions (one per
+    # originating ticker) are all the same asset, so what matters is whether
+    # the combined same-direction holding is under water.
+    same_direction = [p for p in open_positions if p["symbol"] == symbol and p.get("direction") == decision]
+    combined_pnl = sum(p.get("unrealized_pnl_usd", 0) for p in same_direction)
+    averaging_into_loser = bool(config.RISK["no_averaging_into_loser"] and same_direction and combined_pnl < 0)
     checks["no_averaging_into_loser"] = not averaging_into_loser
 
     failed = [name for name, passed in checks.items() if not passed]

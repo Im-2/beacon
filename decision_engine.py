@@ -191,9 +191,21 @@ def process_one(t, portfolio_state, execute_live=False):
 
             proxy_risk_result = risk.evaluate(judgment, proxy_symbol, portfolio_state)
             record["cross_asset_risk_result"] = proxy_risk_result
+            capital = config.RISK["allocated_capital_usd"]
+            proxy_exposure = sum(p.get("size_usd", 0) for p in portfolio_state.get("open_positions", [])
+                                 if p.get("symbol") == proxy_symbol)
+            proxy_cap = capital * config.RISK["max_proxy_exposure_pct"] / 100.0
 
             if not proxy_risk_result["approved"]:
                 record["outcome"] = "cross_asset_proxy_rejected_by_risk"
+            elif proxy_exposure + size_usd > proxy_cap:
+                # Several tickers can each hold their own BTC proxy, but they
+                # are all the same asset, so total BTC exposure is capped.
+                record["outcome"] = "proxy_exposure_cap_reached_not_added"
+                record["cross_asset_note"] = (
+                    f"{proxy_symbol} proxy exposure ${proxy_exposure:,.2f} + this ${size_usd:,.2f} would exceed "
+                    f"the {config.RISK['max_proxy_exposure_pct']:g}% cap (${proxy_cap:,.2f}); {symbol} not expressed."
+                )
             else:
                 proxy_bitget_symbol = execute.to_bitget_symbol(proxy_symbol)
                 try:

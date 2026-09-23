@@ -50,3 +50,10 @@
 
 ---
 
+## 2026-09-23T19:17:36.449653+00:00 — BTC (position_management, category=anticipatory_positioning)
+
+- **Outcome:** test_fixture_closed_mechanics_verified
+- **Order:** {'dry_run': False, 'paper_trading': True, 'tradability': {'tradable': True, 'bitget_symbol': 'BTCUSDT', 'min_trade_usdt': '1'}, 'request': {'method': 'POST', 'path': '/api/v2/spot/trade/place-order', 'body': '{"symbol":"BTCUSDT","side":"sell","orderType":"market","force":"gtc","clientOid":"beacon-BTC-1790191055","size":"0.002316"}', 'body_obj': {'symbol': 'BTCUSDT', 'side': 'sell', 'orderType': 'market', 'force': 'gtc', 'clientOid': 'beacon-BTC-1790191055', 'size': '0.002316'}}, 'stop_loss_pct': 0, 'take_profit_pct': 0, 'http_status': 200, 'response': {'code': '00000', 'msg': 'success', 'requestTime': 1790191054832, 'data': {'orderId': '1486734530173509632', 'clientOid': 'beacon-BTC-1790191055'}}, 'status': 'SENT'}
+
+---
+

@@ -1,6 +1,7 @@
 {
   "capital_usd": 10000.0,
-  "open_positions": [
+  "open_positions": [],
+  "closed_positions": [
     {
       "symbol": "BTC",
       "direction": "long",
@@ -10,14 +11,54 @@
       "take_profit_pct": 5.0,
       "opened_at": "2026-09-22T20:38:27.795948+00:00",
       "category": "anticipatory_positioning",
-      "unrealized_pnl_usd": -4.89,
+      "unrealized_pnl_usd": -5.07,
       "execution_leg": "cross_asset_proxy",
       "proxy_for": "MU",
       "is_test_fixture": true,
       "test_fixture_note": "Genuinely filled on Bitget Demo Trading (real orderId 1486392494467620864), but opened by a labeled synthetic JUDGE decision (not real Qwen reasoning), per explicit user authorization on 2026-09-22 to verify the cross-asset EXECUTE mechanics after real JUDGE genuinely returned no-trade on both real triggers available that day. The fill itself is real; the trading rationale behind it is not.",
-      "current_price": 84231.93
+      "current_price": 84152.2,
+      "closed_at": "2026-09-23T19:17:36.448805+00:00",
+      "close_price": 84353.38,
+      "close_reason": "test_fixture_closed",
+      "realized_pnl_pct": -2.3034,
+      "realized_pnl_usd": -4.61,
+      "hold_time_hours": 22.65,
+      "close_order": {
+        "dry_run": false,
+        "paper_trading": true,
+        "tradability": {
+          "tradable": true,
+          "bitget_symbol": "BTCUSDT",
+          "min_trade_usdt": "1"
+        },
+        "request": {
+          "method": "POST",
+          "path": "/api/v2/spot/trade/place-order",
+          "body": "{\"symbol\":\"BTCUSDT\",\"side\":\"sell\",\"orderType\":\"market\",\"force\":\"gtc\",\"clientOid\":\"beacon-BTC-1790191055\",\"size\":\"0.002316\"}",
+          "body_obj": {
+            "symbol": "BTCUSDT",
+            "side": "sell",
+            "orderType": "market",
+            "force": "gtc",
+            "clientOid": "beacon-BTC-1790191055",
+            "size": "0.002316"
+          }
+        },
+        "stop_loss_pct": 0,
+        "take_profit_pct": 0,
+        "http_status": 200,
+        "response": {
+          "code": "00000",
+          "msg": "success",
+          "requestTime": 1790191054832,
+          "data": {
+            "orderId": "1486734530173509632",
+            "clientOid": "beacon-BTC-1790191055"
+          }
+        },
+        "status": "SENT"
+      }
     }
   ],
-  "closed_positions": [],
   "daily_pnl": {}
 }

@@ -24,6 +24,7 @@ EXECUTION_LABELS = {
     "rejected_by_risk_controls": "Rejected by risk",
     "cross_asset_proxy_rejected_by_risk": "Rejected by risk",
     "already_positioned_not_added": "Already positioned — not added",
+    "proxy_exposure_cap_reached_not_added": "Proxy exposure cap reached — not added",
 }
 
 DECISIONS_LOG = config.LOG_DIR / "decisions.jsonl"
@@ -47,6 +48,8 @@ STATUS_MAP = {
     "executed_cross_asset_proxy": "approved",
     "cross_asset_fallback_unavailable_for_short_direction": "skipped",
     "already_positioned_not_added": "skipped",
+    "proxy_exposure_cap_reached_not_added": "skipped",
+    "test_fixture_closed_mechanics_verified": "closed",
     "closed_stop_loss": "closed",
     "closed_take_profit": "closed",
     "test_fixture_dry_run": "filtered",
@@ -166,6 +169,11 @@ def build_risk_lines(record: dict) -> list:
     return lines
 
 
+def order_id(order: dict) -> str:
+    data = (order.get("response") or {}).get("data") or {}
+    return data.get("orderId") if isinstance(data, dict) else None
+
+
 def order_reject_reason(order: dict) -> str | None:
     return order.get("reason") or (order.get("response") or {}).get("msg")
 
@@ -189,6 +197,14 @@ def build_execute_block(record: dict) -> dict:
         pnl = record.get("realized_pnl_usd")
         pnl_txt = f"${pnl:.2f}" if isinstance(pnl, (int, float)) else "—"
         return {"text": f"Position closed ({outcome.replace('closed_', '')}). Realized P&L: {pnl_txt}.", "kind": "ok"}
+    if outcome == "test_fixture_closed_mechanics_verified":
+        pnl = record.get("realized_pnl_usd")
+        return {"text": f"Test fixture closed — mechanics verified. Real sell order {order_id(order)}, "
+                        f"realized ${pnl:.2f} on the test position (excluded from performance metrics).",
+                "kind": "ok"}
+    if outcome == "proxy_exposure_cap_reached_not_added":
+        return {"text": "Proxy exposure cap reached — not added. " + (record.get("cross_asset_note") or ""),
+                "kind": "neutral"}
     if outcome == "already_positioned_not_added":
         held = record.get("existing_position") or {}
         via = f" via {held.get('symbol')} proxy" if held.get("proxy_for") else ""
@@ -297,27 +313,42 @@ def build():
             decisions.append(normalize_decision(json.loads(line)))
     decisions.sort(key=lambda d: d["timestamp_utc"] or "", reverse=True)
 
-    # P&L sums every closed position (a test-fixture position's fill is still a
-    # real Bitget fill with real P&L, and its unrealized P&L already counts
-    # while open -- dropping it on close would make Cumulative P&L jump back
-    # to zero). Win rate stays real-decision-only: a synthetic judgment's
-    # outcome says nothing about Beacon's judgment quality.
-    real_closed = [p for p in closed_positions if not p.get("is_test_fixture")]
-    realized_pnl_usd = round(sum(p.get("realized_pnl_usd", 0.0) for p in closed_positions), 2)
+    # Headline performance (Cumulative P&L, win rate, drawdown, Sharpe) counts
+    # real decisions only. A test fixture's fill is real, but its trading
+    # rationale was synthetic, so its P&L says nothing about Beacon's judgment;
+    # it's reported separately as test_fixture_pnl_usd.
+    real_closed = sorted((p for p in closed_positions if not p.get("is_test_fixture")),
+                         key=lambda p: p.get("closed_at") or "")
+    real_open = [p for p in open_positions if not p.get("is_test_fixture")]
+    realized_pnl_usd = round(sum(p.get("realized_pnl_usd", 0.0) for p in real_closed), 2)
     wins = [p for p in real_closed if p.get("realized_pnl_usd", 0.0) > 0]
     win_rate_pct = round(len(wins) / len(real_closed) * 100, 1) if real_closed else None
 
     total_exposure = round(sum(p.get("size_usd", 0.0) for p in open_positions), 2)
     unrealized_pnl = round(sum(p.get("unrealized_pnl_usd", 0.0) for p in open_positions), 2)
-    # Cumulative P&L is realized (closed, real trades only) + unrealized (every
-    # currently open position, same total the Positions tab's own "Unrealized
-    # P&L" card shows) -- until a position closes, its P&L only ever shows up
-    # here as unrealized. Previously this only counted realized trades, so it
-    # sat at $0.00 and visibly contradicted a real, non-zero open position on
-    # the Positions tab. realized_pnl_usd is exposed separately so the
-    # frontend can recombine it with a freshly live-fetched unrealized figure
-    # without having to back it out of the combined total.
-    cumulative_pnl_usd = round(realized_pnl_usd + unrealized_pnl, 2)
+    real_unrealized = round(sum(p.get("unrealized_pnl_usd", 0.0) for p in real_open), 2)
+    # Cumulative P&L = realized + unrealized, real positions only: until a real
+    # position closes, its P&L shows up here as unrealized (so this never
+    # contradicts a real open position on the Positions tab).
+    cumulative_pnl_usd = round(realized_pnl_usd + real_unrealized, 2)
+    test_fixture_pnl_usd = round(
+        sum(p.get("realized_pnl_usd", 0.0) for p in closed_positions if p.get("is_test_fixture"))
+        + sum(p.get("unrealized_pnl_usd", 0.0) for p in open_positions if p.get("is_test_fixture")), 2)
+
+    # Max drawdown and Sharpe over real closed trades. Sharpe here is
+    # per-trade (mean / stdev of trade returns), not annualized -- there's far
+    # too little history to annualize honestly -- and needs at least 2 trades.
+    equity, peak, max_dd_pct = capital, capital, 0.0
+    for p in real_closed:
+        equity += p.get("realized_pnl_usd", 0.0)
+        peak = max(peak, equity)
+        max_dd_pct = max(max_dd_pct, (peak - equity) / peak * 100)
+    rets = [p.get("realized_pnl_pct", 0.0) for p in real_closed]
+    sharpe = None
+    if len(rets) >= 2:
+        mean = sum(rets) / len(rets)
+        sd = (sum((r - mean) ** 2 for r in rets) / (len(rets) - 1)) ** 0.5
+        sharpe = round(mean / sd, 2) if sd else None
     largest_position_pct = round(max((p.get("size_usd", 0.0) for p in open_positions), default=0.0) / capital * 100, 2)
 
     today_realized = state.today_realized_pnl(portfolio)
@@ -332,6 +363,10 @@ def build():
         "summary": {
             "cumulative_pnl_usd": cumulative_pnl_usd,
             "realized_pnl_usd": realized_pnl_usd,
+            "real_unrealized_pnl_usd": real_unrealized,
+            "test_fixture_pnl_usd": test_fixture_pnl_usd,
+            "max_drawdown_pct": round(max_dd_pct, 2),
+            "sharpe_per_trade": sharpe,
             "win_rate_pct": win_rate_pct,
             "real_closed_count": len(real_closed),
             "open_positions_count": len(open_positions),

@@ -83,7 +83,8 @@ RISK = {
     "max_position_pct_per_trade": 5.0,   # max % of allocated capital in a single position
     "max_concurrent_positions": 5,
     "max_daily_drawdown_pct": 3.0,       # halts new entries for the day if realized+unrealized daily P&L drops this much
-    "no_averaging_into_loser": True,     # reject new entry on a symbol with an existing open losing position
+    "no_averaging_into_loser": True,     # reject new entry on a symbol whose existing open positions are net losing
+    "max_proxy_exposure_pct": 10.0,      # cap on TOTAL cross-asset proxy (BTC) exposure across all originating tickers
 }
 
 DATA_DIR.mkdir(exist_ok=True)
