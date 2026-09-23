@@ -20,11 +20,26 @@ LOOKBACK_HOURS = 24
 MAX_JUDGE_PER_CYCLE = 5
 
 KEYWORDS = re.compile(
-    r"\b(earnings|eps|revenues?|results?|quarter(ly)?|q3|q4|guidance|outlook|forecast(s|ed|ing)?|"
-    r"estimates?|consensus|beat(s|ing)?|miss(es|ed)?|previews?|pre-?announce(s|d|ment)?|"
-    r"analysts?|upgrade(s|d)?|downgrade(s|d)?|price targets?)\b",
+    r"\b(earnings|eps|revenues?|results?|quarterly|q3|q4|guidance|outlook|forecast(s|ed|ing)?|"
+    r"estimates?|consensus|previews?|pre-?announce(s|d|ment)?|analysts?|price targets?)\b",
     re.IGNORECASE,
 )
+
+# Words that only mean something earnings-related in the right company:
+# "beat Meta's Muse", "burned billions this quarter", "nuclear upgrades" all
+# got through when these counted on their own. Each needs a context word
+# within CONTEXT_WINDOW words (either side) in the headline+summary.
+CONTEXT_WINDOW = 8
+_EARNINGS_CONTEXT = re.compile(
+    r"^(eps|earnings|revenues?|sales|profits?|results?|estimates?|expectations?|consensus|"
+    r"guidance|forecasts?|margins?|income)$", re.IGNORECASE)
+_RATING_CONTEXT = re.compile(
+    r"^(analysts?|ratings?|rated|buy|sell|hold|overweight|underweight|outperform|underperform|"
+    r"neutral|target|stock|shares)$", re.IGNORECASE)
+CONTEXTUAL = [
+    (re.compile(r"^(beat(s|ing)?|miss(es|ed)?|quarters?)$", re.IGNORECASE), _EARNINGS_CONTEXT),
+    (re.compile(r"^(upgrade(s|d)?|downgrade(s|d)?)$", re.IGNORECASE), _RATING_CONTEXT),
+]
 
 
 # Company names match case-insensitively; tickers only as uppercase words
@@ -55,7 +70,26 @@ def news_key(symbol: str, finnhub_id) -> str:
 
 
 def matched_keywords(text: str) -> list:
-    return sorted({m.group(0).lower() for m in KEYWORDS.finditer(text or "")})
+    text = text or ""
+    found = {m.group(0).lower() for m in KEYWORDS.finditer(text)}
+    words = re.findall(r"[A-Za-z0-9'-]+", text)
+    for i, w in enumerate(words):
+        for word_re, context_re in CONTEXTUAL:
+            if word_re.match(w):
+                window = words[max(0, i - CONTEXT_WINDOW): i] + words[i + 1: i + 1 + CONTEXT_WINDOW]
+                if any(context_re.match(c) for c in window):
+                    found.add(w.lower())
+    return sorted(found)
+
+
+def screen(symbol: str, headline: str, summary: str) -> tuple:
+    """(verdict_if_skipped_or_None, matched_keywords) -- the full pre-filter."""
+    keywords = matched_keywords(f"{headline or ''} {summary or ''}")
+    if not keywords:
+        return "skipped_not_earnings_related", keywords
+    if not names_company(symbol, headline):
+        return "skipped_off_ticker", keywords
+    return None, keywords
 
 
 def append_log(record: dict):

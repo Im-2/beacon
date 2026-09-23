@@ -56,13 +56,9 @@ def main():
                 "url": item.get("url"),
                 "published_utc": datetime.fromtimestamp(item.get("datetime", 0), timezone.utc).isoformat(),
             }
-            keywords = news.matched_keywords(f"{item.get('headline', '')} {item.get('summary', '')}")
-            if not keywords:
-                news.append_log({**base, "verdict": "skipped_not_earnings_related"})
-                counts["skipped"] += 1
-                continue
-            if not news.names_company(symbol, item.get("headline")):
-                news.append_log({**base, "verdict": "skipped_off_ticker", "matched_keywords": keywords})
+            skip, keywords = news.screen(symbol, item.get("headline"), item.get("summary"))
+            if skip:
+                news.append_log({**base, "verdict": skip, "matched_keywords": keywords})
                 counts["skipped"] += 1
                 continue
             entry = {**base, "summary": item.get("summary"), "matched_keywords": keywords}

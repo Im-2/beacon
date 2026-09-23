@@ -23,6 +23,7 @@ EXECUTION_LABELS = {
     "cross_asset_fallback_unavailable_for_short_direction": "Short unavailable",
     "rejected_by_risk_controls": "Rejected by risk",
     "cross_asset_proxy_rejected_by_risk": "Rejected by risk",
+    "already_positioned_not_added": "Already positioned — not added",
 }
 
 DECISIONS_LOG = config.LOG_DIR / "decisions.jsonl"
@@ -45,6 +46,7 @@ STATUS_MAP = {
     "executed_direct_rtoken": "approved",
     "executed_cross_asset_proxy": "approved",
     "cross_asset_fallback_unavailable_for_short_direction": "skipped",
+    "already_positioned_not_added": "skipped",
     "closed_stop_loss": "closed",
     "closed_take_profit": "closed",
     "test_fixture_dry_run": "filtered",
@@ -187,6 +189,12 @@ def build_execute_block(record: dict) -> dict:
         pnl = record.get("realized_pnl_usd")
         pnl_txt = f"${pnl:.2f}" if isinstance(pnl, (int, float)) else "—"
         return {"text": f"Position closed ({outcome.replace('closed_', '')}). Realized P&L: {pnl_txt}.", "kind": "ok"}
+    if outcome == "already_positioned_not_added":
+        held = record.get("existing_position") or {}
+        via = f" via {held.get('symbol')} proxy" if held.get("proxy_for") else ""
+        return {"text": f"Already positioned — not added. {symbol} already has an open "
+                        f"{held.get('direction')} position{via} (opened {held.get('opened_at')}).",
+                "kind": "neutral"}
     if outcome == "cross_asset_fallback_unavailable_for_short_direction":
         return {"text": record.get("cross_asset_note") or "Cross-asset fallback unavailable for short direction.", "kind": "neutral"}
     if status == "rejected":

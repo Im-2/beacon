@@ -66,6 +66,15 @@ def trigger_key(t):
     return f"{t['symbol']}::{t.get('accession_number') or t.get('report_date') or t.get('filed_date')}"
 
 
+def existing_position_for(ticker, portfolio_state):
+    """An open position on this underlying ticker, held directly (rToken) or
+    via the cross-asset BTC proxy (symbol "BTC", proxy_for == ticker)."""
+    for p in portfolio_state.get("open_positions", []):
+        if p.get("symbol") == ticker or p.get("proxy_for") == ticker:
+            return p
+    return None
+
+
 def needs_gate(t):
     items = set(t.get("matched_items") or [])
     return "7.01" in items and "2.02" not in items
@@ -113,6 +122,15 @@ def process_one(t, portfolio_state, execute_live=False):
         record["outcome"] = "no_trade_llm_decision"
     elif not risk_result["approved"]:
         record["outcome"] = "rejected_by_risk_controls"
+    elif existing_position_for(symbol, portfolio_state):
+        # One position per underlying ticker, however it's expressed. RISK's
+        # own same-symbol check only blocks averaging into a *losing*
+        # position, and a BTC proxy is stored under "BTC" (with proxy_for),
+        # so without this a second MU headline would open a second order.
+        held = existing_position_for(symbol, portfolio_state)
+        record["outcome"] = "already_positioned_not_added"
+        record["existing_position"] = {k: held.get(k) for k in
+                                       ("symbol", "proxy_for", "direction", "opened_at", "execution_leg")}
     elif not execute_live:
         record["outcome"] = "preview_pending_approval_not_executed"
     else:
@@ -278,31 +296,41 @@ def _news_log_base(item: dict) -> dict:
                                      "published_utc", "matched_keywords")}
 
 
+def prune_news_queue() -> list:
+    """Re-screen every queued item with the current pre-filter (so items
+    queued under older, looser rules get the same treatment) and expire
+    anything older than MAX_AGE_HOURS. Every drop is logged. Saves and
+    returns the remaining queue, newest first."""
+    queue = news.load_queue()
+    cutoff = (datetime.now(timezone.utc) - timedelta(hours=news.MAX_AGE_HOURS)).isoformat()
+    live, dropped = [], {}
+    for item in queue:
+        skip, keywords = news.screen(item["symbol"], item.get("headline"), item.get("summary"))
+        if not skip and item["published_utc"] < cutoff:
+            skip = "expired_not_judged"
+        if skip:
+            news.append_log({**_news_log_base(item), "matched_keywords": keywords, "verdict": skip})
+            dropped[skip] = dropped.get(skip, 0) + 1
+            continue
+        item["matched_keywords"] = keywords
+        live.append(item)
+    live.sort(key=lambda q: q["published_utc"], reverse=True)
+    news.save_queue(live)
+    if dropped:
+        print(f"News queue re-screen: dropped {dropped}; {len(live)} remain.")
+    return live
+
+
 def process_news_queue():
     """Judge up to MAX_JUDGE_PER_CYCLE queued news items, NEWEST first (old
     news is already priced in). Before that, drop queued items that don't name
     the company in the headline, and expire anything published more than
     MAX_AGE_HOURS ago that was never judged -- both logged, never silently
     removed. Returns (judged, still_queued)."""
-    queue = news.load_queue()
-    if not queue:
+    live = prune_news_queue()
+    if not live:
         print("News queue empty.")
         return 0, 0
-    cutoff = (datetime.now(timezone.utc) - timedelta(hours=news.MAX_AGE_HOURS)).isoformat()
-    live, off_ticker, expired = [], 0, 0
-    for item in queue:
-        if not news.names_company(item["symbol"], item.get("headline")):
-            news.append_log({**_news_log_base(item), "verdict": "skipped_off_ticker"})
-            off_ticker += 1
-        elif item["published_utc"] < cutoff:
-            news.append_log({**_news_log_base(item), "verdict": "expired_not_judged"})
-            expired += 1
-        else:
-            live.append(item)
-    if off_ticker or expired:
-        print(f"News queue: dropped {off_ticker} not about the ticker, expired {expired} older than "
-              f"{news.MAX_AGE_HOURS}h without a judgment.")
-    live.sort(key=lambda q: q["published_utc"], reverse=True)
     batch, rest = live[:news.MAX_JUDGE_PER_CYCLE], live[news.MAX_JUDGE_PER_CYCLE:]
     judged = 0
     for item in batch:

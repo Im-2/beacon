@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T19:00:22.917999+00:00",
+  "generated_at": "2026-09-23T19:05:18.883432+00:00",
   "capital_usd": 10000.0,
   "summary": {
     "cumulative_pnl_usd": -5.07,
@@ -1722,12 +1722,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=623010a7e650b172d6b11e5c67b799cd5097dd09e6271f81c105a41e123ee016",
       "published_utc": "2026-09-23T15:45:48+00:00",
-      "summary": "Broadcom's latest earnings dropped a set of forward projections so aggressive that ignoring them starts to feel like a mistake. Here is why one investor keeps adding shares on every single paycheck.",
       "matched_keywords": [
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.378750+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.041480+00:00"
     },
     {
       "news_key": "NVDA:142361819",
@@ -1774,12 +1773,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=5aeb55b590914085bebfba4aca5134e39530224146bc42e23176e52eb0a5cf3f",
       "published_utc": "2026-09-23T15:35:52+00:00",
-      "summary": "Micron's September 30 earnings report could be the most important catalyst in its history, and three specific numbers will determine whether the AI memory bull case holds or breaks entirely.",
       "matched_keywords": [
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.374621+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.041284+00:00"
     },
     {
       "news_key": "NVDA:142361828",
@@ -2024,13 +2022,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=7f76af08f858b5f4e1fa1c6620df91a57f3a09871a277d10a20b50d0ed657d1c",
       "published_utc": "2026-09-23T14:37:19+00:00",
-      "summary": "Microsoft (MSFT) has returned about 33% over the past three months, though it is down 3.1% over the past twelve months. Near $500 a share, the stock carries a trailing price-to-earnings ratio of about 26.7 times adjusted earnings. Whether that multiple looks elevated or not, it is the wrong number to make the decision on, because the earnings analysts already expect are not in it.",
       "matched_keywords": [
         "analysts",
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:10:59.501907+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.041008+00:00"
     },
     {
       "news_key": "MU:142361838",
@@ -2051,13 +2048,9 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=28de505dd80ec129085e10bb2591af65d03469c15a7eb839b6539edd1f1499fa",
       "published_utc": "2026-09-23T14:26:10+00:00",
-      "summary": "Alphabet and Meta both burned billions on AI this quarter, but only one of them built something the other cannot simply outspend to replicate. The gap between an advertising flywheel and a true data moat is wider than their stock prices suggest.",
-      "matched_keywords": [
-        "beat",
-        "quarter"
-      ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:10:59.501590+00:00"
+      "matched_keywords": [],
+      "verdict": "skipped_not_earnings_related",
+      "logged_at_utc": "2026-09-23T19:04:25.040770+00:00"
     },
     {
       "news_key": "GOOGL:142361876",
@@ -2160,12 +2153,9 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=529cdeee001758f1fb4482d7ad248b463e35f348d868c80cf1330d8819c162d9",
       "published_utc": "2026-09-23T13:50:00+00:00",
-      "summary": "Southern Company's Georgia Power plans nuclear upgrades with Google, potentially adding 96 MW while targeting $900 million in projected customer benefits.",
-      "matched_keywords": [
-        "upgrades"
-      ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:10:59.500719+00:00"
+      "matched_keywords": [],
+      "verdict": "skipped_not_earnings_related",
+      "logged_at_utc": "2026-09-23T19:04:25.040511+00:00"
     },
     {
       "news_key": "MU:142357186",
@@ -2186,13 +2176,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=b686a144139d3a2ad1739d1a4f2d1bfd2e6b6029783d366a9d92601e5c8499fd",
       "published_utc": "2026-09-23T13:42:57+00:00",
-      "summary": "Intel has surged past its average analyst price target after one of its biggest monthly runs in years, and now bulls and bears are locked in a standoff over whether the turnaround still has teeth or the easy money is already gone.",
       "matched_keywords": [
         "analyst",
         "price target"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.358188+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.040295+00:00"
     },
     {
       "news_key": "NVDA:142358652",
@@ -2213,13 +2202,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=20841415b59305f0a3982b4d731dcacc5ee1f8a327aaa79c7172d87f70f9f90d",
       "published_utc": "2026-09-23T13:32:09+00:00",
-      "summary": "Palantir Technologies (PLTR) is known for selling software to governments. Its fastest growth now comes from American companies. U.S. commercial revenue is what those American companies pay Palantir. That line reached $764 million in the latest quarter. It grew 149% from a year earlier. So what are American companies buying.",
       "matched_keywords": [
-        "quarter",
         "revenue"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:10:59.500264+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.040060+00:00"
     },
     {
       "news_key": "GOOGL:142359099",
@@ -2371,12 +2358,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=781ab304f6790b8083e94fa5c6e5569ef7f845aa45231dacf24373143cd20c6a",
       "published_utc": "2026-09-23T13:04:00+00:00",
-      "summary": "Muse might be a game changer for a company that has been trying to diversify its revenue sources beyond online ads for many years.",
       "matched_keywords": [
         "revenue"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.317841+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.039761+00:00"
     },
     {
       "news_key": "NVDA:142358659",
@@ -2489,12 +2475,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=90023b3162f65a9e778821503b3392a7253d522a671e0be46ef6046539f1a8ba",
       "published_utc": "2026-09-23T12:53:23+00:00",
-      "summary": "The latest AI rally pushed the Nasdaq Composite (^IXIC) to an all-time record high above 27,200 on Tuesday. The 8:30 Hosts Julie Hyman, Jake Conley, and Pras Subramanian examine Wall Street analysis that forecasts that the Nasdaq could move even higher after this rally.",
       "matched_keywords": [
         "forecasts"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.287804+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.039506+00:00"
     },
     {
       "news_key": "MU:142359427",
@@ -2602,12 +2587,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=a3fa6cade5ef52c655363edefe8a92b57793a20368ef7a506a2cba1b2b29fa0e",
       "published_utc": "2026-09-23T12:34:00+00:00",
-      "summary": "Netflix and Airbnb could see meaningful earnings growth, delivering compounding returns.",
       "matched_keywords": [
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.286378+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.039154+00:00"
     },
     {
       "news_key": "GOOGL:142357631",
@@ -2809,12 +2793,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=8e88ff8ca2452a4cb18356e33ace6fa8dce94e77f13c1a2011866313b0d9abdc",
       "published_utc": "2026-09-23T11:55:00+00:00",
-      "summary": "Investors should use time and compound earnings to their advantage.",
       "matched_keywords": [
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.282173+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.038869+00:00"
     },
     {
       "news_key": "NVDA:142356580",
@@ -2895,13 +2878,12 @@
       "source": "SeekingAlpha",
       "url": "https://finnhub.io/api/news?id=2bb65cf5263922c83a2560831a94d1faa718e599d8895d7f4a50b46517e56cdf",
       "published_utc": "2026-09-23T11:28:18+00:00",
-      "summary": "Sandisk Corporation Strong Buy: contracted NAND revenues, Kioxia JV bit growth, $15.5B buybacks & HBF upside\u00e2\u0080\u0094click to get the key SNDK stock risks and outlook now.",
       "matched_keywords": [
         "outlook",
         "revenues"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:01.231004+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.038270+00:00"
     },
     {
       "news_key": "GOOGL:142356592",
@@ -2948,12 +2930,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=d90e90a228e44448c6f91d82f7693ea3e938f0b9f0a63c452534e5667d45d216",
       "published_utc": "2026-09-23T11:22:00+00:00",
-      "summary": "Micron is in a great position to soar after earnings.",
       "matched_keywords": [
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.242285+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.037973+00:00"
     },
     {
       "news_key": "GOOGL:142356617",
@@ -3216,12 +3197,9 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=8f8d24046115c162288884f578e9b3bb609cc131095430b4328a88f910feacf9",
       "published_utc": "2026-09-23T10:05:01+00:00",
-      "summary": "D-Wave still trades at a lofty valuation despite its stock slump.",
-      "matched_keywords": [
-        "quarter"
-      ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.211100+00:00"
+      "matched_keywords": [],
+      "verdict": "skipped_not_earnings_related",
+      "logged_at_utc": "2026-09-23T19:04:25.037668+00:00"
     },
     {
       "news_key": "GOOGL:142360262",
@@ -3602,12 +3580,11 @@
       "source": "Benzinga",
       "url": "https://finnhub.io/api/news?id=393952819fb065421e116f460d58a4bb2d532a9c2fffc7b18f1f069fab6cd58c",
       "published_utc": "2026-09-23T07:28:27+00:00",
-      "summary": "Cathie Wood-led ARK Invest forecasts oil could fall to $30-$35 as transport shifts to electric power, cutting demand.",
       "matched_keywords": [
         "forecasts"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:10:59.492508+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.037271+00:00"
     },
     {
       "news_key": "GOOGL:142355631",
@@ -3727,13 +3704,11 @@
       "source": "Benzinga",
       "url": "https://finnhub.io/api/news?id=df367e6df90d8502c34917b2dcbe3f2f30dab939c215d64c1b1a02eb38e2a589",
       "published_utc": "2026-09-23T06:37:24+00:00",
-      "summary": "Musk says AI could surpass every field by 2028, while studies show uneven performance and labs accelerate scientific discovery.",
       "matched_keywords": [
-        "beat",
         "forecast"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:10:59.491210+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.036859+00:00"
     },
     {
       "news_key": "NVDA:142355630",
@@ -3982,12 +3957,11 @@
       "source": "CNBC",
       "url": "https://finnhub.io/api/news?id=beaf15ac0114047e99276305759b489231326a4f757ebfd58a4132975871b99b",
       "published_utc": "2026-09-23T03:36:47+00:00",
-      "summary": "Recent weeks have seen AI safety fears reach new heights. That will be a key focus for the U.S. and Chinese leaders, analysts told CNBC.",
       "matched_keywords": [
         "analysts"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.178102+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.036264+00:00"
     },
     {
       "news_key": "MU:142359192",
@@ -4041,13 +4015,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=5c3d3fc661307eeb93fd65baa8fc80a69cda085a8b79f868f656c3239eb2d2f1",
       "published_utc": "2026-09-23T02:57:01+00:00",
-      "summary": "From the end of June to mid-September, expected earnings rose nearly five times as quickly as the index itself.",
       "matched_keywords": [
         "earnings",
         "quarter"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.176850+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.035822+00:00"
     },
     {
       "news_key": "NVDA:142350346",
@@ -4211,12 +4184,9 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=075bf0ef30d49aa73aedd831b4f10451e69a80c23ba0f43369fb0999b1bc0bde",
       "published_utc": "2026-09-22T23:35:01+00:00",
-      "summary": "The company embraces nuclear as a way to power AI.",
-      "matched_keywords": [
-        "upgrade"
-      ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:10:59.487612+00:00"
+      "matched_keywords": [],
+      "verdict": "skipped_not_earnings_related",
+      "logged_at_utc": "2026-09-23T19:04:25.035342+00:00"
     },
     {
       "news_key": "NVDA:142343760",
@@ -4226,12 +4196,9 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=075bf0ef30d49aa73aedd831b4f10451e69a80c23ba0f43369fb0999b1bc0bde",
       "published_utc": "2026-09-22T23:35:01+00:00",
-      "summary": "The company embraces nuclear as a way to power AI.",
-      "matched_keywords": [
-        "upgrade"
-      ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.172251+00:00"
+      "matched_keywords": [],
+      "verdict": "skipped_not_earnings_related",
+      "logged_at_utc": "2026-09-23T19:04:25.035544+00:00"
     },
     {
       "news_key": "NVDA:142343763",
@@ -4241,12 +4208,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=9453ea8f611629f795d06bfa540f9faa5371a7cddc032b20d5c01c7a9f824422",
       "published_utc": "2026-09-22T23:35:00+00:00",
-      "summary": "Based on price targets alone, the risks may outweigh the rewards of owning SpaceX stock for more conservative investors.",
       "matched_keywords": [
         "price targets"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.171817+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.035114+00:00"
     },
     {
       "news_key": "GOOGL:142343767",
@@ -4315,12 +4281,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=365e8f2227e5c089b356c18cb976aa690ed3b395c46a5f57229900b876c5834f",
       "published_utc": "2026-09-22T22:25:00+00:00",
-      "summary": "The move to go after more incremental revenue through the defense business is encouraging, but there's more for investors to cheer about.",
       "matched_keywords": [
         "revenue"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.170349+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.034830+00:00"
     },
     {
       "news_key": "MU:142343804",
@@ -4467,12 +4432,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=49523b64032dbd62d2f615ba6397c253636bb19be6ef3602f3e5329db83ddbd2",
       "published_utc": "2026-09-22T21:45:44+00:00",
-      "summary": "Three covered call ETFs have deposited cash into investor accounts every single month for up to twelve years running, surviving a pandemic and multiple bear markets without missing a beat. The fund most income screens ignore has quietly outperformed the two obvious choices by a wide margin.",
       "matched_keywords": [
         "beat"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.167410+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.034545+00:00"
     },
     {
       "news_key": "MU:142342990",
@@ -4581,14 +4545,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=55ce57818b00582fff1f9a4829b167687d9013dd6128083227450b0f2a2e9e73",
       "published_utc": "2026-09-22T20:48:36+00:00",
-      "summary": "The number worth watching at International Business Machines (IBM) is its annual recurring revenue. It kept growing through a weak quarter. You may expect the story here to be the missed second quarter or the falling stock. It is not. So how big is this recurring revenue business, and how fast is it growing.",
       "matched_keywords": [
-        "missed",
         "quarter",
         "revenue"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:10:59.485295+00:00"
+      "verdict": "skipped_off_ticker",
+      "logged_at_utc": "2026-09-23T19:04:25.034219+00:00"
     },
     {
       "news_key": "NVDA:142343766",
@@ -4631,12 +4593,9 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=ee34c86a9b3c364e9b8c96d1e7bc6585d8e19a48111706810e000d639ea8d461",
       "published_utc": "2026-09-22T20:29:00+00:00",
-      "summary": "Apple stock finished up 0.2% at $339.75, giving the company its highest close since July 28 and putting its market cap at $4.96 trillion.",
-      "matched_keywords": [
-        "misses"
-      ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.163004+00:00"
+      "matched_keywords": [],
+      "verdict": "skipped_not_earnings_related",
+      "logged_at_utc": "2026-09-23T19:04:25.033758+00:00"
     },
     {
       "news_key": "MU:142345250",
@@ -4779,12 +4738,9 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=7bce3d4f1c56f9bc5e260755afec5824d7f86577bf2b33683a58c94d12415e2e",
       "published_utc": "2026-09-22T19:13:00+00:00",
-      "summary": "Pershing Square\u2019s latest filing reveals a calculated pivot between two tech rivals.",
-      "matched_keywords": [
-        "quarter"
-      ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:10:59.483898+00:00"
+      "matched_keywords": [],
+      "verdict": "skipped_not_earnings_related",
+      "logged_at_utc": "2026-09-23T19:04:25.033226+00:00"
     },
     {
       "news_key": "MU:142341960",
@@ -5018,15 +4974,15 @@
   ],
   "news_stats": {
     "seen": 280,
-    "skipped": 230,
-    "skipped_not_earnings": 230,
-    "skipped_off_ticker": 0,
+    "skipped": 256,
+    "skipped_not_earnings": 237,
+    "skipped_off_ticker": 19,
     "expired": 0,
-    "queued": 45,
+    "queued": 19,
     "judged_no_trade": 5,
     "judged_trade": 0,
     "exported": 280,
-    "queue_length": 45
+    "queue_length": 19
   },
   "qwen_usage": {
     "by_day": [

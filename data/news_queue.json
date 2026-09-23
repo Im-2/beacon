@@ -1,29 +1,231 @@
 [
   {
-    "news_key": "GOOGL:142341989",
-    "symbol": "GOOGL",
-    "finnhub_id": 142341989,
-    "headline": "Bill Ackman ditches a major AI stock after just one quarter",
+    "news_key": "MU:142361827",
+    "symbol": "MU",
+    "finnhub_id": 142361827,
+    "headline": "Up 275% This Year, Micron (MU) Is Still a No-Brainer Buy Before September 30",
     "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=7bce3d4f1c56f9bc5e260755afec5824d7f86577bf2b33683a58c94d12415e2e",
-    "published_utc": "2026-09-22T19:13:00+00:00",
-    "summary": "Pershing Square\u2019s latest filing reveals a calculated pivot between two tech rivals.",
+    "url": "https://finnhub.io/api/news?id=5aeb55b590914085bebfba4aca5134e39530224146bc42e23176e52eb0a5cf3f",
+    "published_utc": "2026-09-23T15:35:52+00:00",
+    "summary": "Micron's September 30 earnings report could be the most important catalyst in its history, and three specific numbers will determine whether the AI memory bull case holds or breaks entirely.",
     "matched_keywords": [
-      "quarter"
+      "earnings"
     ]
   },
   {
-    "news_key": "NVDA:142342938",
-    "symbol": "NVDA",
-    "finnhub_id": 142342938,
-    "headline": "Top Analyst Reports for NVIDIA, Berkshire Hathaway & GE Aerospace",
+    "news_key": "MU:142361917",
+    "symbol": "MU",
+    "finnhub_id": 142361917,
+    "headline": "Citi expects Micron stock to rally into this event",
     "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=529d51ca192a19aae5f1c7eb4e7fab4a45c8e8abc22fcae43b70d8b2879ae89e",
-    "published_utc": "2026-09-22T20:24:00+00:00",
-    "summary": "NVIDIA's AI demand, Berkshire's diversified earnings and GE Aerospace's commercial and defense strength drive today's research focus.",
+    "url": "https://finnhub.io/api/news?id=559777ea536e179c699b07313eefb3ab741eb2bd314153ce8862178475e5e53f",
+    "published_utc": "2026-09-23T15:01:19+00:00",
+    "summary": "Investing.com -- Citi expects Micron shares to rally into the SEMICON West conference, raising its price target on the memory maker to $1,300 from $1,150.",
+    "matched_keywords": [
+      "price target"
+    ]
+  },
+  {
+    "news_key": "MU:142361922",
+    "symbol": "MU",
+    "finnhub_id": 142361922,
+    "headline": "Micron (MU) Earnings Expected to Grow: Should You Buy?",
+    "source": "Yahoo",
+    "url": "https://finnhub.io/api/news?id=c23bd9438b7671dbbe5f0d018cfbb564463048ba770b378d208f0e526b111fc0",
+    "published_utc": "2026-09-23T14:00:01+00:00",
+    "summary": "Micron (MU) possesses the right combination of the two key ingredients for a likely earnings beat in its upcoming report. Get prepared with the key expectations.",
+    "matched_keywords": [
+      "beat",
+      "earnings"
+    ]
+  },
+  {
+    "news_key": "MU:142359424",
+    "symbol": "MU",
+    "finnhub_id": 142359424,
+    "headline": "Micron Wall Street Target Hits $2,000 as Traders Pile In Before Earnings",
+    "source": "Yahoo",
+    "url": "https://finnhub.io/api/news?id=760550e58985974b8667f34b5cc9eed09780dc37b26814aa51f297a34506e37c",
+    "published_utc": "2026-09-23T13:20:24+00:00",
+    "summary": "Wall Street analysts are fighting over Micron more violently than they have in years, with targets ranging from a humble hold to a stunning $2,000 price, and a single line in the September 30 earnings report will determine who looks like a genius and who quietly disappears.",
+    "matched_keywords": [
+      "analysts",
+      "earnings"
+    ]
+  },
+  {
+    "news_key": "NVDA:142358566",
+    "symbol": "NVDA",
+    "finnhub_id": 142358566,
+    "headline": "Zacks Investment Ideas feature highlights: Astera Labs, SpaceX, Cloudflare, NVIDIA and Meta Platforms",
+    "source": "Yahoo",
+    "url": "https://finnhub.io/api/news?id=c2fd5efbaf80de9259710f8533e0d5a5e411009a96ef3d87b814c21522f0c1e0",
+    "published_utc": "2026-09-23T13:05:00+00:00",
+    "summary": "Astera Labs gains momentum as AI data centers scale, with triple-digit growth, repeated earnings beats and rising connectivity demand.",
+    "matched_keywords": [
+      "beats",
+      "earnings"
+    ]
+  },
+  {
+    "news_key": "NVDA:142359327",
+    "symbol": "NVDA",
+    "finnhub_id": 142359327,
+    "headline": "Nvidia Stock Set For 40% Surge: 3 Catalysts That Could Drive the Next Big Move",
+    "source": "Yahoo",
+    "url": "https://finnhub.io/api/news?id=5424a1b8f054bb86d3263082fa25dae14ee5619430ab6de2abec2f7f00768d7b",
+    "published_utc": "2026-09-23T13:00:24+00:00",
+    "summary": "Nvidia just posted triple-digit revenue growth and Jensen Huang says the company can only fulfill 70% of demand, yet the stock still trades well below where the math points. Three converging forces suggest the gap between current price and fair value may close faster than most investors expect.",
+    "matched_keywords": [
+      "revenue"
+    ]
+  },
+  {
+    "news_key": "MU:142359427",
+    "symbol": "MU",
+    "finnhub_id": 142359427,
+    "headline": "Micron Technology Shares Edge Lower Ahead of Fiscal Q4 Earnings",
+    "source": "Yahoo",
+    "url": "https://finnhub.io/api/news?id=68ea613bbf284f1014b66bb3831f4871f16c157d6d5ef13fbb49401f9b752212",
+    "published_utc": "2026-09-23T12:50:50+00:00",
+    "summary": "Micron Technology (NASDAQ:MU) shares fell 0. 3% in pre-market trading, following a four-session advance that had contributed to a gain of approximately 14% during September.",
+    "matched_keywords": [
+      "earnings",
+      "q4"
+    ]
+  },
+  {
+    "news_key": "MU:142359428",
+    "symbol": "MU",
+    "finnhub_id": 142359428,
+    "headline": "Memory Prices Could Peak Early. What That Means for Micron Stock.",
+    "source": "Yahoo",
+    "url": "https://finnhub.io/api/news?id=4c4fe7b5cdc7362578dcf2c3f6502a8ff47c14be4cf9d97119d91f07d9654d8c",
+    "published_utc": "2026-09-23T12:46:00+00:00",
+    "summary": "Micron stock is surging ahead of its earnings but Citi analyst Atif Malik has a warning about memory-chip prices.",
     "matched_keywords": [
       "analyst",
       "earnings"
+    ]
+  },
+  {
+    "news_key": "MU:142357044",
+    "symbol": "MU",
+    "finnhub_id": 142357044,
+    "headline": "Four AI Stars Rev Up As Analysts Raise Profit Targets; Micron Clears Early Buy Point",
+    "source": "Yahoo",
+    "url": "https://finnhub.io/api/news?id=87744e686338dff61e9166c773839f85d9d00cdfc6fa630f7418814b944e9a54",
+    "published_utc": "2026-09-23T12:00:57+00:00",
+    "summary": "Analysts are raising profit estimates for four leaders of the artificial intelligence trade: AI stock Micron is above a trendline entry.",
+    "matched_keywords": [
+      "analysts",
+      "estimates"
+    ]
+  },
+  {
+    "news_key": "NVDA:142356580",
+    "symbol": "NVDA",
+    "finnhub_id": 142356580,
+    "headline": "Nvidia\u2019s Last Quarter Was Nearly Perfect. One Number in the Fine Print Wasn\u2019t.",
+    "source": "Yahoo",
+    "url": "https://finnhub.io/api/news?id=7f14bde8195bae63bcb712493f44023c471378e40e4077caa1ba80a47b1124ba",
+    "published_utc": "2026-09-23T11:53:01+00:00",
+    "summary": "Nvidia grew revenue by 106% in its fiscal second quarter, but there\u2019s another number I\u2019m watching closely.",
+    "matched_keywords": [
+      "quarter",
+      "revenue"
+    ]
+  },
+  {
+    "news_key": "MU:142356584",
+    "symbol": "MU",
+    "finnhub_id": 142356584,
+    "headline": "Act Now: Micron Could Skyrocket After Sept. 30",
+    "source": "Yahoo",
+    "url": "https://finnhub.io/api/news?id=d90e90a228e44448c6f91d82f7693ea3e938f0b9f0a63c452534e5667d45d216",
+    "published_utc": "2026-09-23T11:22:00+00:00",
+    "summary": "Micron is in a great position to soar after earnings.",
+    "matched_keywords": [
+      "earnings"
+    ]
+  },
+  {
+    "news_key": "MU:142356115",
+    "symbol": "MU",
+    "finnhub_id": 142356115,
+    "headline": "Micron (MU) Stock Looks Reasonable Despite Its Very Large Run",
+    "source": "Yahoo",
+    "url": "https://finnhub.io/api/news?id=51b99fc9b7fc9c002e3e134683e174f453c32866cca11e70d7f3fa151613f0c1",
+    "published_utc": "2026-09-23T09:13:53+00:00",
+    "summary": "Micron Technology has turned into one of the market's most eye catching semiconductor stories. The real question for anyone looking at the stock today is whether the current price can be squared with the earnings that sit behind it. After a powerful multi year run and a stream of headline grabbing developments, the key issue now is what investors are actually paying for in terms of profits. Over the past 3 years Micron Technology has delivered a very large share price gain of about 15x. That...",
+    "matched_keywords": [
+      "earnings"
+    ]
+  },
+  {
+    "news_key": "NVDA:142356076",
+    "symbol": "NVDA",
+    "finnhub_id": 142356076,
+    "headline": "Nvidia's Demand Is Outpacing Its 70% Growth Forecast, and That Is Just the Beginning",
+    "source": "Yahoo",
+    "url": "https://finnhub.io/api/news?id=0834c142cb8acebf1840e7d38c5d41952d67c1196f14afaab4f7d92329d37297",
+    "published_utc": "2026-09-23T08:30:00+00:00",
+    "summary": "It's a good problem for a company to have.",
+    "matched_keywords": [
+      "forecast"
+    ]
+  },
+  {
+    "news_key": "NVDA:142355168",
+    "symbol": "NVDA",
+    "finnhub_id": 142355168,
+    "headline": "Why Is NVIDIA Getting Cheaper While Apple Hits New All-Time Highs",
+    "source": "Yahoo",
+    "url": "https://finnhub.io/api/news?id=ee2b564c59fca237d4452703f3fe6b53fef067acc2094cda3ea986eab0f4c15d",
+    "published_utc": "2026-09-23T05:35:24+00:00",
+    "summary": "Apple shares reached a fresh ATH above $344, while NVIDIA's forward valuation multiple has compressed sharply despite record revenue growth.",
+    "matched_keywords": [
+      "revenue"
+    ]
+  },
+  {
+    "news_key": "NVDA:142352825",
+    "symbol": "NVDA",
+    "finnhub_id": 142352825,
+    "headline": "Nvidia Stock Could Surge by 2028: Here's How Beginners Can Get In Now According to Motley Fool's Price Estimates",
+    "source": "Yahoo",
+    "url": "https://finnhub.io/api/news?id=b27439abc0c0e249a9a8bbc95f96b046268ed725488b2ec3321afcae8003cba7",
+    "published_utc": "2026-09-23T04:20:00+00:00",
+    "summary": "It's not too late to buy Nvidia.",
+    "matched_keywords": [
+      "estimates"
+    ]
+  },
+  {
+    "news_key": "NVDA:142343761",
+    "symbol": "NVDA",
+    "finnhub_id": 142343761,
+    "headline": "Nvidia\u2019s Cooling Stock Valuations Are Being Looked At As A Warning Signal",
+    "source": "Yahoo",
+    "url": "https://finnhub.io/api/news?id=5ea26352c48b17d12d2da37ae38a4d027236533062f7510208363d3860c9bfac",
+    "published_utc": "2026-09-22T22:45:19+00:00",
+    "summary": "Nvidia's shares trade at less than 17 times forward earnings, signaling growing Wall Street skepticism about its long-term sustainability.",
+    "matched_keywords": [
+      "earnings"
+    ]
+  },
+  {
+    "news_key": "MU:142343804",
+    "symbol": "MU",
+    "finnhub_id": 142343804,
+    "headline": "Micron's Memory Boom Is Facing a New Test",
+    "source": "Yahoo",
+    "url": "https://finnhub.io/api/news?id=f8e8991ce0939d22ee002b9903ab9d84c7ae6e29081a71d7633fb8d826195c41",
+    "published_utc": "2026-09-22T22:24:31+00:00",
+    "summary": "Micron revenue jumped to $41.46 billion last quarter from $9.3 billion a year earlier.",
+    "matched_keywords": [
+      "quarter",
+      "revenue"
     ]
   },
   {
@@ -43,565 +245,16 @@
     ]
   },
   {
-    "news_key": "NVDA:142342935",
+    "news_key": "NVDA:142342938",
     "symbol": "NVDA",
-    "finnhub_id": 142342935,
-    "headline": "Apple Just Misses $5 Trillion Market Cap. The Milestone Is Likely Coming Soon.",
+    "finnhub_id": 142342938,
+    "headline": "Top Analyst Reports for NVIDIA, Berkshire Hathaway & GE Aerospace",
     "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=ee34c86a9b3c364e9b8c96d1e7bc6585d8e19a48111706810e000d639ea8d461",
-    "published_utc": "2026-09-22T20:29:00+00:00",
-    "summary": "Apple stock finished up 0.2% at $339.75, giving the company its highest close since July 28 and putting its market cap at $4.96 trillion.",
-    "matched_keywords": [
-      "misses"
-    ]
-  },
-  {
-    "news_key": "GOOGL:142342956",
-    "symbol": "GOOGL",
-    "finnhub_id": 142342956,
-    "headline": "Can This Number Push IBM Stock Higher?",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=55ce57818b00582fff1f9a4829b167687d9013dd6128083227450b0f2a2e9e73",
-    "published_utc": "2026-09-22T20:48:36+00:00",
-    "summary": "The number worth watching at International Business Machines (IBM) is its annual recurring revenue. It kept growing through a weak quarter. You may expect the story here to be the missed second quarter or the falling stock. It is not. So how big is this recurring revenue business, and how fast is it growing.",
-    "matched_keywords": [
-      "missed",
-      "quarter",
-      "revenue"
-    ]
-  },
-  {
-    "news_key": "NVDA:142342933",
-    "symbol": "NVDA",
-    "finnhub_id": 142342933,
-    "headline": "3 Monthly Income ETFs to Buy Once That Have Paid You Every Single Month for More Than a Decade",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=49523b64032dbd62d2f615ba6397c253636bb19be6ef3602f3e5329db83ddbd2",
-    "published_utc": "2026-09-22T21:45:44+00:00",
-    "summary": "Three covered call ETFs have deposited cash into investor accounts every single month for up to twelve years running, surviving a pandemic and multiple bear markets without missing a beat. The fund most income screens ignore has quietly outperformed the two obvious choices by a wide margin.",
-    "matched_keywords": [
-      "beat"
-    ]
-  },
-  {
-    "news_key": "MU:142343804",
-    "symbol": "MU",
-    "finnhub_id": 142343804,
-    "headline": "Micron's Memory Boom Is Facing a New Test",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=f8e8991ce0939d22ee002b9903ab9d84c7ae6e29081a71d7633fb8d826195c41",
-    "published_utc": "2026-09-22T22:24:31+00:00",
-    "summary": "Micron revenue jumped to $41.46 billion last quarter from $9.3 billion a year earlier.",
-    "matched_keywords": [
-      "quarter",
-      "revenue"
-    ]
-  },
-  {
-    "news_key": "NVDA:142343764",
-    "symbol": "NVDA",
-    "finnhub_id": 142343764,
-    "headline": "Detroit Automakers Turn Back the Clock on the Arsenal of Democracy -- Investors Should Cheer",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=365e8f2227e5c089b356c18cb976aa690ed3b395c46a5f57229900b876c5834f",
-    "published_utc": "2026-09-22T22:25:00+00:00",
-    "summary": "The move to go after more incremental revenue through the defense business is encouraging, but there's more for investors to cheer about.",
-    "matched_keywords": [
-      "revenue"
-    ]
-  },
-  {
-    "news_key": "NVDA:142343761",
-    "symbol": "NVDA",
-    "finnhub_id": 142343761,
-    "headline": "Nvidia\u2019s Cooling Stock Valuations Are Being Looked At As A Warning Signal",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=5ea26352c48b17d12d2da37ae38a4d027236533062f7510208363d3860c9bfac",
-    "published_utc": "2026-09-22T22:45:19+00:00",
-    "summary": "Nvidia's shares trade at less than 17 times forward earnings, signaling growing Wall Street skepticism about its long-term sustainability.",
-    "matched_keywords": [
-      "earnings"
-    ]
-  },
-  {
-    "news_key": "NVDA:142343763",
-    "symbol": "NVDA",
-    "finnhub_id": 142343763,
-    "headline": "What $3,000 Invested in SpaceX Stock Could Grow to by September 2027",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=9453ea8f611629f795d06bfa540f9faa5371a7cddc032b20d5c01c7a9f824422",
-    "published_utc": "2026-09-22T23:35:00+00:00",
-    "summary": "Based on price targets alone, the risks may outweigh the rewards of owning SpaceX stock for more conservative investors.",
-    "matched_keywords": [
-      "price targets"
-    ]
-  },
-  {
-    "news_key": "GOOGL:142343760",
-    "symbol": "GOOGL",
-    "finnhub_id": 142343760,
-    "headline": "Google Goes Nuclear With Power Upgrade Agreement in Georgia",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=075bf0ef30d49aa73aedd831b4f10451e69a80c23ba0f43369fb0999b1bc0bde",
-    "published_utc": "2026-09-22T23:35:01+00:00",
-    "summary": "The company embraces nuclear as a way to power AI.",
-    "matched_keywords": [
-      "upgrade"
-    ]
-  },
-  {
-    "news_key": "NVDA:142343760",
-    "symbol": "NVDA",
-    "finnhub_id": 142343760,
-    "headline": "Google Goes Nuclear With Power Upgrade Agreement in Georgia",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=075bf0ef30d49aa73aedd831b4f10451e69a80c23ba0f43369fb0999b1bc0bde",
-    "published_utc": "2026-09-22T23:35:01+00:00",
-    "summary": "The company embraces nuclear as a way to power AI.",
-    "matched_keywords": [
-      "upgrade"
-    ]
-  },
-  {
-    "news_key": "NVDA:142350345",
-    "symbol": "NVDA",
-    "finnhub_id": 142350345,
-    "headline": "S&P 500 Profits Are on Track for a Third Straight Quarter of 25%+ Growth. The Index Hasn't Kept Up.",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=5c3d3fc661307eeb93fd65baa8fc80a69cda085a8b79f868f656c3239eb2d2f1",
-    "published_utc": "2026-09-23T02:57:01+00:00",
-    "summary": "From the end of June to mid-September, expected earnings rose nearly five times as quickly as the index itself.",
-    "matched_keywords": [
-      "earnings",
-      "quarter"
-    ]
-  },
-  {
-    "news_key": "NVDA:142362766",
-    "symbol": "NVDA",
-    "finnhub_id": 142362766,
-    "headline": "Trump-Xi summit puts AI safety talks on the table but neither side wants to slow down",
-    "source": "CNBC",
-    "url": "https://finnhub.io/api/news?id=beaf15ac0114047e99276305759b489231326a4f757ebfd58a4132975871b99b",
-    "published_utc": "2026-09-23T03:36:47+00:00",
-    "summary": "Recent weeks have seen AI safety fears reach new heights. That will be a key focus for the U.S. and Chinese leaders, analysts told CNBC.",
-    "matched_keywords": [
-      "analysts"
-    ]
-  },
-  {
-    "news_key": "NVDA:142352825",
-    "symbol": "NVDA",
-    "finnhub_id": 142352825,
-    "headline": "Nvidia Stock Could Surge by 2028: Here's How Beginners Can Get In Now According to Motley Fool's Price Estimates",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=b27439abc0c0e249a9a8bbc95f96b046268ed725488b2ec3321afcae8003cba7",
-    "published_utc": "2026-09-23T04:20:00+00:00",
-    "summary": "It's not too late to buy Nvidia.",
-    "matched_keywords": [
-      "estimates"
-    ]
-  },
-  {
-    "news_key": "NVDA:142355168",
-    "symbol": "NVDA",
-    "finnhub_id": 142355168,
-    "headline": "Why Is NVIDIA Getting Cheaper While Apple Hits New All-Time Highs",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=ee2b564c59fca237d4452703f3fe6b53fef067acc2094cda3ea986eab0f4c15d",
-    "published_utc": "2026-09-23T05:35:24+00:00",
-    "summary": "Apple shares reached a fresh ATH above $344, while NVIDIA's forward valuation multiple has compressed sharply despite record revenue growth.",
-    "matched_keywords": [
-      "revenue"
-    ]
-  },
-  {
-    "news_key": "GOOGL:142361080",
-    "symbol": "GOOGL",
-    "finnhub_id": 142361080,
-    "headline": "Elon Musk Says AI Could \u2018Beat All Fields\u2019 By 2028, Far Faster Than Fran\u00e7ois Chollet\u2019s 10-20 Year Forecast",
-    "source": "Benzinga",
-    "url": "https://finnhub.io/api/news?id=df367e6df90d8502c34917b2dcbe3f2f30dab939c215d64c1b1a02eb38e2a589",
-    "published_utc": "2026-09-23T06:37:24+00:00",
-    "summary": "Musk says AI could surpass every field by 2028, while studies show uneven performance and labs accelerate scientific discovery.",
-    "matched_keywords": [
-      "beat",
-      "forecast"
-    ]
-  },
-  {
-    "news_key": "GOOGL:142359149",
-    "symbol": "GOOGL",
-    "finnhub_id": 142359149,
-    "headline": "Cathie Wood-led ARK Invest Says Oil Could Crash to $30-$35 Once Strait of Hormuz Reopens As Trump Touts Positive Iran Talks",
-    "source": "Benzinga",
-    "url": "https://finnhub.io/api/news?id=393952819fb065421e116f460d58a4bb2d532a9c2fffc7b18f1f069fab6cd58c",
-    "published_utc": "2026-09-23T07:28:27+00:00",
-    "summary": "Cathie Wood-led ARK Invest forecasts oil could fall to $30-$35 as transport shifts to electric power, cutting demand.",
-    "matched_keywords": [
-      "forecasts"
-    ]
-  },
-  {
-    "news_key": "NVDA:142356076",
-    "symbol": "NVDA",
-    "finnhub_id": 142356076,
-    "headline": "Nvidia's Demand Is Outpacing Its 70% Growth Forecast, and That Is Just the Beginning",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=0834c142cb8acebf1840e7d38c5d41952d67c1196f14afaab4f7d92329d37297",
-    "published_utc": "2026-09-23T08:30:00+00:00",
-    "summary": "It's a good problem for a company to have.",
-    "matched_keywords": [
-      "forecast"
-    ]
-  },
-  {
-    "news_key": "MU:142356115",
-    "symbol": "MU",
-    "finnhub_id": 142356115,
-    "headline": "Micron (MU) Stock Looks Reasonable Despite Its Very Large Run",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=51b99fc9b7fc9c002e3e134683e174f453c32866cca11e70d7f3fa151613f0c1",
-    "published_utc": "2026-09-23T09:13:53+00:00",
-    "summary": "Micron Technology has turned into one of the market's most eye catching semiconductor stories. The real question for anyone looking at the stock today is whether the current price can be squared with the earnings that sit behind it. After a powerful multi year run and a stream of headline grabbing developments, the key issue now is what investors are actually paying for in terms of profits. Over the past 3 years Micron Technology has delivered a very large share price gain of about 15x. That...",
-    "matched_keywords": [
-      "earnings"
-    ]
-  },
-  {
-    "news_key": "NVDA:142356589",
-    "symbol": "NVDA",
-    "finnhub_id": 142356589,
-    "headline": "D-Wave Quantum Just Got $100 Million From the U.S. Government. It's Also Burning Through Roughly $37 Million a Quarter. With Its Stock Down 60% From the Peak, Is It a Bargain or a Trap?",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=8f8d24046115c162288884f578e9b3bb609cc131095430b4328a88f910feacf9",
-    "published_utc": "2026-09-23T10:05:01+00:00",
-    "summary": "D-Wave still trades at a lofty valuation despite its stock slump.",
-    "matched_keywords": [
-      "quarter"
-    ]
-  },
-  {
-    "news_key": "MU:142356584",
-    "symbol": "MU",
-    "finnhub_id": 142356584,
-    "headline": "Act Now: Micron Could Skyrocket After Sept. 30",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=d90e90a228e44448c6f91d82f7693ea3e938f0b9f0a63c452534e5667d45d216",
-    "published_utc": "2026-09-23T11:22:00+00:00",
-    "summary": "Micron is in a great position to soar after earnings.",
-    "matched_keywords": [
-      "earnings"
-    ]
-  },
-  {
-    "news_key": "NVDA:142356584",
-    "symbol": "NVDA",
-    "finnhub_id": 142356584,
-    "headline": "Act Now: Micron Could Skyrocket After Sept. 30",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=d90e90a228e44448c6f91d82f7693ea3e938f0b9f0a63c452534e5667d45d216",
-    "published_utc": "2026-09-23T11:22:00+00:00",
-    "summary": "Micron is in a great position to soar after earnings.",
-    "matched_keywords": [
-      "earnings"
-    ]
-  },
-  {
-    "news_key": "MU:142361778",
-    "symbol": "MU",
-    "finnhub_id": 142361778,
-    "headline": "Sandisk's $15.5 Billion Buyback Could Retire Up To 5.6% Of Current Shares",
-    "source": "SeekingAlpha",
-    "url": "https://finnhub.io/api/news?id=2bb65cf5263922c83a2560831a94d1faa718e599d8895d7f4a50b46517e56cdf",
-    "published_utc": "2026-09-23T11:28:18+00:00",
-    "summary": "Sandisk Corporation Strong Buy: contracted NAND revenues, Kioxia JV bit growth, $15.5B buybacks & HBF upside\u00e2\u0080\u0094click to get the key SNDK stock risks and outlook now.",
-    "matched_keywords": [
-      "outlook",
-      "revenues"
-    ]
-  },
-  {
-    "news_key": "NVDA:142356580",
-    "symbol": "NVDA",
-    "finnhub_id": 142356580,
-    "headline": "Nvidia\u2019s Last Quarter Was Nearly Perfect. One Number in the Fine Print Wasn\u2019t.",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=7f14bde8195bae63bcb712493f44023c471378e40e4077caa1ba80a47b1124ba",
-    "published_utc": "2026-09-23T11:53:01+00:00",
-    "summary": "Nvidia grew revenue by 106% in its fiscal second quarter, but there\u2019s another number I\u2019m watching closely.",
-    "matched_keywords": [
-      "quarter",
-      "revenue"
-    ]
-  },
-  {
-    "news_key": "NVDA:142357811",
-    "symbol": "NVDA",
-    "finnhub_id": 142357811,
-    "headline": "Prediction: This ETF Could Make You a Millionaire With Just $750 per Month",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=8e88ff8ca2452a4cb18356e33ace6fa8dce94e77f13c1a2011866313b0d9abdc",
-    "published_utc": "2026-09-23T11:55:00+00:00",
-    "summary": "Investors should use time and compound earnings to their advantage.",
-    "matched_keywords": [
-      "earnings"
-    ]
-  },
-  {
-    "news_key": "MU:142357044",
-    "symbol": "MU",
-    "finnhub_id": 142357044,
-    "headline": "Four AI Stars Rev Up As Analysts Raise Profit Targets; Micron Clears Early Buy Point",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=87744e686338dff61e9166c773839f85d9d00cdfc6fa630f7418814b944e9a54",
-    "published_utc": "2026-09-23T12:00:57+00:00",
-    "summary": "Analysts are raising profit estimates for four leaders of the artificial intelligence trade: AI stock Micron is above a trendline entry.",
-    "matched_keywords": [
-      "analysts",
-      "estimates"
-    ]
-  },
-  {
-    "news_key": "NVDA:142357814",
-    "symbol": "NVDA",
-    "finnhub_id": 142357814,
-    "headline": "2 Growth Stocks That Could Double by 2030",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=a3fa6cade5ef52c655363edefe8a92b57793a20368ef7a506a2cba1b2b29fa0e",
-    "published_utc": "2026-09-23T12:34:00+00:00",
-    "summary": "Netflix and Airbnb could see meaningful earnings growth, delivering compounding returns.",
-    "matched_keywords": [
-      "earnings"
-    ]
-  },
-  {
-    "news_key": "MU:142359428",
-    "symbol": "MU",
-    "finnhub_id": 142359428,
-    "headline": "Memory Prices Could Peak Early. What That Means for Micron Stock.",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=4c4fe7b5cdc7362578dcf2c3f6502a8ff47c14be4cf9d97119d91f07d9654d8c",
-    "published_utc": "2026-09-23T12:46:00+00:00",
-    "summary": "Micron stock is surging ahead of its earnings but Citi analyst Atif Malik has a warning about memory-chip prices.",
+    "url": "https://finnhub.io/api/news?id=529d51ca192a19aae5f1c7eb4e7fab4a45c8e8abc22fcae43b70d8b2879ae89e",
+    "published_utc": "2026-09-22T20:24:00+00:00",
+    "summary": "NVIDIA's AI demand, Berkshire's diversified earnings and GE Aerospace's commercial and defense strength drive today's research focus.",
     "matched_keywords": [
       "analyst",
-      "earnings"
-    ]
-  },
-  {
-    "news_key": "MU:142359427",
-    "symbol": "MU",
-    "finnhub_id": 142359427,
-    "headline": "Micron Technology Shares Edge Lower Ahead of Fiscal Q4 Earnings",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=68ea613bbf284f1014b66bb3831f4871f16c157d6d5ef13fbb49401f9b752212",
-    "published_utc": "2026-09-23T12:50:50+00:00",
-    "summary": "Micron Technology (NASDAQ:MU) shares fell 0. 3% in pre-market trading, following a four-session advance that had contributed to a gain of approximately 14% during September.",
-    "matched_keywords": [
-      "earnings",
-      "q4"
-    ]
-  },
-  {
-    "news_key": "NVDA:142359335",
-    "symbol": "NVDA",
-    "finnhub_id": 142359335,
-    "headline": "Nasdaq climbs to record high off the back of revived AI trade",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=90023b3162f65a9e778821503b3392a7253d522a671e0be46ef6046539f1a8ba",
-    "published_utc": "2026-09-23T12:53:23+00:00",
-    "summary": "The latest AI rally pushed the Nasdaq Composite (^IXIC) to an all-time record high above 27,200 on Tuesday. The 8:30 Hosts Julie Hyman, Jake Conley, and Pras Subramanian examine Wall Street analysis that forecasts that the Nasdaq could move even higher after this rally.",
-    "matched_keywords": [
-      "forecasts"
-    ]
-  },
-  {
-    "news_key": "NVDA:142359327",
-    "symbol": "NVDA",
-    "finnhub_id": 142359327,
-    "headline": "Nvidia Stock Set For 40% Surge: 3 Catalysts That Could Drive the Next Big Move",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=5424a1b8f054bb86d3263082fa25dae14ee5619430ab6de2abec2f7f00768d7b",
-    "published_utc": "2026-09-23T13:00:24+00:00",
-    "summary": "Nvidia just posted triple-digit revenue growth and Jensen Huang says the company can only fulfill 70% of demand, yet the stock still trades well below where the math points. Three converging forces suggest the gap between current price and fair value may close faster than most investors expect.",
-    "matched_keywords": [
-      "revenue"
-    ]
-  },
-  {
-    "news_key": "NVDA:142358556",
-    "symbol": "NVDA",
-    "finnhub_id": 142358556,
-    "headline": "Meta Platforms' National TV Ad Shows a Major Shift in the Business Model",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=781ab304f6790b8083e94fa5c6e5569ef7f845aa45231dacf24373143cd20c6a",
-    "published_utc": "2026-09-23T13:04:00+00:00",
-    "summary": "Muse might be a game changer for a company that has been trying to diversify its revenue sources beyond online ads for many years.",
-    "matched_keywords": [
-      "revenue"
-    ]
-  },
-  {
-    "news_key": "NVDA:142358566",
-    "symbol": "NVDA",
-    "finnhub_id": 142358566,
-    "headline": "Zacks Investment Ideas feature highlights: Astera Labs, SpaceX, Cloudflare, NVIDIA and Meta Platforms",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=c2fd5efbaf80de9259710f8533e0d5a5e411009a96ef3d87b814c21522f0c1e0",
-    "published_utc": "2026-09-23T13:05:00+00:00",
-    "summary": "Astera Labs gains momentum as AI data centers scale, with triple-digit growth, repeated earnings beats and rising connectivity demand.",
-    "matched_keywords": [
-      "beats",
-      "earnings"
-    ]
-  },
-  {
-    "news_key": "MU:142359424",
-    "symbol": "MU",
-    "finnhub_id": 142359424,
-    "headline": "Micron Wall Street Target Hits $2,000 as Traders Pile In Before Earnings",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=760550e58985974b8667f34b5cc9eed09780dc37b26814aa51f297a34506e37c",
-    "published_utc": "2026-09-23T13:20:24+00:00",
-    "summary": "Wall Street analysts are fighting over Micron more violently than they have in years, with targets ranging from a humble hold to a stunning $2,000 price, and a single line in the September 30 earnings report will determine who looks like a genius and who quietly disappears.",
-    "matched_keywords": [
-      "analysts",
-      "earnings"
-    ]
-  },
-  {
-    "news_key": "GOOGL:142359365",
-    "symbol": "GOOGL",
-    "finnhub_id": 142359365,
-    "headline": "What Is Really Driving Palantir's Growth?",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=20841415b59305f0a3982b4d731dcacc5ee1f8a327aaa79c7172d87f70f9f90d",
-    "published_utc": "2026-09-23T13:32:09+00:00",
-    "summary": "Palantir Technologies (PLTR) is known for selling software to governments. Its fastest growth now comes from American companies. U.S. commercial revenue is what those American companies pay Palantir. That line reached $764 million in the latest quarter. It grew 149% from a year earlier. So what are American companies buying.",
-    "matched_keywords": [
-      "quarter",
-      "revenue"
-    ]
-  },
-  {
-    "news_key": "NVDA:142359331",
-    "symbol": "NVDA",
-    "finnhub_id": 142359331,
-    "headline": "Intel Skyrocketed 30% Higher in 1 Month: Here\u2019s What to Do Now",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=b686a144139d3a2ad1739d1a4f2d1bfd2e6b6029783d366a9d92601e5c8499fd",
-    "published_utc": "2026-09-23T13:42:57+00:00",
-    "summary": "Intel has surged past its average analyst price target after one of its biggest monthly runs in years, and now bulls and bears are locked in a standoff over whether the turnaround still has teeth or the easy money is already gone.",
-    "matched_keywords": [
-      "analyst",
-      "price target"
-    ]
-  },
-  {
-    "news_key": "GOOGL:142359383",
-    "symbol": "GOOGL",
-    "finnhub_id": 142359383,
-    "headline": "SO's Georgia Power Signs Google Deal to Boost Nuclear Capacity",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=529cdeee001758f1fb4482d7ad248b463e35f348d868c80cf1330d8819c162d9",
-    "published_utc": "2026-09-23T13:50:00+00:00",
-    "summary": "Southern Company's Georgia Power plans nuclear upgrades with Google, potentially adding 96 MW while targeting $900 million in projected customer benefits.",
-    "matched_keywords": [
-      "upgrades"
-    ]
-  },
-  {
-    "news_key": "MU:142361922",
-    "symbol": "MU",
-    "finnhub_id": 142361922,
-    "headline": "Micron (MU) Earnings Expected to Grow: Should You Buy?",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=c23bd9438b7671dbbe5f0d018cfbb564463048ba770b378d208f0e526b111fc0",
-    "published_utc": "2026-09-23T14:00:01+00:00",
-    "summary": "Micron (MU) possesses the right combination of the two key ingredients for a likely earnings beat in its upcoming report. Get prepared with the key expectations.",
-    "matched_keywords": [
-      "beat",
-      "earnings"
-    ]
-  },
-  {
-    "news_key": "GOOGL:142361875",
-    "symbol": "GOOGL",
-    "finnhub_id": 142361875,
-    "headline": "Alphabet\u2019s Spark Agentic AI Will Beat Meta\u2019s Muse in the Long Run",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=28de505dd80ec129085e10bb2591af65d03469c15a7eb839b6539edd1f1499fa",
-    "published_utc": "2026-09-23T14:26:10+00:00",
-    "summary": "Alphabet and Meta both burned billions on AI this quarter, but only one of them built something the other cannot simply outspend to replicate. The gap between an advertising flywheel and a true data moat is wider than their stock prices suggest.",
-    "matched_keywords": [
-      "beat",
-      "quarter"
-    ]
-  },
-  {
-    "news_key": "GOOGL:142361844",
-    "symbol": "GOOGL",
-    "finnhub_id": 142361844,
-    "headline": "What Microsoft's Trailing Multiple Leaves Out",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=7f76af08f858b5f4e1fa1c6620df91a57f3a09871a277d10a20b50d0ed657d1c",
-    "published_utc": "2026-09-23T14:37:19+00:00",
-    "summary": "Microsoft (MSFT) has returned about 33% over the past three months, though it is down 3.1% over the past twelve months. Near $500 a share, the stock carries a trailing price-to-earnings ratio of about 26.7 times adjusted earnings. Whether that multiple looks elevated or not, it is the wrong number to make the decision on, because the earnings analysts already expect are not in it.",
-    "matched_keywords": [
-      "analysts",
-      "earnings"
-    ]
-  },
-  {
-    "news_key": "MU:142361917",
-    "symbol": "MU",
-    "finnhub_id": 142361917,
-    "headline": "Citi expects Micron stock to rally into this event",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=559777ea536e179c699b07313eefb3ab741eb2bd314153ce8862178475e5e53f",
-    "published_utc": "2026-09-23T15:01:19+00:00",
-    "summary": "Investing.com -- Citi expects Micron shares to rally into the SEMICON West conference, raising its price target on the memory maker to $1,300 from $1,150.",
-    "matched_keywords": [
-      "price target"
-    ]
-  },
-  {
-    "news_key": "MU:142361827",
-    "symbol": "MU",
-    "finnhub_id": 142361827,
-    "headline": "Up 275% This Year, Micron (MU) Is Still a No-Brainer Buy Before September 30",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=5aeb55b590914085bebfba4aca5134e39530224146bc42e23176e52eb0a5cf3f",
-    "published_utc": "2026-09-23T15:35:52+00:00",
-    "summary": "Micron's September 30 earnings report could be the most important catalyst in its history, and three specific numbers will determine whether the AI memory bull case holds or breaks entirely.",
-    "matched_keywords": [
-      "earnings"
-    ]
-  },
-  {
-    "news_key": "NVDA:142361827",
-    "symbol": "NVDA",
-    "finnhub_id": 142361827,
-    "headline": "Up 275% This Year, Micron (MU) Is Still a No-Brainer Buy Before September 30",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=5aeb55b590914085bebfba4aca5134e39530224146bc42e23176e52eb0a5cf3f",
-    "published_utc": "2026-09-23T15:35:52+00:00",
-    "summary": "Micron's September 30 earnings report could be the most important catalyst in its history, and three specific numbers will determine whether the AI memory bull case holds or breaks entirely.",
-    "matched_keywords": [
-      "earnings"
-    ]
-  },
-  {
-    "news_key": "NVDA:142361832",
-    "symbol": "NVDA",
-    "finnhub_id": 142361832,
-    "headline": "Broadcom Just Made a Move That Further Solidifies My Decision to Buy on Repeat",
-    "source": "Yahoo",
-    "url": "https://finnhub.io/api/news?id=623010a7e650b172d6b11e5c67b799cd5097dd09e6271f81c105a41e123ee016",
-    "published_utc": "2026-09-23T15:45:48+00:00",
-    "summary": "Broadcom's latest earnings dropped a set of forward projections so aggressive that ignoring them starts to feel like a mistake. Here is why one investor keeps adding shares on every single paycheck.",
-    "matched_keywords": [
       "earnings"
     ]
   }
