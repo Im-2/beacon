@@ -1,9 +1,11 @@
 {
-  "generated_at": "2026-09-23T20:00:03.599190+00:00",
+  "generated_at": "2026-09-23T20:16:44.844056+00:00",
   "capital_usd": 10000.0,
   "summary": {
     "cumulative_pnl_usd": 0,
     "realized_pnl_usd": 0,
+    "triggers_detected": 32,
+    "live_since_utc": "2026-09-18T14:19:41.489280+00:00",
     "real_unrealized_pnl_usd": 0,
     "test_fixture_pnl_usd": -4.61,
     "max_drawdown_pct": 0.0,

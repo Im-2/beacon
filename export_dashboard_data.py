@@ -365,6 +365,9 @@ def build():
     today_realized = state.today_realized_pnl(portfolio)
     daily_pnl_pct = round((today_realized + unrealized_pnl) / capital * 100, 2)
     no_averaging_blocked_count = sum(1 for d in decisions if d["no_averaging_blocked"])
+    processed_file = config.DATA_DIR / "processed_triggers.json"
+    triggers_detected = len(json.loads(processed_file.read_text())) if processed_file.exists() else 0
+    live_since_utc = min((d["timestamp_utc"] for d in decisions if d["timestamp_utc"]), default=None)
     news_items, news_stats = build_news()
     news_stats["queue_length"] = len(news.load_queue())
 
@@ -374,6 +377,8 @@ def build():
         "summary": {
             "cumulative_pnl_usd": cumulative_pnl_usd,
             "realized_pnl_usd": realized_pnl_usd,
+            "triggers_detected": triggers_detected,
+            "live_since_utc": live_since_utc,
             "real_unrealized_pnl_usd": real_unrealized,
             "test_fixture_pnl_usd": test_fixture_pnl_usd,
             "max_drawdown_pct": round(max_dd_pct, 2),
