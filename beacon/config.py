@@ -84,7 +84,8 @@ RISK = {
     "max_concurrent_positions": 5,
     "max_daily_drawdown_pct": 3.0,       # halts new entries for the day if realized+unrealized daily P&L drops this much
     "no_averaging_into_loser": True,     # reject new entry on a symbol whose existing open positions are net losing
-    "max_proxy_exposure_pct": 10.0,      # cap on TOTAL cross-asset proxy (BTC) exposure across all originating tickers
+    "max_proxy_exposure_pct": 10.0,
+    "max_holding_hours": 48,             # close at market if neither stop-loss nor take-profit hit by then      # cap on TOTAL cross-asset proxy (BTC) exposure across all originating tickers
 }
 
 DATA_DIR.mkdir(exist_ok=True)

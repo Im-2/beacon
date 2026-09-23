@@ -52,6 +52,7 @@ STATUS_MAP = {
     "test_fixture_closed_mechanics_verified": "closed",
     "closed_stop_loss": "closed",
     "closed_take_profit": "closed",
+    "closed_max_holding_period": "closed",
     "test_fixture_dry_run": "filtered",
 }
 
@@ -169,6 +170,13 @@ def build_risk_lines(record: dict) -> list:
     return lines
 
 
+CLOSE_LABELS = {
+    "closed_stop_loss": "Closed — stop-loss hit",
+    "closed_take_profit": "Closed — take-profit hit",
+    "closed_max_holding_period": "Closed — max holding period reached",
+}
+
+
 def order_id(order: dict) -> str:
     data = (order.get("response") or {}).get("data") or {}
     return data.get("orderId") if isinstance(data, dict) else None
@@ -201,7 +209,10 @@ def build_execute_block(record: dict) -> dict:
     if status == "closed":
         pnl = record.get("realized_pnl_usd")
         pnl_txt = f"${pnl:.2f}" if isinstance(pnl, (int, float)) else "—"
-        return {"text": f"Position closed ({outcome.replace('closed_', '')}). Realized P&L: {pnl_txt}.", "kind": "ok"}
+        label = CLOSE_LABELS.get(outcome, f"Position closed ({outcome.replace('closed_', '')})")
+        held = record.get("hold_time_hours")
+        held_txt = f" after {held:.1f}h" if isinstance(held, (int, float)) else ""
+        return {"text": f"{label}{held_txt}. Realized P&L: {pnl_txt}.", "kind": "ok"}
     if outcome == "proxy_exposure_cap_reached_not_added":
         return {"text": "Proxy exposure cap reached — not added. " + (record.get("cross_asset_note") or ""),
                 "kind": "neutral"}

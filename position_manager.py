@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Step 4: checks every open paper position against its stop-loss/take-profit,
-closes it via a paper order if triggered, and logs the outcome (P&L, hold
-time). Run frequently (every 30-60 min) during market hours per Step 5.
+Step 4: checks every open paper position against its stop-loss/take-profit
+and the max holding period (RISK.max_holding_hours), closes it at market if
+any is hit, and logs the outcome (P&L, hold time). Runs every 30 min.
 
 Also refreshes unrealized_pnl_usd on every open position on every run (used by
 risk.py's daily-drawdown circuit breaker), even when nothing closes.
@@ -29,13 +29,18 @@ def unrealized_pnl_pct(direction: str, entry_price: float, current_price: float)
     return (entry_price - current_price) / entry_price * 100.0
 
 
-def check_position(pos: dict, current_price: float) -> str | None:
-    """Returns 'stop_loss', 'take_profit', or None."""
+def check_position(pos: dict, current_price: float, now: datetime = None) -> str | None:
+    """Returns 'stop_loss', 'take_profit', 'max_holding_period', or None.
+    Price exits take precedence; the time exit only fires if neither hit."""
     pnl_pct = unrealized_pnl_pct(pos["direction"], pos["entry_price"], current_price)
     if pnl_pct <= -abs(pos["stop_loss_pct"]):
         return "stop_loss"
     if pnl_pct >= abs(pos["take_profit_pct"]):
         return "take_profit"
+    # An earnings/news signal fades within a day or two; don't hold it forever.
+    held_hours = ((now or datetime.now(timezone.utc)) - datetime.fromisoformat(pos["opened_at"])).total_seconds() / 3600
+    if held_hours >= config.RISK["max_holding_hours"]:
+        return "max_holding_period"
     return None
 
 
