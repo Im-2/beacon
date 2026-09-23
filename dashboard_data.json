@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T23:55:16.226705+00:00",
+  "generated_at": "2026-09-23T23:55:32.232966+00:00",
   "capital_usd": 10000.0,
   "summary": {
     "cumulative_pnl_usd": 0,
@@ -5618,12 +5618,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=5ea26352c48b17d12d2da37ae38a4d027236533062f7510208363d3860c9bfac",
       "published_utc": "2026-09-22T22:45:19+00:00",
-      "summary": "Nvidia's shares trade at less than 17 times forward earnings, signaling growing Wall Street skepticism about its long-term sustainability.",
       "matched_keywords": [
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.170693+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-23T23:55:31.448210+00:00"
     },
     {
       "news_key": "GOOGL:142352586",
@@ -5658,13 +5657,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=f8e8991ce0939d22ee002b9903ab9d84c7ae6e29081a71d7633fb8d826195c41",
       "published_utc": "2026-09-22T22:24:31+00:00",
-      "summary": "Micron revenue jumped to $41.46 billion last quarter from $9.3 billion a year earlier.",
       "matched_keywords": [
         "quarter",
         "revenue"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:01.220054+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-23T23:55:31.448792+00:00"
     },
     {
       "news_key": "GOOGL:142351097",
@@ -6338,12 +6336,12 @@
     "skipped": 331,
     "skipped_not_earnings": 304,
     "skipped_off_ticker": 27,
-    "expired": 2,
-    "queued": 24,
+    "expired": 4,
+    "queued": 22,
     "judged_no_trade": 10,
     "judged_trade": 0,
     "exported": 367,
-    "queue_length": 24
+    "queue_length": 22
   },
   "qwen_usage": {
     "by_day": [
@@ -6359,12 +6357,12 @@
     "total_tokens": 18561
   },
   "last_cycle": {
-    "last_live_cycle_utc": "2026-09-23T20:37:30.534071+00:00",
+    "last_live_cycle_utc": "2026-09-23T23:55:31.457989+00:00",
     "triggers_total": 2,
     "triggers_pending_at_start": 0,
     "triggers_processed": 0,
-    "news_judged": 5,
-    "news_queued_remaining": 24
+    "news_judged": 0,
+    "news_queued_remaining": 22
   },
   "scan_schedule": {
     "anchor_utc": "2026-09-18T14:33:00+00:00",
