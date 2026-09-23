@@ -183,6 +183,11 @@ def build_execute_block(record: dict) -> dict:
     symbol = record.get("symbol")
     status = status_for(outcome)
     order = record.get("rtoken_order") or record.get("cross_asset_order") or record.get("order") or {}
+    if outcome == "test_fixture_closed_mechanics_verified":
+        pnl = record.get("realized_pnl_usd")
+        return {"text": f"Test fixture closed — mechanics verified. Real sell order {order_id(order)}, "
+                        f"realized ${pnl:.2f} on the test position (excluded from performance metrics).",
+                "kind": "ok"}
     if outcome == "executed_direct_rtoken":
         return {"text": f"Direct rToken execution: {symbol} — order {order.get('status')}.", "kind": "ok"}
     if outcome == "executed_cross_asset_proxy":
@@ -197,11 +202,6 @@ def build_execute_block(record: dict) -> dict:
         pnl = record.get("realized_pnl_usd")
         pnl_txt = f"${pnl:.2f}" if isinstance(pnl, (int, float)) else "—"
         return {"text": f"Position closed ({outcome.replace('closed_', '')}). Realized P&L: {pnl_txt}.", "kind": "ok"}
-    if outcome == "test_fixture_closed_mechanics_verified":
-        pnl = record.get("realized_pnl_usd")
-        return {"text": f"Test fixture closed — mechanics verified. Real sell order {order_id(order)}, "
-                        f"realized ${pnl:.2f} on the test position (excluded from performance metrics).",
-                "kind": "ok"}
     if outcome == "proxy_exposure_cap_reached_not_added":
         return {"text": "Proxy exposure cap reached — not added. " + (record.get("cross_asset_note") or ""),
                 "kind": "neutral"}

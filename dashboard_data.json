@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T19:30:08.987683+00:00",
+  "generated_at": "2026-09-23T19:40:44.994241+00:00",
   "capital_usd": 10000.0,
   "summary": {
     "cumulative_pnl_usd": 0,
@@ -104,7 +104,7 @@
       "judge_text": "Not reached.",
       "judge_neutral": true,
       "risk_lines": [],
-      "execute_text": "Position closed (test_fixture_mechanics_verified). Realized P&L: $-4.61.",
+      "execute_text": "Test fixture closed \u2014 mechanics verified. Real sell order 1486734530173509632, realized $-4.61 on the test position (excluded from performance metrics).",
       "execute_kind": "ok",
       "edgar_url": null,
       "realized_pnl_usd": -4.61,
