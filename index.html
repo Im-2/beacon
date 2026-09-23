@@ -1108,125 +1108,316 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <div class="page">
-  <section class="hero">
-    <nav class="hero-nav">
-      <a class="nav-logo" href="#"><span class="mark"></span>Beacon</a>
-      <div class="nav-links">
-        <a href="dashboard.html">Dashboard</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="https://github.com/Im-2/beacon" target="_blank" rel="noopener">GitHub</a>
-        <span class="nav-divider"></span>
-        <a class="nav-x" href="#" aria-label="Beacon on X">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-          </svg>
-        </a>
+<style>
+  /* ---------- HERO (bh-) ----------
+     Black hero, Bitget turquoise accent, "signal ring" motif at the edges,
+     phone mockup overlapping the white market-tracking section below. Every
+     number shown is loaded from dashboard_data.json / market_data.json. */
+  .bh{
+    --bh-accent:#1DA2B4;
+    --bh-glow:#00E5C7;
+    --bh-on-accent:#04262A;
+    --bh-glass:rgba(20,24,25,0.74);
+    --bh-line:rgba(255,255,255,0.09);
+    --bh-mute:rgba(255,255,255,0.64);
+    position:relative;
+    display:flow-root; /* keeps the stage's negative margin inside, so the fade to white isn't covered */
+    margin-inline:-20px;
+    padding-inline:20px;
+    color:#FFFFFF;
+    background:
+      radial-gradient(55% 30% at 50% 100%, rgba(0,229,199,0.55), rgba(0,229,199,0) 70%),
+      linear-gradient(180deg, #0A0A0A 0%, #0A0A0A 56%, #0A2F34 70%, #127F8C 83%, #8BE9DE 94%, #FFFFFF 100%);
+  }
+  .bh-deco{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
+  .bh-rings{position:absolute;top:110px;width:560px;height:560px;opacity:0.8;}
+  .bh-rings--left{left:-340px;}
+  .bh-rings--right{right:-340px;}
+  .bh-rings span{
+    position:absolute;border-radius:50%;
+    inset:calc(var(--i) * 36px);
+    border:1px solid rgba(120,190,196,calc(0.34 - var(--i) * 0.04));
+  }
+  .bh-rings i{
+    position:absolute;inset:0;border-radius:50%;
+    border:1.5px solid rgba(0,229,199,0.5);
+    opacity:0;animation:bhPulse 7s ease-out infinite;
+  }
+  .bh-rings--right i{animation-delay:3.5s;}
+  @keyframes bhPulse{
+    0%{transform:scale(0.22);opacity:0;}
+    12%{opacity:0.6;}
+    100%{transform:scale(1);opacity:0;}
+  }
+
+  .bh-nav{
+    position:relative;z-index:4;max-width:1120px;margin-inline:auto;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:22px;
+  }
+  .bh-logo{display:flex;align-items:center;gap:10px;color:#FFFFFF;text-decoration:none;
+    font:700 18px/1 'Space Grotesk','Inter',sans-serif;}
+  .bh-mark{width:28px;height:28px;border-radius:8px;flex-shrink:0;
+    background:linear-gradient(135deg,var(--bh-accent),var(--bh-glow));}
+  .bh-links{display:flex;gap:32px;}
+  .bh-links a{color:rgba(255,255,255,0.76);text-decoration:none;font:500 14px/1 'Inter',sans-serif;transition:color .15s ease;}
+  .bh-links a:hover{color:#FFFFFF;}
+  .bh-pill-white{background:#FFFFFF;color:#0A0A0A;border-radius:999px;padding:11px 20px;
+    font:600 13.5px/1 'Inter',sans-serif;text-decoration:none;white-space:nowrap;transition:transform .15s ease;}
+  .bh-pill-white:hover{transform:translateY(-1px);}
+
+  .bh-copy{position:relative;z-index:4;text-align:center;max-width:780px;margin:52px auto 0;}
+  .bh-copy h1{margin:0;font-family:'Space Grotesk','Inter',sans-serif;font-weight:700;
+    font-size:clamp(38px,6.2vw,70px);line-height:1.03;letter-spacing:-0.035em;text-wrap:balance;}
+  .bh-copy h1 span{color:var(--bh-glow);}
+  .bh-copy p{margin:20px auto 0;max-width:54ch;font:400 16.5px/1.6 'Inter',sans-serif;color:var(--bh-mute);}
+  .bh-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px;}
+  .bh-cta{display:inline-flex;align-items:center;justify-content:center;padding:14px 26px;border-radius:999px;
+    font:600 14.5px/1 'Inter',sans-serif;text-decoration:none;
+    transition:transform .15s ease,background .15s ease,box-shadow .15s ease;}
+  .bh-cta:hover{transform:translateY(-1px);}
+  .bh-cta--primary{background:var(--bh-accent);color:var(--bh-on-accent);
+    box-shadow:0 12px 32px -10px rgba(29,162,180,0.75);}
+  .bh-cta--primary:hover{background:#22B6C9;}
+  .bh-cta--dark{background:#18191A;color:#FFFFFF;border:1px solid var(--bh-line);}
+  .bh-cta--dark:hover{background:#222426;}
+  .bh a:focus-visible{outline:2px solid var(--bh-glow);outline-offset:3px;}
+
+  /* stage: phone + floating cards; the phone's lower part hangs into the
+     next section, which pads its top to make room */
+  .bh-stage{position:relative;z-index:2;max-width:1080px;height:620px;margin:56px auto -250px;}
+  .bh-glow{position:absolute;left:50%;bottom:30px;width:660px;max-width:100%;height:320px;transform:translateX(-50%);
+    background:radial-gradient(closest-side, rgba(0,229,199,0.6), rgba(29,162,180,0.28) 55%, rgba(29,162,180,0) 100%);
+    filter:blur(26px);z-index:0;}
+
+  .bh-phone{position:absolute;left:50%;top:0;transform:translateX(-50%);z-index:1;
+    width:300px;height:620px;padding:10px;border-radius:48px;background:#131516;
+    box-shadow:0 0 0 1.5px #2A2E30, 0 40px 80px -30px rgba(0,0,0,0.85);
+    -webkit-mask-image:linear-gradient(180deg,#000 68%,transparent 100%);
+    mask-image:linear-gradient(180deg,#000 68%,transparent 100%);}
+  .bh-screen{height:100%;border-radius:38px;overflow:hidden;background:#FFFFFF;color:#0A2224;
+    display:flex;flex-direction:column;font-family:'Inter',sans-serif;}
+  .bh-status{position:relative;display:flex;align-items:center;justify-content:space-between;
+    padding:13px 24px 6px;font:600 12px/1 'Inter',sans-serif;background:#CDF3EF;}
+  .bh-notch{position:absolute;left:50%;top:9px;transform:translateX(-50%);width:86px;height:23px;border-radius:999px;background:#0A0A0A;}
+  .bh-status svg{display:block;}
+  .bh-top{background:linear-gradient(180deg,#CDF3EF 0%,#DFF7F4 65%,#FFFFFF 100%);padding:8px 18px 16px;}
+  .bh-appbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .bh-appbar b{display:flex;align-items:center;gap:7px;font:700 14px/1 'Space Grotesk','Inter',sans-serif;}
+  .bh-appbar b i{width:18px;height:18px;border-radius:5px;background:linear-gradient(135deg,var(--bh-accent),var(--bh-glow));}
+  .bh-live{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:999px;
+    font:700 9.5px/1 'Inter',sans-serif;letter-spacing:0.07em;text-transform:uppercase;color:#0B6E63;background:rgba(12,139,121,0.13);}
+  .bh-live::before{content:"";width:6px;height:6px;border-radius:50%;background:#12C79E;}
+  .bh-cap-label{text-align:center;font:500 11.5px/1 'Inter',sans-serif;color:#3E5F63;}
+  .bh-cap{text-align:center;margin-top:7px;font:700 31px/1 'Space Grotesk','Inter',sans-serif;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;}
+  .bh-cap-sub{text-align:center;margin-top:7px;font:500 10.5px/1.3 'Inter',sans-serif;color:#3E5F63;}
+  .bh-actions{display:flex;gap:8px;justify-content:center;margin-top:14px;}
+  .bh-actions a{flex:1;max-width:118px;text-align:center;padding:10px 0;border-radius:999px;background:#0B1F22;color:#FFFFFF;
+    font:600 11.5px/1 'Inter',sans-serif;text-decoration:none;}
+  .bh-body{padding:10px 16px 0;}
+  .bh-row-head{display:flex;justify-content:space-between;align-items:baseline;margin:4px 2px 8px;}
+  .bh-row-head b{font:700 12.5px/1 'Space Grotesk','Inter',sans-serif;}
+  .bh-row-head a,.bh-row-head span{font:600 10.5px/1 'Inter',sans-serif;color:#0E6B78;text-decoration:none;}
+  .bh-wl{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 12px;padding:0 16px 2px;}
+  .bh-wl::-webkit-scrollbar{display:none;}
+  .bh-wl-card{flex:0 0 94px;border:1px solid #E3EEEE;border-radius:12px;padding:8px 9px;background:#FFFFFF;}
+  .bh-wl-card .t{display:flex;justify-content:space-between;align-items:baseline;font:700 11.5px/1 'Space Grotesk','Inter',sans-serif;}
+  .bh-wl-card .t small{font:500 8px/1 'Inter',sans-serif;color:#7A9396;letter-spacing:0.03em;}
+  .bh-wl-card .p{margin-top:7px;font:600 12.5px/1 'Inter',sans-serif;font-variant-numeric:tabular-nums;}
+  .bh-wl-card .c{margin-top:4px;font:600 10px/1 'Inter',sans-serif;font-variant-numeric:tabular-nums;color:#7A9396;}
+  .bh-up{color:#0C8B79 !important;}
+  .bh-down{color:#D1453B !important;}
+  .bh-dec{display:flex;align-items:center;gap:7px;padding:9px 2px;border-top:1px solid #EEF4F4;font:500 11px/1.2 'Inter',sans-serif;}
+  .bh-dec b{width:42px;flex-shrink:0;font:700 11.5px/1 'Space Grotesk','Inter',sans-serif;}
+  .bh-dec .tg{font:600 9px/1 'Inter',sans-serif;color:#0E6B78;background:#EEF8F8;border-radius:999px;padding:3px 7px;white-space:nowrap;}
+  .bh-dec .d{margin-left:auto;color:#4C6A6E;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .bh-empty{margin:6px 2px;font:500 11px/1.4 'Inter',sans-serif;color:#7A9396;}
+
+  .bh-cards{position:absolute;inset:0;z-index:3;pointer-events:none;}
+  .bh-card{position:absolute;width:204px;padding:16px 18px;border-radius:16px;pointer-events:auto;
+    background:var(--bh-glass);border:1px solid var(--bh-line);color:#FFFFFF;
+    box-shadow:0 24px 50px -24px rgba(0,0,0,0.85);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);}
+  .bh-card .l{display:flex;align-items:center;gap:7px;font:500 12px/1 'Inter',sans-serif;color:var(--bh-mute);}
+  .bh-card .l::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--bh-glow);flex-shrink:0;}
+  .bh-card .n{margin-top:10px;font:700 28px/1 'Space Grotesk','Inter',sans-serif;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;}
+  .bh-card .s{margin-top:8px;font:500 11.5px/1.4 'Inter',sans-serif;color:var(--bh-mute);}
+  .bh-card--a{top:22px;left:calc(50% - 474px);transform:rotate(-6deg);}
+  .bh-card--b{top:212px;left:calc(50% - 408px);transform:rotate(4deg);}
+  .bh-card--c{top:40px;right:calc(50% - 474px);transform:rotate(5deg);}
+  .bh-card--d{top:230px;right:calc(50% - 402px);transform:rotate(-4deg);}
+  .bh-dot-btn{position:absolute;top:172px;right:calc(50% - 262px);width:42px;height:42px;border-radius:50%;pointer-events:auto;
+    display:grid;place-items:center;background:var(--bh-accent);color:var(--bh-on-accent);text-decoration:none;
+    box-shadow:0 0 0 7px rgba(29,162,180,0.18);transition:transform .15s ease;}
+  .bh-dot-btn:hover{transform:scale(1.06);}
+  .bh-dot-btn svg{width:16px;height:16px;}
+
+  /* ---------- MARKET TRACKING (right after hero) ---------- */
+  .bh-market{position:relative;z-index:1;background:#FFFFFF;margin-inline:-20px;padding-inline:20px;padding-block:320px 72px;}
+  .bh-market-inner{max-width:1040px;margin-inline:auto;}
+  .bh-market h2{margin:0;text-align:center;color:#0A2224;font:700 clamp(28px,3.6vw,42px)/1.1 'Space Grotesk','Inter',sans-serif;
+    letter-spacing:-0.025em;text-wrap:balance;}
+  .bh-market-sub{margin:14px auto 0;max-width:58ch;text-align:center;font:400 15.5px/1.6 'Inter',sans-serif;color:#4C6A6E;}
+  .bh-chart-card{margin-top:40px;padding:24px;border-radius:28px;background:#F4FBFA;border:1px solid #E3EEEE;}
+  .bh-chart-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:16px;}
+  .bh-chart-sym{font:600 13px/1.2 'JetBrains Mono','Roboto Mono',monospace;color:#0A2224;letter-spacing:0.02em;}
+  .bh-chart-note{margin-top:6px;max-width:52ch;font:400 12.5px/1.5 'Inter',sans-serif;color:#4C6A6E;}
+  .bh-chart-price{text-align:right;}
+  .bh-chart-price b{display:block;font:700 26px/1.1 'Space Grotesk','Inter',sans-serif;color:#0A2224;font-variant-numeric:tabular-nums;}
+  .bh-chart-price span{font:600 13px/1.4 'Inter',sans-serif;color:#4C6A6E;font-variant-numeric:tabular-nums;}
+  .bh-chart{position:relative;height:380px;border-radius:18px;background:#FFFFFF;border:1px solid #E3EEEE;overflow:hidden;}
+  .bh-chart-empty{position:absolute;inset:0;display:grid;place-items:center;padding:20px;text-align:center;
+    font:500 14px/1.5 'Inter',sans-serif;color:#4C6A6E;}
+  .bh-chart-foot{margin-top:12px;font:500 12px/1.5 'Inter',sans-serif;color:#4C6A6E;}
+
+  @media (max-width:980px){
+    .bh-card--a{left:calc(50% - 420px);}
+    .bh-card--c{right:calc(50% - 420px);}
+  }
+  @media (max-width:900px){
+    .bh-links{display:none;}
+    .bh-stage{height:auto;margin:44px auto 0;display:flex;flex-direction:column;align-items:center;gap:18px;}
+    .bh-phone{position:relative;left:auto;transform:none;height:560px;max-width:100%;}
+    .bh-glow{bottom:auto;top:260px;}
+    .bh-cards{position:static;display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:460px;padding-bottom:48px;}
+    .bh-card{position:static;width:auto;transform:none;}
+    .bh-dot-btn{display:none;}
+    .bh-market{padding-block:64px 56px;}
+  }
+  @media (max-width:600px){
+    .bh-rings{width:420px;height:420px;top:90px;}
+    .bh-rings--left{left:-300px;}
+    .bh-rings--right{right:-300px;}
+    .bh-copy{margin-top:36px;}
+    .bh-card{padding:14px;}
+    .bh-card .n{font-size:24px;}
+    .bh-chart{height:300px;}
+    .bh-chart-card{padding:16px;border-radius:20px;}
+    .bh-chart-price{text-align:left;}
+  }
+  @media (max-width:420px){
+    .bh,.bh-market{margin-inline:-16px;padding-inline:16px;}
+    .bh-pill-white{padding:10px 14px;font-size:12.5px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .bh-rings i{animation:none;}
+    .bh-cta,.bh-pill-white,.bh-dot-btn{transition:none;}
+  }
+</style>
+
+  <section class="bh" id="top">
+    <div class="bh-deco" aria-hidden="true">
+      <div class="bh-rings bh-rings--left">
+        <span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span><span style="--i:4"></span><span style="--i:5"></span><span style="--i:6"></span><i></i>
       </div>
+      <div class="bh-rings bh-rings--right">
+        <span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span><span style="--i:4"></span><span style="--i:5"></span><span style="--i:6"></span><i></i>
+      </div>
+    </div>
+
+    <nav class="bh-nav" aria-label="Primary">
+      <a class="bh-logo" href="#top"><span class="bh-mark"></span>Beacon</a>
+      <div class="bh-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="#howItWorks">How It Works</a>
+        <a href="https://github.com/Im-2/beacon" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <a class="bh-pill-white" href="dashboard.html">Open Dashboard</a>
     </nav>
 
-    <span class="plus p1">+</span>
-    <span class="plus p2">+</span>
+    <div class="bh-copy">
+      <h1>Earnings move markets.<br><span>Beacon moves first.</span></h1>
+      <p>An autonomous agent that reads earnings news and filings, lets Qwen judge them, and paper-trades on Bitget inside hard risk limits.</p>
+      <div class="bh-ctas">
+        <a class="bh-cta bh-cta--primary" href="dashboard.html">Watch Beacon Trade</a>
+        <a class="bh-cta bh-cta--dark" href="#howItWorks">How It Works</a>
+      </div>
+    </div>
 
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <h1>Earnings move markets.<br><span class="hero-payoff"><em>Beacon</em> moves first.</span></h1>
-        <p class="sub">
-          Beacon continuously monitors earnings and guidance, evaluates market-moving signals
-          with an LLM, applies deterministic risk controls, and executes paper trades
-          automatically — without waiting for a human decision.
-        </p>
-        <div class="cta-row">
-          <a class="btn btn-solid" href="dashboard.html">Watch Beacon Trade</a>
-          <a class="btn btn-ghost" href="#how-it-works">How It Works</a>
-        </div>
-        <div class="status-row">
-          <span class="status-pill"><span class="status-dot"></span>Live Monitoring</span>
-          <span class="status-pill">24/7</span>
-          <span class="status-pill">Paper Trading</span>
+    <div class="bh-stage">
+      <div class="bh-glow" aria-hidden="true"></div>
+
+      <div class="bh-phone" role="img" aria-label="Beacon's mobile view: paper capital, watchlist, and latest decisions">
+        <div class="bh-screen">
+          <div class="bh-status">
+            <span id="bhTime">—</span>
+            <span class="bh-notch"></span>
+            <svg width="46" height="11" viewBox="0 0 46 11" fill="#0A2224" aria-hidden="true">
+              <rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/>
+              <rect x="24" y="0.5" width="19" height="10" rx="3" fill="none" stroke="#0A2224" stroke-width="1.2"/><rect x="26" y="2.5" width="13" height="6" rx="1.5"/><rect x="44" y="3.5" width="2" height="4" rx="1"/>
+            </svg>
+          </div>
+          <div class="bh-top">
+            <div class="bh-appbar"><b><i></i>Beacon</b><span class="bh-live">Live</span></div>
+            <div class="bh-cap-label">Paper Capital</div>
+            <div class="bh-cap" id="bhCap">—</div>
+            <div class="bh-cap-sub" id="bhCapSub">Loading live data…</div>
+            <div class="bh-actions">
+              <a href="dashboard.html#positions">Positions</a>
+              <a href="dashboard.html#history">History</a>
+            </div>
+          </div>
+          <div class="bh-body">
+            <div class="bh-row-head"><b>Watchlist</b><span>Bitget rTokens</span></div>
+            <div class="bh-wl">
+              <div class="bh-wl-card" data-t="EQT"><div class="t">EQT<small>rToken</small></div><div class="p">—</div><div class="c">—</div></div>
+              <div class="bh-wl-card" data-t="GOOGL"><div class="t">GOOGL<small>rToken</small></div><div class="p">—</div><div class="c">—</div></div>
+              <div class="bh-wl-card" data-t="MU"><div class="t">MU<small>rToken</small></div><div class="p">—</div><div class="c">—</div></div>
+              <div class="bh-wl-card" data-t="NVDA"><div class="t">NVDA<small>rToken</small></div><div class="p">—</div><div class="c">—</div></div>
+            </div>
+            <div class="bh-row-head"><b>Latest Decisions</b><a href="dashboard.html#history">See all</a></div>
+            <div id="bhDecisions"><p class="bh-empty">Loading…</p></div>
+          </div>
         </div>
       </div>
 
-      <div class="hero-card">
-        <div class="card-top">
-          <div class="card-brand"><span class="mark"></span>Beacon</div>
-          <div class="live"><span class="pulse"></span>Live</div>
+      <div class="bh-cards">
+        <div class="bh-card bh-card--a">
+          <div class="l">Headlines processed</div>
+          <div class="n" id="bhHeadlines">—</div>
+          <div class="s" id="bhHeadlinesSub">Finnhub news, 5 tickers</div>
         </div>
-
-        <div class="stat-chip">
-          <span class="label">Paper Capital</span>
-          <span class="value">$10,000.00</span>
+        <div class="bh-card bh-card--b">
+          <div class="l">Qwen decisions</div>
+          <div class="n" id="bhQwen">—</div>
+          <div class="s" id="bhQwenSub">Real judgments, no mocks</div>
         </div>
-
-        <div class="flow">
-          <div class="flow-step">
-            <span class="flow-dot"></span>
-            <div class="flow-label">Sense · New Earnings Signal</div>
-            <div class="signal-head">
-              <span class="signal-ticker">LEN</span>
-              <span class="signal-name">Tokenized LEN</span>
-            </div>
-            <div class="signal-metrics">
-              <div class="signal-metric">EPS<b class="pos">+18% Beat</b></div>
-              <div class="signal-metric">Revenue<b class="pos">+7% Beat</b></div>
-              <div class="signal-metric">Guidance<b class="pos">Raised</b></div>
-            </div>
-          </div>
-
-          <div class="flow-step">
-            <span class="flow-dot"></span>
-            <div class="flow-label">Judge · LLM Decision</div>
-            <div class="judge-row">
-              <span class="judge-direction">Long</span>
-              <span class="judge-conviction">82% Conviction</span>
-            </div>
-            <p class="judge-rationale">"Strong earnings beat with positive guidance revision."</p>
-          </div>
-
-          <div class="flow-step">
-            <span class="flow-dot done"></span>
-            <div class="flow-label">Risk Check <span class="flow-badge">✓ Passed</span></div>
-            <div class="risk-grid">
-              <div>Position<b>4.8%</b></div>
-              <div>Stop Loss<b>-4.0%</b></div>
-              <div>Take Profit<b>+8.5%</b></div>
-            </div>
-          </div>
-
-          <div class="flow-step last">
-            <span class="flow-dot done"></span>
-            <div class="flow-label">Execute <span class="flow-badge">✓ Order Placed</span></div>
-            <div class="exec-amount">$480 paper position</div>
-          </div>
+        <div class="bh-card bh-card--c">
+          <div class="l">Triggers detected</div>
+          <div class="n" id="bhTriggers">—</div>
+          <div class="s">SEC 8-K filings + pre-earnings</div>
         </div>
-
-        <div class="triggers">
-          <div class="t-label">Recent Triggers</div>
-          <div class="trigger-row">
-            <span class="dot bullish"></span>
-            <span class="ticker">LEN</span>
-            <span class="meta">Long · 82%</span>
-            <span class="date">✓</span>
-          </div>
-          <div class="trigger-row">
-            <span class="dot watch"></span>
-            <span class="ticker">NKE</span>
-            <span class="meta">No Trade</span>
-            <span class="date">✓</span>
-          </div>
-          <div class="trigger-row">
-            <span class="dot filtered"></span>
-            <span class="ticker">VLO</span>
-            <span class="meta">Filtered</span>
-            <span class="date">✓</span>
-          </div>
+        <div class="bh-card bh-card--d">
+          <div class="l">Days live</div>
+          <div class="n" id="bhDays">—</div>
+          <div class="s" id="bhDaysSub">Running on a 3-hour cycle</div>
         </div>
-
-        <p class="hero-card-caption">Illustrative example — see the live dashboard for real activity</p>
+        <a class="bh-dot-btn" href="dashboard.html" aria-label="Open the live dashboard">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"/></svg>
+        </a>
       </div>
     </div>
   </section>
 
-  <div class="below-hero-spacer"></div>
+  <section class="bh-market" id="market">
+    <div class="bh-market-inner">
+      <h2>Live market tracking, straight from Bitget</h2>
+      <p class="bh-market-sub">The same hourly candles Beacon's watchlist uses, pulled from Bitget's public market data on every cycle.</p>
+      <div class="bh-chart-card">
+        <div class="bh-chart-head">
+          <div>
+            <div class="bh-chart-sym">RNVDUSDT · Bitget tokenized</div>
+            <div class="bh-chart-note">Bitget's tokenized NVDA trades at its own rebased price. This is not NVDA's share price.</div>
+          </div>
+          <div class="bh-chart-price">
+            <b id="bhNvdaPrice">—</b>
+            <span id="bhNvdaChg">—</span>
+          </div>
+        </div>
+        <div class="bh-chart" id="bhChart"><div class="bh-chart-empty" id="bhChartEmpty">Loading live candles…</div></div>
+        <div class="bh-chart-foot">Hourly candles, last 5 days · Source: Bitget public market data · Updated <span id="bhChartUpdated">—</span></div>
+      </div>
+    </div>
+  </section>
 
   <section class="showcase">
     <div class="showcase-inner">
@@ -1899,5 +2090,127 @@ Data source: SEC EDGAR (live)</pre>
     } catch (e) {
       section.classList.add('in-view');
     }
+  })();
+</script>
+
+<!-- TradingView Lightweight Charts (MIT), same pinned build as the dashboard's chart modal. -->
+<script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+<script>
+  (function(){
+    // Same live sources as the dashboard: GitHub raw first (updated by every
+    // cron cycle's publish-data step), same-origin copy as the fallback.
+    var RAW = 'https://raw.githubusercontent.com/Im-2/beacon/master/';
+    function getJson(name){
+      var bust = '?t=' + Date.now();
+      return fetch(RAW + name + bust, {cache: 'no-store'})
+        .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .catch(function(){
+          return fetch(name + bust, {cache: 'no-store'})
+            .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+        });
+    }
+    function $(id){ return document.getElementById(id); }
+    function setText(id, v){ var el = $(id); if (el) el.textContent = v; }
+    function esc(s){
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+      });
+    }
+    function usd(n, dp){
+      return '$' + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits: dp, maximumFractionDigits: dp});
+    }
+    function pct(f){ var p = f * 100; return (p >= 0 ? '+' : '') + p.toFixed(2) + '%'; }
+
+    setText('bhTime', new Date().toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'}));
+
+    getJson('dashboard_data.json').then(function(d){
+      var s = d.summary || {};
+      var pnl = s.cumulative_pnl_usd || 0;
+      setText('bhCap', usd((d.capital_usd || 0) + pnl, 2));
+      setText('bhCapSub', 'Cumulative P&L ' + (pnl >= 0 ? '+' : '−') + usd(pnl, 2) + ' · real decisions only');
+
+      var ns = d.news_stats || {};
+      setText('bhHeadlines', (ns.seen || 0).toLocaleString('en-US'));
+      setText('bhHeadlinesSub', (ns.skipped || 0) + ' skipped · ' +
+        ((ns.judged_no_trade || 0) + (ns.judged_trade || 0)) + ' sent to Qwen');
+
+      var real = (d.decisions || []).filter(function(x){ return !x.is_mock; });
+      var judged = real.filter(function(x){ return x.decision; });
+      var trades = judged.filter(function(x){ return x.decision === 'long' || x.decision === 'short'; }).length;
+      setText('bhQwen', judged.length);
+      setText('bhQwenSub', trades + ' directional call' + (trades === 1 ? '' : 's') + ' · ' + (judged.length - trades) + ' no-trade');
+
+      if (typeof s.triggers_detected === 'number') setText('bhTriggers', s.triggers_detected);
+      if (s.live_since_utc) {
+        var since = new Date(s.live_since_utc);
+        var days = Math.max(0, Math.floor((Date.now() - since.getTime()) / 86400000));
+        setText('bhDays', days + (days === 1 ? ' day' : ' days'));
+        setText('bhDaysSub', 'Live since ' + since.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}));
+      }
+
+      var list = $('bhDecisions');
+      if (list) {
+        list.innerHTML = real.slice(0, 6).map(function(x){
+          var dec = x.decision === 'long' ? 'Long' : x.decision === 'short' ? 'Short' : 'No trade';
+          var conv = typeof x.conviction === 'number' ? ' · ' + x.conviction + '%' : '';
+          return '<div class="bh-dec"><b>' + esc(x.symbol) + '</b><span class="tg">' + esc(x.trigger_label) + '</span>' +
+            '<span class="d">' + dec + conv + '</span></div>';
+        }).join('') || '<p class="bh-empty">No real decisions yet.</p>';
+      }
+    }).catch(function(){
+      setText('bhCapSub', 'Live data unavailable right now');
+      var list = $('bhDecisions'); if (list) list.innerHTML = '<p class="bh-empty">Live data unavailable right now.</p>';
+    });
+
+    getJson('market_data.json').then(function(m){
+      var P = m.prices || {};
+      ['EQT', 'GOOGL', 'MU', 'NVDA'].forEach(function(tk){
+        var p = P[tk];
+        var card = document.querySelector('.bh-wl-card[data-t="' + tk + '"]');
+        if (!p || !card) return;
+        card.querySelector('.p').textContent = '$' + p.price.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: p.price < 10 ? 3 : 2});
+        var c = card.querySelector('.c');
+        c.textContent = pct(p.change24h);
+        c.classList.add(p.change24h >= 0 ? 'bh-up' : 'bh-down');
+      });
+
+      var n = P.NVDA;
+      if (n) {
+        setText('bhNvdaPrice', '$' + n.price.toFixed(3));
+        var chg = $('bhNvdaChg');
+        chg.textContent = pct(n.change24h) + ' in 24h';
+        chg.classList.add(n.change24h >= 0 ? 'bh-up' : 'bh-down');
+      }
+      if (m.updatedAt) {
+        setText('bhChartUpdated', new Date(m.updatedAt).toLocaleString('en-US', {month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'}));
+      }
+
+      var candles = (m.candles || {}).NVDA;
+      var box = $('bhChart'), empty = $('bhChartEmpty');
+      if (!candles || !candles.length || !window.LightweightCharts || !box) {
+        if (empty) empty.textContent = 'Live candles are unavailable right now.';
+        return;
+      }
+      if (empty) empty.hidden = true;
+      var chart = LightweightCharts.createChart(box, {
+        autoSize: true,
+        layout: {background: {color: '#FFFFFF'}, textColor: '#4C6A6E', fontFamily: 'Inter, sans-serif', fontSize: 11},
+        grid: {vertLines: {color: '#EEF4F4'}, horzLines: {color: '#EEF4F4'}},
+        rightPriceScale: {borderVisible: false},
+        timeScale: {borderVisible: false, timeVisible: true, secondsVisible: false},
+        crosshair: {mode: 1},
+        handleScroll: {mouseWheel: false, pressedMouseMove: true, horzTouchDrag: true, vertTouchDrag: false},
+        handleScale: {mouseWheel: false, pinch: true}
+      });
+      var series = chart.addCandlestickSeries({
+        upColor: '#1DA2B4', borderUpColor: '#1DA2B4', wickUpColor: '#1DA2B4',
+        downColor: '#D1453B', borderDownColor: '#D1453B', wickDownColor: '#D1453B',
+        priceFormat: {type: 'price', precision: 3, minMove: 0.001}
+      });
+      series.setData(candles);
+      chart.timeScale().fitContent();
+    }).catch(function(){
+      setText('bhChartEmpty', 'Live candles are unavailable right now.');
+    });
   })();
 </script>
