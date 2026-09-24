@@ -1,30 +1,44 @@
 {
-  "generated_at": "2026-09-24T10:30:02.808693+00:00",
+  "generated_at": "2026-09-24T10:36:06.295229+00:00",
   "capital_usd": 10000.0,
   "summary": {
-    "cumulative_pnl_usd": 0,
+    "cumulative_pnl_usd": 0.0,
     "realized_pnl_usd": 0,
     "triggers_detected": 32,
     "live_since_utc": "2026-09-18T14:19:41.489280+00:00",
-    "real_unrealized_pnl_usd": 0,
+    "real_unrealized_pnl_usd": 0.0,
     "test_fixture_pnl_usd": -4.61,
     "max_drawdown_pct": 0.0,
     "sharpe_per_trade": null,
     "win_rate_pct": null,
     "real_closed_count": 0,
-    "open_positions_count": 0,
-    "total_exposure_usd": 0,
-    "total_exposure_pct": 0.0,
-    "unrealized_pnl_usd": 0,
-    "concurrent_positions_used": 0,
+    "open_positions_count": 1,
+    "total_exposure_usd": 200.0,
+    "total_exposure_pct": 2.0,
+    "unrealized_pnl_usd": 0.0,
+    "concurrent_positions_used": 1,
     "concurrent_positions_cap": 5,
-    "position_size_used_pct": 0.0,
+    "position_size_used_pct": 2.0,
     "position_size_cap_pct": 5.0,
     "daily_drawdown_pct": 0.0,
     "daily_drawdown_cap_pct": 3.0,
     "no_averaging_blocked_count": 0
   },
-  "open_positions": [],
+  "open_positions": [
+    {
+      "symbol": "BTC",
+      "direction": "long",
+      "entry_price": 83255.58,
+      "size_usd": 200.0,
+      "stop_loss_pct": 3.0,
+      "take_profit_pct": 6.0,
+      "opened_at": "2026-09-24T10:33:47.921780+00:00",
+      "category": "news_reactive",
+      "unrealized_pnl_usd": 0.0,
+      "execution_leg": "cross_asset_proxy",
+      "proxy_for": "MU"
+    }
+  ],
   "closed_positions": [
     {
       "symbol": "BTC",
@@ -85,6 +99,98 @@
     }
   ],
   "decisions": [
+    {
+      "timestamp_utc": "2026-09-24T10:35:21.914536+00:00",
+      "date_label": "Sep 24",
+      "symbol": "NVDA",
+      "trigger_label": "News",
+      "category": "news_reactive",
+      "decision": "no-trade",
+      "conviction": 5,
+      "risk_approved": false,
+      "risk_reason": "LLM decision was no-trade.",
+      "status": "notrade",
+      "outcome": "no_trade_llm_decision",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Finnhub news (Yahoo, 2026-09-23T17:00:17+00:00):\nNvidia Scores Winning Streak: Trump-Xi Meeting, China Sales Outlook In Focus\nSource: https://finnhub.io/api/news?id=4f2add1c39fc69b51710acf86817701a4dd7fc91ed0b10fa8c6158f7926f58c7",
+      "judge_heading": "Judge",
+      "judge_text": "The news item does not contain reported earnings, guidance, or estimate revisions for NVDA; it only notes a pause after a six-day winning streak ahead of a Trump-Xi meeting and CEO involvement. The matched keyword 'outlook' is insufficient because no actual outlook figures or changes are disclosed. NVDA is down 1.47% at $225.51, but this price action alone does not establish an earnings-driven setup. Without concrete, ticker-specific earnings/guidance information, there is no reliable directional edge.",
+      "judge_neutral": false,
+      "risk_lines": [],
+      "execute_text": "No order placed \u2014 Judge decision was no-trade.",
+      "execute_kind": "neutral",
+      "edgar_url": null,
+      "realized_pnl_usd": null,
+      "realized_pnl_pct": null,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
+    {
+      "timestamp_utc": "2026-09-24T10:34:16.677451+00:00",
+      "date_label": "Sep 24",
+      "symbol": "MU",
+      "trigger_label": "News",
+      "category": "news_reactive",
+      "decision": "no-trade",
+      "conviction": 15,
+      "risk_approved": false,
+      "risk_reason": "LLM decision was no-trade.",
+      "status": "notrade",
+      "outcome": "no_trade_llm_decision",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Finnhub news (Yahoo, 2026-09-23T17:04:18+00:00):\nCiti Revamps Micron Stock Price Target For 2027\nSource: https://finnhub.io/api/news?id=7081252494af1536b4849120c0bd4e96b4020a9862ae972b93834ed5f85d1f1b",
+      "judge_heading": "Judge",
+      "judge_text": "The news is ticker-specific and directionally positive because it states Citi lifted Micron forecasts and a 2027 price target due to hotter memory pricing. However, no actual price target, estimate revision, EPS, revenue, or margin figure is provided, so the magnitude of the bullish signal cannot be assessed. MU's quote also fell 2.2% to $1,071.88 from $1,096.16, showing no immediate positive price confirmation. With only a headline and no concrete numbers, the evidence is too thin for a trade.",
+      "judge_neutral": false,
+      "risk_lines": [],
+      "execute_text": "No order placed \u2014 Judge decision was no-trade.",
+      "execute_kind": "neutral",
+      "edgar_url": null,
+      "realized_pnl_usd": null,
+      "realized_pnl_pct": null,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
+    {
+      "timestamp_utc": "2026-09-24T10:33:47.923262+00:00",
+      "date_label": "Sep 24",
+      "symbol": "MU",
+      "trigger_label": "News",
+      "category": "news_reactive",
+      "decision": "long",
+      "conviction": 32,
+      "risk_approved": true,
+      "risk_reason": "All risk checks passed.",
+      "status": "approved",
+      "outcome": "executed_cross_asset_proxy",
+      "is_mock": false,
+      "is_cross_asset": true,
+      "cross_asset_symbol": "BTC",
+      "cross_asset_note": "Cross-asset proxy execution: rToken MU halted, expressing via BTC instead.",
+      "sense_text": "Finnhub news (Yahoo, 2026-09-23T17:15:25+00:00):\nMicron Price Target Raised to $1,300 by Citi on Stronger DRAM Pricing, Undersupply\nSource: https://finnhub.io/api/news?id=9deb5f49694d21898dad6e57ce121a6083695313c26c49b61c0c961ec214f1ef",
+      "judge_heading": "Judge",
+      "judge_text": "Citi raised Micron's price target to $1,300, which is above the current quote of $1,071.88 and implies roughly 21% upside if achieved. The stated drivers, stronger DRAM pricing and undersupply, are directly relevant to Micron's earnings potential. However, the evidence is limited to one headline and summary, the stock is down 2.2% on the day, and the summary cautions that the target remains below broader Wall Street expectations. That supports only a small, low-conviction long rather than a larger position.",
+      "judge_neutral": false,
+      "risk_lines": [
+        "Position size cap: passed (2.0% of 5.0% cap)",
+        "Concurrent positions: passed (cap 5)",
+        "Daily drawdown breaker: passed (0.0% of 3.0% limit)",
+        "No averaging into losers: passed"
+      ],
+      "execute_text": "Cross-asset proxy execution: rToken MU halted, expressing via BTC instead.",
+      "execute_kind": "ok",
+      "edgar_url": null,
+      "realized_pnl_usd": null,
+      "realized_pnl_pct": null,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
     {
       "timestamp_utc": "2026-09-24T02:35:11.510495+00:00",
       "date_label": "Sep 24",
@@ -3361,13 +3467,21 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=9deb5f49694d21898dad6e57ce121a6083695313c26c49b61c0c961ec214f1ef",
       "published_utc": "2026-09-23T17:15:25+00:00",
-      "summary": "Citi just lifted its Micron price target, but here is the catch: even that higher number sits well below what Wall Street analysts collectively expect, raising the question of how much further this rally has left to run.",
       "matched_keywords": [
         "analysts",
         "price target"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T20:33:36.465600+00:00"
+      "verdict": "judged_trade",
+      "decision": "long",
+      "conviction": 32,
+      "rationale": "Citi raised Micron's price target to $1,300, which is above the current quote of $1,071.88 and implies roughly 21% upside if achieved. The stated drivers, stronger DRAM pricing and undersupply, are directly relevant to Micron's earnings potential. However, the evidence is limited to one headline and summary, the stock is down 2.2% on the day, and the summary cautions that the target remains below broader Wall Street expectations. That supports only a small, low-conviction long rather than a larger position.",
+      "tone_assessment": "The headline is constructive because it links a higher Citi price target to stronger DRAM pricing and undersupply. The summary is more cautious, noting that the new target still sits below broader Wall Street expectations.",
+      "is_mock": false,
+      "outcome": "executed_cross_asset_proxy",
+      "execution_leg": "cross_asset_proxy",
+      "decision_timestamp_utc": "2026-09-24T10:33:47.923262+00:00",
+      "logged_at_utc": "2026-09-24T10:33:47.926448+00:00",
+      "execution_label": "BTC proxy"
     },
     {
       "news_key": "MU:142363037",
@@ -3461,13 +3575,21 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=7081252494af1536b4849120c0bd4e96b4020a9862ae972b93834ed5f85d1f1b",
       "published_utc": "2026-09-23T17:04:18+00:00",
-      "summary": "Micron Stock in Focus as Citi Lifts Forecasts on Hotter Memory Pricing",
       "matched_keywords": [
         "forecasts",
         "price target"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T20:33:36.462622+00:00"
+      "verdict": "judged_no_trade",
+      "decision": "no-trade",
+      "conviction": 15,
+      "rationale": "The news is ticker-specific and directionally positive because it states Citi lifted Micron forecasts and a 2027 price target due to hotter memory pricing. However, no actual price target, estimate revision, EPS, revenue, or margin figure is provided, so the magnitude of the bullish signal cannot be assessed. MU's quote also fell 2.2% to $1,071.88 from $1,096.16, showing no immediate positive price confirmation. With only a headline and no concrete numbers, the evidence is too thin for a trade.",
+      "tone_assessment": "The headline and summary are positive, saying Citi lifted forecasts and a 2027 price target on hotter memory pricing, but the language is vague and lacks specific figures.",
+      "is_mock": false,
+      "outcome": "no_trade_llm_decision",
+      "execution_leg": null,
+      "decision_timestamp_utc": "2026-09-24T10:34:16.677451+00:00",
+      "logged_at_utc": "2026-09-24T10:34:16.679773+00:00",
+      "execution_label": null
     },
     {
       "news_key": "MU:142363135",
@@ -3491,12 +3613,20 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=4f2add1c39fc69b51710acf86817701a4dd7fc91ed0b10fa8c6158f7926f58c7",
       "published_utc": "2026-09-23T17:00:17+00:00",
-      "summary": "Nvidia stock takes a breather after a six-day winning streak ahead of a key meeting between CEO Huang, President Trump and China's Xi Jinping.",
       "matched_keywords": [
         "outlook"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T20:33:39.628711+00:00"
+      "verdict": "judged_no_trade",
+      "decision": "no-trade",
+      "conviction": 5,
+      "rationale": "The news item does not contain reported earnings, guidance, or estimate revisions for NVDA; it only notes a pause after a six-day winning streak ahead of a Trump-Xi meeting and CEO involvement. The matched keyword 'outlook' is insufficient because no actual outlook figures or changes are disclosed. NVDA is down 1.47% at $225.51, but this price action alone does not establish an earnings-driven setup. Without concrete, ticker-specific earnings/guidance information, there is no reliable directional edge.",
+      "tone_assessment": "The headline is speculative and event-watch focused, mentioning a possible China sales outlook and political meetings but providing no concrete earnings, guidance, or estimate data.",
+      "is_mock": false,
+      "outcome": "no_trade_llm_decision",
+      "execution_leg": null,
+      "decision_timestamp_utc": "2026-09-24T10:35:21.914536+00:00",
+      "logged_at_utc": "2026-09-24T10:35:21.916589+00:00",
+      "execution_label": null
     },
     {
       "news_key": "GOOGL:142363062",
@@ -5207,13 +5337,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=d20d9edd802c74241306d9f1ef858cb5ebf8134a2456a2b8fcf641102774f2bc",
       "published_utc": "2026-09-23T10:24:27+00:00",
-      "summary": "Despite EQT Corporation\u2019s weak performance relative to the energy sector over the past year, Wall Street analysts maintain a bullish outlook on the stock\u2019s prospects.",
       "matched_keywords": [
         "analysts",
         "outlook"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T20:33:31.686369+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-24T10:31:53.430920+00:00"
     },
     {
       "news_key": "NVDA:142356587",
@@ -5422,12 +5551,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=51b99fc9b7fc9c002e3e134683e174f453c32866cca11e70d7f3fa151613f0c1",
       "published_utc": "2026-09-23T09:13:53+00:00",
-      "summary": "Micron Technology has turned into one of the market's most eye catching semiconductor stories. The real question for anyone looking at the stock today is whether the current price can be squared with the earnings that sit behind it. After a powerful multi year run and a stream of headline grabbing developments, the key issue now is what investors are actually paying for in terms of profits. Over the past 3 years Micron Technology has delivered a very large share price gain of about 15x. That...",
       "matched_keywords": [
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:01.227917+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-24T10:31:53.432003+00:00"
     },
     {
       "news_key": "GOOGL:142356101",
@@ -5536,12 +5664,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=0834c142cb8acebf1840e7d38c5d41952d67c1196f14afaab4f7d92329d37297",
       "published_utc": "2026-09-23T08:30:00+00:00",
-      "summary": "It's a good problem for a company to have.",
       "matched_keywords": [
         "forecast"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.191237+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-24T10:31:53.432297+00:00"
     },
     {
       "news_key": "NVDA:142356087",
@@ -5898,12 +6025,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=ee2b564c59fca237d4452703f3fe6b53fef067acc2094cda3ea986eab0f4c15d",
       "published_utc": "2026-09-23T05:35:24+00:00",
-      "summary": "Apple shares reached a fresh ATH above $344, while NVIDIA's forward valuation multiple has compressed sharply despite record revenue growth.",
       "matched_keywords": [
         "revenue"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.182812+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-24T10:31:53.432556+00:00"
     },
     {
       "news_key": "MU:142352840",
@@ -5990,12 +6116,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=b27439abc0c0e249a9a8bbc95f96b046268ed725488b2ec3321afcae8003cba7",
       "published_utc": "2026-09-23T04:20:00+00:00",
-      "summary": "It's not too late to buy Nvidia.",
       "matched_keywords": [
         "estimates"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.180307+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-24T10:31:53.432822+00:00"
     },
     {
       "news_key": "NVDA:142359616",
@@ -6824,12 +6949,12 @@
     "skipped": 380,
     "skipped_not_earnings": 345,
     "skipped_off_ticker": 35,
-    "expired": 4,
-    "queued": 20,
-    "judged_no_trade": 13,
-    "judged_trade": 0,
+    "expired": 9,
+    "queued": 12,
+    "judged_no_trade": 15,
+    "judged_trade": 1,
     "exported": 400,
-    "queue_length": 20
+    "queue_length": 12
   },
   "qwen_usage": {
     "by_day": [
@@ -6841,22 +6966,22 @@
       },
       {
         "date": "2026-09-24",
-        "calls": 3,
+        "calls": 6,
         "failed": 0,
-        "tokens": 5693
+        "tokens": 13985
       }
     ],
     "tracking_since": "2026-09-23",
-    "total_calls": 13,
-    "total_tokens": 24254
+    "total_calls": 16,
+    "total_tokens": 32546
   },
   "last_cycle": {
-    "last_live_cycle_utc": "2026-09-24T02:35:42.563061+00:00",
+    "last_live_cycle_utc": "2026-09-24T10:35:53.365209+00:00",
     "triggers_total": 2,
     "triggers_pending_at_start": 0,
     "triggers_processed": 0,
     "news_judged": 3,
-    "news_queued_remaining": 20
+    "news_queued_remaining": 12
   },
   "scan_schedule": {
     "anchor_utc": "2026-09-18T14:33:00+00:00",
