@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T20:30:03.763499+00:00",
+  "generated_at": "2026-09-24T20:33:28.664374+00:00",
   "capital_usd": 10000.0,
   "summary": {
     "cumulative_pnl_usd": 2.72,
@@ -7362,11 +7362,11 @@
     "total_tokens": 42362
   },
   "last_cycle": {
-    "last_live_cycle_utc": "2026-09-24T17:36:05.391883+00:00",
+    "last_live_cycle_utc": "2026-09-24T20:33:26.080993+00:00",
     "triggers_total": 2,
     "triggers_pending_at_start": 0,
     "triggers_processed": 0,
-    "news_judged": 5,
+    "news_judged": 0,
     "news_queued_remaining": 11
   },
   "scan_schedule": {
