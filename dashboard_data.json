@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T14:30:06.885923+00:00",
+  "generated_at": "2026-09-24T14:33:31.985262+00:00",
   "capital_usd": 10000.0,
   "summary": {
     "cumulative_pnl_usd": 1.26,
@@ -4884,13 +4884,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=c23bd9438b7671dbbe5f0d018cfbb564463048ba770b378d208f0e526b111fc0",
       "published_utc": "2026-09-23T14:00:01+00:00",
-      "summary": "Micron (MU) possesses the right combination of the two key ingredients for a likely earnings beat in its upcoming report. Get prepared with the key expectations.",
       "matched_keywords": [
         "beat",
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:01.241574+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-24T14:33:28.685777+00:00"
     },
     {
       "news_key": "GOOGL:142361879",
@@ -5007,13 +5006,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=760550e58985974b8667f34b5cc9eed09780dc37b26814aa51f297a34506e37c",
       "published_utc": "2026-09-23T13:20:24+00:00",
-      "summary": "Wall Street analysts are fighting over Micron more violently than they have in years, with targets ranging from a humble hold to a stunning $2,000 price, and a single line in the September 30 earnings report will determine who looks like a genius and who quietly disappears.",
       "matched_keywords": [
         "analysts",
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:01.240302+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-24T14:33:28.687844+00:00"
     },
     {
       "news_key": "NVDA:142359337",
@@ -5100,13 +5098,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=c2fd5efbaf80de9259710f8533e0d5a5e411009a96ef3d87b814c21522f0c1e0",
       "published_utc": "2026-09-23T13:05:00+00:00",
-      "summary": "Astera Labs gains momentum as AI data centers scale, with triple-digit growth, repeated earnings beats and rising connectivity demand.",
       "matched_keywords": [
         "beats",
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.321605+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-24T14:33:28.689895+00:00"
     },
     {
       "news_key": "NVDA:142358556",
@@ -5163,12 +5160,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=5424a1b8f054bb86d3263082fa25dae14ee5619430ab6de2abec2f7f00768d7b",
       "published_utc": "2026-09-23T13:00:24+00:00",
-      "summary": "Nvidia just posted triple-digit revenue growth and Jensen Huang says the company can only fulfill 70% of demand, yet the stock still trades well below where the math points. Three converging forces suggest the gap between current price and fair value may close faster than most investors expect.",
       "matched_keywords": [
         "revenue"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.308569+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-24T14:33:28.691930+00:00"
     },
     {
       "news_key": "GOOGL:142359387",
@@ -5247,13 +5243,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=68ea613bbf284f1014b66bb3831f4871f16c157d6d5ef13fbb49401f9b752212",
       "published_utc": "2026-09-23T12:50:50+00:00",
-      "summary": "Micron Technology (NASDAQ:MU) shares fell 0. 3% in pre-market trading, following a four-session advance that had contributed to a gain of approximately 14% during September.",
       "matched_keywords": [
         "earnings",
         "q4"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:01.236757+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-24T14:33:28.693155+00:00"
     },
     {
       "news_key": "NVDA:142357802",
@@ -5285,13 +5280,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=4c4fe7b5cdc7362578dcf2c3f6502a8ff47c14be4cf9d97119d91f07d9654d8c",
       "published_utc": "2026-09-23T12:46:00+00:00",
-      "summary": "Micron stock is surging ahead of its earnings but Citi analyst Atif Malik has a warning about memory-chip prices.",
       "matched_keywords": [
         "analyst",
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:01.236085+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-24T14:33:28.694128+00:00"
     },
     {
       "news_key": "MU:142359433",
@@ -5513,13 +5507,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=87744e686338dff61e9166c773839f85d9d00cdfc6fa630f7418814b944e9a54",
       "published_utc": "2026-09-23T12:00:57+00:00",
-      "summary": "Analysts are raising profit estimates for four leaders of the artificial intelligence trade: AI stock Micron is above a trendline entry.",
       "matched_keywords": [
         "analysts",
         "estimates"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:01.232434+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-24T14:33:28.695037+00:00"
     },
     {
       "news_key": "NVDA:142357805",
@@ -5565,13 +5558,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=7f14bde8195bae63bcb712493f44023c471378e40e4077caa1ba80a47b1124ba",
       "published_utc": "2026-09-23T11:53:01+00:00",
-      "summary": "Nvidia grew revenue by 106% in its fiscal second quarter, but there\u2019s another number I\u2019m watching closely.",
       "matched_keywords": [
         "quarter",
         "revenue"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-23T18:11:03.281831+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-24T14:33:28.695922+00:00"
     },
     {
       "news_key": "NVDA:142356590",
@@ -6988,12 +6980,12 @@
     "skipped": 420,
     "skipped_not_earnings": 380,
     "skipped_off_ticker": 40,
-    "expired": 10,
-    "queued": 14,
+    "expired": 18,
+    "queued": 6,
     "judged_no_trade": 15,
     "judged_trade": 1,
     "exported": 400,
-    "queue_length": 14
+    "queue_length": 6
   },
   "qwen_usage": {
     "by_day": [
@@ -7015,12 +7007,12 @@
     "total_tokens": 32546
   },
   "last_cycle": {
-    "last_live_cycle_utc": "2026-09-24T11:36:59.644839+00:00",
+    "last_live_cycle_utc": "2026-09-24T14:33:28.733104+00:00",
     "triggers_total": 2,
     "triggers_pending_at_start": 0,
     "triggers_processed": 0,
     "news_judged": 0,
-    "news_queued_remaining": 14
+    "news_queued_remaining": 6
   },
   "scan_schedule": {
     "anchor_utc": "2026-09-18T14:33:00+00:00",
