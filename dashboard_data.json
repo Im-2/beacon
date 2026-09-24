@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T23:55:32.232966+00:00",
+  "generated_at": "2026-09-24T01:08:33.057227+00:00",
   "capital_usd": 10000.0,
   "summary": {
     "cumulative_pnl_usd": 0,
@@ -20,7 +20,7 @@
     "concurrent_positions_cap": 5,
     "position_size_used_pct": 0.0,
     "position_size_cap_pct": 5.0,
-    "daily_drawdown_pct": -0.05,
+    "daily_drawdown_pct": 0.0,
     "daily_drawdown_cap_pct": 3.0,
     "no_averaging_blocked_count": 0
   },
