@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-25T11:35:40.729200+00:00",
+  "generated_at": "2026-09-25T12:00:07.306604+00:00",
   "capital_usd": 10000.0,
   "summary": {
-    "cumulative_pnl_usd": 4.05,
+    "cumulative_pnl_usd": 3.21,
     "realized_pnl_usd": 0,
     "triggers_detected": 32,
     "live_since_utc": "2026-09-18T14:19:41.489280+00:00",
-    "real_unrealized_pnl_usd": 4.05,
+    "real_unrealized_pnl_usd": 3.21,
     "test_fixture_pnl_usd": -4.61,
     "max_drawdown_pct": 0.0,
     "sharpe_per_trade": null,
@@ -15,12 +15,12 @@
     "open_positions_count": 1,
     "total_exposure_usd": 200.0,
     "total_exposure_pct": 2.0,
-    "unrealized_pnl_usd": 4.05,
+    "unrealized_pnl_usd": 3.21,
     "concurrent_positions_used": 1,
     "concurrent_positions_cap": 5,
     "position_size_used_pct": 2.0,
     "position_size_cap_pct": 5.0,
-    "daily_drawdown_pct": 0.04,
+    "daily_drawdown_pct": 0.03,
     "daily_drawdown_cap_pct": 3.0,
     "no_averaging_blocked_count": 0
   },
@@ -34,10 +34,10 @@
       "take_profit_pct": 6.0,
       "opened_at": "2026-09-24T10:33:47.921780+00:00",
       "category": "news_reactive",
-      "unrealized_pnl_usd": 4.05,
+      "unrealized_pnl_usd": 3.21,
       "execution_leg": "cross_asset_proxy",
       "proxy_for": "MU",
-      "current_price": 84940.61
+      "current_price": 84592.58
     }
   ],
   "closed_positions": [
