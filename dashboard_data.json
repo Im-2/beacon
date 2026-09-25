@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-25T08:30:05.726398+00:00",
+  "generated_at": "2026-09-25T08:35:52.732316+00:00",
   "capital_usd": 10000.0,
   "summary": {
-    "cumulative_pnl_usd": 2.81,
+    "cumulative_pnl_usd": 2.7,
     "realized_pnl_usd": 0,
     "triggers_detected": 32,
     "live_since_utc": "2026-09-18T14:19:41.489280+00:00",
-    "real_unrealized_pnl_usd": 2.81,
+    "real_unrealized_pnl_usd": 2.7,
     "test_fixture_pnl_usd": -4.61,
     "max_drawdown_pct": 0.0,
     "sharpe_per_trade": null,
@@ -15,7 +15,7 @@
     "open_positions_count": 1,
     "total_exposure_usd": 200.0,
     "total_exposure_pct": 2.0,
-    "unrealized_pnl_usd": 2.81,
+    "unrealized_pnl_usd": 2.7,
     "concurrent_positions_used": 1,
     "concurrent_positions_cap": 5,
     "position_size_used_pct": 2.0,
@@ -34,10 +34,10 @@
       "take_profit_pct": 6.0,
       "opened_at": "2026-09-24T10:33:47.921780+00:00",
       "category": "news_reactive",
-      "unrealized_pnl_usd": 2.81,
+      "unrealized_pnl_usd": 2.7,
       "execution_leg": "cross_asset_proxy",
       "proxy_for": "MU",
-      "current_price": 84425.52
+      "current_price": 84380.0
     }
   ],
   "closed_positions": [
@@ -100,6 +100,151 @@
     }
   ],
   "decisions": [
+    {
+      "timestamp_utc": "2026-09-25T08:35:50.054143+00:00",
+      "date_label": "Sep 25",
+      "symbol": "MU",
+      "trigger_label": "News",
+      "category": "news_reactive",
+      "decision": "no-trade",
+      "conviction": 8,
+      "risk_approved": false,
+      "risk_reason": "LLM decision was no-trade.",
+      "status": "notrade",
+      "outcome": "no_trade_llm_decision",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Finnhub news (Yahoo, 2026-09-24T16:35:41+00:00):\nMicron Stock Gets a Big Wall Street Boost Ahead of Earnings\nSource: https://finnhub.io/api/news?id=d59dfba9a588392500d4251a7bc9164d1f50fa0ba7070acbc6f7a78737a1c7aa",
+      "judge_heading": "Judge",
+      "judge_text": "The only evidence is a Yahoo headline saying Micron may have a massive quarter ahead of earnings, with no stated EPS, revenue, guidance, or analyst estimate numbers. While the quote is modestly positive at $1080.53, up 0.8%, that price move alone does not confirm an earnings-driven surprise. Because this is a news_reactive trigger and the article lacks concrete ticker-specific earnings/guidance/estimate information, the expected-surprise signal is too weak to trade. The appropriate action is to avoid inferring a bullish report and stand aside.",
+      "judge_neutral": false,
+      "risk_lines": [],
+      "execute_text": "No order placed \u2014 Judge decision was no-trade.",
+      "execute_kind": "neutral",
+      "edgar_url": null,
+      "realized_pnl_usd": null,
+      "realized_pnl_pct": null,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
+    {
+      "timestamp_utc": "2026-09-25T08:35:15.748306+00:00",
+      "date_label": "Sep 25",
+      "symbol": "GOOGL",
+      "trigger_label": "News",
+      "category": "news_reactive",
+      "decision": "no-trade",
+      "conviction": 10,
+      "risk_approved": false,
+      "risk_reason": "LLM decision was no-trade.",
+      "status": "notrade",
+      "outcome": "no_trade_llm_decision",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Finnhub news (Yahoo, 2026-09-24T17:08:33+00:00):\nAlphabet Drops Below $350: Buying Opportunity or the Start of Something Worse?\nSource: https://finnhub.io/api/news?id=a96f2820ffcc8f013bf4e339aec6bec88508b47f182104481f47244e29c727b1",
+      "judge_heading": "Judge",
+      "judge_text": "The news item is a broad market-commentary piece about Alphabet falling below $350 and whether it is a buying opportunity, but it provides no concrete earnings, guidance, or estimate data. The summary explicitly says there was no earnings warning, guidance cut, or regulatory news explaining the move. Current quote data shows GOOGL at $342.36, up 1.34%, which does not itself provide a tradable fundamental surprise. Because the trigger is news_reactive and the evidence is only a speculative headline/summary, there is insufficient information to form a directional view.",
+      "judge_neutral": false,
+      "risk_lines": [],
+      "execute_text": "No order placed \u2014 Judge decision was no-trade.",
+      "execute_kind": "neutral",
+      "edgar_url": null,
+      "realized_pnl_usd": null,
+      "realized_pnl_pct": null,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
+    {
+      "timestamp_utc": "2026-09-25T08:34:55.137611+00:00",
+      "date_label": "Sep 25",
+      "symbol": "NVDA",
+      "trigger_label": "News",
+      "category": "news_reactive",
+      "decision": "no-trade",
+      "conviction": 6,
+      "risk_approved": false,
+      "risk_reason": "LLM decision was no-trade.",
+      "status": "notrade",
+      "outcome": "no_trade_llm_decision",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Finnhub news (Yahoo, 2026-09-24T17:46:02+00:00):\nSuper Micro Stock Slips as New NVIDIA AI Systems Enter the Market\nSource: https://finnhub.io/api/news?id=cd0056006ad115260ae2b6469c2bc2e0bd1aebf8f5d604f0520367c956ee4a8c",
+      "judge_heading": "Judge",
+      "judge_text": "The news item does not contain concrete NVIDIA earnings, guidance, or estimate information; it mainly discusses Super Micro and new NVIDIA AI systems entering the market. The only numeric reference is a '$72 Billion Revenue Target' tied to the broader context in the summary, not a disclosed NVIDIA figure or guidance update. NVIDIA's quote shows only a modest -0.41% move to $224.58, which by itself does not indicate a tradable earnings-related surprise. Because the headline passed a keyword filter on 'revenue' but lacks ticker-specific financial evidence, the appropriate action is to avoid inferring an earnings impact.",
+      "judge_neutral": false,
+      "risk_lines": [],
+      "execute_text": "No order placed \u2014 Judge decision was no-trade.",
+      "execute_kind": "neutral",
+      "edgar_url": null,
+      "realized_pnl_usd": null,
+      "realized_pnl_pct": null,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
+    {
+      "timestamp_utc": "2026-09-25T08:34:33.297536+00:00",
+      "date_label": "Sep 25",
+      "symbol": "MU",
+      "trigger_label": "News",
+      "category": "news_reactive",
+      "decision": "no-trade",
+      "conviction": 5,
+      "risk_approved": false,
+      "risk_reason": "LLM decision was no-trade.",
+      "status": "notrade",
+      "outcome": "no_trade_llm_decision",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Finnhub news (Yahoo, 2026-09-24T20:01:38+00:00):\nAMD and Micron Get New Price Targets as Taiwan Chip Exports Hit Record $30.8B\nSource: https://finnhub.io/api/news?id=a77092667763a6686667b304e1e56c6858ddde875ebf7e710878f36fc7934f24",
+      "judge_heading": "Judge",
+      "judge_text": "The news item says AMD and Micron received new price targets and references Taiwan chip exports hitting $30.8 billion, but it does not provide the actual price targets, estimate changes, earnings results, or guidance for MU. The summary also mentions Micron breaking out of a technical triangle, which is market commentary rather than fundamental earnings/guidance evidence. MU's quote is up 0.807% to 1080.53, but that price move alone does not confirm a tradable earnings-driven surprise. Because the headline lacks concrete ticker-specific estimate information, the prudent response is no-trade with low conviction.",
+      "judge_neutral": false,
+      "risk_lines": [],
+      "execute_text": "No order placed \u2014 Judge decision was no-trade.",
+      "execute_kind": "neutral",
+      "edgar_url": null,
+      "realized_pnl_usd": null,
+      "realized_pnl_pct": null,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
+    {
+      "timestamp_utc": "2026-09-25T08:34:05.837936+00:00",
+      "date_label": "Sep 25",
+      "symbol": "MU",
+      "trigger_label": "News",
+      "category": "news_reactive",
+      "decision": "no-trade",
+      "conviction": 8,
+      "risk_approved": false,
+      "risk_reason": "LLM decision was no-trade.",
+      "status": "notrade",
+      "outcome": "no_trade_llm_decision",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Finnhub news (Yahoo, 2026-09-24T20:31:09+00:00):\nMicron vs. Sandisk: Which AI Memory Stock Is the Better Buy?\nSource: https://finnhub.io/api/news?id=275523e31ff41b6a59701c7a3b37cfa6f4a7b1ed0b5fd07f162139c8a03c759d",
+      "judge_heading": "Judge",
+      "judge_text": "The news item is a generic comparison of Micron and Sandisk as AI-memory stocks, not a specific earnings report, guidance update, or estimate revision for MU. It only states that Micron trades near 7 times forward earnings and warns that memory stocks may look cheapest near cyclical peaks, which is too broad to establish an earnings surprise. The quote shows MU at $1,080.53, up 0.81%, but there is no concrete ticker-specific catalyst in the provided text to justify a directional trade. Therefore, the appropriate response is to stand aside rather than infer a bullish or bearish earnings event.",
+      "judge_neutral": false,
+      "risk_lines": [],
+      "execute_text": "No order placed \u2014 Judge decision was no-trade.",
+      "execute_kind": "neutral",
+      "edgar_url": null,
+      "realized_pnl_usd": null,
+      "realized_pnl_pct": null,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
     {
       "timestamp_utc": "2026-09-25T07:46:41.611274+00:00",
       "date_label": "Sep 25",
@@ -2376,6 +2521,84 @@
   ],
   "news_signals": [
     {
+      "news_key": "NVDA:142405490",
+      "symbol": "NVDA",
+      "finnhub_id": 142405490,
+      "headline": "Can Plug Power\u2019s (PLUG) NZ Electrolyzer Win Offset Questions Raised by a COO Exit?",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=1481c43bdda2696f04f336cc3f72f688eb3faf1a881a5bfefd0f94feb3fd0f84",
+      "published_utc": "2026-09-25T07:12:25+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-09-25T08:33:25.907895+00:00"
+    },
+    {
+      "news_key": "MU:142405008",
+      "symbol": "MU",
+      "finnhub_id": 142405008,
+      "headline": "Broadcom And 2 Other High Growth Stocks To Own",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=ffa629d66040fb9160861602a3bc525db62ec76a30d86d679d1a46c4b25073fb",
+      "published_utc": "2026-09-25T07:12:02+00:00",
+      "verdict": "skipped_off_ticker",
+      "matched_keywords": [
+        "earnings"
+      ],
+      "logged_at_utc": "2026-09-25T08:33:24.839136+00:00"
+    },
+    {
+      "news_key": "NVDA:142404517",
+      "symbol": "NVDA",
+      "finnhub_id": 142404517,
+      "headline": "Where Will Robinhood Stock Be in 5 Years?",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=bdf675fb096a8b4fb1212f3aed9b34afada5c950f6b860ac3cf1ea79cfaa281f",
+      "published_utc": "2026-09-25T06:50:00+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-09-25T08:33:25.906808+00:00"
+    },
+    {
+      "news_key": "NVDA:142405492",
+      "symbol": "NVDA",
+      "finnhub_id": 142405492,
+      "headline": "The Math Doesn't Lie: What Oklo's Stock Sales Actually Cost Investors",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=1e3efb7c2f8358428105612964fe49a2ed90fc43ddfa06a707dadb467313ea1c",
+      "published_utc": "2026-09-25T06:25:00+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-09-25T08:33:25.905938+00:00"
+    },
+    {
+      "news_key": "GOOGL:142399239",
+      "symbol": "GOOGL",
+      "finnhub_id": 142399239,
+      "headline": "Do Cloudflare\u2019s (NET) New AI Crawler Controls Quietly Strengthen Its Data-Moat Narrative?",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=cd2c4d10920a5ed7a5a104b8aa0251941ad181d80aee3a990a5f5198c55e8254",
+      "published_utc": "2026-09-25T06:09:20+00:00",
+      "verdict": "skipped_off_ticker",
+      "matched_keywords": [
+        "results"
+      ],
+      "logged_at_utc": "2026-09-25T08:33:23.633743+00:00"
+    },
+    {
+      "news_key": "NVDA:142400525",
+      "symbol": "NVDA",
+      "finnhub_id": 142400525,
+      "headline": "Meet the 6 Categories That Drove Costco\u2019s 19.5% Digitally Enabled Sales Comps in Its Latest Quarter.",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=3a93e7bc32ebda45d01defd308a611300e146586528544905db7214d69873aa0",
+      "published_utc": "2026-09-25T05:54:28+00:00",
+      "verdict": "skipped_off_ticker",
+      "matched_keywords": [
+        "quarter"
+      ],
+      "logged_at_utc": "2026-09-25T08:33:25.904811+00:00"
+    },
+    {
       "news_key": "NVDA:142397282",
       "symbol": "NVDA",
       "finnhub_id": 142397282,
@@ -3251,12 +3474,20 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=275523e31ff41b6a59701c7a3b37cfa6f4a7b1ed0b5fd07f162139c8a03c759d",
       "published_utc": "2026-09-24T20:31:09+00:00",
-      "summary": "Micron Technology, Inc. (NASDAQ:MU) and Sandisk Corporation (NASDAQ:SNDK) have produced two of the strongest rallies in the AI infrastructure trade, yet neither looks expensive on headline earnings. Micron trades near 7 times forward earnings, while Sandisk is around 8.5 times. The trap is that memory stocks often look cheapest when profits are near cyclical peaks. [\u2026]",
       "matched_keywords": [
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-25T07:44:23.835833+00:00"
+      "verdict": "judged_no_trade",
+      "decision": "no-trade",
+      "conviction": 8,
+      "rationale": "The news item is a generic comparison of Micron and Sandisk as AI-memory stocks, not a specific earnings report, guidance update, or estimate revision for MU. It only states that Micron trades near 7 times forward earnings and warns that memory stocks may look cheapest near cyclical peaks, which is too broad to establish an earnings surprise. The quote shows MU at $1,080.53, up 0.81%, but there is no concrete ticker-specific catalyst in the provided text to justify a directional trade. Therefore, the appropriate response is to stand aside rather than infer a bullish or bearish earnings event.",
+      "tone_assessment": "The article\u2019s tone is comparative and cautious, noting that memory stocks can appear cheap near cyclical profit peaks rather than providing a clear earnings-driven signal.",
+      "is_mock": false,
+      "outcome": "no_trade_llm_decision",
+      "execution_leg": null,
+      "decision_timestamp_utc": "2026-09-25T08:34:05.837936+00:00",
+      "logged_at_utc": "2026-09-25T08:34:05.842007+00:00",
+      "execution_label": null
     },
     {
       "news_key": "NVDA:142386647",
@@ -3290,12 +3521,20 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=a77092667763a6686667b304e1e56c6858ddde875ebf7e710878f36fc7934f24",
       "published_utc": "2026-09-24T20:01:38+00:00",
-      "summary": "Taiwan chip exports hit a record $30.8 billion as AMD and Micron break out of the triangles that capped them since July.",
       "matched_keywords": [
         "price targets"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-25T07:44:23.834357+00:00"
+      "verdict": "judged_no_trade",
+      "decision": "no-trade",
+      "conviction": 5,
+      "rationale": "The news item says AMD and Micron received new price targets and references Taiwan chip exports hitting $30.8 billion, but it does not provide the actual price targets, estimate changes, earnings results, or guidance for MU. The summary also mentions Micron breaking out of a technical triangle, which is market commentary rather than fundamental earnings/guidance evidence. MU's quote is up 0.807% to 1080.53, but that price move alone does not confirm a tradable earnings-driven surprise. Because the headline lacks concrete ticker-specific estimate information, the prudent response is no-trade with low conviction.",
+      "tone_assessment": "The headline tone is mildly positive, citing record Taiwan chip exports and new price targets, but it provides no specific Micron earnings, guidance, or estimate figures. The language reads like broad sector/technical commentary rather than a concrete company-specific disclosure.",
+      "is_mock": false,
+      "outcome": "no_trade_llm_decision",
+      "execution_leg": null,
+      "decision_timestamp_utc": "2026-09-25T08:34:33.297536+00:00",
+      "logged_at_utc": "2026-09-25T08:34:33.298811+00:00",
+      "execution_label": null
     },
     {
       "news_key": "GOOGL:142386673",
@@ -3816,12 +4055,20 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=cd0056006ad115260ae2b6469c2bc2e0bd1aebf8f5d604f0520367c956ee4a8c",
       "published_utc": "2026-09-24T17:46:02+00:00",
-      "summary": "Super Micro Rolls Out NVIDIA's Vera Rubin AI Racks as $72 Billion Revenue Target Looms",
       "matched_keywords": [
         "revenue"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-25T07:44:25.355094+00:00"
+      "verdict": "judged_no_trade",
+      "decision": "no-trade",
+      "conviction": 6,
+      "rationale": "The news item does not contain concrete NVIDIA earnings, guidance, or estimate information; it mainly discusses Super Micro and new NVIDIA AI systems entering the market. The only numeric reference is a '$72 Billion Revenue Target' tied to the broader context in the summary, not a disclosed NVIDIA figure or guidance update. NVIDIA's quote shows only a modest -0.41% move to $224.58, which by itself does not indicate a tradable earnings-related surprise. Because the headline passed a keyword filter on 'revenue' but lacks ticker-specific financial evidence, the appropriate action is to avoid inferring an earnings impact.",
+      "tone_assessment": "The headline is neutral and product/market-oriented, focusing on Super Micro rolling out NVIDIA AI systems rather than providing NVIDIA-specific earnings, guidance, or estimate detail.",
+      "is_mock": false,
+      "outcome": "no_trade_llm_decision",
+      "execution_leg": null,
+      "decision_timestamp_utc": "2026-09-25T08:34:55.137611+00:00",
+      "logged_at_utc": "2026-09-25T08:34:55.138963+00:00",
+      "execution_label": null
     },
     {
       "news_key": "NVDA:142384578",
@@ -3915,14 +4162,22 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=a96f2820ffcc8f013bf4e339aec6bec88508b47f182104481f47244e29c727b1",
       "published_utc": "2026-09-24T17:08:33+00:00",
-      "summary": "Alphabet shed 3.8% in a single session with no earnings warning, no guidance cut, and no regulatory news to explain it. The gap between where the stock trades now and where analysts say it belongs raises a question worth sitting with before the next move.",
       "matched_keywords": [
         "analysts",
         "earnings",
         "guidance"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-25T07:44:22.493591+00:00"
+      "verdict": "judged_no_trade",
+      "decision": "no-trade",
+      "conviction": 10,
+      "rationale": "The news item is a broad market-commentary piece about Alphabet falling below $350 and whether it is a buying opportunity, but it provides no concrete earnings, guidance, or estimate data. The summary explicitly says there was no earnings warning, guidance cut, or regulatory news explaining the move. Current quote data shows GOOGL at $342.36, up 1.34%, which does not itself provide a tradable fundamental surprise. Because the trigger is news_reactive and the evidence is only a speculative headline/summary, there is insufficient information to form a directional view.",
+      "tone_assessment": "The headline and summary are speculative and questioning rather than evidentiary, noting a 3.8% drop without an earnings warning, guidance cut, or regulatory news.",
+      "is_mock": false,
+      "outcome": "no_trade_llm_decision",
+      "execution_leg": null,
+      "decision_timestamp_utc": "2026-09-25T08:35:15.748306+00:00",
+      "logged_at_utc": "2026-09-25T08:35:15.750144+00:00",
+      "execution_label": null
     },
     {
       "news_key": "NVDA:142384579",
@@ -4020,12 +4275,20 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=d59dfba9a588392500d4251a7bc9164d1f50fa0ba7070acbc6f7a78737a1c7aa",
       "published_utc": "2026-09-24T16:35:41+00:00",
-      "summary": "Higher prices and strong demand are setting Micron up for a massive quarter.",
       "matched_keywords": [
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-25T07:44:23.829808+00:00"
+      "verdict": "judged_no_trade",
+      "decision": "no-trade",
+      "conviction": 8,
+      "rationale": "The only evidence is a Yahoo headline saying Micron may have a massive quarter ahead of earnings, with no stated EPS, revenue, guidance, or analyst estimate numbers. While the quote is modestly positive at $1080.53, up 0.8%, that price move alone does not confirm an earnings-driven surprise. Because this is a news_reactive trigger and the article lacks concrete ticker-specific earnings/guidance/estimate information, the expected-surprise signal is too weak to trade. The appropriate action is to avoid inferring a bullish report and stand aside.",
+      "tone_assessment": "The headline and summary are bullish in tone, citing higher prices, strong demand, and a Wall Street boost, but they provide no concrete estimate or guidance figures.",
+      "is_mock": false,
+      "outcome": "no_trade_llm_decision",
+      "execution_leg": null,
+      "decision_timestamp_utc": "2026-09-25T08:35:50.054143+00:00",
+      "logged_at_utc": "2026-09-25T08:35:50.055403+00:00",
+      "execution_label": null
     },
     {
       "news_key": "NVDA:142384581",
@@ -6023,13 +6286,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=6777deb05b2988abdd843209f8676e02e32ea78105927250fa167cfa83a41c7c",
       "published_utc": "2026-09-24T08:19:31+00:00",
-      "summary": "Investors are weighing lofty memory valuations, rising competition and sustained AI-driven demand ahead of Micron\u2019s key earnings report.",
       "matched_keywords": [
         "earnings",
         "results"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-24T11:34:24.608551+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-25T08:33:42.566559+00:00"
     },
     {
       "news_key": "NVDA:142373749",
@@ -7475,106 +7737,19 @@
       "verdict": "skipped_not_earnings_related",
       "matched_keywords": [],
       "logged_at_utc": "2026-09-23T20:33:39.642291+00:00"
-    },
-    {
-      "news_key": "NVDA:142364010",
-      "symbol": "NVDA",
-      "finnhub_id": 142364010,
-      "headline": "Nvidia Backed This AI Drug Startup. AbbVie Just Became a Partner Before Its IPO",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=68d0c47e436df7dea5a9b1c0e4f840488ea26b6b11d592882fd774625d92c6e3",
-      "published_utc": "2026-09-23T18:42:14+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-09-23T20:33:39.641169+00:00"
-    },
-    {
-      "news_key": "MU:142364102",
-      "symbol": "MU",
-      "finnhub_id": 142364102,
-      "headline": "A $2,400 Price Target on SanDisk Just Lit a Fire Under Every Memory Stock",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=56fd006759c7bd10ded79464cd56f0a787cd9ea259f093a3e188d1e541025a06",
-      "published_utc": "2026-09-23T18:33:05+00:00",
-      "verdict": "skipped_off_ticker",
-      "matched_keywords": [
-        "analyst",
-        "price target"
-      ],
-      "logged_at_utc": "2026-09-23T20:33:36.471453+00:00"
-    },
-    {
-      "news_key": "GOOGL:142364061",
-      "symbol": "GOOGL",
-      "finnhub_id": 142364061,
-      "headline": "GOOGL, NFLX Stocks In Focus \u2014 Alphabet's YouTube Reportedly Rolls Out Fresh Tools To Prevent Creators From Defecting To Netflix",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=6af7d41848d4b54d96c6d6f313a421a686fb9f8e3729f71ac19894852e4505a0",
-      "published_utc": "2026-09-23T18:30:55+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-09-23T20:33:33.540579+00:00"
-    },
-    {
-      "news_key": "NVDA:142364021",
-      "symbol": "NVDA",
-      "finnhub_id": 142364021,
-      "headline": "3 High-Yield Stocks Near Their 52-Week Lows That Dividend Income Investors Are Sleeping On",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=15e6d8601975c7bc46d88c50306e090282ae55ec6c60b982dd3a32edd80d2918",
-      "published_utc": "2026-09-23T18:25:00+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-09-23T20:33:39.639666+00:00"
-    },
-    {
-      "news_key": "GOOGL:142364062",
-      "symbol": "GOOGL",
-      "finnhub_id": 142364062,
-      "headline": "Dell Gains 1.4% as $999 Googlebook Tests Consumer AI Margins",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=8462b6899991c8b3c5fd464f3b0dc79d9a85b559e6002eab97109d79a98292c8",
-      "published_utc": "2026-09-23T18:24:36+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-09-23T20:33:33.539733+00:00"
-    },
-    {
-      "news_key": "MU:142364101",
-      "symbol": "MU",
-      "finnhub_id": 142364101,
-      "headline": "SK Hynix Falls 3% Despite Wolfe Research Lifting Its Target to $250; SanDisk Drops 3%, Micron Slides 2%",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=9742e496d9688f35e102db57890e5b82ae9abd02e7b79d8957a7a5bf0db85e5f",
-      "published_utc": "2026-09-23T18:20:27+00:00",
-      "matched_keywords": [
-        "analyst",
-        "outlook"
-      ],
-      "verdict": "judged_no_trade",
-      "decision": "no-trade",
-      "conviction": 5,
-      "rationale": "The news item mentions Micron only in passing as sliding 2% alongside the memory sector, while the specific analyst action is a Wolfe Research target increase for SK Hynix, not Micron. There are no Micron-specific earnings results, guidance changes, or estimate revisions provided. The summary is broad market commentary about analyst optimism failing to lift memory shares, which is insufficient evidence for a directional trade. Given the news_reactive standard that headline-only items without concrete ticker-specific fundamentals should not be traded, the appropriate response is no-trade.",
-      "tone_assessment": "The headline is sector commentary focused on SK Hynix and broad memory-stock weakness, with no concrete Micron-specific earnings, guidance, or estimate detail.",
-      "is_mock": false,
-      "outcome": "no_trade_llm_decision",
-      "execution_leg": null,
-      "decision_timestamp_utc": "2026-09-23T20:36:58.547479+00:00",
-      "logged_at_utc": "2026-09-23T20:36:58.548873+00:00",
-      "execution_label": null
     }
   ],
   "news_stats": {
-    "seen": 734,
-    "skipped": 670,
-    "skipped_not_earnings": 580,
-    "skipped_off_ticker": 90,
-    "expired": 22,
-    "queued": 16,
-    "judged_no_trade": 25,
+    "seen": 740,
+    "skipped": 676,
+    "skipped_not_earnings": 583,
+    "skipped_off_ticker": 93,
+    "expired": 23,
+    "queued": 10,
+    "judged_no_trade": 30,
     "judged_trade": 1,
     "exported": 400,
-    "queue_length": 16
+    "queue_length": 10
   },
   "qwen_usage": {
     "by_day": [
@@ -7592,22 +7767,22 @@
       },
       {
         "date": "2026-09-25",
-        "calls": 5,
+        "calls": 10,
         "failed": 0,
-        "tokens": 9278
+        "tokens": 19236
       }
     ],
     "tracking_since": "2026-09-23",
-    "total_calls": 26,
-    "total_tokens": 51640
+    "total_calls": 31,
+    "total_tokens": 61598
   },
   "last_cycle": {
-    "last_live_cycle_utc": "2026-09-25T07:46:41.613558+00:00",
+    "last_live_cycle_utc": "2026-09-25T08:35:50.056473+00:00",
     "triggers_total": 2,
     "triggers_pending_at_start": 0,
     "triggers_processed": 0,
     "news_judged": 5,
-    "news_queued_remaining": 16
+    "news_queued_remaining": 10
   },
   "scan_schedule": {
     "anchor_utc": "2026-09-18T14:33:00+00:00",
