@@ -1,44 +1,30 @@
 {
-  "generated_at": "2026-09-26T10:00:05.913094+00:00",
+  "generated_at": "2026-09-26T11:30:10.820102+00:00",
   "capital_usd": 10000.0,
   "summary": {
-    "cumulative_pnl_usd": 1.58,
-    "realized_pnl_usd": 0,
+    "cumulative_pnl_usd": 2.63,
+    "realized_pnl_usd": 2.19,
     "triggers_detected": 32,
     "live_since_utc": "2026-09-18T14:19:41.489280+00:00",
-    "real_unrealized_pnl_usd": 1.58,
+    "real_unrealized_pnl_usd": 0.44,
     "test_fixture_pnl_usd": -4.61,
     "max_drawdown_pct": 0.0,
     "sharpe_per_trade": null,
-    "win_rate_pct": null,
-    "real_closed_count": 0,
-    "open_positions_count": 2,
-    "total_exposure_usd": 600.0,
-    "total_exposure_pct": 6.0,
-    "unrealized_pnl_usd": 1.58,
-    "concurrent_positions_used": 2,
+    "win_rate_pct": 100.0,
+    "real_closed_count": 1,
+    "open_positions_count": 1,
+    "total_exposure_usd": 400.0,
+    "total_exposure_pct": 4.0,
+    "unrealized_pnl_usd": 0.44,
+    "concurrent_positions_used": 1,
     "concurrent_positions_cap": 5,
     "position_size_used_pct": 4.0,
     "position_size_cap_pct": 5.0,
-    "daily_drawdown_pct": 0.02,
+    "daily_drawdown_pct": 0.03,
     "daily_drawdown_cap_pct": 3.0,
     "no_averaging_blocked_count": 0
   },
   "open_positions": [
-    {
-      "symbol": "BTC",
-      "direction": "long",
-      "entry_price": 83255.58,
-      "size_usd": 200.0,
-      "stop_loss_pct": 3.0,
-      "take_profit_pct": 6.0,
-      "opened_at": "2026-09-24T10:33:47.921780+00:00",
-      "category": "news_reactive",
-      "unrealized_pnl_usd": 1.84,
-      "execution_leg": "cross_asset_proxy",
-      "proxy_for": "MU",
-      "current_price": 84022.0
-    },
     {
       "symbol": "BTC",
       "direction": "long",
@@ -48,10 +34,10 @@
       "take_profit_pct": 5.0,
       "opened_at": "2026-09-25T20:35:21.041081+00:00",
       "category": "news_reactive",
-      "unrealized_pnl_usd": -0.26,
+      "unrealized_pnl_usd": 0.44,
       "execution_leg": "cross_asset_proxy",
       "proxy_for": "GOOGL",
-      "current_price": 84022.0
+      "current_price": 84169.01
     }
   ],
   "closed_positions": [
@@ -111,9 +97,93 @@
         },
         "status": "SENT"
       }
+    },
+    {
+      "symbol": "BTC",
+      "direction": "long",
+      "entry_price": 83255.58,
+      "size_usd": 200.0,
+      "stop_loss_pct": 3.0,
+      "take_profit_pct": 6.0,
+      "opened_at": "2026-09-24T10:33:47.921780+00:00",
+      "category": "news_reactive",
+      "unrealized_pnl_usd": 2.19,
+      "execution_leg": "cross_asset_proxy",
+      "proxy_for": "MU",
+      "current_price": 84169.01,
+      "closed_at": "2026-09-26T11:30:08.840731+00:00",
+      "close_price": 84169.01,
+      "close_reason": "max_holding_period",
+      "realized_pnl_pct": 1.0971,
+      "realized_pnl_usd": 2.19,
+      "hold_time_hours": 48.94,
+      "close_order": {
+        "dry_run": false,
+        "paper_trading": true,
+        "tradability": {
+          "tradable": true,
+          "bitget_symbol": "BTCUSDT",
+          "min_trade_usdt": "1"
+        },
+        "request": {
+          "method": "POST",
+          "path": "/api/v2/spot/trade/place-order",
+          "body": "{\"symbol\":\"BTCUSDT\",\"side\":\"sell\",\"orderType\":\"market\",\"force\":\"gtc\",\"clientOid\":\"beacon-BTC-1790422207\",\"size\":\"0.002402\"}",
+          "body_obj": {
+            "symbol": "BTCUSDT",
+            "side": "sell",
+            "orderType": "market",
+            "force": "gtc",
+            "clientOid": "beacon-BTC-1790422207",
+            "size": "0.002402"
+          }
+        },
+        "stop_loss_pct": 0,
+        "take_profit_pct": 0,
+        "http_status": 200,
+        "response": {
+          "code": "00000",
+          "msg": "success",
+          "requestTime": 1790422208019,
+          "data": {
+            "orderId": "1487704056910356480",
+            "clientOid": "beacon-BTC-1790422207"
+          }
+        },
+        "status": "SENT"
+      }
     }
   ],
   "decisions": [
+    {
+      "timestamp_utc": "2026-09-26T11:30:08.840801+00:00",
+      "date_label": "Sep 26",
+      "symbol": "BTC",
+      "trigger_label": "Position Mgmt",
+      "category": "news_reactive",
+      "decision": null,
+      "conviction": null,
+      "risk_approved": null,
+      "risk_reason": null,
+      "status": "closed",
+      "outcome": "closed_max_holding_period",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Open-position check against stop-loss/take-profit (30-min cycle).",
+      "judge_heading": "Judge",
+      "judge_text": "Not reached.",
+      "judge_neutral": true,
+      "risk_lines": [],
+      "execute_text": "Closed \u2014 max holding period reached after 48.9h. Realized P&L: $2.19.",
+      "execute_kind": "ok",
+      "edgar_url": null,
+      "realized_pnl_usd": 2.19,
+      "realized_pnl_pct": 1.0971,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
     {
       "timestamp_utc": "2026-09-26T08:58:51.502876+00:00",
       "date_label": "Sep 26",
