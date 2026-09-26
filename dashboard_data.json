@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T16:30:05.702571+00:00",
+  "generated_at": "2026-09-26T17:00:07.748938+00:00",
   "capital_usd": 10000.0,
   "summary": {
     "cumulative_pnl_usd": 2.38,
@@ -37,7 +37,7 @@
       "unrealized_pnl_usd": 0.19,
       "execution_leg": "cross_asset_proxy",
       "proxy_for": "GOOGL",
-      "current_price": 84117.1
+      "current_price": 84117.61
     }
   ],
   "closed_positions": [
