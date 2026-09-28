@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T17:30:12.849064+00:00",
+  "generated_at": "2026-09-28T17:33:45.986493+00:00",
   "capital_usd": 10000.0,
   "summary": {
     "cumulative_pnl_usd": -4.08,
@@ -6805,12 +6805,11 @@
       "source": "Benzinga",
       "url": "https://finnhub.io/api/news?id=77f54701023fe201eb195ced40fe08ecaca462848aa586f2ccb42c76d0e57157",
       "published_utc": "2026-09-27T16:50:07+00:00",
-      "summary": "Explore whether the upcoming Micron earnings and the Solidigm IPO will rescue the DRAM ETF, which has slumped recently",
       "matched_keywords": [
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-28T14:34:24.294249+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-28T17:33:38.988193+00:00"
     },
     {
       "news_key": "NVDA:142448486",
@@ -9363,12 +9362,12 @@
     "skipped": 1285,
     "skipped_not_earnings": 1111,
     "skipped_off_ticker": 174,
-    "expired": 33,
-    "queued": 15,
+    "expired": 34,
+    "queued": 14,
     "judged_no_trade": 78,
     "judged_trade": 3,
     "exported": 400,
-    "queue_length": 15
+    "queue_length": 14
   },
   "qwen_usage": {
     "by_day": [
@@ -9414,12 +9413,12 @@
     "total_tokens": 157298
   },
   "last_cycle": {
-    "last_live_cycle_utc": "2026-09-28T14:37:34.454159+00:00",
+    "last_live_cycle_utc": "2026-09-28T17:33:39.023804+00:00",
     "triggers_total": 2,
     "triggers_pending_at_start": 0,
     "triggers_processed": 0,
-    "news_judged": 5,
-    "news_queued_remaining": 15
+    "news_judged": 0,
+    "news_queued_remaining": 14
   },
   "scan_schedule": {
     "anchor_utc": "2026-09-18T14:33:00+00:00",
