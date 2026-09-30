@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T11:30:17.150699+00:00",
+  "generated_at": "2026-09-30T11:33:56.741614+00:00",
   "capital_usd": 10000.0,
   "summary": {
     "cumulative_pnl_usd": -4.08,
@@ -7873,12 +7873,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=9ba68aa13ff6c53f55d37aad8f18688db25660746319c49f28b810ebe3ee4622",
       "published_utc": "2026-09-28T22:30:01+00:00",
-      "summary": "Nvidia\u2019s earnings are soaring as the AI boom marches on.",
       "matched_keywords": [
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-29T09:11:51.194184+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-30T11:33:47.560399+00:00"
     },
     {
       "news_key": "MU:142471923",
@@ -7950,12 +7949,11 @@
       "source": "SeekingAlpha",
       "url": "https://finnhub.io/api/news?id=cea73a9489948d1a5650a29bfefc174d7553035c1663fd74978eb33a8dd3a083",
       "published_utc": "2026-09-28T22:00:00+00:00",
-      "summary": "Google Cloud's accelerating growth, Gemini adoption, and $514B backlog provide substantial AI-driven revenue visibility for Alphabet. Read why GOOGL stock is a Buy.",
       "matched_keywords": [
         "revenue"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-29T09:11:47.681280+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-30T11:33:47.564411+00:00"
     },
     {
       "news_key": "GOOGL:142471942",
@@ -8332,12 +8330,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=f6341aa2a82c09aa37a6b821e03380c5e955e06a10028b0e35731ecc7b801601",
       "published_utc": "2026-09-28T20:41:37+00:00",
-      "summary": "Nvidia now has $235 billion available for share repurchases as its forward earnings multiple falls to its lowest level in more than a decade.",
       "matched_keywords": [
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-29T09:11:51.185768+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-30T11:33:47.567747+00:00"
     },
     {
       "news_key": "MU:142471231",
@@ -8347,12 +8344,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=5e2d2ddcf47ae93a5c4f866dd264109752d7b68a594a93ccd4a25e1ce2ef7fa3",
       "published_utc": "2026-09-28T20:41:22+00:00",
-      "summary": "Micron Technology is set to report earnings after markets close Wednesday, with traders anticipating a sizable swing in the memory chipmaker\u2019s stock.",
       "matched_keywords": [
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-29T09:11:49.240656+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-30T11:33:47.574430+00:00"
     },
     {
       "news_key": "NVDA:142471175",
@@ -8398,13 +8394,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=eda89d39c60624dba62925a32b74c22fea465136aa9e7834124af02b9216e022",
       "published_utc": "2026-09-28T20:34:00+00:00",
-      "summary": "Micron will provide the headline technology report to watch this week, with explosive AI-driven memory demand setting a particularly high bar for its fiscal fourth-quarter results.",
       "matched_keywords": [
         "earnings",
         "results"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-29T09:11:49.240119+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-30T11:33:47.577009+00:00"
     },
     {
       "news_key": "NVDA:142471169",
@@ -8414,12 +8409,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=2783ec0858b9b7fed4c2bf84492ec2d68e48de13b74f24ead4dbbd7d65adc4d7",
       "published_utc": "2026-09-28T20:31:00+00:00",
-      "summary": "Broadcom's AI revenue growth trajectory suggests that it is becoming a major player in a lucrative market.",
       "matched_keywords": [
         "revenue"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-29T09:11:51.184805+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-30T11:33:47.581251+00:00"
     },
     {
       "news_key": "GOOGL:142471205",
@@ -8453,12 +8447,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=e889819364be642924cf9f77fb92061179e2e8b57136d062a75b9d417d1db01a",
       "published_utc": "2026-09-28T19:31:07+00:00",
-      "summary": "Alphabet's management has changed what it talks about on its earnings calls. In April 2024, managing its own cost base was a major strategic focus. By July 2026, spending on AI infrastructure had taken center stage. Management plans 2026 capital spending of $195 billion to $205 billion. The plan exceeds the $185.7 billion of cash its operations made over the past year. How did Alphabet shift so rapidly from cost discipline to record-breaking capital spending.",
       "matched_keywords": [
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-29T09:11:47.677246+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-30T11:33:47.585286+00:00"
     },
     {
       "news_key": "NVDA:142470100",
@@ -8480,12 +8473,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=deb9ce0606c832d2df7d674f7194a399bedc5f5baacdd761601c168d6513f210",
       "published_utc": "2026-09-28T19:25:29+00:00",
-      "summary": "Wednesday's guidance must show that extraordinary AI-memory margins can survive additional capacity and customer commitments.",
       "matched_keywords": [
         "guidance"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-29T09:11:49.239862+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-30T11:33:47.588319+00:00"
     },
     {
       "news_key": "MU:142470094",
@@ -8591,13 +8583,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=e422d10b1b193e48b966238600165aa7163bb192bff9c98ad5469a16bb5aedf4",
       "published_utc": "2026-09-28T19:14:58+00:00",
-      "summary": "AI Demand Sparks Fresh Bull Case for Micron Stock Ahead of Earnings",
       "matched_keywords": [
         "earnings",
         "price target"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-29T09:11:49.239363+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-30T11:33:47.592002+00:00"
     },
     {
       "news_key": "NVDA:142469837",
@@ -8619,12 +8610,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=9709a261a1af6d1937f18b525a3bb2ae9e7296bfb3db3c08849e4e54fdd7e978",
       "published_utc": "2026-09-28T19:07:24+00:00",
-      "summary": "AI memory demand could challenge an old Wall Street assumption.",
       "matched_keywords": [
         "analyst"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-29T09:11:49.239126+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-30T11:33:47.596814+00:00"
     },
     {
       "news_key": "GOOGL:142470146",
@@ -8892,15 +8882,14 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=451b82128319a7a9cd07a221e6c9e2d25c687920f4fc1fe69a6db82e11826792",
       "published_utc": "2026-09-28T18:00:00+00:00",
-      "summary": "Micron heads into fiscal Q4 earnings with $50B revenue guidance, 86% gross margin expectations and strong AI-driven memory demand.",
       "matched_keywords": [
         "earnings",
         "guidance",
         "q4",
         "revenue"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-29T09:11:49.238346+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-30T11:33:47.600365+00:00"
     },
     {
       "news_key": "NVDA:142469531",
@@ -8970,13 +8959,12 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=30d93e0ddb68fb75bf75c55f4ddd30d3dd05f36ca5ed2e644791f9395d04c2f8",
       "published_utc": "2026-09-28T17:41:04+00:00",
-      "summary": "Micron is set to report its fiscal Q4 earnings on Sept. 30. Options sentiment for the near term is bearish for MU shares.",
       "matched_keywords": [
         "earnings",
         "q4"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-29T09:11:49.237952+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-30T11:33:47.605691+00:00"
     },
     {
       "news_key": "NVDA:142469102",
@@ -8998,14 +8986,13 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=f5cd6bcea2230f3e86aea735cf9be7963d2edb8bf6ad0f9c7a879a5bce451694",
       "published_utc": "2026-09-28T17:37:00+00:00",
-      "summary": "Micron Technology Inc (NASDAQ:MU) could deliver fourth-fiscal-quarter earnings per share in the mid-$30s as rising DRAM and NAND prices lift sales and margins, Wedbush said ahead of the company's earnings call. The revised estimates sit around the upper end of prior company guidance, assuming...",
       "matched_keywords": [
         "earnings",
         "estimates",
         "guidance"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-09-29T09:11:49.237540+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-09-30T11:33:47.608111+00:00"
     },
     {
       "news_key": "NVDA:142469091",
@@ -9951,12 +9938,12 @@
     "skipped": 1656,
     "skipped_not_earnings": 1431,
     "skipped_off_ticker": 225,
-    "expired": 65,
-    "queued": 13,
+    "expired": 78,
+    "queued": 0,
     "judged_no_trade": 98,
     "judged_trade": 3,
     "exported": 400,
-    "queue_length": 13
+    "queue_length": 0
   },
   "qwen_usage": {
     "by_day": [
@@ -10008,12 +9995,12 @@
     "total_tokens": 195179
   },
   "last_cycle": {
-    "last_live_cycle_utc": "2026-09-29T17:35:08.858849+00:00",
+    "last_live_cycle_utc": "2026-09-30T11:33:47.614607+00:00",
     "triggers_total": 2,
     "triggers_pending_at_start": 0,
     "triggers_processed": 0,
-    "news_judged": 5,
-    "news_queued_remaining": 13
+    "news_judged": 0,
+    "news_queued_remaining": 0
   },
   "scan_schedule": {
     "anchor_utc": "2026-09-18T14:33:00+00:00",
