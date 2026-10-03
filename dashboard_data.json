@@ -1,45 +1,30 @@
 {
-  "generated_at": "2026-10-03T02:00:07.585603+00:00",
+  "generated_at": "2026-10-03T09:00:23.343789+00:00",
   "capital_usd": 10000.0,
   "summary": {
-    "cumulative_pnl_usd": 0.11,
-    "realized_pnl_usd": -4.08,
+    "cumulative_pnl_usd": 0.12,
+    "realized_pnl_usd": 0.12,
     "triggers_detected": 33,
     "live_since_utc": "2026-09-18T14:19:41.489280+00:00",
-    "real_unrealized_pnl_usd": 4.19,
+    "real_unrealized_pnl_usd": 0,
     "test_fixture_pnl_usd": -4.61,
     "max_drawdown_pct": 0.06,
-    "sharpe_per_trade": -0.12,
-    "win_rate_pct": 50.0,
-    "real_closed_count": 2,
-    "open_positions_count": 1,
-    "total_exposure_usd": 350.0,
-    "total_exposure_pct": 3.5,
-    "unrealized_pnl_usd": 4.19,
-    "concurrent_positions_used": 1,
+    "sharpe_per_trade": 0.16,
+    "win_rate_pct": 66.7,
+    "real_closed_count": 3,
+    "open_positions_count": 0,
+    "total_exposure_usd": 0,
+    "total_exposure_pct": 0.0,
+    "unrealized_pnl_usd": 0,
+    "concurrent_positions_used": 0,
     "concurrent_positions_cap": 5,
-    "position_size_used_pct": 3.5,
+    "position_size_used_pct": 0.0,
     "position_size_cap_pct": 5.0,
     "daily_drawdown_pct": 0.04,
     "daily_drawdown_cap_pct": 3.0,
     "no_averaging_blocked_count": 0
   },
-  "open_positions": [
-    {
-      "symbol": "BTC",
-      "direction": "long",
-      "entry_price": 83617.55,
-      "size_usd": 350.0,
-      "stop_loss_pct": 4.5,
-      "take_profit_pct": 9.0,
-      "opened_at": "2026-10-01T07:33:40.488694+00:00",
-      "category": "post_event_reactive",
-      "unrealized_pnl_usd": 4.19,
-      "execution_leg": "cross_asset_proxy",
-      "proxy_for": "MU",
-      "current_price": 84618.14
-    }
-  ],
+  "open_positions": [],
   "closed_positions": [
     {
       "symbol": "BTC",
@@ -207,9 +192,93 @@
         },
         "status": "SENT"
       }
+    },
+    {
+      "symbol": "BTC",
+      "direction": "long",
+      "entry_price": 83617.55,
+      "size_usd": 350.0,
+      "stop_loss_pct": 4.5,
+      "take_profit_pct": 9.0,
+      "opened_at": "2026-10-01T07:33:40.488694+00:00",
+      "category": "post_event_reactive",
+      "unrealized_pnl_usd": 4.2,
+      "execution_leg": "cross_asset_proxy",
+      "proxy_for": "MU",
+      "current_price": 84620.38,
+      "closed_at": "2026-10-03T09:00:22.315459+00:00",
+      "close_price": 84620.38,
+      "close_reason": "max_holding_period",
+      "realized_pnl_pct": 1.1993,
+      "realized_pnl_usd": 4.2,
+      "hold_time_hours": 49.44,
+      "close_order": {
+        "dry_run": false,
+        "paper_trading": true,
+        "tradability": {
+          "tradable": true,
+          "bitget_symbol": "BTCUSDT",
+          "min_trade_usdt": "1"
+        },
+        "request": {
+          "method": "POST",
+          "path": "/api/v2/spot/trade/place-order",
+          "body": "{\"symbol\":\"BTCUSDT\",\"side\":\"sell\",\"orderType\":\"market\",\"force\":\"gtc\",\"clientOid\":\"beacon-BTC-1791018019\",\"size\":\"0.004185\"}",
+          "body_obj": {
+            "symbol": "BTCUSDT",
+            "side": "sell",
+            "orderType": "market",
+            "force": "gtc",
+            "clientOid": "beacon-BTC-1791018019",
+            "size": "0.004185"
+          }
+        },
+        "stop_loss_pct": 0,
+        "take_profit_pct": 0,
+        "http_status": 200,
+        "response": {
+          "code": "00000",
+          "msg": "success",
+          "requestTime": 1791018021725,
+          "data": {
+            "orderId": "1490203080750047232",
+            "clientOid": "beacon-BTC-1791018019"
+          }
+        },
+        "status": "SENT"
+      }
     }
   ],
   "decisions": [
+    {
+      "timestamp_utc": "2026-10-03T09:00:22.315537+00:00",
+      "date_label": "Oct 3",
+      "symbol": "BTC",
+      "trigger_label": "Position Mgmt",
+      "category": "post_event_reactive",
+      "decision": null,
+      "conviction": null,
+      "risk_approved": null,
+      "risk_reason": null,
+      "status": "closed",
+      "outcome": "closed_max_holding_period",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Open-position check against stop-loss/take-profit (30-min cycle).",
+      "judge_heading": "Judge",
+      "judge_text": "Not reached.",
+      "judge_neutral": true,
+      "risk_lines": [],
+      "execute_text": "Closed \u2014 max holding period reached after 49.4h. Realized P&L: $4.20.",
+      "execute_kind": "ok",
+      "edgar_url": null,
+      "realized_pnl_usd": 4.2,
+      "realized_pnl_pct": 1.1993,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
     {
       "timestamp_utc": "2026-10-02T23:35:51.253849+00:00",
       "date_label": "Oct 2",
