@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T18:02:51.312704+00:00",
+  "generated_at": "2026-10-05T18:03:11.442346+00:00",
   "capital_usd": 10000.0,
   "summary": {
     "cumulative_pnl_usd": -3.36,
@@ -9411,12 +9411,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=bb46c9b03b933b2c9d53ba36a64023ca471fb4c570546e933c310788978fb7cf",
       "published_utc": "2026-10-04T16:39:54+00:00",
-      "summary": "No, industry cycles are not dead.",
       "matched_keywords": [
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-05T09:03:41.385239+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-10-05T18:03:09.242328+00:00"
     },
     {
       "news_key": "NVDA:142624630",
@@ -9550,12 +9549,11 @@
       "source": "SeekingAlpha",
       "url": "https://finnhub.io/api/news?id=e012dd3b6154bc6910355a2e04a2cc4eb074dd4da88b54ee273195beb60f6842",
       "published_utc": "2026-10-04T15:14:39+00:00",
-      "summary": "6346560 looks undervalued at sub-15x forward P/E with 20%+ EPS growth; NVDY is a hold as low IV hurts call-selling.",
       "matched_keywords": [
         "eps"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-05T09:03:45.925125+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-10-05T18:03:09.243380+00:00"
     },
     {
       "news_key": "NVDA:142624131",
@@ -11461,12 +11459,12 @@
     "skipped": 3048,
     "skipped_not_earnings": 2572,
     "skipped_off_ticker": 476,
-    "expired": 251,
-    "queued": 35,
+    "expired": 253,
+    "queued": 33,
     "judged_no_trade": 143,
     "judged_trade": 6,
     "exported": 400,
-    "queue_length": 35
+    "queue_length": 33
   },
   "qwen_usage": {
     "by_day": [
@@ -11554,12 +11552,12 @@
     "total_tokens": 309788
   },
   "last_cycle": {
-    "last_live_cycle_utc": "2026-10-05T09:07:49.486025+00:00",
+    "last_live_cycle_utc": "2026-10-05T18:03:09.279392+00:00",
     "triggers_total": 2,
     "triggers_pending_at_start": 0,
     "triggers_processed": 0,
-    "news_judged": 4,
-    "news_queued_remaining": 6
+    "news_judged": 0,
+    "news_queued_remaining": 33
   },
   "scan_schedule": {
     "anchor_utc": "2026-09-18T14:33:00+00:00",
