@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-06T15:00:03.876770+00:00",
+  "generated_at": "2026-10-06T15:00:54.463972+00:00",
   "capital_usd": 10000.0,
   "summary": {
-    "cumulative_pnl_usd": 1.8,
+    "cumulative_pnl_usd": 1.89,
     "realized_pnl_usd": 0.12,
     "triggers_detected": 33,
     "live_since_utc": "2026-09-18T14:19:41.489280+00:00",
-    "real_unrealized_pnl_usd": 1.68,
+    "real_unrealized_pnl_usd": 1.77,
     "test_fixture_pnl_usd": -4.61,
     "max_drawdown_pct": 0.06,
     "sharpe_per_trade": 0.16,
@@ -15,7 +15,7 @@
     "open_positions_count": 1,
     "total_exposure_usd": 300.0,
     "total_exposure_pct": 3.0,
-    "unrealized_pnl_usd": 1.68,
+    "unrealized_pnl_usd": 1.77,
     "concurrent_positions_used": 1,
     "concurrent_positions_cap": 5,
     "position_size_used_pct": 3.0,
@@ -34,10 +34,10 @@
       "take_profit_pct": 8.0,
       "opened_at": "2026-10-05T09:06:21.462519+00:00",
       "category": "news_reactive",
-      "unrealized_pnl_usd": 1.68,
+      "unrealized_pnl_usd": 1.77,
       "execution_leg": "cross_asset_proxy",
       "proxy_for": "MU",
-      "current_price": 86622.24
+      "current_price": 86649.31
     }
   ],
   "closed_positions": [
@@ -265,6 +265,64 @@
     }
   ],
   "decisions": [
+    {
+      "timestamp_utc": "2026-10-06T15:00:52.598014+00:00",
+      "date_label": "Oct 6",
+      "symbol": "MU",
+      "trigger_label": "News",
+      "category": "news_reactive",
+      "decision": "no-trade",
+      "conviction": 20,
+      "risk_approved": false,
+      "risk_reason": "LLM decision was no-trade.",
+      "status": "notrade",
+      "outcome": "no_trade_llm_decision",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Finnhub news (SeekingAlpha, 2026-10-06T09:35:00+00:00):\nMicron: Wishful Thinking At Its Finest\nSource: https://finnhub.io/api/news?id=8c54c398c381e7d579b749bf22b9876fb9ba05dc6a82fed5b972f10e69d71fe5",
+      "judge_heading": "Judge",
+      "judge_text": "The supplied Seeking Alpha summary is ticker-specific and references Micron's recent 4Q results, but it only gives qualitative claims about moderating ASP growth and peaking gross margins without any reported figures, guidance, or estimate changes. It also presents the stock as a sell in an opinion-piece format, which is thin evidence for a directional trade. Meanwhile, the provided quote shows MU up 0.58% at $1070.12, offering no immediate confirmation of bearish price action. With no concrete numbers or clear surprise magnitude, the risk/reward is insufficient to justify entering a position.",
+      "judge_neutral": false,
+      "risk_lines": [],
+      "execute_text": "No order placed \u2014 Judge decision was no-trade.",
+      "execute_kind": "neutral",
+      "edgar_url": null,
+      "realized_pnl_usd": null,
+      "realized_pnl_pct": null,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
+    {
+      "timestamp_utc": "2026-10-06T15:00:04.023281+00:00",
+      "date_label": "Oct 6",
+      "symbol": "NVDA",
+      "trigger_label": "News",
+      "category": "news_reactive",
+      "decision": "no-trade",
+      "conviction": 5,
+      "risk_approved": false,
+      "risk_reason": "LLM decision was no-trade.",
+      "status": "notrade",
+      "outcome": "no_trade_llm_decision",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Finnhub news (SeekingAlpha, 2026-10-06T09:40:00+00:00):\nNvidia: Smart Money Is Pounding The Table\nSource: https://finnhub.io/api/news?id=6dbb7f8a7071b4beb81d11b0ed89c2a343afc5898e49a50655bf94efc4a934c1",
+      "judge_heading": "Judge",
+      "judge_text": "The news item is a SeekingAlpha headline asserting that Nvidia is upgraded to strong buy and near new highs, but it does not contain specific earnings, guidance, or estimate-revision data that can be evaluated as a tradable surprise. The quote shows NVDA up 1.47% at $242.40, but price action alone is insufficient under the news_reactive standard. Because the evidence is thin opinion content rather than concrete ticker-specific earnings/guidance information, the appropriate response is to stand aside.",
+      "judge_neutral": false,
+      "risk_lines": [],
+      "execute_text": "No order placed \u2014 Judge decision was no-trade.",
+      "execute_kind": "neutral",
+      "edgar_url": null,
+      "realized_pnl_usd": null,
+      "realized_pnl_pct": null,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
     {
       "timestamp_utc": "2026-10-06T14:59:44.599147+00:00",
       "date_label": "Oct 6",
@@ -7693,12 +7751,20 @@
       "source": "SeekingAlpha",
       "url": "https://finnhub.io/api/news?id=6dbb7f8a7071b4beb81d11b0ed89c2a343afc5898e49a50655bf94efc4a934c1",
       "published_utc": "2026-10-06T09:40:00+00:00",
-      "summary": "Nvidia hits new all-time highs near a $6T cap. Check out why NVDA stock is upgraded to strong buy.",
       "matched_keywords": [
         "upgraded"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-06T14:58:16.399149+00:00"
+      "verdict": "judged_no_trade",
+      "decision": "no-trade",
+      "conviction": 5,
+      "rationale": "The news item is a SeekingAlpha headline asserting that Nvidia is upgraded to strong buy and near new highs, but it does not contain specific earnings, guidance, or estimate-revision data that can be evaluated as a tradable surprise. The quote shows NVDA up 1.47% at $242.40, but price action alone is insufficient under the news_reactive standard. Because the evidence is thin opinion content rather than concrete ticker-specific earnings/guidance information, the appropriate response is to stand aside.",
+      "tone_assessment": "The headline and summary are bullish and promotional, citing an upgrade to strong buy and new highs, but they provide no concrete earnings, guidance, or estimate figures.",
+      "is_mock": false,
+      "outcome": "no_trade_llm_decision",
+      "execution_leg": null,
+      "decision_timestamp_utc": "2026-10-06T15:00:04.023281+00:00",
+      "logged_at_utc": "2026-10-06T15:00:04.024078+00:00",
+      "execution_label": null
     },
     {
       "news_key": "NVDA:142657666",
@@ -7720,12 +7786,20 @@
       "source": "SeekingAlpha",
       "url": "https://finnhub.io/api/news?id=8c54c398c381e7d579b749bf22b9876fb9ba05dc6a82fed5b972f10e69d71fe5",
       "published_utc": "2026-10-06T09:35:00+00:00",
-      "summary": "Micron reported its 4Q results last week; the print confirmed our expectation of moderating ASP growth and peaking gross margins. Read why MU stock is a sell.",
       "matched_keywords": [
         "results"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-06T14:58:15.307537+00:00"
+      "verdict": "judged_no_trade",
+      "decision": "no-trade",
+      "conviction": 20,
+      "rationale": "The supplied Seeking Alpha summary is ticker-specific and references Micron's recent 4Q results, but it only gives qualitative claims about moderating ASP growth and peaking gross margins without any reported figures, guidance, or estimate changes. It also presents the stock as a sell in an opinion-piece format, which is thin evidence for a directional trade. Meanwhile, the provided quote shows MU up 0.58% at $1070.12, offering no immediate confirmation of bearish price action. With no concrete numbers or clear surprise magnitude, the risk/reward is insufficient to justify entering a position.",
+      "tone_assessment": "The headline and summary are explicitly negative, describing moderating ASP growth and peaking gross margins and labeling MU a sell.",
+      "is_mock": false,
+      "outcome": "no_trade_llm_decision",
+      "execution_leg": null,
+      "decision_timestamp_utc": "2026-10-06T15:00:52.598014+00:00",
+      "logged_at_utc": "2026-10-06T15:00:52.599257+00:00",
+      "execution_label": null
     },
     {
       "news_key": "NVDA:142664212",
@@ -11978,11 +12052,11 @@
     "skipped_not_earnings": 2777,
     "skipped_off_ticker": 505,
     "expired": 283,
-    "queued": 8,
-    "judged_no_trade": 161,
+    "queued": 6,
+    "judged_no_trade": 163,
     "judged_trade": 6,
     "exported": 400,
-    "queue_length": 11
+    "queue_length": 6
   },
   "qwen_usage": {
     "by_day": [
@@ -12066,22 +12140,22 @@
       },
       {
         "date": "2026-10-06",
-        "calls": 18,
+        "calls": 20,
         "failed": 0,
-        "tokens": 38071
+        "tokens": 42637
       }
     ],
     "tracking_since": "2026-09-23",
-    "total_calls": 170,
-    "total_tokens": 347859
+    "total_calls": 172,
+    "total_tokens": 352425
   },
   "last_cycle": {
-    "last_live_cycle_utc": "2026-10-06T11:35:40.918953+00:00",
+    "last_live_cycle_utc": "2026-10-06T15:00:52.601153+00:00",
     "triggers_total": 2,
     "triggers_pending_at_start": 0,
     "triggers_processed": 0,
     "news_judged": 5,
-    "news_queued_remaining": 20
+    "news_queued_remaining": 6
   },
   "scan_schedule": {
     "anchor_utc": "2026-09-18T14:33:00+00:00",
