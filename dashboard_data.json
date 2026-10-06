@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-06T08:30:05.040441+00:00",
+  "generated_at": "2026-10-06T08:35:38.706994+00:00",
   "capital_usd": 10000.0,
   "summary": {
-    "cumulative_pnl_usd": -0.77,
+    "cumulative_pnl_usd": -0.87,
     "realized_pnl_usd": 0.12,
     "triggers_detected": 33,
     "live_since_utc": "2026-09-18T14:19:41.489280+00:00",
-    "real_unrealized_pnl_usd": -0.89,
+    "real_unrealized_pnl_usd": -0.99,
     "test_fixture_pnl_usd": -4.61,
     "max_drawdown_pct": 0.06,
     "sharpe_per_trade": 0.16,
@@ -15,7 +15,7 @@
     "open_positions_count": 1,
     "total_exposure_usd": 300.0,
     "total_exposure_pct": 3.0,
-    "unrealized_pnl_usd": -0.89,
+    "unrealized_pnl_usd": -0.99,
     "concurrent_positions_used": 1,
     "concurrent_positions_cap": 5,
     "position_size_used_pct": 3.0,
@@ -34,10 +34,10 @@
       "take_profit_pct": 8.0,
       "opened_at": "2026-10-05T09:06:21.462519+00:00",
       "category": "news_reactive",
-      "unrealized_pnl_usd": -0.89,
+      "unrealized_pnl_usd": -0.99,
       "execution_leg": "cross_asset_proxy",
       "proxy_for": "MU",
-      "current_price": 85884.72
+      "current_price": 85856.45
     }
   ],
   "closed_positions": [
@@ -265,6 +265,151 @@
     }
   ],
   "decisions": [
+    {
+      "timestamp_utc": "2026-10-06T08:35:36.728922+00:00",
+      "date_label": "Oct 6",
+      "symbol": "MU",
+      "trigger_label": "News",
+      "category": "news_reactive",
+      "decision": "no-trade",
+      "conviction": 15,
+      "risk_approved": false,
+      "risk_reason": "LLM decision was no-trade.",
+      "status": "notrade",
+      "outcome": "no_trade_llm_decision",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Finnhub news (Yahoo, 2026-10-05T17:20:02+00:00):\nWhy Isn't Micron's Stock Taking Off After Reporting Strong Q4 Numbers?\nSource: https://finnhub.io/api/news?id=30e0aa6547ccac2cebdf7dfd1a36d5faee9da95cd93b985a520dc7ed5bc593f3",
+      "judge_heading": "Judge",
+      "judge_text": "The provided news says Micron's Q4 revenue soared 379%, but it also explicitly states that this was not enough to get the market excited. The quote shows MU down 1.0% to 1063.96 from the previous close of 1074.89, consistent with a muted reaction. However, there are no consensus estimates, EPS figures, guidance details, or margin commentary in the input to determine whether the results truly beat expectations or why the stock is not responding. With only a retrospective headline and limited numeric context, there is insufficient evidence for a reliable directional trade.",
+      "judge_neutral": false,
+      "risk_lines": [],
+      "execute_text": "No order placed \u2014 Judge decision was no-trade.",
+      "execute_kind": "neutral",
+      "edgar_url": null,
+      "realized_pnl_usd": null,
+      "realized_pnl_pct": null,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
+    {
+      "timestamp_utc": "2026-10-06T08:34:59.879338+00:00",
+      "date_label": "Oct 6",
+      "symbol": "NVDA",
+      "trigger_label": "News",
+      "category": "news_reactive",
+      "decision": "no-trade",
+      "conviction": 8,
+      "risk_approved": false,
+      "risk_reason": "LLM decision was no-trade.",
+      "status": "notrade",
+      "outcome": "no_trade_llm_decision",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Finnhub news (Yahoo, 2026-10-05T18:51:53+00:00):\nNvidia, Broadcom May Be Surprisingly Safe From a 32-GW Hole in the AI Boom, Morgan Stanley Says\nSource: https://finnhub.io/api/news?id=a06d38c2adb48ff3109e7132ee60fa6cf971bad4d2b9885679f1754c197079f0",
+      "judge_heading": "Judge",
+      "judge_text": "The headline is ticker-specific and somewhat positive, but it only offers a qualitative analyst view that Nvidia may be 'surprisingly safe' from a 32-GW power shortfall. It does not contain reported earnings, guidance, or specific estimate changes that would support a directional trade. NVDA's quote is up 2.1% at $238.90 and near/above the listed 52-week high, but the news itself is too thin to justify entry. Under the news-reactive standard, a headline without concrete earnings/guidance/estimate data should result in a no-trade.",
+      "judge_neutral": false,
+      "risk_lines": [],
+      "execute_text": "No order placed \u2014 Judge decision was no-trade.",
+      "execute_kind": "neutral",
+      "edgar_url": null,
+      "realized_pnl_usd": null,
+      "realized_pnl_pct": null,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
+    {
+      "timestamp_utc": "2026-10-06T08:34:38.554826+00:00",
+      "date_label": "Oct 6",
+      "symbol": "MU",
+      "trigger_label": "News",
+      "category": "news_reactive",
+      "decision": "no-trade",
+      "conviction": 10,
+      "risk_approved": false,
+      "risk_reason": "LLM decision was no-trade.",
+      "status": "notrade",
+      "outcome": "no_trade_llm_decision",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Finnhub news (Yahoo, 2026-10-05T19:13:00+00:00):\nMorgan Stanley revisits Micron stock price target amid stellar growth\nSource: https://finnhub.io/api/news?id=fa7d2730d67539e7b30f2d3903c1dac63e09ea7322149c5ac88ad25891a4d413",
+      "judge_heading": "Judge",
+      "judge_text": "The news item says Morgan Stanley revisited Micron's price target amid strong growth and that tight memory supply may persist through 2028, which is directionally positive. However, it does not disclose the actual price target, any estimate revisions, or concrete earnings/guidance figures. With only a vague headline and summary, there is insufficient evidence to infer a tradable surprise. Micron's quote is down 1.0% at $1,063.96, and the available data does not show whether this news materially changes expectations.",
+      "judge_neutral": false,
+      "risk_lines": [],
+      "execute_text": "No order placed \u2014 Judge decision was no-trade.",
+      "execute_kind": "neutral",
+      "edgar_url": null,
+      "realized_pnl_usd": null,
+      "realized_pnl_pct": null,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
+    {
+      "timestamp_utc": "2026-10-06T08:34:11.811161+00:00",
+      "date_label": "Oct 6",
+      "symbol": "NVDA",
+      "trigger_label": "News",
+      "category": "news_reactive",
+      "decision": "no-trade",
+      "conviction": 5,
+      "risk_approved": false,
+      "risk_reason": "LLM decision was no-trade.",
+      "status": "notrade",
+      "outcome": "no_trade_llm_decision",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Finnhub news (Yahoo, 2026-10-06T05:25:00+00:00):\nThe Zacks Analyst Blog Highlights Lam, Taiwan, Marathon, NVIDIA, Micron and Alphabet\nSource: https://finnhub.io/api/news?id=60179a5c700c06054ef8c9e668a19d0280e296064c794a98999b461eaab3baa4",
+      "judge_heading": "Judge",
+      "judge_text": "The news item is a Zacks Analyst Blog roundup covering Lam Research, TSMC, Marathon Petroleum, NVIDIA, Micron, and Alphabet, but the summary only says Lam Research, TSMC, and Marathon Petroleum stand out ahead of Q3 earnings. It provides no concrete NVDA-specific revenue, EPS, guidance, or estimate revision information. Although NVDA's quote is up 2.12% to $238.90 and near its 52-week high of $237.88, that market action is not tied to a specific actionable disclosure in the supplied news. Under the news_reactive standard, this is too thin and non-specific to support a directional trade.",
+      "judge_neutral": false,
+      "risk_lines": [],
+      "execute_text": "No order placed \u2014 Judge decision was no-trade.",
+      "execute_kind": "neutral",
+      "edgar_url": null,
+      "realized_pnl_usd": null,
+      "realized_pnl_pct": null,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
+    {
+      "timestamp_utc": "2026-10-06T08:33:52.690835+00:00",
+      "date_label": "Oct 6",
+      "symbol": "MU",
+      "trigger_label": "News",
+      "category": "news_reactive",
+      "decision": "no-trade",
+      "conviction": 5,
+      "risk_approved": false,
+      "risk_reason": "LLM decision was no-trade.",
+      "status": "notrade",
+      "outcome": "no_trade_llm_decision",
+      "is_mock": false,
+      "is_cross_asset": false,
+      "cross_asset_symbol": null,
+      "cross_asset_note": null,
+      "sense_text": "Finnhub news (Yahoo, 2026-10-06T05:25:00+00:00):\nThe Zacks Analyst Blog Highlights Lam, Taiwan, Marathon, NVIDIA, Micron and Alphabet\nSource: https://finnhub.io/api/news?id=60179a5c700c06054ef8c9e668a19d0280e296064c794a98999b461eaab3baa4",
+      "judge_heading": "Judge",
+      "judge_text": "The news item mentions Micron only as part of a broad list of highlighted tickers, while the summary specifically discusses Lam Research, TSMC, Marathon Petroleum, AI demand, semiconductor growth, and elevated oil prices. It provides no MU-specific revenue, EPS, guidance, or explicit estimate change that could support a directional surprise view. The quote shows MU down 1.02% at 1063.96, but that move alone does not establish an earnings- or guidance-driven signal. Because the evidence is limited to a generic headline that passed keyword filters, the appropriate response is to avoid a trade.",
+      "judge_neutral": false,
+      "risk_lines": [],
+      "execute_text": "No order placed \u2014 Judge decision was no-trade.",
+      "execute_kind": "neutral",
+      "edgar_url": null,
+      "realized_pnl_usd": null,
+      "realized_pnl_pct": null,
+      "correction_note": null,
+      "no_averaging_blocked": false
+    },
     {
       "timestamp_utc": "2026-10-06T07:39:26.926842+00:00",
       "date_label": "Oct 6",
@@ -6399,6 +6544,80 @@
   ],
   "news_signals": [
     {
+      "news_key": "MU:142653185",
+      "symbol": "MU",
+      "finnhub_id": 142653185,
+      "headline": "Micron Technology (NASDAQ:MU) Delivers High Growth and Improving Fundamentals Across Eight Key Tests",
+      "source": "ChartMill",
+      "url": "https://finnhub.io/api/news?id=1d366adce9a9d98acffd290cf1a2cbee9a59e641012a6ade8b3e4078b63227f4",
+      "published_utc": "2026-10-06T08:01:23+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-06T08:33:15.792673+00:00"
+    },
+    {
+      "news_key": "NVDA:142652811",
+      "symbol": "NVDA",
+      "finnhub_id": 142652811,
+      "headline": "Michael Burry Quoted a 1968 Book to Answer Nvidia (NVDA). The Passage Is Uncomfortable",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=79c2f09de298f4d954f748c04cd0948b762465dae3321a80d66e20a03d35c2be",
+      "published_utc": "2026-10-06T07:42:59+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-06T08:33:17.020382+00:00"
+    },
+    {
+      "news_key": "NVDA:142652813",
+      "symbol": "NVDA",
+      "finnhub_id": 142652813,
+      "headline": "Will Intel Bring Back Its Dividend Now That Its Stock Has Tripled?",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=5a326a99bd4bb0347e7f2824db3c81031fd94c3ab54b70e534a024ac6346fba5",
+      "published_utc": "2026-10-06T07:36:02+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-06T08:33:17.019693+00:00"
+    },
+    {
+      "news_key": "NVDA:142651173",
+      "symbol": "NVDA",
+      "finnhub_id": 142651173,
+      "headline": "Here's How Many Shares of Nike You'd Need for $10,000 in Yearly Dividends",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=2f05bc3386df4983aefa9c044cfcb5599c63b9b06652ceeda1a7fd9526d29eea",
+      "published_utc": "2026-10-06T07:05:00+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-06T08:33:17.019444+00:00"
+    },
+    {
+      "news_key": "NVDA:142651790",
+      "symbol": "NVDA",
+      "finnhub_id": 142651790,
+      "headline": "$10,000 in Marvell Stock a Decade Ago Is Worth About $206,000 Now. Repeating That Would Take 35% Annual Earnings Growth.",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=bb20c72bb1688fd14ed76d5d0e8d6b7cd95a85f329a03c414f60441a452c7a7f",
+      "published_utc": "2026-10-06T06:43:01+00:00",
+      "verdict": "skipped_off_ticker",
+      "matched_keywords": [
+        "earnings"
+      ],
+      "logged_at_utc": "2026-10-06T08:33:17.019159+00:00"
+    },
+    {
+      "news_key": "NVDA:142652816",
+      "symbol": "NVDA",
+      "finnhub_id": 142652816,
+      "headline": "Rigetti Computing vs. D-Wave Quantum: Which Quantum Computing Stock Is the Better Buy?",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=9f516263836f199e05436789992e93bad83d4cef9651bdf29c7427e35d1db22c",
+      "published_utc": "2026-10-06T06:29:00+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-06T08:33:17.018794+00:00"
+    },
+    {
       "news_key": "MU:142648334",
       "symbol": "MU",
       "finnhub_id": 142648334,
@@ -6482,6 +6701,58 @@
       "execution_leg": null,
       "decision_timestamp_utc": "2026-10-06T07:36:19.477251+00:00",
       "logged_at_utc": "2026-10-06T07:36:19.480628+00:00",
+      "execution_label": null
+    },
+    {
+      "news_key": "MU:142649719",
+      "symbol": "MU",
+      "finnhub_id": 142649719,
+      "headline": "The Zacks Analyst Blog Highlights Lam, Taiwan, Marathon, NVIDIA, Micron and Alphabet",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=60179a5c700c06054ef8c9e668a19d0280e296064c794a98999b461eaab3baa4",
+      "published_utc": "2026-10-06T05:25:00+00:00",
+      "matched_keywords": [
+        "analyst",
+        "earnings",
+        "estimates",
+        "q3"
+      ],
+      "verdict": "judged_no_trade",
+      "decision": "no-trade",
+      "conviction": 5,
+      "rationale": "The news item mentions Micron only as part of a broad list of highlighted tickers, while the summary specifically discusses Lam Research, TSMC, Marathon Petroleum, AI demand, semiconductor growth, and elevated oil prices. It provides no MU-specific revenue, EPS, guidance, or explicit estimate change that could support a directional surprise view. The quote shows MU down 1.02% at 1063.96, but that move alone does not establish an earnings- or guidance-driven signal. Because the evidence is limited to a generic headline that passed keyword filters, the appropriate response is to avoid a trade.",
+      "tone_assessment": "The headline and summary are generic Zacks analyst-blog commentary highlighting multiple companies, with no concrete Micron-specific earnings, guidance, or estimate revision disclosed.",
+      "is_mock": false,
+      "outcome": "no_trade_llm_decision",
+      "execution_leg": null,
+      "decision_timestamp_utc": "2026-10-06T08:33:52.690835+00:00",
+      "logged_at_utc": "2026-10-06T08:33:52.693938+00:00",
+      "execution_label": null
+    },
+    {
+      "news_key": "NVDA:142649719",
+      "symbol": "NVDA",
+      "finnhub_id": 142649719,
+      "headline": "The Zacks Analyst Blog Highlights Lam, Taiwan, Marathon, NVIDIA, Micron and Alphabet",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=60179a5c700c06054ef8c9e668a19d0280e296064c794a98999b461eaab3baa4",
+      "published_utc": "2026-10-06T05:25:00+00:00",
+      "matched_keywords": [
+        "analyst",
+        "earnings",
+        "estimates",
+        "q3"
+      ],
+      "verdict": "judged_no_trade",
+      "decision": "no-trade",
+      "conviction": 5,
+      "rationale": "The news item is a Zacks Analyst Blog roundup covering Lam Research, TSMC, Marathon Petroleum, NVIDIA, Micron, and Alphabet, but the summary only says Lam Research, TSMC, and Marathon Petroleum stand out ahead of Q3 earnings. It provides no concrete NVDA-specific revenue, EPS, guidance, or estimate revision information. Although NVDA's quote is up 2.12% to $238.90 and near its 52-week high of $237.88, that market action is not tied to a specific actionable disclosure in the supplied news. Under the news_reactive standard, this is too thin and non-specific to support a directional trade.",
+      "tone_assessment": "The headline and summary are generic multi-company analyst-blog commentary, with no NVDA-specific earnings, guidance, or estimate details.",
+      "is_mock": false,
+      "outcome": "no_trade_llm_decision",
+      "execution_leg": null,
+      "decision_timestamp_utc": "2026-10-06T08:34:11.811161+00:00",
+      "logged_at_utc": "2026-10-06T08:34:11.813262+00:00",
       "execution_label": null
     },
     {
@@ -7220,12 +7491,20 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=fa7d2730d67539e7b30f2d3903c1dac63e09ea7322149c5ac88ad25891a4d413",
       "published_utc": "2026-10-05T19:13:00+00:00",
-      "summary": "Micron stock rides an AI memory boom, even as management warns that tight memory supply will last through 2028.",
       "matched_keywords": [
         "price target"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-06T07:35:30.689184+00:00"
+      "verdict": "judged_no_trade",
+      "decision": "no-trade",
+      "conviction": 10,
+      "rationale": "The news item says Morgan Stanley revisited Micron's price target amid strong growth and that tight memory supply may persist through 2028, which is directionally positive. However, it does not disclose the actual price target, any estimate revisions, or concrete earnings/guidance figures. With only a vague headline and summary, there is insufficient evidence to infer a tradable surprise. Micron's quote is down 1.0% at $1,063.96, and the available data does not show whether this news materially changes expectations.",
+      "tone_assessment": "The headline and summary are qualitatively positive, referencing an AI memory boom and tight supply, but they provide no specific price target, estimate change, or quantified guidance.",
+      "is_mock": false,
+      "outcome": "no_trade_llm_decision",
+      "execution_leg": null,
+      "decision_timestamp_utc": "2026-10-06T08:34:38.554826+00:00",
+      "logged_at_utc": "2026-10-06T08:34:38.556275+00:00",
+      "execution_label": null
     },
     {
       "news_key": "NVDA:142638420",
@@ -7343,12 +7622,20 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=a06d38c2adb48ff3109e7132ee60fa6cf971bad4d2b9885679f1754c197079f0",
       "published_utc": "2026-10-05T18:51:53+00:00",
-      "summary": "A 32-gigawatt power shortfall could delay America\u2019s AI data-center boom, but Nvidia Corp. (NASDAQ:NVDA) and Broadcom Inc. (NASDAQ:AVGO) may be surprisingly well protected, according to Morgan Stanley. Morgan Stanley estimates U.S. data-center developers face a 34% net power shortfall through...",
       "matched_keywords": [
         "estimates"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-06T07:35:32.732751+00:00"
+      "verdict": "judged_no_trade",
+      "decision": "no-trade",
+      "conviction": 8,
+      "rationale": "The headline is ticker-specific and somewhat positive, but it only offers a qualitative analyst view that Nvidia may be 'surprisingly safe' from a 32-GW power shortfall. It does not contain reported earnings, guidance, or specific estimate changes that would support a directional trade. NVDA's quote is up 2.1% at $238.90 and near/above the listed 52-week high, but the news itself is too thin to justify entry. Under the news-reactive standard, a headline without concrete earnings/guidance/estimate data should result in a no-trade.",
+      "tone_assessment": "The Morgan Stanley commentary is mildly reassuring toward Nvidia, suggesting it may be protected from a data-center power shortfall, but it provides no concrete earnings, guidance, or estimate figures.",
+      "is_mock": false,
+      "outcome": "no_trade_llm_decision",
+      "execution_leg": null,
+      "decision_timestamp_utc": "2026-10-06T08:34:59.879338+00:00",
+      "logged_at_utc": "2026-10-06T08:34:59.880892+00:00",
+      "execution_label": null
     },
     {
       "news_key": "NVDA:142638416",
@@ -7644,14 +7931,22 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=30e0aa6547ccac2cebdf7dfd1a36d5faee9da95cd93b985a520dc7ed5bc593f3",
       "published_utc": "2026-10-05T17:20:02+00:00",
-      "summary": "Micron's revenue soared by 379% last quarter, but that wasn't enough to get the market excited about the stock.",
       "matched_keywords": [
         "q4",
         "quarter",
         "revenue"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-06T07:35:30.685079+00:00"
+      "verdict": "judged_no_trade",
+      "decision": "no-trade",
+      "conviction": 15,
+      "rationale": "The provided news says Micron's Q4 revenue soared 379%, but it also explicitly states that this was not enough to get the market excited. The quote shows MU down 1.0% to 1063.96 from the previous close of 1074.89, consistent with a muted reaction. However, there are no consensus estimates, EPS figures, guidance details, or margin commentary in the input to determine whether the results truly beat expectations or why the stock is not responding. With only a retrospective headline and limited numeric context, there is insufficient evidence for a reliable directional trade.",
+      "tone_assessment": "The headline and summary are skeptical, noting that Micron's Q4 revenue soared 379% but still failed to excite the market.",
+      "is_mock": false,
+      "outcome": "no_trade_llm_decision",
+      "execution_leg": null,
+      "decision_timestamp_utc": "2026-10-06T08:35:36.728922+00:00",
+      "logged_at_utc": "2026-10-06T08:35:36.731266+00:00",
+      "execution_label": null
     },
     {
       "news_key": "NVDA:142637656",
@@ -9902,13 +10197,12 @@
       "source": "Benzinga",
       "url": "https://finnhub.io/api/news?id=45aa9516b416b3e29532dab88fc2d16a69f6894b8d177c9b077cf781fbf315ff",
       "published_utc": "2026-10-05T08:09:50+00:00",
-      "summary": "CNBC traders favor Nvidia, Okta, Cognex and Delta; analysts cite upside, raised targets, RealSense acquisition and upcoming earnings.",
       "matched_keywords": [
         "analysts",
         "earnings"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-05T16:19:13.825966+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-10-06T08:33:32.842524+00:00"
     },
     {
       "news_key": "NVDA:142630892",
@@ -9930,15 +10224,14 @@
       "source": "SeekingAlpha",
       "url": "https://finnhub.io/api/news?id=28ad214787e785b83683be092a25cbe7c3b19f1599fb20caf4b3d8621762af55",
       "published_utc": "2026-10-05T08:00:18+00:00",
-      "summary": "Micron Technology beats on AI chip demand; FY27 guidance and HBM/Nvidia deals boost visibility. Click here to read this MU stock update.",
       "matched_keywords": [
         "beats",
         "guidance",
         "q4",
         "results"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-05T16:19:12.893102+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-10-06T08:33:32.842949+00:00"
     },
     {
       "news_key": "NVDA:142637519",
@@ -10001,15 +10294,14 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=a2d3aefefe7316c10e07f8d2e4491e7c80a86aa704c8e5cce68c73709172059d",
       "published_utc": "2026-10-05T07:43:15+00:00",
-      "summary": "Nvidia Corp. partner Hon Hai Precision Industry Co. reported better-than-expected quarterly revenue, signaling sustained and elevated spending on global AI infrastructure.",
       "matched_keywords": [
         "beats",
         "estimates",
         "quarterly",
         "revenue"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-05T16:19:13.825367+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-10-06T08:33:32.843236+00:00"
     },
     {
       "news_key": "MU:142633969",
@@ -10019,13 +10311,12 @@
       "source": "SeekingAlpha",
       "url": "https://finnhub.io/api/news?id=f350f5c8e494ff79605b3fa44dc766bd39108d836472de69de8d49b20d1ffe37",
       "published_utc": "2026-10-05T07:41:26+00:00",
-      "summary": "MU delivered 380% YoY revenue growth and an 87% gross margin in 4Q, and its 1Q FY2027 outlook suggests the current momentum will continue.",
       "matched_keywords": [
         "outlook",
         "revenue"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-05T16:19:12.892391+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-10-06T08:33:32.843482+00:00"
     },
     {
       "news_key": "NVDA:142634874",
@@ -11499,117 +11790,19 @@
       "verdict": "skipped_not_earnings_related",
       "matched_keywords": [],
       "logged_at_utc": "2026-10-04T14:33:33.905107+00:00"
-    },
-    {
-      "news_key": "NVDA:142623611",
-      "symbol": "NVDA",
-      "finnhub_id": 142623611,
-      "headline": "AMD Reaches a $1 Trillion Market Cap. Can It Finally Dethrone Nvidia?",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=bae7a93eb6b04eb4b5fa2d54195e40991a4a3e68fd7843807c8afad69ffd94b1",
-      "published_utc": "2026-10-04T13:34:00+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-04T14:33:33.904822+00:00"
-    },
-    {
-      "news_key": "NVDA:142623623",
-      "symbol": "NVDA",
-      "finnhub_id": 142623623,
-      "headline": "Social Security's Trump Bump-Led 2027 COLA Will Be One of the Largest in 35 Years, but It May Financially Cripple America's Leading Retirement Program",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=bffe2c078572b0bf9bf551fa95e2d94f9dc8aa337eafcb013f90346150a7d68d",
-      "published_utc": "2026-10-04T13:26:01+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-04T14:33:33.904473+00:00"
-    },
-    {
-      "news_key": "NVDA:142623617",
-      "symbol": "NVDA",
-      "finnhub_id": 142623617,
-      "headline": "Why Dutch Bros Stock Dropped 21% in September",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=29781c130f8398fc98ca9235c1dc48377dea96cf00b17d1091414a822809fde8",
-      "published_utc": "2026-10-04T13:25:01+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-04T14:33:33.904193+00:00"
-    },
-    {
-      "news_key": "NVDA:142623618",
-      "symbol": "NVDA",
-      "finnhub_id": 142623618,
-      "headline": "XRP Price Outlook: What Investors Can Expect Over the Next 3 Years",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=2a75dce58691e8d0b39daa6a9dbaf6349113e9af2b4ce276b6fc309443b96635",
-      "published_utc": "2026-10-04T13:23:00+00:00",
-      "verdict": "skipped_off_ticker",
-      "matched_keywords": [
-        "outlook"
-      ],
-      "logged_at_utc": "2026-10-04T14:33:33.903928+00:00"
-    },
-    {
-      "news_key": "MU:142623619",
-      "symbol": "MU",
-      "finnhub_id": 142623619,
-      "headline": "Micron or Sandisk: If I Could Only Own One for the Next 5 Years, It Would Be This One",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=9ffa793f246d5afc224e95d4773f444e165d05586bf43c748e2a111e80466efb",
-      "published_utc": "2026-10-04T13:16:00+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-04T14:33:32.501451+00:00"
-    },
-    {
-      "news_key": "NVDA:142623619",
-      "symbol": "NVDA",
-      "finnhub_id": 142623619,
-      "headline": "Micron or Sandisk: If I Could Only Own One for the Next 5 Years, It Would Be This One",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=9ffa793f246d5afc224e95d4773f444e165d05586bf43c748e2a111e80466efb",
-      "published_utc": "2026-10-04T13:16:00+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-04T14:33:33.903522+00:00"
-    },
-    {
-      "news_key": "GOOGL:142623631",
-      "symbol": "GOOGL",
-      "finnhub_id": 142623631,
-      "headline": "A $1,000 Bet on Marvell in 2016 Crushed the Market With 2140% Returns",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=858f6954812836cf6d567922f0a14af10761865669f12f3444ecd035486b298a",
-      "published_utc": "2026-10-04T13:15:40+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-04T14:33:30.477602+00:00"
-    },
-    {
-      "news_key": "NVDA:142623612",
-      "symbol": "NVDA",
-      "finnhub_id": 142623612,
-      "headline": "Dow Jones Futures Loom With Nasdaq At High, Nvidia And SpaceX Buys, But Note These Risks",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=4018bc790033c4d2e8981e48398dc1d878d39f2b9e582954416a3d4e226d8c61",
-      "published_utc": "2026-10-04T13:06:59+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-04T14:33:33.903124+00:00"
     }
   ],
   "news_stats": {
-    "seen": 3609,
-    "skipped": 3161,
-    "skipped_not_earnings": 2670,
-    "skipped_off_ticker": 491,
-    "expired": 258,
-    "queued": 36,
-    "judged_no_trade": 148,
+    "seen": 3617,
+    "skipped": 3167,
+    "skipped_not_earnings": 2675,
+    "skipped_off_ticker": 492,
+    "expired": 262,
+    "queued": 29,
+    "judged_no_trade": 153,
     "judged_trade": 6,
     "exported": 400,
-    "queue_length": 36
+    "queue_length": 29
   },
   "qwen_usage": {
     "by_day": [
@@ -11693,22 +11886,22 @@
       },
       {
         "date": "2026-10-06",
-        "calls": 5,
+        "calls": 10,
         "failed": 0,
-        "tokens": 12070
+        "tokens": 22671
       }
     ],
     "tracking_since": "2026-09-23",
-    "total_calls": 157,
-    "total_tokens": 321858
+    "total_calls": 162,
+    "total_tokens": 332459
   },
   "last_cycle": {
-    "last_live_cycle_utc": "2026-10-06T07:39:26.941976+00:00",
+    "last_live_cycle_utc": "2026-10-06T08:35:36.733866+00:00",
     "triggers_total": 2,
     "triggers_pending_at_start": 0,
     "triggers_processed": 0,
     "news_judged": 5,
-    "news_queued_remaining": 36
+    "news_queued_remaining": 29
   },
   "scan_schedule": {
     "anchor_utc": "2026-09-18T14:33:00+00:00",
