@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-07T22:00:06.397920+00:00",
+  "generated_at": "2026-10-07T22:33:25.124614+00:00",
   "capital_usd": 10000.0,
   "summary": {
-    "cumulative_pnl_usd": -10.11,
+    "cumulative_pnl_usd": -9.45,
     "realized_pnl_usd": -7.82,
     "triggers_detected": 33,
     "live_since_utc": "2026-09-18T14:19:41.489280+00:00",
-    "real_unrealized_pnl_usd": -2.29,
+    "real_unrealized_pnl_usd": -1.63,
     "test_fixture_pnl_usd": -4.61,
     "max_drawdown_pct": 0.1,
     "sharpe_per_trade": -0.25,
@@ -15,7 +15,7 @@
     "open_positions_count": 1,
     "total_exposure_usd": 400.0,
     "total_exposure_pct": 4.0,
-    "unrealized_pnl_usd": -2.29,
+    "unrealized_pnl_usd": -1.63,
     "concurrent_positions_used": 1,
     "concurrent_positions_cap": 5,
     "position_size_used_pct": 4.0,
@@ -34,10 +34,10 @@
       "take_profit_pct": 6.0,
       "opened_at": "2026-10-07T11:35:42.735833+00:00",
       "category": "news_reactive",
-      "unrealized_pnl_usd": -2.29,
+      "unrealized_pnl_usd": -1.63,
       "execution_leg": "cross_asset_proxy",
       "proxy_for": "EQT",
-      "current_price": 83165.54
+      "current_price": 83305.0
     }
   ],
   "closed_positions": [
