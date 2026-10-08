@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08T14:30:15.655366+00:00",
+  "generated_at": "2026-10-08T14:41:23.357783+00:00",
   "capital_usd": 10000.0,
   "summary": {
     "cumulative_pnl_usd": -13.95,
@@ -11350,12 +11350,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=87d19e03a1a70e8c8981e060e1289e402e6f0773348a09a912a19f1730cc9f4f",
       "published_utc": "2026-10-07T14:21:36+00:00",
-      "summary": "Micron Technology (MU) stock got a bigger target from Rosenblatt on Thursday, October 1. The firm raised its price target to $1,900 from $1,500 and kept its Buy rating.",
       "matched_keywords": [
         "price target"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-07T20:33:29.554866+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-10-08T14:39:50.455518+00:00"
     },
     {
       "news_key": "GOOGL:142696991",
@@ -11754,12 +11753,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=c8086aa98892eb4c2551c4aa3d23add7373feecddeeb5126bbcdc0031d6f40fb",
       "published_utc": "2026-10-07T13:25:00+00:00",
-      "summary": "Key Stats for Alphabet StockPrice change for Alphabet stock in last 6 months: 14%$GOOGL Stock Price as of Oct. 6: $34852-Week High: $409$GOOGL Stock Price Target: $429What Happened?A mass consumer lawsuit against Google (GOOGL:NASDAQ) began in London on Tuesday.",
       "matched_keywords": [
         "price target"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-07T14:33:34.337846+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-10-08T14:39:50.456689+00:00"
     },
     {
       "news_key": "GOOGL:142694731",
@@ -12114,12 +12112,11 @@
       "source": "Yahoo",
       "url": "https://finnhub.io/api/news?id=74146d781085746f597156dc7f899215f7651fadfbd20c2fdf9b21ab53a86922",
       "published_utc": "2026-10-07T12:30:04+00:00",
-      "summary": "According to the average brokerage recommendation (ABR), one should invest in Micron (MU). It is debatable whether this highly sought-after metric is effective because Wall Street analysts' recommendations tend to be overly optimistic. Would it be worth investing in the stock?",
       "matched_keywords": [
         "analysts"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-07T14:33:40.147986+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-10-08T14:39:50.456967+00:00"
     },
     {
       "news_key": "MU:142694779",
@@ -13486,12 +13483,12 @@
     "skipped": 3896,
     "skipped_not_earnings": 3289,
     "skipped_off_ticker": 607,
-    "expired": 299,
-    "queued": 10,
+    "expired": 302,
+    "queued": 7,
     "judged_no_trade": 205,
     "judged_trade": 7,
     "exported": 400,
-    "queue_length": 10
+    "queue_length": 7
   },
   "qwen_usage": {
     "by_day": [
@@ -13597,12 +13594,12 @@
     "total_tokens": 446344
   },
   "last_cycle": {
-    "last_live_cycle_utc": "2026-10-08T11:35:19.844711+00:00",
+    "last_live_cycle_utc": "2026-10-08T14:41:10.905171+00:00",
     "triggers_total": 2,
     "triggers_pending_at_start": 0,
     "triggers_processed": 0,
-    "news_judged": 5,
-    "news_queued_remaining": 10
+    "news_judged": 0,
+    "news_queued_remaining": 7
   },
   "scan_schedule": {
     "anchor_utc": "2026-09-18T14:33:00+00:00",
