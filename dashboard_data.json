@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T11:30:04.546129+00:00",
+  "generated_at": "2026-10-09T11:33:44.840886+00:00",
   "capital_usd": 10000.0,
   "summary": {
     "cumulative_pnl_usd": -20.04,
@@ -8906,6 +8906,272 @@
   ],
   "news_signals": [
     {
+      "news_key": "GOOGL:142757494",
+      "symbol": "GOOGL",
+      "finnhub_id": 142757494,
+      "headline": "OpenAI's $20 Billion Revenue Gap Sends Chip Stocks Tumbling",
+      "source": "ChartMill",
+      "url": "https://finnhub.io/api/news?id=557033d381aadccfe976abc5e7e0ac7ac2483c91237e84c6093fb91093fef475",
+      "published_utc": "2026-10-09T10:00:23+00:00",
+      "verdict": "skipped_off_ticker",
+      "matched_keywords": [
+        "estimates",
+        "guidance",
+        "revenue"
+      ],
+      "logged_at_utc": "2026-10-09T11:33:22.218210+00:00"
+    },
+    {
+      "news_key": "MU:142757494",
+      "symbol": "MU",
+      "finnhub_id": 142757494,
+      "headline": "OpenAI's $20 Billion Revenue Gap Sends Chip Stocks Tumbling",
+      "source": "ChartMill",
+      "url": "https://finnhub.io/api/news?id=557033d381aadccfe976abc5e7e0ac7ac2483c91237e84c6093fb91093fef475",
+      "published_utc": "2026-10-09T10:00:23+00:00",
+      "verdict": "skipped_off_ticker",
+      "matched_keywords": [
+        "estimates",
+        "guidance",
+        "revenue"
+      ],
+      "logged_at_utc": "2026-10-09T11:33:23.257193+00:00"
+    },
+    {
+      "news_key": "NVDA:142757494",
+      "symbol": "NVDA",
+      "finnhub_id": 142757494,
+      "headline": "OpenAI's $20 Billion Revenue Gap Sends Chip Stocks Tumbling",
+      "source": "ChartMill",
+      "url": "https://finnhub.io/api/news?id=557033d381aadccfe976abc5e7e0ac7ac2483c91237e84c6093fb91093fef475",
+      "published_utc": "2026-10-09T10:00:23+00:00",
+      "verdict": "skipped_off_ticker",
+      "matched_keywords": [
+        "estimates",
+        "guidance",
+        "revenue"
+      ],
+      "logged_at_utc": "2026-10-09T11:33:24.953333+00:00"
+    },
+    {
+      "news_key": "NVDA:142754506",
+      "symbol": "NVDA",
+      "finnhub_id": 142754506,
+      "headline": "Providing Tools and Resources to Protect Investors",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=56f1c6e5ec088a5270ad6fd39311407d66583d7a649e1f665057dcd2f21e257e",
+      "published_utc": "2026-10-09T09:50:00+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:24.951502+00:00"
+    },
+    {
+      "news_key": "NVDA:142754502",
+      "symbol": "NVDA",
+      "finnhub_id": 142754502,
+      "headline": "Top Storage Stock to Buy With $500 Right Now",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=647d46c9e0bdf91b7908545a7ede013fffde7b4e561f04a8c2c6c81e3b78da62",
+      "published_utc": "2026-10-09T09:50:00+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:24.952284+00:00"
+    },
+    {
+      "news_key": "NVDA:142754507",
+      "symbol": "NVDA",
+      "finnhub_id": 142754507,
+      "headline": "Should You Buy the Solana Cryptocurrency While It's Still Below Its $262 Peak?",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=617191186f304749f8479f2ac62609562964f857b1a9ab51424571b297f95a5e",
+      "published_utc": "2026-10-09T09:48:00+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:24.950642+00:00"
+    },
+    {
+      "news_key": "NVDA:142754503",
+      "symbol": "NVDA",
+      "finnhub_id": 142754503,
+      "headline": "The U.S. Economy Just Delivered Bad News. History Says It Could Be Good News for the S&P 500.",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=a4fa17fd927a8aad1dfe651d942e50220976b8deedb77d9783a851b4aa831fb0",
+      "published_utc": "2026-10-09T09:35:00+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:24.949577+00:00"
+    },
+    {
+      "news_key": "NVDA:142754508",
+      "symbol": "NVDA",
+      "finnhub_id": 142754508,
+      "headline": "If You're Worried About an AI Bubble, Here's the Tech Stock Portfolio I'd Build",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=1692cb68d9f8fdb7e552ed48a375d8b54f6fc21f20c9ad8ecc799324bc7b51ee",
+      "published_utc": "2026-10-09T09:30:00+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:24.948743+00:00"
+    },
+    {
+      "news_key": "NVDA:142754499",
+      "symbol": "NVDA",
+      "finnhub_id": 142754499,
+      "headline": "Update: Market Chatter: Nvidia-Backed Firmus Reportedly Scraps $5 Billion IPO",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=7da261a2d8b6bf2c38647545edfb643687599ee1af178daaeffbd57d1421bdb3",
+      "published_utc": "2026-10-09T09:28:05+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:24.947913+00:00"
+    },
+    {
+      "news_key": "NVDA:142754509",
+      "symbol": "NVDA",
+      "finnhub_id": 142754509,
+      "headline": "Warren Buffett Recommends This Vanguard Fund for All Investors. If You Invest $300 Monthly, Here\u2019s What History Says It Will Be Worth in 20 Years.",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=c92189723d505eb20dd7dfe07bd7ac82431a4aac3f30d5f19ed21f595b73766f",
+      "published_utc": "2026-10-09T09:28:01+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:24.947084+00:00"
+    },
+    {
+      "news_key": "NVDA:142754504",
+      "symbol": "NVDA",
+      "finnhub_id": 142754504,
+      "headline": "SpaceX's Fleecing of Retail Investors Continues: Up to $51 Billion in Insider Shares Unlock Today, Oct. 9",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=efb2c9c876571e14ce580a9c09b20733fbf66b5743059726e4ba66102510b4f2",
+      "published_utc": "2026-10-09T09:26:02+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:24.946321+00:00"
+    },
+    {
+      "news_key": "NVDA:142754510",
+      "symbol": "NVDA",
+      "finnhub_id": 142754510,
+      "headline": "Be Wary of Pressure to Transfer Funds From Your Brokerage Account",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=b647f602c594f141bb41b22ab336cc8ea861cce7bf0eae7172365804688ce685",
+      "published_utc": "2026-10-09T09:20:00+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:24.945557+00:00"
+    },
+    {
+      "news_key": "GOOGL:142754551",
+      "symbol": "GOOGL",
+      "finnhub_id": 142754551,
+      "headline": "PwC Australia moves beyond advising with AI cybersecurity offering",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=0c71298452f7fdcf24f11e24fb7b1bab43145423f32ddb58da5ee82a9ba7403a",
+      "published_utc": "2026-10-09T09:10:57+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:22.217550+00:00"
+    },
+    {
+      "news_key": "GOOGL:142754552",
+      "symbol": "GOOGL",
+      "finnhub_id": 142754552,
+      "headline": "Google's $10 Million Purchase of Spirit Airlines Data Raises Concerns From US Lawmakers",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=03856d4a3999577928415a6cf7a27a6c7dbd64b3bf87d772eb46a80ff9c2fe97",
+      "published_utc": "2026-10-09T09:09:00+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:22.217193+00:00"
+    },
+    {
+      "news_key": "NVDA:142754500",
+      "symbol": "NVDA",
+      "finnhub_id": 142754500,
+      "headline": "Up 200% in 2026 and Counting: 3 AI Winners to Hold and 3 to Dump Right Now",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=bfc3f1aaee8bd534d99e36f833d553d6f8b15a75fbbe8abbca1130ab7cfc99b6",
+      "published_utc": "2026-10-09T09:06:00+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:24.945014+00:00"
+    },
+    {
+      "news_key": "NVDA:142754511",
+      "symbol": "NVDA",
+      "finnhub_id": 142754511,
+      "headline": "How Much Would You Need to Invest in These 4 High-Yield Stocks to Earn $1,000 a Month?",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=ef0477093b7c43940895b10db2618a885d17d7c0fba102c6119230fea14a4136",
+      "published_utc": "2026-10-09T08:50:00+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:24.944085+00:00"
+    },
+    {
+      "news_key": "MU:142751603",
+      "symbol": "MU",
+      "finnhub_id": 142751603,
+      "headline": "Why Are Nasdaq Futures Surging Premarket? SPCX, ASTS, AAPL, TMUS, VZ, NVDA, MU, LITE Stocks In Focus",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=5504b507413e1a9d7c270522973a489c5cd47b850ea6963230d7c505460e0693",
+      "published_utc": "2026-10-09T08:38:57+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:23.255479+00:00"
+    },
+    {
+      "news_key": "NVDA:142751603",
+      "symbol": "NVDA",
+      "finnhub_id": 142751603,
+      "headline": "Why Are Nasdaq Futures Surging Premarket? SPCX, ASTS, AAPL, TMUS, VZ, NVDA, MU, LITE Stocks In Focus",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=5504b507413e1a9d7c270522973a489c5cd47b850ea6963230d7c505460e0693",
+      "published_utc": "2026-10-09T08:38:57+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:24.943406+00:00"
+    },
+    {
+      "news_key": "NVDA:142751828",
+      "symbol": "NVDA",
+      "finnhub_id": 142751828,
+      "headline": "Here's Where Palantir and 4 Other AI Software Stocks Could Be in 5 Years",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=e692b4b2a46c84931a178e1d5f5a31ce596f54cca77a75b30acda39304bc1eb7",
+      "published_utc": "2026-10-09T08:35:00+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:24.942892+00:00"
+    },
+    {
+      "news_key": "GOOGL:142751329",
+      "symbol": "GOOGL",
+      "finnhub_id": 142751329,
+      "headline": "Elon Musk Mocks SoftBank's Reported $100B AI Fundraising Plan: 'Only A Fool Would Give Them Money'",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=aeca0f38d3191e7d61ab57c04056af86b6da5bfc2037469a7b34402fb3de684a",
+      "published_utc": "2026-10-09T08:33:54+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:22.216405+00:00"
+    },
+    {
+      "news_key": "NVDA:142754512",
+      "symbol": "NVDA",
+      "finnhub_id": 142754512,
+      "headline": "Democrats Have a 93% Chance of Retaking at Least One House of Congress on Nov. 3 -- History Says That's Bad News for Stocks",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=8f9b5958e29d629d52aeb1e1ea545c920ac9f4f4ceb61cf28c89344963bb9f20",
+      "published_utc": "2026-10-09T08:26:02+00:00",
+      "verdict": "skipped_off_ticker",
+      "matched_keywords": [
+        "forecasts"
+      ],
+      "logged_at_utc": "2026-10-09T11:33:24.942337+00:00"
+    },
+    {
       "news_key": "NVDA:142749822",
       "symbol": "NVDA",
       "finnhub_id": 142749822,
@@ -8930,6 +9196,18 @@
         "earnings"
       ],
       "logged_at_utc": "2026-10-09T08:33:30.824573+00:00"
+    },
+    {
+      "news_key": "GOOGL:142758482",
+      "symbol": "GOOGL",
+      "finnhub_id": 142758482,
+      "headline": "LDP: Sustainable Distribution, But Rising Yields And Inflation Could Pressure Returns",
+      "source": "SeekingAlpha",
+      "url": "https://finnhub.io/api/news?id=2e04f11dad90982745fc9dd741d1a2e874a6c2bf9512a9b13757b0c7823412e5",
+      "published_utc": "2026-10-09T07:09:36+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:22.214695+00:00"
     },
     {
       "news_key": "GOOGL:142749420",
@@ -9006,6 +9284,18 @@
       "verdict": "skipped_not_earnings_related",
       "matched_keywords": [],
       "logged_at_utc": "2026-10-09T08:33:30.819352+00:00"
+    },
+    {
+      "news_key": "NVDA:142755991",
+      "symbol": "NVDA",
+      "finnhub_id": 142755991,
+      "headline": "Nvidia: Jensen Huang And Lisa Su Agree On One Thing",
+      "source": "SeekingAlpha",
+      "url": "https://finnhub.io/api/news?id=92e0b4ad495445fbb3c207f309f0c1e98ddd4571657ad2717bb37a7f855400d6",
+      "published_utc": "2026-10-09T06:18:51+00:00",
+      "verdict": "skipped_not_earnings_related",
+      "matched_keywords": [],
+      "logged_at_utc": "2026-10-09T11:33:24.940985+00:00"
     },
     {
       "news_key": "NVDA:142745132",
@@ -12199,12 +12489,11 @@
       "source": "CNBC",
       "url": "https://finnhub.io/api/news?id=60a7bc11f3eed2cbcafaf600f879ba6b55396a663da4f75ec2d9177d5667a025",
       "published_utc": "2026-10-08T11:28:06+00:00",
-      "summary": "Gil Luria, managing director at D.A. Davidson & Co., joins 'Squawk on the Street' to discuss Micron after the investment bank raised its 12-month price target for the memory chipmaker to $3,000 from $2,100.",
       "matched_keywords": [
         "price target"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-08T17:33:22.314229+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-10-09T11:33:43.633717+00:00"
     },
     {
       "news_key": "NVDA:142725565",
@@ -12399,14 +12688,13 @@
       "source": "Benzinga",
       "url": "https://finnhub.io/api/news?id=0b00817fb0e77a8c25f12b5ae5bd2b5d347ac97ee971c33a653a3f422fc20be1",
       "published_utc": "2026-10-08T10:24:50+00:00",
-      "summary": "Alphabet expands Gemini across Google Workspace to capture enterprise AI demand as analysts project strong Q3 earnings growth.",
       "matched_keywords": [
         "analysts",
         "earnings",
         "q3"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-08T17:33:21.133336+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-10-09T11:33:43.634819+00:00"
     },
     {
       "news_key": "NVDA:142725458",
@@ -12836,12 +13124,11 @@
       "source": "SeekingAlpha",
       "url": "https://finnhub.io/api/news?id=09cebd89aeb54375c32fbe5bb1a8c308a6fdfbd31b053ddfba5e28bdbeaeb3f1",
       "published_utc": "2026-10-08T08:51:23+00:00",
-      "summary": "Micron Technology delivered record-breaking results, but I maintain a Sell rating due to concerns about the sustainability of current margins. Read my analysis on the MU stock.",
       "matched_keywords": [
         "results"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-08T17:33:22.313056+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-10-09T11:33:43.635256+00:00"
     },
     {
       "news_key": "NVDA:142720375",
@@ -12951,12 +13238,11 @@
       "source": "Benzinga",
       "url": "https://finnhub.io/api/news?id=30ff80bfbd2bfc353ab808c90162486c78e9752d0a4a70abef27e3cbc58e6990",
       "published_utc": "2026-10-08T08:34:56+00:00",
-      "summary": "Samsung boasts a record quarterly profit as AI memory demand soars, and AMD&#39;s Lisa Su went to Seoul, South Korea to secure supply.",
       "matched_keywords": [
         "quarterly"
       ],
-      "verdict": "queued",
-      "logged_at_utc": "2026-10-08T17:33:23.835671+00:00"
+      "verdict": "expired_not_judged",
+      "logged_at_utc": "2026-10-09T11:33:43.635773+00:00"
     },
     {
       "news_key": "NVDA:142720380",
@@ -13994,313 +14280,19 @@
       "verdict": "skipped_not_earnings_related",
       "matched_keywords": [],
       "logged_at_utc": "2026-10-08T00:48:43.026888+00:00"
-    },
-    {
-      "news_key": "NVDA:142701230",
-      "symbol": "NVDA",
-      "finnhub_id": 142701230,
-      "headline": "Robot data startup Mecka AI nabs $60M from Sequoia",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=3a923e593c1343feea60a9a638ef0b271076fb78c577cfb6d11c01e3ec0ba11f",
-      "published_utc": "2026-10-07T23:36:57+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:43.026336+00:00"
-    },
-    {
-      "news_key": "NVDA:142701235",
-      "symbol": "NVDA",
-      "finnhub_id": 142701235,
-      "headline": "Can Dell (DELL) Turn Its New AI Data Platform Into a Durable Competitive Advantage?",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=3002822e76eaede04c18fc7b5415a7c3246545392b85c5b965ea929947e2ef9c",
-      "published_utc": "2026-10-07T23:19:36+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:43.025894+00:00"
-    },
-    {
-      "news_key": "NVDA:142701236",
-      "symbol": "NVDA",
-      "finnhub_id": 142701236,
-      "headline": "CrowdStrike (CRWD) Earns IDC MarketScape Leader Recognition",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=5df653fff04f8a2ef2276756f1db7d0c64d7015b01c74ef3461b9fdcb0db6869",
-      "published_utc": "2026-10-07T23:17:54+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:43.025090+00:00"
-    },
-    {
-      "news_key": "GOOGL:142701231",
-      "symbol": "GOOGL",
-      "finnhub_id": 142701231,
-      "headline": "Why NorthWestern Energy Group Stock Soared on Wednesday",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=26d6d4a9f6cde5628bf68317ce549ce1ab0c47798bff251e2eccd575fd941494",
-      "published_utc": "2026-10-07T23:16:53+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:41.656281+00:00"
-    },
-    {
-      "news_key": "NVDA:142701231",
-      "symbol": "NVDA",
-      "finnhub_id": 142701231,
-      "headline": "Why NorthWestern Energy Group Stock Soared on Wednesday",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=26d6d4a9f6cde5628bf68317ce549ce1ab0c47798bff251e2eccd575fd941494",
-      "published_utc": "2026-10-07T23:16:53+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:43.024729+00:00"
-    },
-    {
-      "news_key": "NVDA:142701232",
-      "symbol": "NVDA",
-      "finnhub_id": 142701232,
-      "headline": "S&P 500 And Nasdaq 100 Slip From Record Highs Amid Pressure From Soaring Treasury Yields \u2014 SPCX, AMD, NVDA, MRVL In Focus",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=50352b28347a16ef361adee73323be4f5be5b71231708705135708bc7bebdb49",
-      "published_utc": "2026-10-07T22:50:51+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:43.024282+00:00"
-    },
-    {
-      "news_key": "GOOGL:142701264",
-      "symbol": "GOOGL",
-      "finnhub_id": 142701264,
-      "headline": "What Happens To IBM Stock If Its Slowdown Lasts?",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=63751dfd0ba45e251e05f6487254cc994a85f171e9b56f25541cb57bdb614c7e",
-      "published_utc": "2026-10-07T22:47:25+00:00",
-      "verdict": "skipped_off_ticker",
-      "matched_keywords": [
-        "earnings",
-        "quarter",
-        "results"
-      ],
-      "logged_at_utc": "2026-10-08T00:48:41.655993+00:00"
-    },
-    {
-      "news_key": "NVDA:142701241",
-      "symbol": "NVDA",
-      "finnhub_id": 142701241,
-      "headline": "What Are AVGO Stock Investors Betting On?",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=fe6c2b41f319d645bd53217a37d78a23c4388554fc9dfe3c9e1b3a8fd1ab80fb",
-      "published_utc": "2026-10-07T22:38:41+00:00",
-      "verdict": "skipped_off_ticker",
-      "matched_keywords": [
-        "earnings"
-      ],
-      "logged_at_utc": "2026-10-08T00:48:43.023862+00:00"
-    },
-    {
-      "news_key": "NVDA:142701237",
-      "symbol": "NVDA",
-      "finnhub_id": 142701237,
-      "headline": "Most Investors Misunderstand the Stock Market. Here's the One Sector I'm Buying Now.",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=743117d33d30019732cf3913911ae389a12ca8a626c3d8bf5f212add0b570dbf",
-      "published_utc": "2026-10-07T22:35:00+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:43.023341+00:00"
-    },
-    {
-      "news_key": "NVDA:142701238",
-      "symbol": "NVDA",
-      "finnhub_id": 142701238,
-      "headline": "The S&P 500 Just Reached a New Record. Here\u2019s What History Says About Buying Stocks Now.",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=8d84e2cb5868c69a2353093327a9922cb0343d5ae6b542ecdd34826b51e5849c",
-      "published_utc": "2026-10-07T22:30:02+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:43.022980+00:00"
-    },
-    {
-      "news_key": "MU:142701242",
-      "symbol": "MU",
-      "finnhub_id": 142701242,
-      "headline": "What Is Really Behind Micron Stock's Run?",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=56789c56d46d94c18e2e6fb4cfbe035fac0296953fc1f1070d05812ee4e4b29c",
-      "published_utc": "2026-10-07T22:25:39+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:42.346768+00:00"
-    },
-    {
-      "news_key": "NVDA:142701242",
-      "symbol": "NVDA",
-      "finnhub_id": 142701242,
-      "headline": "What Is Really Behind Micron Stock's Run?",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=56789c56d46d94c18e2e6fb4cfbe035fac0296953fc1f1070d05812ee4e4b29c",
-      "published_utc": "2026-10-07T22:25:39+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:43.022484+00:00"
-    },
-    {
-      "news_key": "NVDA:142701239",
-      "symbol": "NVDA",
-      "finnhub_id": 142701239,
-      "headline": "Pfizer Stock: Buy, Sell, or Hold?",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=8635cf7d37949658b87073da4024db2959c671efc351a6f074c9c352a14846f0",
-      "published_utc": "2026-10-07T22:17:00+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:43.021681+00:00"
-    },
-    {
-      "news_key": "NVDA:142701240",
-      "symbol": "NVDA",
-      "finnhub_id": 142701240,
-      "headline": "SpaceX (SPCX) Deepens Launch And Mobile Ambitions But What Really Anchors Its Long\u2011Term Edge?",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=a7c6dce0b62446109815f0e20d02ea99f837349d8ab0c5b091109de8070b8631",
-      "published_utc": "2026-10-07T22:15:56+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:43.021223+00:00"
-    },
-    {
-      "news_key": "GOOGL:142701243",
-      "symbol": "GOOGL",
-      "finnhub_id": 142701243,
-      "headline": "Banks Under Pressure from Spiking Yields Ahead of Q3 Results",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=e32c3ce81ead13bd51895057067c403482588adce9d9d9671a0d42dba7ebd823",
-      "published_utc": "2026-10-07T22:10:00+00:00",
-      "verdict": "skipped_off_ticker",
-      "matched_keywords": [
-        "q3",
-        "results"
-      ],
-      "logged_at_utc": "2026-10-08T00:48:41.655594+00:00"
-    },
-    {
-      "news_key": "MU:142701243",
-      "symbol": "MU",
-      "finnhub_id": 142701243,
-      "headline": "Banks Under Pressure from Spiking Yields Ahead of Q3 Results",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=e32c3ce81ead13bd51895057067c403482588adce9d9d9671a0d42dba7ebd823",
-      "published_utc": "2026-10-07T22:10:00+00:00",
-      "verdict": "skipped_off_ticker",
-      "matched_keywords": [
-        "q3",
-        "results"
-      ],
-      "logged_at_utc": "2026-10-08T00:48:42.346277+00:00"
-    },
-    {
-      "news_key": "NVDA:142701243",
-      "symbol": "NVDA",
-      "finnhub_id": 142701243,
-      "headline": "Banks Under Pressure from Spiking Yields Ahead of Q3 Results",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=e32c3ce81ead13bd51895057067c403482588adce9d9d9671a0d42dba7ebd823",
-      "published_utc": "2026-10-07T22:10:00+00:00",
-      "verdict": "skipped_off_ticker",
-      "matched_keywords": [
-        "q3",
-        "results"
-      ],
-      "logged_at_utc": "2026-10-08T00:48:43.020579+00:00"
-    },
-    {
-      "news_key": "GOOGL:142700689",
-      "symbol": "GOOGL",
-      "finnhub_id": 142700689,
-      "headline": "Why Black Hills Stock Rocketed Higher Today",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=9f142417a033bbdeeb9a79639eb422f8ac7d5c86fbe7e03370e14ba4a1e9d152",
-      "published_utc": "2026-10-07T22:06:36+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:41.655120+00:00"
-    },
-    {
-      "news_key": "NVDA:142700689",
-      "symbol": "NVDA",
-      "finnhub_id": 142700689,
-      "headline": "Why Black Hills Stock Rocketed Higher Today",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=9f142417a033bbdeeb9a79639eb422f8ac7d5c86fbe7e03370e14ba4a1e9d152",
-      "published_utc": "2026-10-07T22:06:36+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:43.020175+00:00"
-    },
-    {
-      "news_key": "NVDA:142701245",
-      "symbol": "NVDA",
-      "finnhub_id": 142701245,
-      "headline": "Broadcom, Oracle, and SpaceX pursue blockbuster debt deals amid AI buildout - WSJ",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=5aac99229d1977e1003724bed3b6ede51d18663bd7c2253045e5e1c57b312348",
-      "published_utc": "2026-10-07T21:58:28+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:43.019750+00:00"
-    },
-    {
-      "news_key": "NVDA:142701246",
-      "symbol": "NVDA",
-      "finnhub_id": 142701246,
-      "headline": "Market Chatter: Broadcom, Oracle, SpaceX Seek Financing for AI Chip Purchases",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=83d6292d2594f7ccb711d65d6db0810ed16e50936015d86e6a86fd223b1c8a66",
-      "published_utc": "2026-10-07T21:57:54+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:43.019056+00:00"
-    },
-    {
-      "news_key": "NVDA:142700254",
-      "symbol": "NVDA",
-      "finnhub_id": 142700254,
-      "headline": "Why Veeco Instruments Stock Crushed it Last Month",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=ebb1e38537ad06e422317667c1e5096c28468b6a363bc80babbb64601f0f05e8",
-      "published_utc": "2026-10-07T21:55:28+00:00",
-      "verdict": "skipped_off_ticker",
-      "matched_keywords": [
-        "analyst",
-        "upgrade"
-      ],
-      "logged_at_utc": "2026-10-08T00:48:43.018274+00:00"
-    },
-    {
-      "news_key": "GOOGL:142700284",
-      "symbol": "GOOGL",
-      "finnhub_id": 142700284,
-      "headline": "FouAnalytics and fraud0 Partner to Bring Automated Google Ads Refunds to the World's Largest Advertisers",
-      "source": "Yahoo",
-      "url": "https://finnhub.io/api/news?id=fb95b1a94da131905d722e7b2a58d3967bb6dbba4d2129f73880ad0df68bf49c",
-      "published_utc": "2026-10-07T21:51:00+00:00",
-      "verdict": "skipped_not_earnings_related",
-      "matched_keywords": [],
-      "logged_at_utc": "2026-10-08T00:48:41.654737+00:00"
     }
   ],
   "news_stats": {
-    "seen": 4718,
-    "skipped": 4167,
-    "skipped_not_earnings": 3496,
-    "skipped_off_ticker": 671,
-    "expired": 312,
-    "queued": 4,
+    "seen": 4741,
+    "skipped": 4190,
+    "skipped_not_earnings": 3515,
+    "skipped_off_ticker": 675,
+    "expired": 316,
+    "queued": 0,
     "judged_no_trade": 228,
     "judged_trade": 7,
     "exported": 400,
-    "queue_length": 4
+    "queue_length": 0
   },
   "qwen_usage": {
     "by_day": [
@@ -14412,12 +14404,12 @@
     "total_tokens": 493986
   },
   "last_cycle": {
-    "last_live_cycle_utc": "2026-10-09T08:36:13.897108+00:00",
+    "last_live_cycle_utc": "2026-10-09T11:33:43.636458+00:00",
     "triggers_total": 2,
     "triggers_pending_at_start": 0,
     "triggers_processed": 0,
-    "news_judged": 5,
-    "news_queued_remaining": 4
+    "news_judged": 0,
+    "news_queued_remaining": 0
   },
   "scan_schedule": {
     "anchor_utc": "2026-09-18T14:33:00+00:00",
